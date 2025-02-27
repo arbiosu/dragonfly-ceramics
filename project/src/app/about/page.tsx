@@ -16,14 +16,14 @@ export default function About() {
 
     return (
         <>
-        <section className="bg-stone-400 mx-auto px-4 py-12 md:py20">
+        <section className="bg-df-bg mx-auto px-4 py-12 md:py20">
             <div className="grid md:grid-cols-2 gap-12 items-center">
-                <div className="relative aspect-square bg-stone-100">
+                <div className="relative aspect-square bg-df-bg">
                     <Image
                         src="/about-kelly-cropped.jpg"
                         alt="Kelly From Dragonfly Ceramics"
                         fill
-                        className="object-contain bg-stone-400"
+                        className="object-contain bg-df-bg"
                     />
                 </div>
                 <div className="space-y-8">
@@ -42,7 +42,7 @@ export default function About() {
                 </div>
             </div>
         </section>
-        <section className="p-8 grid md:grid-cols-3 gap-2 bg-stone-900">
+        <section className="p-8 grid md:grid-cols-3 gap-2 bg-df-bg">
             <SubscribeCard />
             <Image
                 src="/dragonfly-logo-nobg.png"
