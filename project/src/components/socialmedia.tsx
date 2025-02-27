@@ -76,6 +76,8 @@ export function SocialMediaLinksCard() {
                 <h2 className="text-xl font-bold text-df-text mb-2">
                     Follow Us
                 </h2>
+            </div>
+            <div className="flex justify-center">
                 <Image 
                     src="/profile.svg"
                     alt="Profile icon with heart"

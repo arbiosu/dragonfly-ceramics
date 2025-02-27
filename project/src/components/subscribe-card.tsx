@@ -39,9 +39,11 @@ export default function SubscribeCard() {
                     <h2 className="text-xl font-bold text-df-text mb-2">
                         Subcribe
                     </h2>
+                </div>
+                <div className="flex justify-center">
                     <Image 
                         src="/mail.svg"
-                        alt="Profile icon with heart"
+                        alt="Envelope icon"
                         width={100}
                         height={100}
                     />
