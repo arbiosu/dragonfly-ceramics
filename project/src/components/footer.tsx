@@ -1,4 +1,5 @@
 import Link from "next/link"
+import SocialMediaLinksComponent from "@/components/socialmedia"
 
 export default function Footer() {
     const currentYear = new Date().getFullYear()
@@ -37,34 +38,9 @@ export default function Footer() {
             </div>
   
             {/* Social Media */}
-            <div>
+            <div className="">
               <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
-              <div className="flex space-x-4">
-                <a
-                    href="https://open.spotify.com/show/4ffm2AA2kGffaH6TbMzilZ?si=2bnAUAW_TVicae7kjhTE-Q&nd=1&dlsi=93f75f140fc34b37"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-gray-800 transition-colors"
-                >
-                    <span className="sr-only">Spotify</span>
-                </a>
-                <a
-                    href="https://www.youtube.com/@AthletesResilienceCenter"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-gray-800 transition-colors"
-                >
-                    <span className="sr-only">Youtube</span>
-                </a>
-                <a
-                    href="https://www.instagram.com/athletesresiliencecenter/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-gray-800 transition-colors"
-                >
-                    <span className="sr-only">Instagram</span>
-                </a>
-              </div>
+              <SocialMediaLinksComponent />
             </div>
           </div>
   

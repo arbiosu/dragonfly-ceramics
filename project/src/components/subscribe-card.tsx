@@ -2,6 +2,7 @@
 
 
 import { useState } from "react";
+import Image from "next/image";
 
 
 export default function SubscribeCard() {
@@ -33,13 +34,21 @@ export default function SubscribeCard() {
         // TODO: hit api
     }
         return (
-            <div className="max-w-md w-full mx-auto rounded-lg shadow-lg bg-white p-6">
-                <div className="text-center mb-6">
+            <div className="max-w-md w-full mx-auto rounded-lg shadow-lg bg-white p-6 flex flex-col h-full">
+                <div className="text-center mb-auto justify-items-center space-y-8">
                     <h2 className="text-xl font-bold text-gray-800 mb-2">
                         Subcribe
                     </h2>
+                    <Image 
+                        src="/mail.svg"
+                        alt="Profile icon with heart"
+                        width={100}
+                        height={100}
+                    />
+                </div>
+                <div className="text-center my-auto py-4">
                     <p className="text-gray-600">
-                        Stay in the loop with our latest news and offers
+                        Keep up with Dragonfly Ceramics on YouTube, TikTok, and Instagram
                     </p>
                 </div>
                 {submitted ? (
@@ -69,7 +78,7 @@ export default function SubscribeCard() {
                         </div>
                         <button
                             type="submit"
-                            className="w-full bg-stone-800 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition duration-300 ease-in-out"
+                            className="flex justify-center mt-4 w-full bg-stone-800 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition duration-300 ease-in-out"
                         >
                             Subscribe Now
                         </button>
