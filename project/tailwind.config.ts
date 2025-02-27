@@ -11,6 +11,8 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "df-text": "#33311d",
+        "df-bg": "#eee4d1",
       },
     },
   },
