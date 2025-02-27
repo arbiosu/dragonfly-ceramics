@@ -2,6 +2,7 @@ import Image from "next/image";
 import ShopLink from "@/components/shop-link";
 import ImageGrid from "@/components/image-grid";
 import SubscribeCard from "@/components/subscribe-card";
+import { SocialMediaLinksCard } from "@/components/socialmedia";
 import potterySvg from "@/../public/ceramic-vase.svg"
 
 
@@ -41,8 +42,15 @@ export default function About() {
                 </div>
             </div>
         </section>
-        <section className="p-8 bg-stone-200">
+        <section className="p-8 grid md:grid-cols-3 gap-2 bg-stone-900">
             <SubscribeCard />
+            <Image
+                src="/dragonfly-logo-nobg.png"
+                alt="Dragonfly Ceramics Logo"
+                width={600}
+                height={400}
+            />
+            <SocialMediaLinksCard />
         </section>
         <ImageGrid items={imageGridItems} />
         </>
