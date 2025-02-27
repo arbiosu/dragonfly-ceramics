@@ -42,12 +42,14 @@ export default function Navbar() {
                     </li>
                 ))}
                 <li>
-                    <Image 
-                        src="/logo-cropped.png"
-                        alt="Dragonfly Ceramics"
-                        width={70}
-                        height={40}
-                    />
+                    <Link href="/" className="hover:text-blue-300 transition-colors">
+                        <Image 
+                            src="/logo-cropped.png"
+                            alt="Dragonfly Ceramics"
+                            width={70}
+                            height={40}
+                        />
+                    </Link>
                 </li>
             </ul>
         </nav>
