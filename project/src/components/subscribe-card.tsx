@@ -48,7 +48,7 @@ export default function SubscribeCard() {
                 </div>
                 <div className="text-center my-auto py-4">
                     <p className="text-gray-600">
-                        Keep up with Dragonfly Ceramics on YouTube, TikTok, and Instagram
+                        Join our mailing list for product updates!
                     </p>
                 </div>
                 {submitted ? (
