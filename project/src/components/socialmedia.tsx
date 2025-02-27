@@ -73,7 +73,7 @@ export function SocialMediaLinksCard() {
     return (
         <div className="max-w-md w-full mx-auto rounded-lg shadow-lg bg-white p-6 flex flex-col h-full">
             <div className="text-center mb-auto justify-items-center space-y-8">
-                <h2 className="text-xl font-bold text-gray-800 mb-2">
+                <h2 className="text-xl font-bold text-df-text mb-2">
                     Follow Us
                 </h2>
                 <Image 
@@ -84,7 +84,7 @@ export function SocialMediaLinksCard() {
                 />
             </div>
             <div className="text-center my-auto py-4">
-                <p className="text-gray-600">
+                <p className="text-df-text">
                     Keep up with Dragonfly Ceramics on YouTube, TikTok, and Instagram
                 </p>
             </div>

@@ -36,7 +36,7 @@ export default function SubscribeCard() {
         return (
             <div className="max-w-md w-full mx-auto rounded-lg shadow-lg bg-white p-6 flex flex-col h-full">
                 <div className="text-center mb-auto justify-items-center space-y-8">
-                    <h2 className="text-xl font-bold text-gray-800 mb-2">
+                    <h2 className="text-xl font-bold text-df-text mb-2">
                         Subcribe
                     </h2>
                     <Image 
@@ -47,7 +47,7 @@ export default function SubscribeCard() {
                     />
                 </div>
                 <div className="text-center my-auto py-4">
-                    <p className="text-gray-600">
+                    <p className="text-df-text">
                         Join our mailing list for product updates!
                     </p>
                 </div>
@@ -56,7 +56,7 @@ export default function SubscribeCard() {
                         <p className="text-green-600 font-medium">
                             Thanks for subscribing!
                         </p>
-                        <p className="text-green-500 text-sm mt-1">
+                        <p className="text-green-600 text-sm mt-1">
                             We&apos;ll keep you updated with the latest news
                         </p>
                     </div>
@@ -78,7 +78,7 @@ export default function SubscribeCard() {
                         </div>
                         <button
                             type="submit"
-                            className="flex justify-center mt-4 w-full bg-stone-800 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition duration-300 ease-in-out"
+                            className="flex justify-center mt-4 w-full bg-df-text hover:bg-blue-300 text-white font-bold py-3 px-4 rounded-md transition duration-300 ease-in-out"
                         >
                             Subscribe Now
                         </button>

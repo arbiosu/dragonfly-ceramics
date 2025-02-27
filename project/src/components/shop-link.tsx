@@ -6,8 +6,8 @@ export default function ShopLink() {
         <Link 
             href={"#"}
             className="inline-flex items-center justify-center px-5 py-3 mr-3
-            text-base font-bold text-center text-white rounded-lg bg-stone-800
-            hover:bg-blue-700 focus:ring-4 focus:ring-white"
+            text-base font-bold text-center text-white rounded-lg bg-df-text
+            hover:bg-blue-300 focus:ring-4 focus:ring-white"
         >
             Shop now
             <svg 

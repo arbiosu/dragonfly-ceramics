@@ -30,13 +30,13 @@ export default function Navbar() {
     
     return (
         <nav
-        className={`p-6 fixed top-0 left-0 right-0 z-50 transition-all duration-300
-          ${isScrolled ? "bg-black shadow-md" : "bg-transparent"}`}
+        className={`p-4 fixed top-0 left-0 right-0 z-50 transition-all duration-300
+          ${isScrolled ? "bg-df-text shadow-md" : "bg-transparent"}`}
         >
             <ul className="flex gap-8 text-white text-lg md:text-3xl lg:text-4xl">
                 {navLinks.map((link, index) => (
                     <li key={index}>
-                        <Link href={link.href} className="hover:text-df-text transition-colors">
+                        <Link href={link.href} className="hover:text-blue-300 transition-colors">
                             {link.label}
                         </Link>
                     </li>

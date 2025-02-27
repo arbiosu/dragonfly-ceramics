@@ -1,6 +1,5 @@
 import Image from "next/image"
-import ShopLink from "@/components/shop-link"
-
+import SubscribeCard from "./subscribe-card"
 export default function Hero() {
     return (
         <section className="grid min-h-[100dvh] w-full md:grid-cols-2 text-df-text">
@@ -24,7 +23,7 @@ export default function Hero() {
                             Insert some text here for your brand
                         </p>
                     </div>
-                    <ShopLink />
+                    <SubscribeCard />
                 </div>
             </div>
         </section>
