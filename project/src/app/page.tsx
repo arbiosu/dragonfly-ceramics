@@ -1,43 +1,38 @@
 import Hero from "@/components/hero";
 import LandingPage from "@/components/landing-page";
-import FAQCarousel from "@/components/faqs";
+import { FAQHorizontalScroll} from "@/components/faqs";
 
 export default function Home() {
   const faqs = [
     {
       id: 1,
-      question: "What payment methods do you accept?",
-      answer: "We accept all major credit cards, PayPal, and bank transfers. For enterprise customers, we also offer invoicing options with net-30 payment terms."
+      question: "What if my purchase is damaged or delayed?",
+      answer: "All products are packaged with love and care and I ship them out ASAP with a tracking number. However, if your piece comes damaged, please email me photos within 3 days of arrival. I will try my best to replace the item with something similar or a full or partial refund can be given."
     },
     {
       id: 2,
-      question: "How do I reset my password?",
-      answer: "You can reset your password by clicking the 'Forgot Password' link on the login page. We'll send a password reset link to your registered email address."
+      question: "Where do you ship?",
+      answer: "As of now, I only ship in the United States but hope to eventually expand internationally!"
     },
     {
       id: 3,
-      question: "Can I cancel my subscription anytime?",
-      answer: "Yes, you can cancel your subscription at any time. Go to Account Settings > Subscription and click 'Cancel Subscription'. You'll still have access until the end of your billing period."
+      question: "How do I take care of my Pottery?",
+      answer: "All of my pieces are dishwasher and microwave safe! However, I always recommend handwashing. Pieces that are not dishwasher and microwave safe will be labeled in the description of the piece."
     },
     {
       id: 4,
-      question: "Do you offer refunds?",
-      answer: "We offer a 30-day money-back guarantee for all our subscription plans. If you're not satisfied, contact our support team within 30 days of purchase for a full refund."
+      question: "Do you accept returns?",
+      answer: "Please make your purchases carefully as all sales are final. I only accept returns if the wrong item was shipped to you."
     },
     {
       id: 5,
-      question: "How do I contact customer support?",
-      answer: "Our customer support team is available 24/7 via live chat on our website, email at support@example.com, or by phone at (555) 123-4567."
+      question: "When do you restock?",
+      answer: "I have no particular schedule for restocks. As long as you are following my socials and/or signed up for my newsletter, you will be alerted when a drop happens!"
     },
     {
       id: 6,
-      question: "What is your privacy policy?",
-      answer: "We take your privacy seriously. We never sell your personal data to third parties. You can read our full privacy policy on our website under the Legal section."
-    },
-    {
-      id: 7,
-      question: "How do I update my billing information?",
-      answer: "You can update your billing information by going to Account Settings > Billing and clicking 'Edit Payment Method'."
+      question: "How do I purchase a custom or wholesale order?",
+      answer: "Please fill out the form under the “contact” page and allow up to 72 hours for me to respond!"
     }
   ];
 
@@ -46,7 +41,7 @@ export default function Home() {
       <LandingPage />
       <Hero />
       <div className="py-4 md:py-8">
-        <FAQCarousel faqs={faqs} />
+        <FAQHorizontalScroll faqs={faqs} />
       </div>
     </main>
   );

@@ -37,7 +37,7 @@ export default function SubscribeCard() {
             <div className="w-full mx-auto rounded-lg shadow-lg bg-white p-6 flex flex-col h-full">
                 <div className="text-center mb-auto justify-items-center space-y-8">
                     <h2 className="text-xl font-bold text-df-text mb-2">
-                        Subcribe
+                        Subscribe
                     </h2>
                 </div>
                 <div className="flex justify-center">
