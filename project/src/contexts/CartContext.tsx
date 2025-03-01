@@ -1,16 +1,12 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
+import { CartItem } from "@/lib/stripe"
 import { Stripe } from "stripe";
 
 
 interface Props {
     children: React.ReactNode;
-}
-
-interface CartItem {
-    product: Stripe.Product;
-    quantity: number;
 }
 
 interface CartContextValue {
