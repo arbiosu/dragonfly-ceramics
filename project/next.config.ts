@@ -7,8 +7,13 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        port: ''
-      }
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'files.stripe.com',
+        port: '',
+      },
     ]
   }
 };
