@@ -2,6 +2,7 @@
 
 import { Stripe } from "stripe";
 import Image from "next/image";
+import { useState } from "react"
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/contexts/ToastContext";
 import { CartItem } from "@/lib/stripe";
@@ -13,6 +14,7 @@ interface ProductCardProps {
 
 
 export default function ProductCard({ data }: ProductCardProps) {
+    const [isHovered, setIsHovered] = useState<boolean>(false);
     const { addToCart } = useCart();
     const { addToast } = useToast();
 
@@ -45,20 +47,42 @@ export default function ProductCard({ data }: ProductCardProps) {
     }
 
     return (
-        <div className="flex flex-col border rounded-lg overflow-hidden shadow-md h-full bg-white">
+        <div
+            className="relative group w-full max-w-sm bg-df-bg rounded-lg shadow-md overflow-hidden"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
             {/* Image Container TODO: add placeholder svg */}
-            <div className="relative w-full pt-[75%]">
+            <div className="relative w-full aspect-square">
                 <Image
                     src={data.images[0]}
                     alt={data.description || "No description"}
-                    className="absolute top-0 left-0 w-full h-full object-cover"
-                    height={100}
-                    width={100}
+                    className="object-cover"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 256px"
                 />
+                {/* Hover Buttons - Appear on hover */}
+                <div
+                className={`absolute inset-0 bg-black/40 flex flex-col items-center justify-center gap-2 p-4 transition-opacity duration-200 ${
+                    isHovered ? "opacity-100" : "opacity-0"
+                }`}
+                >
+                    <button
+                        className="w-full bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-md transition-colors"
+                        onClick={() => handleBuyNow({ product: data, quantity: 1 })}
+                    >
+                        Buy Now
+                    </button>
+                    <button
+                        className="w-full bg-df-text hover:bg-gray-900 text-white font-semibold py-2 px-4 rounded-md transition-colors"
+                        onClick={handleAddToCart}
+                    >
+                        Add to Cart
+                    </button>
+                </div>
             </div>
-            {/* Product Information */}
-            <div className="flex flex-col flex-grow p-4">
-                <h3 className="text-lg font-semibold text-df-text mb-1">
+            <div className="p-4">
+                <h3 className="text-lg font-semibold text-df-text truncate">
                     {data.name}
                 </h3>
                 <p className="text-sm text-df-text mb-4 flex-grow">
@@ -76,24 +100,6 @@ export default function ProductCard({ data }: ProductCardProps) {
                             No pricing data
                         </p>
                     )}
-                    <div className="flex gap-2">
-                        <button 
-                            className="flex-1 bg-blue-600 hover:bg-blue-700
-                            py-2 px-4 rounded-md text-sm font-medium text-white
-                            transition-colors duration-200"
-                            onClick={() => handleBuyNow({ product: data, quantity: 1 })}
-                        >
-                            Buy Now
-                        </button>
-                        <button 
-                            className="flex-1 bg-gray-100 hover:bg-gray-200 
-                            py-2 px-4 rounded-md text-sm font-medium text-gray-800
-                            transition-colors duration-200 border border-gray-300"
-                            onClick={handleAddToCart}
-                        >
-                        Add to Cart
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>

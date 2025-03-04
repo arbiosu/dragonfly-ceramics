@@ -28,7 +28,7 @@ export default function CheckoutButton() {
 
     return (
         <button
-        className="bg-df-text hover:bg-blue-300 py-2 px-4 rounded-md text-sm
+        className="bg-df-text hover:bg-blue-300 py-2 px-4 rounded-md text-lg
         font-medium text-white transition-colors duration-200"
         onClick={() => handleCheckout(cartItems)}
         >

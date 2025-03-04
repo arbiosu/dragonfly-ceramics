@@ -19,39 +19,39 @@ export default function CartItemCard({ product, quantity }: CartItem) {
     }
 
     return (
-        <div className="flex flex-col rounded-lg border border-gray-200 shadow-sm overflow-hidden bg-white">
-            <div className="relative h-48 w-full bg-gray-100">
+        <div className="relative group w-full max-w-sm bg-df-bg rounded-lg shadow-md overflow-hidden">
+            <div className="relative w-full aspect-square">
                 <Image
                     src={product.images[0]}
-                    alt={product.name}
+                    alt={product.description || "No description"}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, 256px"
                 />
             </div>
-            <div className="mt-4 flex items-center">
-                <span className="mx-3 w-8 text-center text-df-text">{product.name}</span>
-                <span className="mx-3 w-8 text-center text-df-text">{quantity}</span>
+            <div className="p-2">
+                <h3 className="text-lg font-semibold text-df-text">{product.name}</h3>
+                <p className="text-sm text-df-text mb-2 flex-grow">QTY: {quantity}</p>
+                {product.default_price && typeof product.default_price !== 'string'
+                && product.default_price.unit_amount ? (
+                    <div className="mt-2 text-df-text font-bold text-sm">
+                        Subtotal: ${product.default_price?.unit_amount / 100}
+                    </div>
+                ): (
+                    <p className="text-xl font-bold text-df-text mb-3">
+                        No pricing data
+                    </p>
+                )}
                 <div className="ml-auto">
                     <button
                         onClick={handleRemove}
-                        className="p-1 text-red-500 hover:text-red-700 hover:bg-gray-100 rounded-md"
+                        className="font-semibold px-4 py-2 bg-red-500 text-white rounded-md flex items-center gap-2 hover:bg-red-600 transition-colors"
                         aria-label="Remove from Cart"
                     >
                         Remove from Cart
                     </button>
                 </div>
             </div>
-            {product.default_price && typeof product.default_price !== 'string'
-            && product.default_price.unit_amount ? (
-                <div className="mt-2 text-right text-df-text text-sm">
-                    Subtotal: ${product.default_price?.unit_amount / 100}
-                </div>
-            ): (
-                <p className="text-xl font-bold text-df-text mb-3">
-                    No pricing data
-                </p>
-            )}
         </div>
     );
 };
