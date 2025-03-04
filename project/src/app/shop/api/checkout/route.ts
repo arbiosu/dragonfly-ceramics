@@ -13,7 +13,6 @@ export async function POST(request: Request) {
 
         const session = await stripeCheckout(validatedCart, origin);
         
-        // TODO: convert to redirect
         if (session.url) {
             return NextResponse.json({ url: session.url }, { status: 200 });
         } else {
