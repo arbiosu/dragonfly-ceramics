@@ -1,3 +1,6 @@
+// Source: https://github.com/KMS74/Next.js-Shopping-Cart-App
+// Thank you to github.com/KMS74!
+
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
@@ -13,6 +16,7 @@ interface CartContextValue {
     cartItems: CartItem[];
     addToCart: (product: Stripe.Product) => void;
     removeFromCart: (productId: string) => void;
+    purgeCart: () => void;
     cartTotal: number;
     cartCount: number;
 }
@@ -23,6 +27,7 @@ const CartContext = createContext<CartContextValue>({
     cartItems: [],
     addToCart: () => {},
     removeFromCart: () => {},
+    purgeCart: () => {},
     cartTotal: 0,
     cartCount: 0,
 });
@@ -74,6 +79,10 @@ export const CartProvider = ({ children }: Props) => {
         setCartItems(updatedCartItems);
     };
 
+    const purgeCart = () => {
+        setCartItems([]);
+    }
+
     const cartTotalInCents = cartItems.reduce((total, item) => {
         const price = item.product.default_price
         if (price && typeof price !== 'string' && 'unit_amount' in price) {
@@ -91,6 +100,7 @@ export const CartProvider = ({ children }: Props) => {
                 cartItems,
                 addToCart,
                 removeFromCart,
+                purgeCart,
                 cartTotal,
                 cartCount,
             }}
@@ -102,8 +112,8 @@ export const CartProvider = ({ children }: Props) => {
 
 export const useCart = () => {
     if (CartContext === undefined) {
-        throw new Error('useCart must be used within a CartProvider')
+        throw new Error('useCart must be used within a CartProvider');
     }
-    return useContext(CartContext)
-}
+    return useContext(CartContext);
+};
 
