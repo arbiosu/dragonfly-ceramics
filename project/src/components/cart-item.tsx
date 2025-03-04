@@ -2,13 +2,20 @@
 
 import { CartItem } from "@/lib/stripe";
 import { useCart } from "@/contexts/CartContext";
+import { useToast } from "@/contexts/ToastContext";
 import Image from "next/image";
 
 export default function CartItemCard({ product, quantity }: CartItem) {
     const { removeFromCart } = useCart();
+    const { addToast } = useToast();
 
     const handleRemove = () => {
         removeFromCart(product.id)
+        addToast({
+            title: "Removed from Cart",
+            description: `${product.name} has been removed from your Cart.`,
+            variant: "warning",
+        });
     }
 
     return (

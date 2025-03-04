@@ -1,4 +1,5 @@
 import { CartProvider } from "@/contexts/CartContext";
+import { ToastProvider } from "@/contexts/ToastContext";
 
 export default function ShopLayout({
     children,
@@ -7,7 +8,9 @@ export default function ShopLayout({
 }) {
     return (
         <CartProvider>
-            {children}
+            <ToastProvider>
+                {children}
+            </ToastProvider>
         </CartProvider>
     );
 };

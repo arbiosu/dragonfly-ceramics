@@ -3,6 +3,7 @@
 import { Stripe } from "stripe";
 import Image from "next/image";
 import { useCart } from "@/contexts/CartContext";
+import { useToast } from "@/contexts/ToastContext";
 import { CartItem } from "@/lib/stripe";
 
 
@@ -13,6 +14,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ data }: ProductCardProps) {
     const { addToCart } = useCart();
+    const { addToast } = useToast();
 
     const handleBuyNow = async (item: CartItem) => {
         try {
@@ -32,6 +34,15 @@ export default function ProductCard({ data }: ProductCardProps) {
             console.error(error)
         }
     };
+
+    const handleAddToCart = () => {
+        addToCart(data);
+        addToast({
+            title: "Added to Cart",
+            description: `${data.name} has successfully been added to your cart!`,
+            variant: "success",
+        });
+    }
 
     return (
         <div className="flex flex-col border rounded-lg overflow-hidden shadow-md h-full bg-white">
@@ -78,7 +89,7 @@ export default function ProductCard({ data }: ProductCardProps) {
                             className="flex-1 bg-gray-100 hover:bg-gray-200 
                             py-2 px-4 rounded-md text-sm font-medium text-gray-800
                             transition-colors duration-200 border border-gray-300"
-                            onClick={() => addToCart(data)}
+                            onClick={handleAddToCart}
                         >
                         Add to Cart
                         </button>
