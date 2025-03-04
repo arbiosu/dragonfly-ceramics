@@ -25,7 +25,7 @@ const CartContext = createContext<CartContextValue>({
     removeFromCart: () => {},
     cartTotal: 0,
     cartCount: 0,
-  });
+});
 
 
 // Create a provider component that wraps the children components
