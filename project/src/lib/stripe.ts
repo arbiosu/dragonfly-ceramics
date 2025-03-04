@@ -73,24 +73,3 @@ export async function stripeCheckoutSuccess(sessionId: string) {
     return { status, customerEmail };
 };
 
-
-// server actions
-export async function checkoutServer(cart: CartItem[]) {
-    try {
-        const res = await fetch("/shop/api/checkout", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ cartItems: cart }),
-        });
-
-        if (!res.ok) {
-            throw new Error(`Failed to create checkout session: ${res.status}`);
-        }
-
-        const data = await res.json();
-        window.location.href = data.url;
-
-    } catch (error) {
-        console.error("Checkout Error:", error);
-    }
-};
