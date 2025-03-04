@@ -27,8 +27,8 @@ export default async function Success({ searchParams }: OutcomeProps) {
 
     if (status == 'complete') {
         return (
-            <section id="success">
-                <p>
+            <section id="success" className="container mx-auto py-20">
+                <p className="text-xl text-df-text">
                     We appreciate your business! A confirmation email will be sent to
                     {`${customerEmail}`}
                 </p>
