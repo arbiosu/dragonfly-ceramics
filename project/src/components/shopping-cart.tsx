@@ -1,11 +1,22 @@
 "use client";
 
 import { useCart } from "@/contexts/CartContext";
+import { useState, useEffect } from "react";
 import CartItemCard from "@/components/cart-item";
+import Loading from "@/components/loading";
 
 
 export default function ShoppingCart() {
     const { cartItems, cartTotal, cartCount } = useCart();
+    const [mounted, setMounted] = useState<boolean>(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) {
+        return <Loading />
+    }
 
     return (
         <div>
@@ -29,6 +40,5 @@ export default function ShoppingCart() {
                 </div>
             )}
         </div>
-    )
-    
-}
+    );
+};
