@@ -11,7 +11,10 @@ export interface CartItem {
 }
 
 export async function getProducts(): Promise<Stripe.Product[]> {
-    const products = await stripe.products.list({ expand: ["data.default_price"]})
+    const products = await stripe.products.list({ 
+        expand: ["data.default_price"],
+        active: true,
+    });
     return products.data;
 };
 
