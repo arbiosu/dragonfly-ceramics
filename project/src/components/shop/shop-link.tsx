@@ -23,5 +23,5 @@ export default function ShopLink() {
                 </path>
             </svg>
         </Link>
-    )
-}
+    );
+};

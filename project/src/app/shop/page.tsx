@@ -1,5 +1,5 @@
 import { getProducts } from "@/lib/stripe"
-import ProductGrid from "@/components/product-grid"
+import ProductGrid from "@/components/shop/product-grid"
 
 
 export default async function Shop() {

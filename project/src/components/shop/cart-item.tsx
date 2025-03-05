@@ -16,7 +16,7 @@ export default function CartItemCard({ product, quantity }: CartItem) {
             description: `${product.name} has been removed from your Cart.`,
             variant: "warning",
         });
-    }
+    };
 
     return (
         <div className="relative group w-full max-w-sm bg-df-bg rounded-lg shadow-md overflow-hidden">

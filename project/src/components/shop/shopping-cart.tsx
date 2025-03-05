@@ -2,8 +2,8 @@
 
 import { useCart } from "@/contexts/CartContext";
 import { useState, useEffect } from "react";
-import CartItemCard from "@/components/cart-item";
-import CheckoutButton from "@/components/checkout";
+import CartItemCard from "@/components/shop/cart-item";
+import CheckoutButton from "@/components/shop/checkout";
 import Loading from "@/components/loading";
 
 

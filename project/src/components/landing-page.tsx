@@ -1,4 +1,4 @@
-import ShopLink from "./shop-link";
+import ShopLink from "@/components/shop/shop-link";
 
 
 function LandinPageVideo() {

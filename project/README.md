@@ -1,13 +1,10 @@
 ## TODO
 
 1. fix styling
-3. error handling
-4. fix success page
-    - purgeCart
-    - send session id to server component
-    - call func
-    - OrderSummary page
-6. fix cancel page
+2. error handling
+3. fix cancel page
+4. webhooks
+5. integrate email
 
 
 ```

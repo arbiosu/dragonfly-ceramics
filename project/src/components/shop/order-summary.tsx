@@ -30,7 +30,7 @@ export default function OrderSummary({ session }: SessionProps) {
 
     useEffect(() => {
         purgeCart();
-    }, [])
+    }, [purgeCart])
 
     return (
         <div className="py-20 container mx-auto">

@@ -2,7 +2,7 @@
 
 import { Stripe } from "stripe";
 import { useState, useMemo } from "react";
-import ProductCard from "@/components/product-card";
+import ProductCard from "@/components/shop/product-card";
 
 interface ProductGridProps {
     products: Stripe.Product[];
@@ -24,7 +24,6 @@ export default function ProductGrid({ products }: ProductGridProps) {
     const filterButtons: Filter[] = [
         "all", "mugs", "vases", "oil dispensers", "soap dispensers", "coasters", "merch"
     ];
-
 
     return (
         <div>
@@ -52,5 +51,5 @@ export default function ProductGrid({ products }: ProductGridProps) {
                 ))}
             </div>
         </div>
-    )
-}
+    );
+};

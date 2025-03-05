@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { stripeCheckoutSuccess } from "@/lib/stripe";
-import OrderSummary from "@/components/order-summary";
+import OrderSummary from "@/components/shop/order-summary";
 
 
 type SearchParams = {
