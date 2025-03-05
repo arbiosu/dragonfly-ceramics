@@ -1,7 +1,7 @@
 "use client";
 
 import { useCart } from "@/contexts/CartContext";
-import { CartItem } from "@/lib/stripeUtils";
+import { CartItem } from "@/lib/stripe/utils";
 
 
 export default function CheckoutButton() {

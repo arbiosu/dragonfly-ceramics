@@ -1,4 +1,4 @@
-import { fetchProducts } from "@/lib/stripeUtils"
+import { fetchProducts } from "@/lib/stripe/utils"
 import ProductGrid from "@/components/shop/product-grid"
 
 

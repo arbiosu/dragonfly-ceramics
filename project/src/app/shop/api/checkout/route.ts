@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
-import { stripeCheckout, validateCart, CartItem } from "@/lib/stripeUtils";
+import { stripeCheckout, validateCart, CartItem } from "@/lib/stripe/utils";
 
 
 export async function POST(request: Request) {

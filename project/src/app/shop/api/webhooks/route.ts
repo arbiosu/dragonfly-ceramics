@@ -1,6 +1,6 @@
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server';
-import { stripe } from '@/lib/stripe'
+import { stripe } from '@/lib/stripe/stripe'
 import Stripe from "stripe";
 
 export async function POST(request: Request) {
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
         console.error("Webhook Error: ", error);
         return new NextResponse(`[Stripe] Webhook Error`, { status: 400 })
     }
-    
+
     switch (event.type) {
         case 'checkout.session.completed':
             console.log('[Webhook Success] Checkout Webhook Received!');
