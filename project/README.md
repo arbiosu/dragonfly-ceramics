@@ -1,9 +1,13 @@
 ## TODO
 
 1. fix styling
-2. change whats stored in local storage eg: product type instead
 3. error handling
-4. purgeCart after checkout
+4. fix success page
+    - purgeCart
+    - send session id to server component
+    - call func
+    - OrderSummary page
+6. fix cancel page
 
 
 ```

@@ -3,7 +3,7 @@
 
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { CartItem } from "@/lib/stripe"
 import { Stripe } from "stripe";
 
@@ -79,9 +79,9 @@ export const CartProvider = ({ children }: Props) => {
         setCartItems(updatedCartItems);
     };
 
-    const purgeCart = () => {
+    const purgeCart = useCallback(() => {
         setCartItems([]);
-    }
+    }, []);
 
     const cartTotalInCents = cartItems.reduce((total, item) => {
         const price = item.product.default_price
