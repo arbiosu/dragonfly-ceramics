@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState } from "react"
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/contexts/ToastContext";
-import { CartItem } from "@/lib/stripe";
+import { CartItem } from "@/lib/stripeUtils";
 
 
 interface ProductCardProps {

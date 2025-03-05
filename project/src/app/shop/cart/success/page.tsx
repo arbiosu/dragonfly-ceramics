@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { stripeCheckoutSuccess } from "@/lib/stripe";
+import { stripeCheckoutSuccess } from "@/lib/stripeUtils";
 import OrderSummary from "@/components/shop/order-summary";
 
 

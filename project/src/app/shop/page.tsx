@@ -1,9 +1,9 @@
-import { getProducts } from "@/lib/stripe"
+import { fetchProducts } from "@/lib/stripeUtils"
 import ProductGrid from "@/components/shop/product-grid"
 
 
 export default async function Shop() {
-    const products = await getProducts()
+    const products = await fetchProducts()
     return (
         <main className="py-20">
             <section className="container mx-auto text-center px-4">

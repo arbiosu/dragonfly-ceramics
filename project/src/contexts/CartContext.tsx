@@ -4,7 +4,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, useCallback } from "react";
-import { CartItem } from "@/lib/stripe"
+import { CartItem } from "@/lib/stripeUtils"
 import { Stripe } from "stripe";
 
 
