@@ -1,13 +1,7 @@
-import { redirect } from "next/navigation";
-import { stripeCheckoutSuccess } from "@/lib/stripe/utils";
-import OrderSummary from "@/components/shop/order-summary";
-
-
-export default async function Success({
-    searchParams
-}: {
-    searchParams: { [key: string]: string | string[] | undefined };
-}) {
+// TODO: figure out the problem with this once we come to it
+// figure out async searchParams if possible
+export default function Success() {
+    /*
     const session_id = searchParams.session_id as string | undefined;
 
     if (!session_id) {
@@ -15,10 +9,6 @@ export default async function Success({
     }
 
     const { session, status, customerEmail } = await stripeCheckoutSuccess(session_id);
-
-    if (status === 'open') {
-        redirect('/shop/cart');
-    }
 
     const orderSummary = {
         id: session.id,
@@ -38,4 +28,8 @@ export default async function Success({
             </section>
         );
     }
+    */
+   return (
+        <h1>Success</h1>
+   )
 };
