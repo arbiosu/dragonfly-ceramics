@@ -3,16 +3,11 @@ import { stripeCheckoutSuccess } from "@/lib/stripe/utils";
 import OrderSummary from "@/components/shop/order-summary";
 
 
-type SearchParams = {
-    [key: string]: string | string[];
-};
-
-interface OutcomeProps {
-    searchParams: SearchParams;
-}
-
-
-export default async function Success({ searchParams }: OutcomeProps) {
+export default async function Success({
+    searchParams
+}: {
+    searchParams: { [key: string]: string | string[] | undefined };
+}) {
     const session_id = searchParams.session_id as string | undefined;
 
     if (!session_id) {
@@ -41,6 +36,6 @@ export default async function Success({ searchParams }: OutcomeProps) {
                     We appreciate your business! A confirmation email will be sent to {`${customerEmail}`}
                 </p>
             </section>
-        )
+        );
     }
-}
+};
