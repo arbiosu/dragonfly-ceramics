@@ -13,8 +13,7 @@ interface OutcomeProps {
 
 
 export default async function Success({ searchParams }: OutcomeProps) {
-    const params = await searchParams;
-    const session_id = params.session_id as string | undefined;
+    const session_id = searchParams.session_id as string | undefined;
 
     if (!session_id) {
         throw new Error(`Please provide a valid session id`);
