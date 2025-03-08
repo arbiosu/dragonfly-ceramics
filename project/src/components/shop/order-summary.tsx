@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useCart } from "@/contexts/CartContext";
 
 
-interface SessionProps {
+export interface SessionProps {
     session: Session;
 }
 
@@ -14,10 +14,11 @@ interface Session {
     amountTotal: number | null;
     address: Stripe.Address | string;
     lineItems: Stripe.ApiList<Stripe.LineItem> | undefined;
-
+    email: string;
 }
 
 export default function OrderSummary({ session }: SessionProps) {
+    // todo: extract to stripe/utils
     const formatAddress = (address: Stripe.Address) => {
         const { line1, line2, city, state, postal_code, country } = address;
         const formattedAddress = [line1, line2, city, state, postal_code, country]

@@ -30,7 +30,8 @@ export default async function Success({ searchParams }: OutcomeProps) {
         id: session.id,
         amountTotal: session.amount_total,
         address: session.shipping_details?.address || "N/A",
-        lineItems: session.line_items
+        lineItems: session.line_items,
+        email: customerEmail ? customerEmail : "No email"
     }
 
     if (status == 'complete') {
