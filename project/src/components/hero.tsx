@@ -17,7 +17,7 @@ export default function Hero() {
                             Welcome to Dragonfly Ceramics
                         </h1>
                         <h2 className="text-df-text text-3xl font-medium tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-                            Handcrafted Pottery - insert more interesting text here.
+                            Handcrafted Pottery
                         </h2>
                         <p className="text-df-text text-lg">
                             Insert some text here for your brand

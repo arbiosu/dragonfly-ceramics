@@ -1,5 +1,5 @@
 import Image from "next/image";
-import ShopLink from "@/components/shop-link";
+import ShopLink from "@/components/shop/shop-link";
 import ImageGrid from "@/components/image-grid";
 import SubscribeCard from "@/components/subscribe-card";
 import { FAQHorizontalScroll} from "@/components/faqs";
@@ -11,9 +11,9 @@ import logo from "@/../public/logo-df-text.png"
 export default function About() {
     
     const imageGridItems = [
-        { heading: "Handcrafted", src: "/pottery1.jpg"},
-        { heading: "Excellence", src: "/pottery2.jpg"},
-        { heading: "Sustainable", src: "/pottery-hand.jpeg"}, 
+        { heading: "", src: "/pottery1.jpg"},
+        { heading: "", src: "/pottery2.jpg"},
+        { heading: "", src: "/pottery-hand.jpeg"}, 
     ]
 
     const faqs = [
@@ -69,8 +69,21 @@ export default function About() {
                         <h2 className="text-df-text text-6xl font-light tracking-wider text-center md:text-left">
                             Meet the Artist
                         </h2>
+                        <p className="text-df-text leading-relaxed text-3xl text-center md:text-left">Kelly Slater (she/her)</p>
+                        <p className="text-df-text leading-relaxed text-lg text-center md:text-left italic">Ceramicist</p>
+                        <p className="text-df-text leading-relaxed text-lg text-center md:text-left italic">Based in NYC</p>
                         <p className="text-df-text leading-relaxed">
-                        Lorem ipsum odor amet, consectetuer adipiscing elit. Phasellus curae est suscipit ultricies imperdiet ligula duis. Augue dis odio sociosqu vel laoreet mollis consectetur. Enim nullam ipsum aliquet natoque ante malesuada auctor dictum efficitur. Montes faucibus fermentum urna; in hendrerit dapibus purus.
+                            I first started working with clay in highschool and then pottery
+                            quickly became an obsession in college. I fell in love with the medium
+                            when I started to create both functional and nonfunctional things for myself. 
+                            Soon enough, I had so much pottery in my home, that I needed to share it with others. 
+                        </p>
+                        <p className="text-df-text leading-relaxed">
+                            I currently produce small batches of my work and list them here on
+                            my website when they are finished. I also offer the option to commission
+                            me for custom work and large batch items at a wholesale rate. Be sure to
+                            sign up for my newsletter so you know when I restock and if anything else
+                            exciting happens! 
                         </p>
                         <ShopLink />
                     </div>
@@ -90,6 +103,5 @@ export default function About() {
         </section>
         <ImageGrid items={imageGridItems} />
         </>
-    )
-
-}
+    );
+};
