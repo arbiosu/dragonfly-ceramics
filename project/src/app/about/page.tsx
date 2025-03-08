@@ -11,9 +11,9 @@ import logo from "@/../public/logo-df-text.png"
 export default function About() {
     
     const imageGridItems = [
-        { heading: "Handcrafted", src: "/pottery1.jpg"},
-        { heading: "Excellence", src: "/pottery2.jpg"},
-        { heading: "Sustainable", src: "/pottery-hand.jpeg"}, 
+        { heading: "", src: "/pottery1.jpg"},
+        { heading: "", src: "/pottery2.jpg"},
+        { heading: "", src: "/pottery-hand.jpeg"}, 
     ]
 
     const faqs = [
