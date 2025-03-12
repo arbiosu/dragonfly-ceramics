@@ -1,8 +1,8 @@
 "use server";
 
-import TokenManager from "./manager";
+import uspsManager from "./manager";
 
-type Package = {
+export type Package = {
     weight: number;
     length: number;
     height: number;
@@ -10,16 +10,9 @@ type Package = {
     mailClass: string;
 }
 
-const manager = new TokenManager(
-    process.env.USPS_CLIENT_ID!,
-    process.env.USPS_CLIENT_SECRET!,
-    `${process.env.USPS_URL!}/oauth2/v3`,
-    ["shipments"]
-)
-
 export async function fetchShippingOptions(destinationZIP: string, pkg: Package) {
     try {
-        const token = await manager.getToken();
+        const token = await uspsManager.getToken();
         const domesticPricingOptions = {
             pricingOptions: [
                 {

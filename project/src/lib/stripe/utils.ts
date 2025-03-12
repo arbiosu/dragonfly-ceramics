@@ -9,6 +9,7 @@ export interface CartItem {
     quantity: number;
 }
 
+
 export async function fetchProducts(): Promise<Stripe.Product[]> {
     try {
         const products = await stripe.products.list({ 

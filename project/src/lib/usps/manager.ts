@@ -10,7 +10,7 @@ interface AccessTokenResponse {
  * A manager for the access tokens required for Oauth 2.0 apis
  * In this case, specifically for the USPS API
  */
-export default class TokenManager {
+class TokenManager {
     private accessToken: string | null = null;
     private expiresAt: number = 0;
     private isRefreshing: boolean = false;
@@ -44,8 +44,8 @@ export default class TokenManager {
                 },
                 body: new URLSearchParams({
                     grant_type: "client_credentials",
-                    client_id: process.env.USPS_CLIENT_ID!,
-                    client_secret: process.env.USPS_CLIENT_SECRET!,
+                    client_id: this.clientId,
+                    client_secret: this.clientSecret,
                     scope: this.scopes.join(" "),
         
                 }),
@@ -93,3 +93,12 @@ export default class TokenManager {
         }
     }
 }
+
+const uspsManager = new TokenManager(
+    process.env.USPS_CLIENT_ID!,
+    process.env.USPS_CLIENT_SECRET!,
+    `${process.env.USPS_URL!}/oauth2/v3/token`,
+    ["shipments", "prices"]
+)
+
+export default uspsManager;
