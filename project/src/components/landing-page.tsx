@@ -29,7 +29,7 @@ export default function LandingPage() {
                 <LandinPageVideo />
             </div>
             <div className="h-[10vh] w-full flex items-center justify-center bg-df-bg">
-                <ShopLink />
+                <ShopLink label={"Shop Now"}/>
             </div>
         </div>
     )

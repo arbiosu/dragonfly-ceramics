@@ -8,7 +8,15 @@ interface ProductGridProps {
     products: Stripe.Product[];
 }
 
-type Filter = "all" | "mugs" | "vases" | "oil dispensers" | "soap dispensers" | "coasters" | "merch";
+type Filter = 
+"all" 
+| "mugs"
+| "vases"
+| "oil dispensers"
+| "soap dispensers"
+| "coasters"
+| "berry bowls"
+| "merch";
 
 
 export default function ProductGrid({ products }: ProductGridProps) {
@@ -22,7 +30,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
     }, [products, filter]);
 
     const filterButtons: Filter[] = [
-        "all", "mugs", "vases", "oil dispensers", "soap dispensers", "coasters", "merch"
+        "all", "mugs", "vases", "oil dispensers", "soap dispensers", "coasters", "berry bowls", "merch"
     ];
 
     return (
@@ -32,24 +40,30 @@ export default function ProductGrid({ products }: ProductGridProps) {
                     <button
                         key={index}
                         onClick={() => setFilter(label)}
-                        className={`px-4 py-2 rounded-md font-medium transition-colors
-                        duration-200 text-df-text ${
+                        className={`px-4 py-2 rounded-md font-bold transition-colors
+                        duration-200 text-white ${
                                 filter === label
-                                ? "bg-blue-400"
-                                : "bg-blue-300 hover:bg-blue-300/80"
+                                ? "bg-blue-300"
+                                : "bg-df-text hover:bg-blue-300"
                                 }`}
                     >
                         {label}
                     </button>
                 ))}
             </div>
-            <div className="grid grid-cols-2 gap-4">
-                {filteredProducts.map((product, index) => (
+            {filteredProducts.length > 0 ? (
+                <div className="grid grid-cols-2 gap-4 md:mx-40">
+                    {filteredProducts.map((product, index) => (
                     <div key={index} className="flex justify-center">
                         <ProductCard  data={product} />
                     </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            ) : (
+                <div className="flex justify-center items-center h-40">
+                    <p className="text-2xl font-semibold text-df-text">Sold Out!</p>
+                </div>
+            )}
         </div>
     );
 };

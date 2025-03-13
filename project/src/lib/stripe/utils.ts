@@ -22,6 +22,17 @@ export async function fetchProducts(): Promise<Stripe.Product[]> {
     }
 };
 
+export async function fetchProductById(id: string): Promise<Stripe.Product> {
+    try {
+        const product = await stripe.products.retrieve(id, {
+            expand: ["default_price"],
+        });
+        return product;
+    } catch (error) {
+        throw new Error(`Failed to retrieve product ${id} with error: ${error}`);
+    }
+}
+
 export async function validateCart(
     cart: CartItem[]
 ): Promise<Stripe.Checkout.SessionCreateParams.LineItem[]> {

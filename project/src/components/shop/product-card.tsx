@@ -2,10 +2,10 @@
 
 import { Stripe } from "stripe";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react"
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/contexts/ToastContext";
-import { CartItem } from "@/lib/stripe/utils";
 
 
 interface ProductCardProps {
@@ -17,25 +17,6 @@ export default function ProductCard({ data }: ProductCardProps) {
     const [isHovered, setIsHovered] = useState<boolean>(false);
     const { addToCart } = useCart();
     const { addToast } = useToast();
-
-    const handleBuyNow = async (item: CartItem) => {
-        try {
-            const res = await fetch("/shop/api/checkout", {
-                method: "POST",
-                headers: { "Content-Type": "application/json"},
-                body: JSON.stringify({ cartItems: [item] }),
-            });
-
-            if (!res.ok) {
-                throw new Error(`Failed to create checkout session: ${res.status}`);
-            }
-
-            const data = await res.json();
-            window.location.href = data.url;
-        } catch (error) {
-            console.error(error)
-        }
-    };
 
     const handleAddToCart = () => {
         addToCart(data);
@@ -67,14 +48,14 @@ export default function ProductCard({ data }: ProductCardProps) {
                     isHovered ? "opacity-100" : "opacity-0"
                 }`}
                 >
-                    <button
-                        className="w-full bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-md transition-colors"
-                        onClick={() => handleBuyNow({ product: data, quantity: 1 })}
+                    <Link 
+                        href={`/shop/${data.id}`}
+                        className="w-full bg-black hover:bg-blue-300 text-white font-semibold py-2 px-4 rounded-md transition-colors"
                     >
-                        Buy Now
-                    </button>
+                        Details
+                    </Link>
                     <button
-                        className="w-full bg-df-text hover:bg-gray-900 text-white font-semibold py-2 px-4 rounded-md transition-colors"
+                        className="w-full bg-df-text hover:bg-blue-300 text-white font-semibold py-2 px-4 rounded-md transition-colors"
                         onClick={handleAddToCart}
                     >
                         Add to Cart

@@ -17,14 +17,11 @@ Dont forget to add new keys to prod
     - collect shipping address before
     - formula
     - create session
-4. Fix cancel page, fix success page search params
+4. Fix cancel page, fix success page search params, add option for colors for oil dispensers
 5. Pagination on shop page
 6 Styling:
     - fix product grid on desktop to be closer together
-    - change filter color background to df-text, white text
     - product details page
-    - remove footer headings
-    - increase size on dragonfly logo
 7. admin portal for multiple images
 8. product detail view, dynamic route with product id
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 
-export default function ShopLink() {
+export default function ShopLink({ label }: { label: string }) {
     return (
         <Link 
             href={"/shop"}
@@ -9,7 +9,7 @@ export default function ShopLink() {
             text-base font-bold text-center text-white rounded-lg bg-df-text
             hover:bg-blue-300 focus:ring-4 focus:ring-white"
         >
-            Shop now
+            {label}
             <svg 
                 className="w-5 h-5 ml-2 -mr-1"
                 fill="currentColor" 
