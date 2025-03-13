@@ -25,6 +25,7 @@ export async function POST(request: Request) {
     switch (event.type) {
         case 'checkout.session.completed':
             console.log('[Webhook Success] Checkout Webhook Received!');
+            // TODO: send emails
             break;
         default:
             console.log(`[Webhook] event received: ${event.type}`);

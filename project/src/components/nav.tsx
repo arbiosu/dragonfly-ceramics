@@ -68,7 +68,7 @@ export default function Navbar() {
                         <Image 
                             src="/logo-cropped.png"
                             alt="Dragonfly Ceramics"
-                            width={80}
+                            width={100}
                             height={60}
                             className="object-contain"
                         />

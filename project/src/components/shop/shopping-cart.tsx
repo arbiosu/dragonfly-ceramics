@@ -4,6 +4,7 @@ import { useCart } from "@/contexts/CartContext";
 import { useState, useEffect } from "react";
 import CartItemCard from "@/components/shop/cart-item";
 import CheckoutButton from "@/components/shop/checkout";
+import ShippingRateCalculator from "./shipping-calculator";
 import Loading from "@/components/loading";
 
 
@@ -34,6 +35,7 @@ export default function ShoppingCart() {
                     </div>
                     <div className="flex flex-col justify-start items-start text-lg text-df-text">
                         <span>Estimated Total: ${cartTotal}</span>
+                        <ShippingRateCalculator />
                         <CheckoutButton />
                     </div>
                 </div>

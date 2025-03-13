@@ -9,6 +9,7 @@ export interface CartItem {
     quantity: number;
 }
 
+
 export async function fetchProducts(): Promise<Stripe.Product[]> {
     try {
         const products = await stripe.products.list({ 
@@ -20,6 +21,17 @@ export async function fetchProducts(): Promise<Stripe.Product[]> {
         throw new Error(`Failed to retrieve products in getProducts with error: ${error}`);
     }
 };
+
+export async function fetchProductById(id: string): Promise<Stripe.Product> {
+    try {
+        const product = await stripe.products.retrieve(id, {
+            expand: ["default_price"],
+        });
+        return product;
+    } catch (error) {
+        throw new Error(`Failed to retrieve product ${id} with error: ${error}`);
+    }
+}
 
 export async function validateCart(
     cart: CartItem[]
