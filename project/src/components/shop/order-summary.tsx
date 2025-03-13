@@ -3,6 +3,7 @@
 import { Stripe } from "stripe";
 import { useEffect } from "react";
 import { useCart } from "@/contexts/CartContext";
+import { useToast } from "@/contexts/ToastContext"
 
 
 export interface SessionProps {
@@ -27,7 +28,19 @@ export default function OrderSummary({ session }: SessionProps) {
         return formattedAddress || 'N/A';
     };
 
+    const { addToast } = useToast();
+
+    const handleOrderIdClick = () => {
+        navigator.clipboard.writeText(session.id);
+        addToast({
+            title: "Order ID Copied to Clipboard!",
+            description: "Keep your order ID for any potential questions about your order.",
+            variant: "warning",
+        });
+    }
+
     const { purgeCart } = useCart();
+    
 
     useEffect(() => {
         purgeCart();
@@ -35,25 +48,28 @@ export default function OrderSummary({ session }: SessionProps) {
 
     return (
         <div className="py-20 container mx-auto">
-            <h2 className="text-3xl text-df-text font-semibold">
-                Order Summary
+            <h2 className="text-3xl text-df-text font-semibold mb-4">
+                Thank you! Your Order Summary:
             </h2>
-            <p className="text-df-text text-sm">Order ID: {session.id}</p>
+            <p className="text-df-text text-lg">
+                Order ID - keep this for your records:  
+                <span onClick={handleOrderIdClick}className="hover:bg-blue-300 rounded-lg p-1 text-df-text font-semibold hover:cursor-pointer">{session.id}</span>
+            </p>
             {session.amountTotal && (
-                <p className="text-df-text text-sm">Total Amount: ${session.amountTotal / 100}</p>
+                <p className="text-df-text text-lg">Total Amount: ${session.amountTotal / 100}</p>
             )}
             {typeof session.address !== 'string' ? (
-                <p className="text-df-text text-sm">Shipping Address: {formatAddress(session.address)}</p>
+                <p className="text-df-text text-lg mb-4">Shipping Address: {formatAddress(session.address)}</p>
             ) : (
                 <p>Shipping address not found! Contact...</p>
             )}
             <div>
-                <h3 className="text-xl text-df-text font-semibold">Your receipt</h3>
+                <h3 className="text-2xl text-df-text font-semibold mb-2">Your receipt</h3>
                 {session.lineItems?.data.map((item) => (
                     <div key={item.id}>
-                        <p className="text-df-text text-sm">{item.description}</p>
-                        <p className="text-df-text text-sm">Quantity: {item.quantity}</p>
-                        <p className="text-df-text text-sm  ">Price: ${item.amount_total / 100}</p>
+                        <p className="text-df-text text-lg">{item.description}</p>
+                        <p className="text-df-text text-lg">Quantity: {item.quantity}</p>
+                        <p className="text-df-text text-lg">Price: ${item.amount_total / 100}</p>
                     </div>
                 ))}
             </div>

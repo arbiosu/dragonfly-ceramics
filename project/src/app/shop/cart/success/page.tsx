@@ -1,8 +1,14 @@
-// TODO: figure out the problem with this once we come to it
-// figure out async searchParams if possible
-export default function Success() {
-    /*
-    const session_id = searchParams.session_id as string | undefined;
+import { stripeCheckoutSuccess } from "@/lib/stripe/utils";
+import OrderSummary from "@/components/shop/order-summary";
+
+
+export default async function Success({
+    searchParams,
+}: {
+    searchParams: Promise<{ [key:string]: string | string[] | undefined }>
+}) {
+    
+    const session_id = (await searchParams).session_id as string | undefined;
 
     if (!session_id) {
         throw new Error(`Please provide a valid session id`);
@@ -28,7 +34,7 @@ export default function Success() {
             </section>
         );
     }
-    */
+    
    return (
         <h1>Success</h1>
    )
