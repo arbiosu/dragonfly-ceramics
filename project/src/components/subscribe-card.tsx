@@ -4,6 +4,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { CreateEmailResponseSuccess } from "resend";
+import { validateEmail } from "@/lib/utils";
 
 
 export default function SubscribeCard() {
@@ -12,22 +13,17 @@ export default function SubscribeCard() {
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const validateEmail = (email: string) => {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email)
-    };
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         if (!email) {
-            setError("Please enter your email address. Thank you!")
-            return
+            setError("Please enter your email address. Thank you!");
+            return;
         }
 
         if (!validateEmail(email)) {
-            setError("Invalid email address. Please try again.")
-            return
+            setError("Invalid email address. Please try again.");
+            return;
         }
 
         setIsLoading(true);
@@ -71,9 +67,6 @@ export default function SubscribeCard() {
                     />
                 </div>
                 <div className="text-center my-auto py-4">
-                    <p className="text-df-text">
-                        Join our mailing list for product updates!
-                    </p>
                 </div>
                 {submitted ? (
                     <div className="text-center py-4 px-6 bg-green-50 rounded-md">

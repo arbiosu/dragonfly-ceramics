@@ -17,7 +17,6 @@ export default function Footer() {
   
             {/* Quick Links */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
               <ul className="space-y-2">
                 <li>
                     <Link href="/shop" className="hover:text-gray-800 transition-colors">
@@ -39,7 +38,6 @@ export default function Footer() {
   
             {/* Social Media */}
             <div className="">
-              <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
               <SocialMediaLinksComponent />
             </div>
           </div>

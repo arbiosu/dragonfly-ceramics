@@ -5,8 +5,11 @@ Dont forget to add new keys to prod
 
 1. Webhooks:
     - Endpoint hit
+    - can remove?
 2. Email:
     - need to add Contact form, send email
+    - Customer emails: go to Customers email settings turn on receipts
+    - Kelly emails: settings, comm settings, enable email for successful payment
 3. Shipping: 
     - need to calculate shipping manually
         - add metadata keys weight, dimensions
@@ -23,7 +26,7 @@ Dont forget to add new keys to prod
     - remove footer headings
     - increase size on dragonfly logo
 7. admin portal for multiple images
-
+8. product detail view, dynamic route with product id
 
 ```
 <head>
