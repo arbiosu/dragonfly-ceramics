@@ -40,12 +40,12 @@ export default function ProductGrid({ products }: ProductGridProps) {
                     <button
                         key={index}
                         onClick={() => setFilter(label)}
-                        className={`px-4 py-2 rounded-md font-bold transition-colors
-                        duration-200 text-white ${
-                                filter === label
-                                ? "bg-blue-300"
-                                : "bg-df-text hover:bg-blue-300"
-                                }`}
+                        className={`px-4 py-2 text-df-text font-mono
+                         ${
+                            filter === label
+                            ? "border-solid border-b-4 border-blue-300"
+                            : "text-gray-500"
+                            }`}
                     >
                         {label}
                     </button>

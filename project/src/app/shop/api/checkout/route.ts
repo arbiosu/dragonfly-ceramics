@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
+import Stripe from 'stripe';
 import { stripeCheckout, validateCart, CartItem } from "@/lib/stripe/utils";
 
 
@@ -11,7 +12,37 @@ export async function POST(request: Request) {
         const { cartItems } = (await request.json()) as { cartItems: CartItem[] };
         const validatedCart = await validateCart(cartItems);
 
-        const session = await stripeCheckout(validatedCart, origin);
+        const oilDispenserProps: Partial<Stripe.Checkout.SessionCreateParams> = {};
+        const hasOilDispensers = cartItems.filter((item) => item.product.metadata.type === "oil dispensers");
+        if (hasOilDispensers.length > 0) {
+            oilDispenserProps.custom_fields = [];
+            for (let i = 0; i < hasOilDispensers.length; ++i) {
+                oilDispenserProps.custom_fields.push({
+                    key: "color",
+                    label: {
+                        type: 'custom',
+                        custom: 'Choose your color for your Oil Dispenser'
+                    },
+                    type: "dropdown",
+                    dropdown: {
+                        options: [
+                            {
+                                label: "Blue",
+                                value: "blue",
+                            },
+                            {
+                                label: "Gold",
+                                value: "gold"
+                            },
+                        ],
+                    },
+                });
+            }
+        }
+        console.log("hasOilDispensers: ", hasOilDispensers)
+        console.log("Oil dispenser props", oilDispenserProps)
+
+        const session = await stripeCheckout(validatedCart, origin, oilDispenserProps);
         
         if (session.url) {
             return NextResponse.json({ url: session.url }, { status: 200 });

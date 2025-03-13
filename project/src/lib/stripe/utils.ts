@@ -67,9 +67,10 @@ export async function validateCart(
 
 export async function stripeCheckout(
     validatedCart: Stripe.Checkout.SessionCreateParams.LineItem[],
-    origin: string | null
+    origin: string | null,
+    oilDispenserProps: Partial<Stripe.Checkout.SessionCreateParams>
 ) {
-    try {
+    try {        
         const session = await stripe.checkout.sessions.create({
             line_items: validatedCart,
             billing_address_collection: 'required',
@@ -79,6 +80,7 @@ export async function stripeCheckout(
             mode: 'payment',
             success_url: `${origin}/shop/cart/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${origin}/shop/cart/canceled`,
+            ...oilDispenserProps,
         });
     
         return session;
