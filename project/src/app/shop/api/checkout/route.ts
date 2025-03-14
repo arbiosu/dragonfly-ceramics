@@ -8,13 +8,16 @@ export async function POST(request: Request) {
     try {
         const headersList = await headers();
         const origin = headersList.get('origin');
-        
+        // TODO: add uspsShippingOptions - make type
         const { cartItems } = (await request.json()) as { cartItems: CartItem[] };
         const validatedCart = await validateCart(cartItems);
+        // flow: validate the cart -> add shipping options -> oil dispenser check
+        // -> create session
 
         const oilDispenserProps: Partial<Stripe.Checkout.SessionCreateParams> = {};
         const hasOilDispensers = cartItems.filter((item) => item.product.metadata.type === "oil dispensers");
         if (hasOilDispensers.length > 0) {
+            // max is 3
             oilDispenserProps.custom_fields = [];
             for (let i = 0; i < hasOilDispensers.length; ++i) {
                 oilDispenserProps.custom_fields.push({
@@ -39,8 +42,6 @@ export async function POST(request: Request) {
                 });
             }
         }
-        console.log("hasOilDispensers: ", hasOilDispensers)
-        console.log("Oil dispenser props", oilDispenserProps)
 
         const session = await stripeCheckout(validatedCart, origin, oilDispenserProps);
         

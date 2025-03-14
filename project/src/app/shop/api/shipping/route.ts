@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { fetchShippingOptions, Package } from "@/lib/usps/utils";
+import { fetchEligibleProducts, Box } from "@/lib/usps/utils";
 
 interface USPSError {
     error: string;
@@ -31,9 +31,9 @@ interface ShippingRateObject {
 
 export async function POST(request: Request) {
     try {
-        const { destinationZip, pkg } = (await request.json()) as { destinationZip: string, pkg: Package };
-        console.log("API received request:", { destinationZip, pkg });
-        const rates = await fetchShippingOptions(destinationZip, pkg)
+        const { destinationZip, box } = (await request.json()) as { destinationZip: string, box: Box };
+        console.log("API received request:", { destinationZip, box });
+        const rates = await fetchEligibleProducts(destinationZip, box)
         console.log("Shipping rates received:", rates);
         const options = rates.pricingOptions[0].shippingOptions;
         const shippingOptions: ShippingRateObject[] = [];

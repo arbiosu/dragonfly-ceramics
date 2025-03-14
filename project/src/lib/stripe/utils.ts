@@ -2,11 +2,28 @@
 
 import Stripe from 'stripe';
 import { stripe } from './stripe';
+import {
+    largeFlatRateBoxVolume,
+    mediumFlatRateBoxVolume,
+    smallFlatRateBoxVolume,
+} from '@/lib/usps/utils';
 
 
 export interface CartItem {
     product: Stripe.Product;
     quantity: number;
+}
+
+export async function determineBoxSize(cartItems: CartItem[]) {
+    const map = new Map();
+    for (const item of cartItems) {
+        const totalVolume = 
+        Number(item.product.metadata.length)*
+        Number(item.product.metadata.width)*
+        Number(item.product.metadata.height);
+
+    }
+
 }
 
 

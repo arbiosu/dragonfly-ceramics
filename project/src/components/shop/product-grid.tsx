@@ -30,7 +30,14 @@ export default function ProductGrid({ products }: ProductGridProps) {
     }, [products, filter]);
 
     const filterButtons: Filter[] = [
-        "all", "mugs", "vases", "oil dispensers", "soap dispensers", "coasters", "berry bowls", "merch"
+        "all",
+        "mugs",
+        "vases",
+        "oil dispensers",
+        "soap dispensers",
+        "coasters",
+        "berry bowls",
+        "merch",
     ];
 
     return (

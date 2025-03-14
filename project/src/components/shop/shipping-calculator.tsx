@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useCart } from '@/contexts/CartContext';
-import type { Package } from '@/lib/usps/utils';
+import { Box, determineBoxSize } from '@/lib/usps/utils';
 
 
 export default function ShippingRateCalculator() {
@@ -27,22 +27,15 @@ export default function ShippingRateCalculator() {
         }
 
         setIsLoading(true);
-        const p: Package = {
-            // TODO: Fix?
-            weight: Number(cartItems[0].product.metadata.weight),
-            length: Number(cartItems[0].product.metadata.length),
-            height: Number(cartItems[0].product.metadata.height),
-            width: Number(cartItems[0].product.metadata.width),
-            mailClass: "ALL",
-        }
-        // TODO: handle multiple items in cart
+        const box: Box = await determineBoxSize(cartItems);
+
         try {
             const response = await fetch('/shop/api/shipping', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ destinationZip: zipCode, pkg: p })
+                body: JSON.stringify({ destinationZip: zipCode, box: box })
             })
 
             if (!response.ok) {
