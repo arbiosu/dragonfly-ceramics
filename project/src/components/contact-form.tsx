@@ -34,8 +34,6 @@ export default function ContactForm() {
     setIsLoading(true);
     setError(null)
 
-    console.log(formData);
-
     try {
         const res = await fetch("/shop/api/email/contact", {
             method: "POST",
