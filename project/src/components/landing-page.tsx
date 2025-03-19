@@ -1,4 +1,5 @@
 import ShopLink from "@/components/shop/shop-link";
+import { cursiveFont } from "@/../public/fonts/fonts";
 
 
 function LandinPageVideo() {
@@ -6,7 +7,7 @@ function LandinPageVideo() {
         <div className="absolute inset-0 w-full h-full overflow-hidden">
             <video 
                 autoPlay 
-                loop 
+                loop
                 muted 
                 playsInline 
                 preload="auto"
@@ -24,12 +25,13 @@ function LandinPageVideo() {
 
 export default function LandingPage() {
     return (
-        <div className="h-screen flex flex-col">
-            <div className="h-[90vh] w-full relative">
-                <LandinPageVideo />
-            </div>
-            <div className="h-[10vh] w-full flex items-center justify-center bg-df-bg">
-                <ShopLink label={"Shop Now"}/>
+        <div className="h-screen w-full relative">
+            <LandinPageVideo />
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <div className={`${cursiveFont.className} text-center mb-8`}>
+                <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">dragonfly ceramics</h1>
+                </div>
+                <ShopLink label={"Shop Now"} />
             </div>
         </div>
     )

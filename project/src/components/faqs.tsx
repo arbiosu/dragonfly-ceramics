@@ -32,7 +32,7 @@ export function FAQHorizontalScroll({ faqs }: FAQProps) {
 
     return (
         <div className="w-full max-w-7xl mx-auto py-6">
-            <h2 className="text-2xl font-bold mb-6 text-center text-df-text">
+            <h2 className="text-2xl mb-6 text-center text-df-text">
                 Frequently Asked Questions
             </h2>
             <div
@@ -42,9 +42,9 @@ export function FAQHorizontalScroll({ faqs }: FAQProps) {
                 {faqs.map((faq) => (
                     <div
                         key={faq.id}
-                        className="inline-block align-top bg-white rounded-lg shadow-md p-6 border border-gray-200 mr-4 last:mr-0 flex-shrink-0 w-96"
+                        className="inline-block align-top rounded-lg p-6 border border-gray-200 mr-4 last:mr-0 flex-shrink-0 w-96"
                     >
-                        <h3 className="text-lg text-df-text font-semibold mb-3">
+                        <h3 className="text-lg text-df-text mb-3">
                             {faq.question}
                         </h3>
                         <p className="text-df-text">
@@ -82,7 +82,7 @@ export default function FAQCarousel({ faqs }: FAQProps) {
 
     return (
         <div className="w-full max-w-6xl mx-auto py-6">
-            <h2 className="text-2xl font-bold mb-6 text-center text-df-text">
+            <h2 className="text-2xl mb-6 text-center text-df-text">
                 Frequently Asked Questions
             </h2>
             <div className="relative">
