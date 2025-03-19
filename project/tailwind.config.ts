@@ -13,6 +13,8 @@ export default {
         foreground: "var(--foreground)",
         "df-text": "#33311d",
         "df-bg": "#eee4d1",
+        "dfNew": "#2b2340",
+        "dfNew2": "#dfd1ee",
       },
     },
   },

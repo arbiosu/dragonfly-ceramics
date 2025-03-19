@@ -14,7 +14,7 @@ const ralewayLight = Raleway({
 
 export const metadata: Metadata = {
   title: "Dragonfly Ceramics",
-  description: "Homemade Pottery",
+  description: "Handcrafted Pottery Shop",
 };
 
 export default function RootLayout({

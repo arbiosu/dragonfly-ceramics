@@ -29,7 +29,7 @@ export default function ProductCard({ data }: ProductCardProps) {
 
     return (
         <div
-            className="relative group w-full max-w-sm bg-df-bg rounded-lg shadow-md overflow-hidden"
+            className="relative group w-full max-w-sm bg-df-bg rounded-lg shadow-t-md overflow-hidden"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -62,7 +62,7 @@ export default function ProductCard({ data }: ProductCardProps) {
                     </button>
                 </div>
             </div>
-            <div className="p-4">
+            <div className="p-2">
                 <h3 className="text-lg font-semibold text-df-text truncate">
                     {data.name}
                 </h3>

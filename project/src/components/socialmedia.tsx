@@ -18,6 +18,7 @@ export function SocialMediaLink({ src, link, alt }: SocialMediaData) {
         <Link
             href={link}
             rel="noopener noreferrer"
+            className="block transition-transform hover:scale-110 focus:scale-110 active:scale-95"
             target="_blank"
         >
             <Image 
@@ -33,13 +34,11 @@ export function SocialMediaLink({ src, link, alt }: SocialMediaData) {
 
 export function SocialMediaLinks({ items }: SocialMediaLinkProps) {
     return (
-        <section className="">
-            <div className="flex justify-start space-x-8">
-                {items.map((sm, index) => (
-                    <SocialMediaLink src={sm.src} link={sm.link} alt={sm.alt} key={index} />
-                ))}
-            </div>
-        </section>
+        <div className="flex justify-start space-x-8">
+            {items.map((sm, index) => (
+                <SocialMediaLink src={sm.src} link={sm.link} alt={sm.alt} key={index} />
+            ))}
+        </div>
     )
 }
 
@@ -71,8 +70,7 @@ export default function SocialMediaLinksComponent() {
 
 export function SocialMediaLinksCard() {
     return (
-        <div 
-            className="w-full mx-auto rounded-lg shadow-lg p-6 flex flex-col h-full bg-df-bg relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(circle_800px_at_100%_200px,rgba(120,119,198,0.3),transparent)]">
+        <div className="w-full mx-auto rounded-lg shadow-lg p-6 flex flex-col h-full bg-dfNew2 relative overflow-hidden">
             <div className="text-center mb-auto justify-items-center space-y-8">
                 <h2 className="text-3xl font-bold text-df-text">
                     Follow Us

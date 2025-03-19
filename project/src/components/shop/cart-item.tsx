@@ -35,7 +35,7 @@ export default function CartItemCard({ product, quantity }: CartItem) {
                 {product.default_price && typeof product.default_price !== 'string'
                 && product.default_price.unit_amount ? (
                     <div className="mt-2 text-df-text font-bold text-sm">
-                        Subtotal: ${product.default_price?.unit_amount / 100}
+                        Subtotal: ${(product.default_price?.unit_amount / 100)*quantity}
                     </div>
                 ): (
                     <p className="text-xl font-bold text-df-text mb-3">

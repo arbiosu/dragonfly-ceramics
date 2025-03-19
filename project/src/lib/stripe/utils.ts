@@ -53,6 +53,17 @@ export async function fetchProductById(id: string): Promise<Stripe.Product> {
     }
 }
 
+export async function updateProductImagesById(id: string, newImages: string[]): Promise<Stripe.Product> {
+    try {
+        const product = await stripe.products.update(id, {
+            images: newImages
+        });
+        return product;
+    } catch (error) {
+        throw new Error(`Failed to add image to product with ID ${id} with error ${error}`);
+    }
+}
+
 export async function validateCart(
     cart: CartItem[]
 ): Promise<Stripe.Checkout.SessionCreateParams.LineItem[]> {
@@ -94,6 +105,7 @@ export async function stripeCheckout(
     try {        
         const session = await stripe.checkout.sessions.create({
             line_items: validatedCart,
+            ...oilDispenserProps,
             billing_address_collection: 'required',
             shipping_address_collection: {
                 allowed_countries: ['US'],
@@ -102,7 +114,6 @@ export async function stripeCheckout(
             mode: 'payment',
             success_url: `${origin}/shop/cart/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${origin}/shop/cart/canceled`,
-            ...oilDispenserProps,
         });
     
         return session;

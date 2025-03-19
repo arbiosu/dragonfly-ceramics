@@ -47,7 +47,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
                     <button
                         key={index}
                         onClick={() => setFilter(label)}
-                        className={`px-4 py-2 text-df-text font-mono
+                        className={`px-4 py-2 text-df-text font-bold
                          ${
                             filter === label
                             ? "border-solid border-b-4 border-blue-300"
@@ -59,7 +59,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
                 ))}
             </div>
             {filteredProducts.length > 0 ? (
-                <div className="grid grid-cols-2 gap-4 md:mx-40">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:mx-40">
                     {filteredProducts.map((product, index) => (
                     <div key={index} className="flex justify-center">
                         <ProductCard  data={product} />

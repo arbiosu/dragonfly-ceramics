@@ -27,15 +27,15 @@ export async function POST(request: Request) {
 
         const oilDispenserProps: Partial<Stripe.Checkout.SessionCreateParams> = {};
         const hasOilDispensers = cartItems.filter((item) => item.product.metadata.type === "oil dispensers");
-        if (hasOilDispensers.length > 0) {
-            // max is 3
-            oilDispenserProps.custom_fields = [];
-            for (let i = 0; i < hasOilDispensers.length; ++i) {
+        oilDispenserProps.custom_fields = [];
+
+        for (const oilDispenser of hasOilDispensers) {
+            for (let i = 0; i < oilDispenser.quantity; i++) {
                 oilDispenserProps.custom_fields.push({
                     key: "color",
                     label: {
                         type: 'custom',
-                        custom: 'Choose your color for your Oil Dispenser'
+                        custom: 'Choose a color for your Oil Dispenser'
                     },
                     type: "dropdown",
                     dropdown: {
