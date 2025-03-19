@@ -63,7 +63,7 @@ export default function ContactForm() {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-3xl font-semibold mb-2 text-df-text">Contact</h1>
+      <h1 className="text-3xl mb-2 text-df-text">Contact</h1>
       <h2 className="text-lg text-df-text mb-6">
         For custom orders, wholesale, or general questions, please fill out the information below.
       </h2>
@@ -170,7 +170,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-df-text hover:bg-blue-300 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out"
+          className="w-full bg-df-text hover:bg-blue-300 text-white py-2 px-4 rounded-md transition duration-300 ease-in-out"
         >
         {isLoading ? (
             <div className="flex items-center">

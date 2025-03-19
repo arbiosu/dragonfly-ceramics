@@ -10,7 +10,7 @@ export default function Footer() {
             {/* Brand and Copyright */}
             <div className="md:col-span-2">
               <Link href="/" className="flex items-center mb-4">
-                <span className="text-2xl font-bold">Dragonfly Ceramics</span>
+                <span className="text-2xl">Dragonfly Ceramics</span>
               </Link>
               <p className="text-sm">&copy; {currentYear} Dragonfly Ceramics. All rights reserved.</p>
             </div>

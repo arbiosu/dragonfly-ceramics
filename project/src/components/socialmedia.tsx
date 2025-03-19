@@ -70,9 +70,9 @@ export default function SocialMediaLinksComponent() {
 
 export function SocialMediaLinksCard() {
     return (
-        <div className="w-full mx-auto rounded-lg shadow-lg p-6 flex flex-col h-full bg-dfNew2 relative overflow-hidden">
+        <div className="w-full mx-auto p-6 flex flex-col h-full relative overflow-hidden">
             <div className="text-center mb-auto justify-items-center space-y-8">
-                <h2 className="text-3xl font-bold text-df-text">
+                <h2 className="text-3xl text-df-text">
                     Follow Us
                 </h2>
             </div>

@@ -47,7 +47,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
                     <button
                         key={index}
                         onClick={() => setFilter(label)}
-                        className={`px-4 py-2 text-df-text font-bold
+                        className={`px-4 py-2 text-df-text font-medium
                          ${
                             filter === label
                             ? "border-solid border-b-4 border-blue-300"

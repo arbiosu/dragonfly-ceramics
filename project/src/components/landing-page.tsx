@@ -1,5 +1,5 @@
 import ShopLink from "@/components/shop/shop-link";
-import { cursiveFont } from "@/../public/fonts/fonts";
+import Image from "next/image";
 
 
 function LandinPageVideo() {
@@ -20,7 +20,7 @@ function LandinPageVideo() {
                 Your browser does not support the video tag.
             </video>
         </div>
-    )
+    );
 }
 
 export default function LandingPage() {
@@ -28,11 +28,15 @@ export default function LandingPage() {
         <div className="h-screen w-full relative">
             <LandinPageVideo />
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <div className={`${cursiveFont.className} text-center mb-8`}>
-                <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">dragonfly ceramics</h1>
-                </div>
+                <Image 
+                    src="/dragonfly-text-white.png" 
+                    alt="Dragonfly Ceramics"
+                    width={600}
+                    height={400}
+                    className="mb-4"
+                />
                 <ShopLink label={"Shop Now"} />
             </div>
         </div>
-    )
+    );
 }
