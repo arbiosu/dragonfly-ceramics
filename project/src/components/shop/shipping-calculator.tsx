@@ -102,7 +102,7 @@ export default function ShippingRateCalculator() {
             disabled={isLoading}
             className="w-full bg-df-text hover:bg-blue-300 py-2 px-4 rounded-md text-lg font-medium text-white transition-colors duration-200"
           >
-            {isLoading ? "Calculating..." : "Calculate & Checkout"}
+            {isLoading ? "Calculating..." : "Checkout"}
           </button>
           {error && <div className="mt-3 text-sm text-red-600">{error}</div>}
         </form>

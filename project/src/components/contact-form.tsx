@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { validateEmail } from "@/lib/utils";
-import { CreateEmailResponseSuccess } from "resend";
 
 
 export default function ContactForm() {
@@ -40,16 +39,22 @@ export default function ContactForm() {
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify(formData),
         });
+        const data = await res.json();
+
         if (!res.ok) {
+            if (res.status === 429) {
+              setError(`Too many contact attempts. Please try again in ${data.resetInMinutes} minutes.`);
+            }
             throw new Error(`Failed to send Contact Form email.`);
         }
-        const data: CreateEmailResponseSuccess = await res.json();
+
         if (data !== null) {
-            setSubmitted(true);
-            setError(null);
-        }
+          setSubmitted(true);
+          setError(null);
+      }
+        
     } catch (error) {
-        console.error('Contact email error', error);
+        console.log('Contact email error', error);
         setError("Failed to send your message. Please try again later")
     } finally {
         setIsLoading(false);

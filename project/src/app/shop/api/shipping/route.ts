@@ -23,6 +23,19 @@ export async function POST(request: Request) {
                 case "PRIORITY_MAIL_EXPRESS":
                 case "USPS_GROUND_ADVANTAGE":
                     const rateOption = option.rateOptions[0];
+                    let minimumValue = Number(rateOption.commitment.name[0]);
+                    let maximumValue = Number(rateOption.commitment.name[0]) + 5;
+                    
+                    // Special handling for PRIORITY_MAIL_EXPRESS
+                    if (option.mailClass === "PRIORITY_MAIL_EXPRESS") {
+                        minimumValue = Number(rateOption.commitment.name[0]);
+                        maximumValue = Number(rateOption.commitment.name[0]) + 1;
+                    }
+                    const formattedDisplayName = option.mailClass
+                        .split('_')
+                        .map((word: string) => word.charAt(0) + word.slice(1))
+                        .join(' ');
+
                     options.push({
                         shipping_rate_data: {
                             type: "fixed_amount",
@@ -30,15 +43,15 @@ export async function POST(request: Request) {
                                 amount: Math.floor(rateOption.totalBasePrice*100),
                                 currency: "usd",
                             },
-                            display_name: option.mailClass,
+                            display_name: formattedDisplayName,
                             delivery_estimate: {
                                 minimum: {
                                     unit: "business_day",
-                                    value: Number(rateOption.commitment.name[0])
+                                    value: minimumValue
                                 },
                                 maximum: {
                                     unit: "business_day",
-                                    value: Number(rateOption.commitment.name[0]) + 3
+                                    value: maximumValue
                                 },
                             },
                         },

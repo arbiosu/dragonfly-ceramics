@@ -49,49 +49,49 @@ export async function POST(req: Request) {
             );
         }
 
-    const body: ContactMessage = await req.json();
-    
-    const { data, error } = await resend.emails.send({
-        from: 'Dragonfly Contact Form <noreply@updates.dragonflyceramics.com>',
-        to: "dragonflyceramics.kelly@gmail.com",
-        subject: `Message from Contact Form: ${body.topic}`,
-        html: `<p>
-                From: ${body.name} ${body.email}
-                </p>
-                <br></br>
-                <p>Source: ${body.source}</p>
-                <br></br>
-                <p>Topic: ${body.topic}</p>
-                <br></br>
-                <p>Message: ${body.message}</p>
-                   ` 
-        });
-
-        if (error) {
-            return NextResponse.json({ error }, { status: 500 });
-        }
-
-        // Update submission count
-        submissions.count += 1;
-
-        // Create the response
-        const response = NextResponse.json({ 
-            data, 
-            remaining: RATE_LIMIT - submissions.count
-        }, { status: 200 });
+        const body: ContactMessage = await req.json();
         
-        // Set the updated cookie
-        response.cookies.set({
-            name: COOKIE_NAME,
-            value: JSON.stringify(submissions),
-            expires: new Date(Date.now() + RATE_LIMIT_WINDOW),
-            path: '/',
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict'
-        });
+        const { data, error } = await resend.emails.send({
+            from: 'Dragonfly Contact Form <noreply@updates.dragonflyceramics.com>',
+            to: "dragonflyceramics.kelly@gmail.com",
+            subject: `Message from Contact Form: ${body.topic}`,
+            html: `<p>
+                    From: ${body.name} ${body.email}
+                    </p>
+                    <br></br>
+                    <p>Source: ${body.source}</p>
+                    <br></br>
+                    <p>Topic: ${body.topic}</p>
+                    <br></br>
+                    <p>Message: ${body.message}</p>
+                    `
+            });
 
-        return response;
+            if (error) {
+                return NextResponse.json({ error }, { status: 500 });
+            }
+
+            // Update submission count
+            submissions.count += 1;
+
+            // Create the response
+            const response = NextResponse.json({ 
+                data, 
+                remaining: RATE_LIMIT - submissions.count
+            }, { status: 200 });
+            
+            // Set the updated cookie
+            response.cookies.set({
+                name: COOKIE_NAME,
+                value: JSON.stringify(submissions),
+                expires: new Date(Date.now() + RATE_LIMIT_WINDOW),
+                path: '/',
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict'
+            });
+
+            return response;
     } catch (error) {
         return NextResponse.json({ error }, { status: 500 });
     }

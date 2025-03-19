@@ -13,8 +13,14 @@ export async function POST(request: Request) {
     try {
         const headersList = await headers();
         const origin = headersList.get('origin');
-        // TODO: add uspsShippingOptions - make type
-        const { cartItems, shippingOptions } = (await request.json()) as { cartItems: CartItem[], shippingOptions: ShippingRateObject[]};
+        const { 
+            cartItems,
+            shippingOptions
+        } = (await request.json()) as { 
+            cartItems: CartItem[], 
+            shippingOptions: ShippingRateObject[]
+        };
+
         const validatedCart = await validateCart(cartItems);
         // flow: validate the cart -> add shipping options -> oil dispenser check
         // -> create session
@@ -47,9 +53,6 @@ export async function POST(request: Request) {
                 });
             }
         }
-        for (const option of shippingOptions) {
-            console.log("OPTION from /shipping route:", option);
-        }
         const session = await stripeCheckout(
             validatedCart,
             origin,
@@ -65,7 +68,6 @@ export async function POST(request: Request) {
                 { status: 500 },
             );
         }
-
     } catch (error) {
         let errorMessage = "An unknown error occurred";
         let statusCode = 500;

@@ -3,7 +3,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { CreateEmailResponseSuccess } from "resend";
 import { validateEmail } from "@/lib/utils";
 
 
@@ -36,16 +35,20 @@ export default function SubscribeCard() {
                 body: JSON.stringify({ email: email }),
             });
 
+            const data = await res.json();
+
             if (!res.ok) {
+                if (res.status === 429) {
+                    setError(`Too many subscription attempts. Please try again in ${data.resetInMinutes} minutes.`);
+                }
                 throw new Error(`Failed to send email`);
             }
-            const data: CreateEmailResponseSuccess = await res.json();
             if (data !== null) {
                 setSubmitted(true);
                 setError(null);
             }
         } catch (error) {
-            console.error("Email error:", error);
+            console.log("Email error:", error);
         } finally {
             setIsLoading(false);
         }
