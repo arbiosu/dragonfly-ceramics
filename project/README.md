@@ -14,11 +14,10 @@ Dont forget to add new keys to prod
     - formula
     - create session
     - ensure data is the same?
-3. Pagination on shop page
+3. addtocart on product details page
+    - need to change addtocart
 4. Admin Portal for product images:
     - figure this out later
-5. addtocart on product details page
-    - need to change addtocart
 
 ```
 <head>

@@ -3,20 +3,13 @@
 import uspsManager from "./manager";
 import { CartItem } from "../stripe/utils";
 
-export type Package = {
-    weight: number;
-    length: number;
-    height: number;
-    width: number;
-    mailClass: string;
-}
 
 export type Box = {
     weight: number;
     length: number;
     height: number;
     width: number;
-    boxSize: string;
+    mailClass: string;
 }
 
 // USPS Flat Rate
@@ -63,13 +56,14 @@ export async function determineBoxSize(cartItems: CartItem[]): Promise<Box> {
         heights.push(Number(item.product.metadata.height));
     }
 
+    // cannot ship, contact for wholesale
     if (totalWeight >= 70) {
         return {
             weight: totalWeight,
             length: 0,
             height: 0,
             width: 0,
-            boxSize: "Wholesale"
+            mailClass: "NONE",
         }
     }
     // add padding to volume
@@ -79,10 +73,10 @@ export async function determineBoxSize(cartItems: CartItem[]): Promise<Box> {
         if (totalVolume <= boxVolume) {
             return {
                 weight: totalWeight,
-                length: Math.floor(box.length),
-                width: Math.floor(box.width),
-                height: Math.floor(box.height),
-                boxSize: box.size,
+                length: box.length,
+                width: box.width,
+                height: box.height,
+                mailClass: "ALL"
             };
         }
     }
@@ -95,47 +89,14 @@ export async function determineBoxSize(cartItems: CartItem[]): Promise<Box> {
         length: maxLength,
         width: maxWidth,
         height: maxHeight,
-        boxSize: "Custom"
+        mailClass: "USPS_GROUND_ADVANTAGE",
     };
 };
 
-export async function fetchEligibleProducts(destinationZIP: string, box: Box) {
-    try {
-        const token = await uspsManager.getToken();
-        const data = {
-            originZIPCode: "11211",
-            destinationZIPCode: destinationZIP,
-            weight: box.weight,
-            length: box.length,
-            height: box.height,
-            mailClasses: [
-                "USPS_GROUND_ADVANTAGE",
-                "PRIORITY_MAIL_EXPRESS",
-            ],
-            priceType: "RETAIL",
-        }
-
-        const res = await fetch(`${process.env.USPS_URL!}/prices/v3/base-rates-list/search`, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
-
-        if (!res.ok) {
-            throw new Error(`USPS API request failed with status ${res.status}`);
-        }
-
-        return await res.json();
-    } catch (error) {
-        throw error;
-    }
-};
-
-
-export async function fetchShippingOptions(destinationZIP: string, pkg: Package) {
+export async function fetchShippingOptions(
+    destinationZIP: string,
+    box: Box
+){
     try {
         const token = await uspsManager.getToken();
         const domesticPricingOptions = {
@@ -147,7 +108,7 @@ export async function fetchShippingOptions(destinationZIP: string, pkg: Package)
             originZIPCode: "11211",
             destinationZIPCode: destinationZIP,
             destinationEntryFacilityType: "NONE",
-            packageDescription: pkg,
+            packageDescription: box
         }
 
         const res = await fetch(`${process.env.USPS_URL!}/shipments/v3/options/search`, {

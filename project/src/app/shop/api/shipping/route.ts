@@ -1,91 +1,55 @@
 import { NextResponse } from "next/server";
-import { fetchEligibleProducts, Box } from "@/lib/usps/utils";
-
-interface USPSError {
-    error: string;
-    error_description: string;
-    error_uri: string;
-}
-
-interface ShippingRateObject {
-    shipping_rate_data: {
-      type: 'fixed_amount';
-      fixed_amount: {
-        amount: number;
-        currency: string;
-      };
-      display_name: string;
-      delivery_estimate: {
-        minimum: {
-          unit: 'business_day';
-          value: number;
-        };
-        maximum: {
-          unit: 'business_day';
-          value: number;
-        };
-      };
-    };
-  }
+import { fetchShippingOptions, Box } from "@/lib/usps/utils";
+import type { ShippingRateObject } from "@/lib/stripe/utils";
   
 
 export async function POST(request: Request) {
     try {
         const { destinationZip, box } = (await request.json()) as { destinationZip: string, box: Box };
-        console.log("API received request:", { destinationZip, box });
-        const rates = await fetchEligibleProducts(destinationZip, box)
-        console.log("Shipping rates received:", rates);
-        const options = rates.pricingOptions[0].shippingOptions;
-        const shippingOptions: ShippingRateObject[] = [];
-        for (const option of options) {
+        const pkg = {
+            weight: box.weight,
+            length: box.length,
+            height: box.height,
+            width: box.width,
+            mailClass: box.mailClass,
+        }
+        const rates = await fetchShippingOptions(destinationZip, pkg);
+
+        const shippingOptions = rates.pricingOptions[0].shippingOptions;
+        const options: ShippingRateObject[] = [];
+
+        for (const option of shippingOptions) {
             switch (option.mailClass) {
-                case "PRIORITY_MAIL":
                 case "PRIORITY_MAIL_EXPRESS":
                 case "USPS_GROUND_ADVANTAGE":
-                    for (const data of option.rateOptions) {
-                        shippingOptions.push({
-                            shipping_rate_data: {
-                                type: "fixed_amount",
-                                fixed_amount: {
-                                    amount: data.totalBasePrice,
-                                    currency: "usd",
+                    const rateOption = option.rateOptions[0];
+                    options.push({
+                        shipping_rate_data: {
+                            type: "fixed_amount",
+                            fixed_amount: {
+                                amount: Math.floor(rateOption.totalBasePrice*100),
+                                currency: "usd",
+                            },
+                            display_name: option.mailClass,
+                            delivery_estimate: {
+                                minimum: {
+                                    unit: "business_day",
+                                    value: Number(rateOption.commitment.name[0])
                                 },
-                                display_name: `${data.rates[0].description} - ${data.commitment.name} Shipping`,
-                                delivery_estimate: {
-                                    minimum: {
-                                        unit: "business_day",
-                                        value: Number(`${data.commitment.name[0]}`)
-                                    },
-                                    maximum: {
-                                        unit: "business_day",
-                                        value: Number(`${data.commitment.name[0]}`) + 3
-                                    }
-                                }
-                            }
-                        });
-                    }
-                    
+                                maximum: {
+                                    unit: "business_day",
+                                    value: Number(rateOption.commitment.name[0]) + 3
+                                },
+                            },
+                        },
+                    })
                     break;
                 default:
                     break;
             }
         };
-        for (const option of shippingOptions) {
-            console.log(option)
-        }
-        return NextResponse.json({ rates: shippingOptions });
-
-    } catch (e: unknown) {
-        // Type guard to check if error matches USPSError interface
-        if (e && typeof e === 'object' && 'error' in e && 'error_description' in e) {
-            const uspsError = e as USPSError;
-            return NextResponse.json(
-                { error: uspsError.error, desc: uspsError.error_description }, 
-                { status: 500 }
-            );
-        }
-        
-        // Handle other types of errors
+        return NextResponse.json({ rates: options });
+    } catch (e) {
         console.error("API error:", e);
         return NextResponse.json(
             { error: "An unknown error occurred", desc: String(e) }, 

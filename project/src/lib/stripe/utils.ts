@@ -2,11 +2,6 @@
 
 import Stripe from 'stripe';
 import { stripe } from './stripe';
-import {
-    largeFlatRateBoxVolume,
-    mediumFlatRateBoxVolume,
-    smallFlatRateBoxVolume,
-} from '@/lib/usps/utils';
 
 
 export interface CartItem {
@@ -14,18 +9,26 @@ export interface CartItem {
     quantity: number;
 }
 
-export async function determineBoxSize(cartItems: CartItem[]) {
-    const map = new Map();
-    for (const item of cartItems) {
-        const totalVolume = 
-        Number(item.product.metadata.length)*
-        Number(item.product.metadata.width)*
-        Number(item.product.metadata.height);
-
-    }
-
+export interface ShippingRateObject {
+    shipping_rate_data: {
+      type: 'fixed_amount';
+      fixed_amount: {
+        amount: number;
+        currency: string;
+      };
+      display_name: string;
+      delivery_estimate: {
+        minimum: {
+          unit: 'business_day';
+          value: number;
+        };
+        maximum: {
+          unit: 'business_day';
+          value: number;
+        };
+      };
+    };
 }
-
 
 export async function fetchProducts(): Promise<Stripe.Product[]> {
     try {
@@ -85,7 +88,8 @@ export async function validateCart(
 export async function stripeCheckout(
     validatedCart: Stripe.Checkout.SessionCreateParams.LineItem[],
     origin: string | null,
-    oilDispenserProps: Partial<Stripe.Checkout.SessionCreateParams>
+    oilDispenserProps: Partial<Stripe.Checkout.SessionCreateParams>,
+    shippingOptions: ShippingRateObject[],
 ) {
     try {        
         const session = await stripe.checkout.sessions.create({
@@ -94,6 +98,7 @@ export async function stripeCheckout(
             shipping_address_collection: {
                 allowed_countries: ['US'],
             },
+            shipping_options: shippingOptions,
             mode: 'payment',
             success_url: `${origin}/shop/cart/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${origin}/shop/cart/canceled`,

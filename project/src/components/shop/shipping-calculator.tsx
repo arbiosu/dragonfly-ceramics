@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { Box, determineBoxSize } from '@/lib/usps/utils';
+import type { ShippingRateObject } from '@/lib/stripe/utils';
 
 
 export default function ShippingRateCalculator() {
@@ -15,6 +16,28 @@ export default function ShippingRateCalculator() {
     const isValidZipCode = (zip: string) => {
         return /^\d{5}(-\d{4})?$/.test(zip);
     };
+
+    const proceedToCheckout = async (shippingRates: ShippingRateObject[]) => {
+        try {
+          const res = await fetch("/shop/api/checkout", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                cartItems: cartItems,
+                shippingOptions: shippingRates
+              }),
+          });
+
+          if (!res.ok) {
+              throw new Error(`Failed to create checkout session: ${res.status}`);
+          }
+
+          const data = await res.json();
+          window.location.href = data.url;
+      } catch (error) {
+          console.error("Checkout Error:", error);
+      }
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -43,7 +66,10 @@ export default function ShippingRateCalculator() {
                 console.error(`API Error: ${response.status} - ${errorText}`);
                 throw new Error(`Failed to make request to USPS API`);
             }
-            return response.json();
+
+            const { rates } = await response.json();
+            await proceedToCheckout(rates);
+
         } catch (error) {
             setError('Failed to fetch shipping rates. Please try again.');
             console.error(error);
@@ -53,8 +79,8 @@ export default function ShippingRateCalculator() {
     };
 
     return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-xl font-bold mb-4">Shipping Rate Calculator</h2>
+      <div>
+        <h3 className="text-lg font-semibold mb-2 text-df-text">Shipping</h3>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700 mb-1">
@@ -65,26 +91,21 @@ export default function ShippingRateCalculator() {
               id="zipCode"
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              placeholder="Enter ZIP code (e.g., 10001)"
+              className="w-full text-df-text px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Enter your ZIP code"
               maxLength={10}
             />
           </div>
-          
+
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+            className="w-full bg-df-text hover:bg-blue-300 py-2 px-4 rounded-md text-lg font-medium text-white transition-colors duration-200"
           >
-            {isLoading ? 'Calculating...' : 'Calculate Shipping Rates'}
+            {isLoading ? "Calculating..." : "Calculate & Checkout"}
           </button>
-          
-          {error && (
-            <div className="mt-3 text-sm text-red-600">
-              {error}
-            </div>
-          )}
+          {error && <div className="mt-3 text-sm text-red-600">{error}</div>}
         </form>
-        </div>
+      </div>
     )
 }

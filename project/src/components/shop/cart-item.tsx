@@ -19,19 +19,19 @@ export default function CartItemCard({ product, quantity }: CartItem) {
     };
 
     return (
-        <div className="relative group w-full max-w-sm bg-df-bg rounded-lg shadow-md overflow-hidden">
-            <div className="relative w-full aspect-square">
+        <div className="bg-white rounded-lg shadow-md overflow-hidden flex items-center p-4">
+            <div className="relative w-20 h-20 mr-4 flex-shrink-0">
                 <Image
                     src={product.images[0]}
                     alt={product.description || "No description"}
                     fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 256px"
+                    className="object-cover rounded-md"
+                    sizes="80px"
                 />
             </div>
-            <div className="p-2">
+            <div className="flex-grow">
                 <h3 className="text-lg font-semibold text-df-text">{product.name}</h3>
-                <p className="text-sm text-df-text mb-2 flex-grow">QTY: {quantity}</p>
+                <p className="text-sm text-df-text mb-2">Quantity: {quantity}</p>
                 {product.default_price && typeof product.default_price !== 'string'
                 && product.default_price.unit_amount ? (
                     <div className="mt-2 text-df-text font-bold text-sm">
@@ -42,15 +42,13 @@ export default function CartItemCard({ product, quantity }: CartItem) {
                         No pricing data
                     </p>
                 )}
-                <div className="ml-auto">
-                    <button
-                        onClick={handleRemove}
-                        className="font-semibold px-4 py-2 bg-red-500 text-white rounded-md flex items-center gap-2 hover:bg-red-600 transition-colors"
-                        aria-label="Remove from Cart"
-                    >
-                        Remove from Cart
-                    </button>
-                </div>
+                <button
+                    onClick={handleRemove}
+                    className="font-semibold px-3 py-1 bg-red-500 text-white rounded-md text-sm hover:bg-red-600 transition-colors"
+                    aria-label="Remove from Cart"
+                >
+                    Remove from Cart
+                </button>
             </div>
         </div>
     );

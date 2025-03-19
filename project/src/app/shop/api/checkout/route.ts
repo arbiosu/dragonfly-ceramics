@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import Stripe from 'stripe';
-import { stripeCheckout, validateCart, CartItem } from "@/lib/stripe/utils";
+import {
+    stripeCheckout,
+    validateCart,
+    CartItem,
+    ShippingRateObject
+} from "@/lib/stripe/utils";
 
 
 export async function POST(request: Request) {
@@ -9,7 +14,7 @@ export async function POST(request: Request) {
         const headersList = await headers();
         const origin = headersList.get('origin');
         // TODO: add uspsShippingOptions - make type
-        const { cartItems } = (await request.json()) as { cartItems: CartItem[] };
+        const { cartItems, shippingOptions } = (await request.json()) as { cartItems: CartItem[], shippingOptions: ShippingRateObject[]};
         const validatedCart = await validateCart(cartItems);
         // flow: validate the cart -> add shipping options -> oil dispenser check
         // -> create session
@@ -42,8 +47,15 @@ export async function POST(request: Request) {
                 });
             }
         }
-
-        const session = await stripeCheckout(validatedCart, origin, oilDispenserProps);
+        for (const option of shippingOptions) {
+            console.log("OPTION from /shipping route:", option);
+        }
+        const session = await stripeCheckout(
+            validatedCart,
+            origin,
+            oilDispenserProps,
+            shippingOptions
+        );
         
         if (session.url) {
             return NextResponse.json({ url: session.url }, { status: 200 });
