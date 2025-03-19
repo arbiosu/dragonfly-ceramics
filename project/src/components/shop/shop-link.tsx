@@ -6,7 +6,7 @@ export default function ShopLink({ label }: { label: string }) {
         <Link 
             href={"/shop"}
             className="inline-flex items-center justify-center px-5 py-3 mr-3
-            text-base font-bold text-center text-white rounded-lg bg-df-text
+            text-center text-white rounded-lg bg-df-text
             hover:bg-blue-300 focus:ring-4 focus:ring-white"
         >
             {label}
