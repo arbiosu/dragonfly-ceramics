@@ -14,7 +14,7 @@ export default function Hero() {
                 <div className="flex max-w-md flex-col gap-8">
                     <div className="space-y-4">
                         <h2 className="text-df-text text-3xl tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-                            All handmade one of a kind pottery, made with love
+                            all handmade pottery, crafted with love
                         </h2>
                         <p className="text-df-text text-lg font-medium">Sign up for the mailing list and never miss an update</p>
                     </div>

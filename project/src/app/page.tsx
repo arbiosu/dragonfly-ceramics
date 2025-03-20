@@ -40,7 +40,7 @@ export default function Home() {
     <main className="">
       <LandingPage />
       <Hero />
-      <div className="py-4 md:py-8">
+      <div className="py-4 md:py-8 bg-dfNew2">
         <FAQHorizontalScroll faqs={faqs} />
       </div>
     </main>

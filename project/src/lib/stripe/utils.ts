@@ -35,6 +35,7 @@ export async function fetchProducts(): Promise<Stripe.Product[]> {
         const products = await stripe.products.list({ 
             expand: ["data.default_price"],
             active: true,
+            limit: 100,
         });
         return products.data;
     } catch (error) {
