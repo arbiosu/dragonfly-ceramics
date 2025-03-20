@@ -71,6 +71,8 @@ export default function Navbar() {
                             width={100}
                             height={60}
                             className="object-contain"
+                            placeholder="blur"
+                            blurDataURL="/logo-cropped.png"
                         />
                     </Link>
                 </div>

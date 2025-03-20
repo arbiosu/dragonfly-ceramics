@@ -53,6 +53,8 @@ export function ImageGridItem({ src, alt, className, priority = false }: ImageGr
         priority={priority}
         sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
         className="object-cover"
+        placeholder="blur"
+        blurDataURL={src}
       />
     </div>
   )

@@ -8,7 +8,7 @@ import Loading from "@/components/loading";
 
 
 export default function ShoppingCart() {
-    const { cartItems, cartTotal, cartCount } = useCart();
+    const { cartItems, cartTotal } = useCart();
     const [mounted, setMounted] = useState<boolean>(false);
 
     useEffect(() => {
@@ -20,34 +20,21 @@ export default function ShoppingCart() {
     }
 
     return (
-        <div className="py-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {cartCount > 0 ? (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
-              <h2 className="text-2xl text-df-text mb-4">Your Cart</h2>
-              <div className="grid gap-4">
-                {cartItems.map((item, index) => (
-                  <CartItemCard key={index} product={item.product} quantity={item.quantity} />
-                ))}
-              </div>
-            </div>
-            <div className="lg:col-span-1">
-              <div className="bg-df-bg p-6">
-                <h2 className="text-xl text-df-text mb-4">Order Summary</h2>
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-df-text">Subtotal:</span>
-                  <span className="text-df-text font-bold">${cartTotal.toFixed(2)}</span>
-                </div>
-                <ShippingRateCalculator />
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="text-center p-8 min-h-screen">
-            <h2 className="text-2xl font-semibold text-df-text">Your cart is empty</h2>
-            <p className="mt-2 text-gray-600">Add items to your cart to get started.</p>
-          </div>
-        )}
-      </div>
+      <main className="flex-grow container mx-auto px-4 py-8 max-w-4xl">
+        <h1 className="text-3xl text-df-text mb-8">my cart</h1>
+        {cartItems.map((item, index) => (
+          <CartItemCard product={item.product} quantity={item.quantity} key={index}/>
+        ))}
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-lg text-df-text">free ceramic magnet</span>
+          <button
+            className='w-6 h-6 border bg-white rounded'
+          ></button>
+        </div>
+        <div>
+          <h3 className="text-df-text text-xl mb-8">estimated subtotal: ${cartTotal}</h3>
+        </div>
+        <ShippingRateCalculator />
+      </main>
     );
 };

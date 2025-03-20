@@ -20,13 +20,16 @@ export default async function Shop() {
             <section className="container mx-auto text-center px-4">
                 <h1 className="text-3xl md:text-5xl text-df-text mb-8">Shop</h1>
                 <ProductGrid products={serializedProducts} />
-                <Banner
-                    title={"for custom orders, wholesale, and any other questions:"}
-                    description=""
-                    buttonText="contact form"
-                    buttonLink="/contact"
-                    variant="default"
-                />
+                <div className="py-20">
+                    <Banner
+                        title={"for custom orders, wholesale, and any other questions:"}
+                        description=""
+                        buttonText="contact form"
+                        buttonLink="/contact"
+                        variant="default"
+                    />
+                </div>
+
             </section>
         </main>
     );

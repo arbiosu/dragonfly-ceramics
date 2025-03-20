@@ -8,7 +8,11 @@ export default function Hero() {
                     src="/pottery.jpg"
                     alt="Dragonfly Ceramics Art"
                     fill
-                    className="object-cover" />
+                    className="object-cover"
+                    placeholder="blur"
+                    blurDataURL="/pottery.jpg"
+                    
+                />
             </div>
             <div className="order-1 flex min-h-[50vh] items-center justify-center p-6 md:order-2 md:min-h-[100dvh] md:p-12 lg:p-16">
                 <div className="flex max-w-md flex-col gap-8">

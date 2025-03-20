@@ -34,6 +34,8 @@ export default function LandingPage() {
                     width={600}
                     height={400}
                     className="mb-4"
+                    placeholder="blur"
+                    blurDataURL="/dragonfly-text-white.png"
                 />
                 <ShopLink label={"Shop Now"} />
             </div>

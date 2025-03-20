@@ -15,6 +15,7 @@ interface CartContextValue {
     cartItems: CartItem[];
     addToCart: (product: Product) => void;
     removeFromCart: (productId: string) => void;
+    updateCartItemQuantity: (productId: string, quantity: number) => void;
     purgeCart: () => void;
     cartTotal: number;
     cartCount: number;
@@ -26,6 +27,7 @@ const CartContext = createContext<CartContextValue>({
     cartItems: [],
     addToCart: () => {},
     removeFromCart: () => {},
+    updateCartItemQuantity: () => {},
     purgeCart: () => {},
     cartTotal: 0,
     cartCount: 0,
@@ -70,13 +72,29 @@ export const CartProvider = ({ children }: Props) => {
             setCartItems([...cartItems, { product, quantity: 1}]);
         }
     };
-    // TODO: add logic for decrementing quantity by 1
+
     const removeFromCart = (productId: string) => {
         const updatedCartItems = cartItems.filter(
             (item) => item.product.id !== productId
         );
         setCartItems(updatedCartItems);
     };
+
+    const updateCartItemQuantity = (productId: string, quantity: number) => {
+        const existingCartItemIndex = cartItems.findIndex(
+          (item) => item.product.id === productId
+        );
+        if (existingCartItemIndex !== -1) {
+          const existingCartItem = cartItems[existingCartItemIndex];
+          const updatedCartItem = {
+            ...existingCartItem,
+            quantity,
+          };
+          const updatedCartItems = [...cartItems];
+          updatedCartItems[existingCartItemIndex] = updatedCartItem;
+          setCartItems(updatedCartItems);
+        }
+      };
 
     const purgeCart = useCallback(() => {
         setCartItems([]);
@@ -96,6 +114,7 @@ export const CartProvider = ({ children }: Props) => {
                 cartItems,
                 addToCart,
                 removeFromCart,
+                updateCartItemQuantity,
                 purgeCart,
                 cartTotal,
                 cartCount,

@@ -36,11 +36,13 @@ export default function ProductCard({ data }: ProductCardProps) {
             {/* Image Container TODO: add placeholder svg */}
             <div className="relative w-full aspect-square">
                 <Image
-                    src={data.images[0] ?? "/placeholder.svg"}
+                    src={data.images[0] || "/placeholder.svg"}
                     alt={data.description || "No description"}
                     className="object-cover"
                     fill
                     sizes="(max-width: 768px) 100vw, 256px"
+                    placeholder="blur"
+                    blurDataURL={data.images[0]}
                 />
                 {/* Hover Buttons - Appear on hover */}
                 <div
@@ -50,12 +52,12 @@ export default function ProductCard({ data }: ProductCardProps) {
                 >
                     <Link 
                         href={`/shop/${data.id}`}
-                        className="w-full bg-black hover:bg-dfNew2 text-white py-2 px-4 rounded-md transition-colors"
+                        className="w-full bg-dfNew2 hover:bg-dfNew hover:text-white text-df-text py-2 px-4 rounded-md transition-colors"
                     >
                         Details
                     </Link>
                     <button
-                        className="w-full bg-dfNew hover:bg-dfNew2 text-white py-2 px-4 rounded-md transition-colors"
+                        className="w-full bg-dfNew2 hover:bg-dfNew hover:text-white text-df-text py-2 px-4 rounded-md transition-colors"
                         onClick={handleAddToCart}
                     >
                         Add to Cart

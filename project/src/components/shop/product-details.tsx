@@ -6,8 +6,7 @@ import { type Product } from "@/lib/stripe/utils";
 import { useState } from "react";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/contexts/ToastContext";
-
-
+import SubscribeCard from "@/components/subscribe-card";
 
 interface ProductDetailsProps {
   product: Product;
@@ -15,6 +14,7 @@ interface ProductDetailsProps {
 
 export default function ProductDetails({ product }: ProductDetailsProps) {
   const [selectedImage, setSelectedImage] = useState<string>(product.images[0])
+  const [detailsVisible, setDetailsVisible] = useState<boolean>(false);
   const { addToCart } = useCart();
   const { addToast } = useToast();
 
@@ -27,6 +27,10 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         description: `${product.name} has successfully been added to your cart!`,
         variant: "success",
     });
+  }
+
+  const toggleDetails = () => {
+    setDetailsVisible(!detailsVisible);
   }
 
   return (
@@ -66,6 +70,8 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               className="object-cover"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
+              placeholder="blur"
+              blurDataURL={selectedImage}
               priority
             />
           </div>
@@ -85,6 +91,8 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
                     className="object-cover"
                     fill
                     sizes="80px"
+                    placeholder="blur"
+                    blurDataURL={image}
                   />
                 </button>
               ))}
@@ -104,9 +112,32 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 
           {/* Description */}
           <div className="prose prose-sm max-w-none text-df-text">
-            <h3 className="text-lg font-medium">Description</h3>
+            <h3 className="text-xl">description</h3>
             <p>{product.description || "No description available"}</p>
           </div>
+
+          {product.metadata && Object.keys(product.metadata).length > 0 && (
+            <div className="space-y-2">
+              <div className="flex items-center">
+                <h3 className="text-xl text-df-text mr-2">details</h3>
+                <button 
+                  onClick={toggleDetails}
+                  className="text-black text-2xl focus:outline-none"
+                >
+                  {detailsVisible ? "-" : "+"}
+                </button>
+              </div>
+              <ul className={`list-disc pl-5 text-df-text transition-all duration-300 ${detailsVisible ? "block" : "hidden"}`}>
+                {Object.entries(product.metadata)
+                  .filter(([key]) => key !== "type")
+                  .map(([key, value]) => (
+                  <li key={key}>
+                    <span className="text-lg text-df-text">{key}:</span> {value}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           <div className="">
             <button
@@ -126,9 +157,9 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               </div>
             </div>
           </div>
+          <SubscribeCard />
         </div>
       </div>
     </div>
   );
-}
-
+};
