@@ -30,7 +30,14 @@ export default function ProductGrid({ products }: ProductGridProps) {
     }, [products, filter]);
 
     const filterButtons: Filter[] = [
-        "all", "mugs", "vases", "oil dispensers", "soap dispensers", "coasters", "berry bowls", "merch"
+        "all",
+        "mugs",
+        "vases",
+        "oil dispensers",
+        "soap dispensers",
+        "coasters",
+        "berry bowls",
+        "merch",
     ];
 
     return (
@@ -40,19 +47,19 @@ export default function ProductGrid({ products }: ProductGridProps) {
                     <button
                         key={index}
                         onClick={() => setFilter(label)}
-                        className={`px-4 py-2 rounded-md font-bold transition-colors
-                        duration-200 text-white ${
-                                filter === label
-                                ? "bg-blue-300"
-                                : "bg-df-text hover:bg-blue-300"
-                                }`}
+                        className={`px-4 py-2 text-df-text font-medium
+                         ${
+                            filter === label
+                            ? "border-solid border-b-4 border-blue-300"
+                            : "text-gray-500"
+                            }`}
                     >
                         {label}
                     </button>
                 ))}
             </div>
             {filteredProducts.length > 0 ? (
-                <div className="grid grid-cols-2 gap-4 md:mx-40">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:mx-40">
                     {filteredProducts.map((product, index) => (
                     <div key={index} className="flex justify-center">
                         <ProductCard  data={product} />

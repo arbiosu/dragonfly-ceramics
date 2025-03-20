@@ -20,10 +20,10 @@ export default function About() {
                 </div>
                 <div className="space-y-8">
                     <div className='space-y-6'>
-                        <h2 className="text-df-text text-6xl font-light tracking-wider text-center md:text-left">
+                        <h2 className="text-df-text text-5xl text-center md:text-left">
                             Meet the Artist
                         </h2>
-                        <p className="text-df-text leading-relaxed text-3xl text-center md:text-left">Kelly Slater (she/her)</p>
+                        <p className="text-df-text leading-relaxed text-2xl text-center md:text-left">Kelly Slater (she/her)</p>
                         <p className="text-df-text leading-relaxed text-lg text-center md:text-left italic">Ceramicist</p>
                         <p className="text-df-text leading-relaxed text-lg text-center md:text-left italic">Based in NYC</p>
                         <p className="text-df-text leading-relaxed">
@@ -51,7 +51,7 @@ export default function About() {
             </div>
         </div>
         <div className="container mx-auto max-w-lg py-20">
-            <h3 className="text-df-text text-center text-4xl md:text-6xl font-semibold mb-4">
+            <h3 className="text-df-text text-center text-4xl md:text-6xl mb-4">
                 Subscribe to the Newsletter
             </h3>
             <p className="text-lg text-df-text text-center tracking-tight font-medium mb-4">Sign up for the mailing list and never miss an update</p>

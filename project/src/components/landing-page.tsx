@@ -1,4 +1,5 @@
 import ShopLink from "@/components/shop/shop-link";
+import Image from "next/image";
 
 
 function LandinPageVideo() {
@@ -6,7 +7,7 @@ function LandinPageVideo() {
         <div className="absolute inset-0 w-full h-full overflow-hidden">
             <video 
                 autoPlay 
-                loop 
+                loop
                 muted 
                 playsInline 
                 preload="auto"
@@ -19,18 +20,23 @@ function LandinPageVideo() {
                 Your browser does not support the video tag.
             </video>
         </div>
-    )
+    );
 }
 
 export default function LandingPage() {
     return (
-        <div className="h-screen flex flex-col">
-            <div className="h-[90vh] w-full relative">
-                <LandinPageVideo />
-            </div>
-            <div className="h-[10vh] w-full flex items-center justify-center bg-df-bg">
-                <ShopLink label={"Shop Now"}/>
+        <div className="h-screen w-full relative">
+            <LandinPageVideo />
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <Image 
+                    src="/dragonfly-text-white.png" 
+                    alt="Dragonfly Ceramics"
+                    width={600}
+                    height={400}
+                    className="mb-4"
+                />
+                <ShopLink label={"Shop Now"} />
             </div>
         </div>
-    )
+    );
 }

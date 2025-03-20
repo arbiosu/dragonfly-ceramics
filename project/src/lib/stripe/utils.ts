@@ -9,6 +9,26 @@ export interface CartItem {
     quantity: number;
 }
 
+export interface ShippingRateObject {
+    shipping_rate_data: {
+      type: 'fixed_amount';
+      fixed_amount: {
+        amount: number;
+        currency: string;
+      };
+      display_name: string;
+      delivery_estimate: {
+        minimum: {
+          unit: 'business_day';
+          value: number;
+        };
+        maximum: {
+          unit: 'business_day';
+          value: number;
+        };
+      };
+    };
+}
 
 export async function fetchProducts(): Promise<Stripe.Product[]> {
     try {
@@ -30,6 +50,17 @@ export async function fetchProductById(id: string): Promise<Stripe.Product> {
         return product;
     } catch (error) {
         throw new Error(`Failed to retrieve product ${id} with error: ${error}`);
+    }
+}
+
+export async function updateProductImagesById(id: string, newImages: string[]): Promise<Stripe.Product> {
+    try {
+        const product = await stripe.products.update(id, {
+            images: newImages
+        });
+        return product;
+    } catch (error) {
+        throw new Error(`Failed to add image to product with ID ${id} with error ${error}`);
     }
 }
 
@@ -67,15 +98,19 @@ export async function validateCart(
 
 export async function stripeCheckout(
     validatedCart: Stripe.Checkout.SessionCreateParams.LineItem[],
-    origin: string | null
+    origin: string | null,
+    oilDispenserProps: Partial<Stripe.Checkout.SessionCreateParams>,
+    shippingOptions: ShippingRateObject[],
 ) {
-    try {
+    try {        
         const session = await stripe.checkout.sessions.create({
             line_items: validatedCart,
+            ...oilDispenserProps,
             billing_address_collection: 'required',
             shipping_address_collection: {
                 allowed_countries: ['US'],
             },
+            shipping_options: shippingOptions,
             mode: 'payment',
             success_url: `${origin}/shop/cart/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${origin}/shop/cart/canceled`,

@@ -13,7 +13,6 @@ interface AccessTokenResponse {
 class TokenManager {
     private accessToken: string | null = null;
     private expiresAt: number = 0;
-    private isRefreshing: boolean = false;
     private refreshPromise: Promise<string> | null = null;
     // Buffer time (in ms) before actual expiration to refresh the token
     // Using 5 minutes buffer to ensure we don't use tokens close to expiry
@@ -52,7 +51,8 @@ class TokenManager {
             });
     
             if (!response.ok) {
-                throw new Error(`USPS responded with status ${response.status}`);
+                const e = await response.text();
+                throw new Error(`[USPS] fetchAccessToken() failed with status ${response.status} [Error] ${e}`);
             }
     
             const data = await response.json() as AccessTokenResponse;
@@ -77,20 +77,22 @@ class TokenManager {
         if (this.accessToken && this.expiresAt > Date.now() + this.REFRESH_BUFFER_MS) {
             return this.accessToken;
         }
-        if (this.isRefreshing && this.refreshPromise) {
+        if (this.refreshPromise) {
             return this.refreshPromise;
         }
 
-        this.isRefreshing = true;
-        this.refreshPromise = this.fetchAccessToken();
-
-        try {
-            const token = await this.refreshPromise;
-            return token;
-        } finally {
-            this.isRefreshing = false;
-            this.refreshPromise = null;
-        }
+        this.refreshPromise = this.fetchAccessToken()
+            .then((token) => {
+                return token;
+            })
+            .catch((error) => {
+                this.refreshPromise = null;
+                throw error;
+            })
+            .finally(() => {
+                this.refreshPromise = null;
+            })
+        return this.refreshPromise;
     }
 }
 
@@ -98,7 +100,7 @@ const uspsManager = new TokenManager(
     process.env.USPS_CLIENT_ID!,
     process.env.USPS_CLIENT_SECRET!,
     `${process.env.USPS_URL!}/oauth2/v3/token`,
-    ["shipments", "prices"]
+    ["shipments"]
 )
 
 export default uspsManager;

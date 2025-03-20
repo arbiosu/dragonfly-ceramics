@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { validateEmail } from "@/lib/utils";
-import { CreateEmailResponseSuccess } from "resend";
 
 
 export default function ContactForm() {
@@ -34,24 +33,28 @@ export default function ContactForm() {
     setIsLoading(true);
     setError(null)
 
-    console.log(formData);
-
     try {
         const res = await fetch("/shop/api/email/contact", {
             method: "POST",
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify(formData),
         });
+        const data = await res.json();
+
         if (!res.ok) {
+            if (res.status === 429) {
+              setError(`Too many contact attempts. Please try again in ${data.resetInMinutes} minutes.`);
+            }
             throw new Error(`Failed to send Contact Form email.`);
         }
-        const data: CreateEmailResponseSuccess = await res.json();
+
         if (data !== null) {
-            setSubmitted(true);
-            setError(null);
-        }
+          setSubmitted(true);
+          setError(null);
+      }
+        
     } catch (error) {
-        console.error('Contact email error', error);
+        console.log('Contact email error', error);
         setError("Failed to send your message. Please try again later")
     } finally {
         setIsLoading(false);
@@ -60,7 +63,7 @@ export default function ContactForm() {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-2 text-df-text">Contact</h1>
+      <h1 className="text-3xl mb-2 text-df-text">Contact</h1>
       <h2 className="text-lg text-df-text mb-6">
         For custom orders, wholesale, or general questions, please fill out the information below.
       </h2>
@@ -167,7 +170,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-df-text hover:bg-blue-300 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out"
+          className="w-full bg-df-text hover:bg-blue-300 text-white py-2 px-4 rounded-md transition duration-300 ease-in-out"
         >
         {isLoading ? (
             <div className="flex items-center">
