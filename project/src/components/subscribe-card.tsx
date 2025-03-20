@@ -99,7 +99,7 @@ export default function SubscribeCard() {
                     </div>
                     <button
                         type="submit"
-                        className="flex justify-center mt-4 w-full bg-df-text hover:bg-blue-300 text-white py-3 px-4 rounded-md transition duration-300 ease-in-out"
+                        className="flex justify-center mt-4 w-full bg-dfNew2 hover:bg-blue-300 text-dfNew py-3 px-4 rounded-md transition duration-300 ease-in-out"
                         disabled={isLoading}
                     >
                     {isLoading ? (
