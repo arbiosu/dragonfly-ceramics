@@ -40,9 +40,10 @@ export default function Home() {
     <main className="">
       <LandingPage />
       <Hero />
-      <div className="py-4 md:py-8 bg-dfNew2">
+      <div className="py-8 md:py-12 bg-gradient-to-b from-df-bg via-dfNew2 to-dfNew2">
         <FAQHorizontalScroll faqs={faqs} />
       </div>
+      <div className="py-8 bg-gradient-to-t from-df-bg via-dfNew2 to-dfNew2"></div>
     </main>
   );
 }

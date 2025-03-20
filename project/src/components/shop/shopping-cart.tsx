@@ -20,11 +20,11 @@ export default function ShoppingCart() {
     }
 
     return (
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="py-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {cartCount > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <h2 className="text-2xl font-bold text-df-text mb-4">Your Cart</h2>
+              <h2 className="text-2xl text-df-text mb-4">Your Cart</h2>
               <div className="grid gap-4">
                 {cartItems.map((item, index) => (
                   <CartItemCard key={index} product={item.product} quantity={item.quantity} />
@@ -32,8 +32,8 @@ export default function ShoppingCart() {
               </div>
             </div>
             <div className="lg:col-span-1">
-              <div className="bg-df-bg rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-bold text-df-text mb-4">Order Summary</h2>
+              <div className="bg-df-bg p-6">
+                <h2 className="text-xl text-df-text mb-4">Order Summary</h2>
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-df-text">Subtotal:</span>
                   <span className="text-df-text font-bold">${cartTotal.toFixed(2)}</span>

@@ -3,9 +3,20 @@
 import Stripe from 'stripe';
 import { stripe } from './stripe';
 
+export type Product = {
+    id: string;
+    active: boolean;
+    description: string;
+    name: string;
+    images: string[];
+    metadata: {
+        [key: string]: string;
+    };
+    price: string;
+}
 
 export interface CartItem {
-    product: Stripe.Product;
+    product: Product;
     quantity: number;
 }
 
@@ -51,6 +62,22 @@ export async function fetchProductById(id: string): Promise<Stripe.Product> {
         return product;
     } catch (error) {
         throw new Error(`Failed to retrieve product ${id} with error: ${error}`);
+    }
+}
+
+export async function serializeStripeProduct(product: Stripe.Product): Promise<Product> {
+    return {
+        id: product.id,
+        active: product.active,
+        description: product.description || "No description",
+        name: product.name,
+        images: product.images,
+        metadata: product.metadata,
+        price: product.default_price
+                && typeof product.default_price !== 'string'
+                && product.default_price.unit_amount
+                ? (product.default_price.unit_amount / 100).toString()
+                : "No pricing data."
     }
 }
 

@@ -1,11 +1,11 @@
 "use client";
 
-import { Stripe } from "stripe";
+import type { Product } from "@/lib/stripe/utils";
 import { useState, useMemo } from "react";
 import ProductCard from "@/components/shop/product-card";
 
 interface ProductGridProps {
-    products: Stripe.Product[];
+    products: Product[];
 }
 
 type Filter = 
@@ -50,7 +50,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
                         className={`px-4 py-2 text-df-text font-medium
                          ${
                             filter === label
-                            ? "border-solid border-b-4 border-blue-300"
+                            ? "border-solid border-b-4 border-dfNew"
                             : "text-gray-500"
                             }`}
                     >

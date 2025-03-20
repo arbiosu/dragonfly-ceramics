@@ -71,11 +71,6 @@ export default function SocialMediaLinksComponent() {
 export function SocialMediaLinksCard() {
     return (
         <div className="w-full mx-auto p-6 flex flex-col h-full relative overflow-hidden">
-            <div className="text-center mb-auto justify-items-center space-y-8">
-                <h2 className="text-3xl text-df-text">
-                    Follow Us
-                </h2>
-            </div>
             <div className="flex justify-center">
                 <Image 
                     src="/profile.svg"
@@ -84,14 +79,14 @@ export function SocialMediaLinksCard() {
                     height={100}
                 />
             </div>
-            <div className="text-center my-auto py-4">
+            <div className="text-center my-16 py-4">
                 <p className="text-df-text text-lg">
                     Keep up with Dragonfly Ceramics on YouTube, TikTok, and Instagram
                 </p>
             </div>
-            <div className="flex justify-center mt-4">
+            <div className="flex justify-center">
                 <SocialMediaLinksComponent />
             </div>
         </div>
-    )
+    );
 }

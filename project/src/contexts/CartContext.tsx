@@ -4,8 +4,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, useCallback } from "react";
-import { CartItem } from "@/lib/stripe/utils"
-import { Stripe } from "stripe";
+import { CartItem, Product } from "@/lib/stripe/utils"
 
 
 interface Props {
@@ -14,7 +13,7 @@ interface Props {
 
 interface CartContextValue {
     cartItems: CartItem[];
-    addToCart: (product: Stripe.Product) => void;
+    addToCart: (product: Product) => void;
     removeFromCart: (productId: string) => void;
     purgeCart: () => void;
     cartTotal: number;
@@ -51,7 +50,7 @@ export const CartProvider = ({ children }: Props) => {
     }, [cartItems]);
     
 
-    const addToCart = (product: Stripe.Product) => {
+    const addToCart = (product: Product) => {
         // check if the product is in the cart
         const existingCartItemIndex = cartItems.findIndex(
             (item) => item.product.id === product.id
@@ -83,15 +82,12 @@ export const CartProvider = ({ children }: Props) => {
         setCartItems([]);
     }, []);
 
-    const cartTotalInCents = cartItems.reduce((total, item) => {
-        const price = item.product.default_price
-        if (price && typeof price !== 'string' && 'unit_amount' in price) {
-            return total + (price.unit_amount || 0) * item.quantity;
-        }
-        return total;
+    const addUpCartTotal = cartItems.reduce((total, item) => {
+        const price = item.product.price
+        return total + Number(price) * item.quantity;
     }, 0);
 
-    const cartTotal = cartTotalInCents / 100;
+    const cartTotal = addUpCartTotal;
     const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0);
 
     return (

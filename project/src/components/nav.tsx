@@ -56,7 +56,7 @@ export default function Navbar() {
                 <ul className="hidden md:flex gap-8 text-white text-lg md:text-3xl lg:text-4xl">
                     {navLinks.map((link, index) => (
                         <li key={index}>
-                            <Link href={link.href} className="hover:text-blue-300 transition-colors">
+                            <Link href={link.href} className="hover:text-dfNew2 transition-colors">
                                 {link.label}
                             </Link>
                         </li>

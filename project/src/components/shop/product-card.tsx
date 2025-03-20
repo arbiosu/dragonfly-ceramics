@@ -1,15 +1,15 @@
 "use client";
 
-import { Stripe } from "stripe";
 import Image from "next/image";
 import Link from "next/link";
+import { Product } from "@/lib/stripe/utils";
 import { useState } from "react"
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/contexts/ToastContext";
 
 
 interface ProductCardProps {
-    data: Stripe.Product;
+    data: Product;
 }
 
 
@@ -29,14 +29,14 @@ export default function ProductCard({ data }: ProductCardProps) {
 
     return (
         <div
-            className="relative group w-full max-w-sm bg-df-bg rounded-lg shadow-t-md overflow-hidden"
+            className="relative group w-full max-w-sm bg-df-bg shadow-t-md overflow-hidden"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
             {/* Image Container TODO: add placeholder svg */}
             <div className="relative w-full aspect-square">
                 <Image
-                    src={data.images[0]}
+                    src={data.images[0] ?? "/placeholder.svg"}
                     alt={data.description || "No description"}
                     className="object-cover"
                     fill
@@ -50,12 +50,12 @@ export default function ProductCard({ data }: ProductCardProps) {
                 >
                     <Link 
                         href={`/shop/${data.id}`}
-                        className="w-full bg-black hover:bg-blue-300 text-white font-semibold py-2 px-4 rounded-md transition-colors"
+                        className="w-full bg-black hover:bg-dfNew2 text-white py-2 px-4 rounded-md transition-colors"
                     >
                         Details
                     </Link>
                     <button
-                        className="w-full bg-df-text hover:bg-blue-300 text-white font-semibold py-2 px-4 rounded-md transition-colors"
+                        className="w-full bg-dfNew hover:bg-dfNew2 text-white py-2 px-4 rounded-md transition-colors"
                         onClick={handleAddToCart}
                     >
                         Add to Cart
@@ -63,24 +63,11 @@ export default function ProductCard({ data }: ProductCardProps) {
                 </div>
             </div>
             <div className="p-2">
-                <h3 className="text-lg font-semibold text-df-text truncate">
+                <h3 className="text-lg text-df-text truncate">
                     {data.name}
                 </h3>
-                <p className="text-sm text-df-text mb-4 flex-grow">
-                    {data.description}
-                </p>
                 <div className="mt-auto">
-                    {data.default_price &&
-                    typeof data.default_price !== 'string' &&
-                    data.default_price.unit_amount ? (
-                        <p className="text-xl font-bold text-df-text mb-3">
-                            ${data.default_price?.unit_amount / 100}
-                        </p>
-                    ) : (
-                        <p className="text-xl font-bold text-df-text mb-3">
-                            No pricing data
-                        </p>
-                    )}
+                    <p className="text-2xl text-df-text">${data.price}</p>
                 </div>
             </div>
         </div>

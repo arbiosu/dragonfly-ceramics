@@ -45,14 +45,14 @@ export default function ImageGrid({ items }: ImageGridProps) {
 
 export function ImageGridItem({ src, alt, className, priority = false }: ImageGridItemProps) {
   return (
-    <div className={cn("relative w-full aspect-square overflow-hidden rounded-lg", className)}>
+    <div className={cn("relative w-full aspect-square overflow-hidden", className)}>
       <Image
         src={src || "/placeholder.svg"}
         alt={alt}
         fill
         priority={priority}
         sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-        className="object-cover transition-all duration-300 hover:scale-105"
+        className="object-cover"
       />
     </div>
   )

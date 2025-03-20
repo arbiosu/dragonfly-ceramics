@@ -107,5 +107,5 @@ export default function ShippingRateCalculator() {
           {error && <div className="mt-3 text-sm text-red-600">{error}</div>}
         </form>
       </div>
-    )
-}
+    );
+};
