@@ -88,7 +88,7 @@ export default function CartItemCard({ product, quantity }: CartItem) {
 
         {/* Price and remove */}
         <div className="flex items-center justify-between sm:justify-end col-span-3 sm:col-span-1 mt-2 sm:mt-0">
-          <span className="text-base sm:text-lg font-medium">${product.price}</span>
+          <span className="text-base sm:text-lg font-medium">${Number(product.price) * quantity}</span>
           <button
             onClick={handleRemove}
             className="ml-4 p-2 text-gray-500 hover:text-red-500 transition-colors"
