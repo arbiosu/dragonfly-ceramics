@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${ralewayLight.variable} ${ralewayLight.variable} antialiased bg-df-bg`}
+        className={`${ralewayLight.className} ${ralewayLight.className} antialiased bg-df-bg`}
       >
         <Navbar />
         {children}

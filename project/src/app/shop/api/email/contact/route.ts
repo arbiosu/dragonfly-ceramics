@@ -53,7 +53,7 @@ export async function POST(req: Request) {
         
         const { data, error } = await resend.emails.send({
             from: 'Dragonfly Contact Form <noreply@updates.dragonflyceramics.com>',
-            to: "dragonflyceramics.kelly@gmail.com",
+            to: "amea@oregonstate.edu",
             subject: `Message from Contact Form: ${body.topic}`,
             html: `<p>
                     From: ${body.name} ${body.email}

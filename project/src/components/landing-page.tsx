@@ -27,13 +27,15 @@ export default function LandingPage() {
     return (
         <div className="h-screen w-full relative">
             <LandinPageVideo />
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="absolute inset-0 flex flex-col items-center justify-center mx-8">
                 <Image 
                     src="/dragonfly-text-white.png" 
                     alt="Dragonfly Ceramics"
                     width={600}
                     height={400}
                     className="mb-4"
+                    placeholder="blur"
+                    blurDataURL="/dragonfly-text-white.png"
                 />
                 <ShopLink label={"Shop Now"} />
             </div>

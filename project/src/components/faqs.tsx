@@ -37,17 +37,17 @@ export function FAQHorizontalScroll({ faqs }: FAQProps) {
             </h2>
             <div
                 ref={scrollRef}
-                className="relative overflow-x-auto flex flex-nowrap py-4 px-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
+                className="relative overflow-x-auto flex flex-nowrap py-4 px-2"
             >
                 {faqs.map((faq) => (
                     <div
                         key={faq.id}
-                        className="inline-block align-top rounded-lg p-6 border border-gray-200 mr-4 last:mr-0 flex-shrink-0 w-96"
+                        className="inline-block align-top p-6 mr-4 last:mr-0 flex-shrink-0 w-96"
                     >
-                        <h3 className="text-lg text-df-text mb-3">
+                        <h3 className="text-lg text-dfNew mb-3">
                             {faq.question}
                         </h3>
-                        <p className="text-df-text">
+                        <p className="text-dfNew">
                             {faq.answer}
                         </p>
                     </div>
@@ -55,10 +55,10 @@ export function FAQHorizontalScroll({ faqs }: FAQProps) {
             </div>
             {/* Buttons */}
             <div className="flex justify-between mt-6">
-                <button onClick={scrollLeft} className="bg-white rounded-full p-2 shadow-md hover:bg-blue-300" aria-label="Scroll left">
+                <button onClick={scrollLeft} className="bg-dfNew2 rounded-full p-2 shadow-md hover:bg-blue-300" aria-label="Scroll left">
                     <Image src="/chevron-left.svg" alt="Left arrow icon" width={48} height={48} />
                 </button>
-                <button onClick={scrollRight} className="bg-white rounded-full p-2 shadow-md hover:bg-blue-300" aria-label="Scroll left">
+                <button onClick={scrollRight} className="bg-dfNew2 rounded-full p-2 shadow-md hover:bg-blue-300" aria-label="Scroll left">
                     <Image src="/chevron-right.svg" alt="Right arrow icon" width={48} height={48} />
                 </button>
             </div>

@@ -7,7 +7,8 @@ export default function ShopLink({ label }: { label: string }) {
             href={"/shop"}
             className="inline-flex items-center justify-center px-5 py-3 mr-3
             text-center text-dfNew rounded-lg bg-dfNew2
-            hover:bg-blue-300 focus:ring-4 focus:ring-white"
+            hover:bg-dfNew hover:text-white focus:ring-4 focus:ring-white
+            transition duration-300 ease-in-out"
         >
             {label}
             <svg 

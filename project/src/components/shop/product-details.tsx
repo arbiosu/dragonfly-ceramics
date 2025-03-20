@@ -2,25 +2,36 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { type Product } from "@/lib/stripe/utils";
 import { useState } from "react";
-
-type ProductDetail = {
-    id: string;
-    active: boolean;
-    description: string;
-    name: string;
-    images: string[];
-    metadata: object;
-    price: string;
-}
-
+import { useCart } from "@/contexts/CartContext";
+import { useToast } from "@/contexts/ToastContext";
+import SubscribeCard from "@/components/subscribe-card";
 
 interface ProductDetailsProps {
-  product: ProductDetail;
+  product: Product;
 }
 
 export default function ProductDetails({ product }: ProductDetailsProps) {
   const [selectedImage, setSelectedImage] = useState<string>(product.images[0])
+  const [detailsVisible, setDetailsVisible] = useState<boolean>(false);
+  const { addToCart } = useCart();
+  const { addToast } = useToast();
+
+  // TODO: crusty implementation, too many calls to Stripe. Have to restructure 
+  // CartItem later on
+  const handleAddToCart = () => {
+    addToCart(product);
+    addToast({
+        title: "Added to Cart",
+        description: `${product.name} has successfully been added to your cart!`,
+        variant: "success",
+    });
+  }
+
+  const toggleDetails = () => {
+    setDetailsVisible(!detailsVisible);
+  }
 
   return (
     <div className="container mx-auto px-4 py-20">
@@ -30,8 +41,8 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             <Link
               href={"/shop"}
               className="inline-flex items-center px-5 mb-4 gap-2 md:mx-36
-              font-bold text-df-text text-2xl border-b-4 border-transparent
-              hover:border-blue-300 focus:ring-4 focus:ring-white transition-colors"
+              text-df-text text-2xl
+              hover:text-dfNew2 focus:ring-4 focus:ring-white transition-colors"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -52,13 +63,15 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               <span>Back to Shop</span>
             </Link>
           {/* Main Image */}
-          <div className="relative w-full max-w-md mx-auto aspect-square rounded-lg overflow-hidden border border-gray-200">
+          <div className="relative w-full max-w-sm mx-auto aspect-square">
             <Image
               src={selectedImage || "/placeholder.svg"}
               alt={product.description || "Product image"}
               className="object-cover"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
+              placeholder="blur"
+              blurDataURL={selectedImage}
               priority
             />
           </div>
@@ -78,6 +91,8 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
                     className="object-cover"
                     fill
                     sizes="80px"
+                    placeholder="blur"
+                    blurDataURL={image}
                   />
                 </button>
               ))}
@@ -88,35 +103,50 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
         {/* Product Details Section */}
         <div className="flex flex-col space-y-6 py-20">
           <div>
-            <h1 className="text-3xl font-bold text-df-text">{product.name}</h1>
-
+            <h1 className="text-3xl text-df-text">{product.name}</h1>
             {/* Price */}
             <div className="mt-4">
-                <p className="text-2xl font-bold text-df-text">${product.price}</p>
+                <p className="text-2xl text-df-text">${product.price}</p>
             </div>
           </div>
 
           {/* Description */}
           <div className="prose prose-sm max-w-none text-df-text">
-            <h3 className="text-lg font-medium">Description</h3>
+            <h3 className="text-xl">description</h3>
             <p>{product.description || "No description available"}</p>
           </div>
 
-          {/* Metadata/Features */}
           {product.metadata && Object.keys(product.metadata).length > 0 && (
             <div className="space-y-2">
-              <h3 className="text-lg font-medium text-df-text">Features</h3>
-              <ul className="list-disc pl-5 text-df-text">
+              <div className="flex items-center">
+                <h3 className="text-xl text-df-text mr-2">details</h3>
+                <button 
+                  onClick={toggleDetails}
+                  className="text-black text-2xl focus:outline-none"
+                >
+                  {detailsVisible ? "-" : "+"}
+                </button>
+              </div>
+              <ul className={`list-disc pl-5 text-df-text transition-all duration-300 ${detailsVisible ? "block" : "hidden"}`}>
                 {Object.entries(product.metadata)
                   .filter(([key]) => key !== "type")
                   .map(([key, value]) => (
                   <li key={key}>
-                    <span className="font-medium">{key}:</span> {value}
+                    <span className="text-lg text-df-text">{key}:</span> {value}
                   </li>
                 ))}
               </ul>
             </div>
           )}
+
+          <div className="">
+            <button
+                className="w-full bg-dfNew hover:bg-dfNew2 text-white py-2 px-4 rounded-md transition-colors"
+                onClick={handleAddToCart}
+            >
+                Add to Cart
+            </button>
+          </div>
 
           {/* Additional Information */}
           <div className="border-t border-gray-200 pt-6 mt-6">
@@ -127,9 +157,9 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               </div>
             </div>
           </div>
+          <SubscribeCard />
         </div>
       </div>
     </div>
   );
-}
-
+};

@@ -36,7 +36,7 @@ export async function POST(request: Request) {
                         .map((word: string) => word.charAt(0) + word.slice(1))
                         .join(' ');
 
-                    options.push({
+                    options.unshift({
                         shipping_rate_data: {
                             type: "fixed_amount",
                             fixed_amount: {

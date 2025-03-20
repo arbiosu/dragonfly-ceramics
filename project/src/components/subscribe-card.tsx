@@ -55,18 +55,20 @@ export default function SubscribeCard() {
     };
 
     return (
-        <div className="w-full mx-auto rounded-lg p-6 flex flex-col h-full">
+        <div className="w-full mx-auto rounded-lg p-6 flex flex-col h-full bg-dfNew">
             <div className="text-center mb-auto justify-items-center space-y-8">
-                <h2 className="text-xl text-df-text mb-2">
+                <h2 className="text-xl text-white mb-2">
                     Subscribe
                 </h2>
             </div>
             <div className="flex justify-center">
                 <Image 
-                    src="/mail.svg"
+                    src="/mail-white.svg"
                     alt="Envelope icon"
                     width={100}
                     height={100}
+                    placeholder="blur"
+                    blurDataURL="/mail-white.svg"
                 />
             </div>
             <div className="text-center my-auto py-4">
@@ -99,7 +101,7 @@ export default function SubscribeCard() {
                     </div>
                     <button
                         type="submit"
-                        className="flex justify-center mt-4 w-full bg-dfNew2 hover:bg-blue-300 text-dfNew py-3 px-4 rounded-md transition duration-300 ease-in-out"
+                        className="flex justify-center mt-4 w-full bg-dfNew2 hover:bg-dfNew hover:text-white text-dfNew py-3 px-4 rounded-md transition duration-300 ease-in-out"
                         disabled={isLoading}
                     >
                     {isLoading ? (

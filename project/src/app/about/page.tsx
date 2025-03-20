@@ -1,7 +1,6 @@
 import Image from "next/image";
 import ShopLink from "@/components/shop/shop-link";
 import { ImageGridItem } from "@/components/image-grid";
-import SubscribeCard from "@/components/subscribe-card";
 import { SocialMediaLinksCard } from "@/components/socialmedia";
 
 
@@ -50,14 +49,6 @@ export default function About() {
                 <ImageGridItem src="/pottery-hand.jpeg" alt="Grid image 2" />
             </div>
         </div>
-        <div className="container mx-auto max-w-lg py-20">
-            <h3 className="text-df-text text-center text-4xl md:text-6xl mb-4">
-                Subscribe to the Newsletter
-            </h3>
-            <p className="text-lg text-df-text text-center tracking-tight font-medium mb-4">Sign up for the mailing list and never miss an update</p>
-            <SubscribeCard />
-        </div>
-
         </>
     );
 };

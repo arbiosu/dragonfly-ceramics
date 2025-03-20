@@ -80,11 +80,11 @@ export default function ShippingRateCalculator() {
 
     return (
       <div>
-        <h3 className="text-lg font-semibold mb-2 text-df-text">Shipping</h3>
+        <h3 className="text-lg mb-2 text-df-text">Shipping</h3>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700 mb-1">
-              Destination ZIP Code
+              ZIP Code*
             </label>
             <input
               type="text"
@@ -100,12 +100,12 @@ export default function ShippingRateCalculator() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-df-text hover:bg-blue-300 py-2 px-4 rounded-md text-lg font-medium text-white transition-colors duration-200"
+            className="w-full bg-dfNew2 text-df-text hover:bg-dfNew hover:text-white py-2 px-4 rounded-md text-lg transition-colors duration-200"
           >
             {isLoading ? "Calculating..." : "Checkout"}
           </button>
           {error && <div className="mt-3 text-sm text-red-600">{error}</div>}
         </form>
       </div>
-    )
-}
+    );
+};

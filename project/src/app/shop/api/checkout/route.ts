@@ -22,8 +22,6 @@ export async function POST(request: Request) {
         };
 
         const validatedCart = await validateCart(cartItems);
-        // flow: validate the cart -> add shipping options -> oil dispenser check
-        // -> create session
 
         const oilDispenserProps: Partial<Stripe.Checkout.SessionCreateParams> = {};
         const hasOilDispensers = cartItems.filter((item) => item.product.metadata.type === "oil dispensers");
@@ -41,8 +39,8 @@ export async function POST(request: Request) {
                     dropdown: {
                         options: [
                             {
-                                label: "Blue",
-                                value: "blue",
+                                label: "Silver",
+                                value: "silver",
                             },
                             {
                                 label: "Gold",
