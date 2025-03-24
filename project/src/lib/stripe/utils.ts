@@ -109,6 +109,10 @@ export async function validateCart(
                 }
     
                 const validatedQuantity = item.quantity > 0 ? item.quantity : 1;
+                const inventoryAvailable = validatedQuantity < Number(item.product.metadata.inventory)
+                if (!inventoryAvailable) {
+                    throw new Error(`[Stripe Checkout] Not enough inventory for ${item.product.id}`);
+                }
     
                 return {
                     price: validatedProduct.default_price,
@@ -166,3 +170,33 @@ export async function stripeCheckoutSuccess(sessionId: string) {
     }
 };
 
+//TODO: crusty implementation pls fix
+export async function deductInventory(sessionId: string) {
+    try {
+        const session = await stripe.checkout.sessions.retrieve(sessionId, {
+            expand: ['line_items']
+        });
+        const lineItems = session.line_items?.data ?? [];
+        for (const product of lineItems) {
+            const prod = await fetchProductById(product.id)
+            await updateInventory(product.id, prod.metadata.inventory, product.quantity!) 
+        }
+
+    } catch (error) {
+        throw new Error(`[deductInventory] Failed to deduct inventory with ${error}`)
+    }
+}
+
+export async function updateInventory(productId: string, original: string, deduction: number) {
+    try {
+        const newInventory = Number(original) - deduction;
+        const newInventoryString = newInventory.toString();
+        await stripe.products.update(productId, {
+            metadata: {
+                inventory: newInventoryString
+            }
+        });
+    } catch (error) {
+        throw new Error(`[updateInventory] failed to update inventory with error ${error}`);
+    }
+}

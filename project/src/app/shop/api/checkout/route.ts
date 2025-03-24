@@ -26,6 +26,26 @@ export async function POST(request: Request) {
         const oilDispenserProps: Partial<Stripe.Checkout.SessionCreateParams> = {};
         const hasOilDispensers = cartItems.filter((item) => item.product.metadata.type === "oil dispensers");
         oilDispenserProps.custom_fields = [];
+        oilDispenserProps.custom_fields.push({
+            key: "color",
+            label: {
+                type: 'custom',
+                custom: "Include free ceramic magnet?",
+            },
+            type: "dropdown",
+            dropdown: {
+                options: [
+                    {
+                        label: "Yes",
+                        value: "yes"
+                    },
+                    {
+                        label: "No",
+                        value: "no"
+                    }
+                ]
+            }
+        })
 
         for (const oilDispenser of hasOilDispensers) {
             for (let i = 0; i < oilDispenser.quantity; i++) {
@@ -51,6 +71,8 @@ export async function POST(request: Request) {
                 });
             }
         }
+
+
         const session = await stripeCheckout(
             validatedCart,
             origin,

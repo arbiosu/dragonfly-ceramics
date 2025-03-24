@@ -83,16 +83,16 @@ export default function ShippingRateCalculator() {
         <h3 className="text-lg mb-2 text-df-text">Shipping</h3>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700 mb-1">
-              ZIP Code*
+            <label htmlFor="zipCode" className="block text-lg text-df-text mb-1">
+              zipcode*
             </label>
             <input
               type="text"
               id="zipCode"
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
-              className="w-full text-df-text px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              placeholder="Enter your ZIP code"
+              className="w-full text-df-text bg-df-bg px-3 py-2 border-b-2 border-df-text focus:outline-none focus:ring-indigo-500"
+              placeholder="*to calculate shipping"
               maxLength={10}
             />
           </div>
@@ -100,7 +100,7 @@ export default function ShippingRateCalculator() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-dfNew2 text-df-text hover:bg-dfNew hover:text-white py-2 px-4 rounded-md text-lg transition-colors duration-200"
+            className="w-full bg-dfNew2 text-df-text hover:bg-dfNew hover:text-white py-2 px-4 rounded-md text-xl transition-colors duration-200"
           >
             {isLoading ? "Calculating..." : "Checkout"}
           </button>
