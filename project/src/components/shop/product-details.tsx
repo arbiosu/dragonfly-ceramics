@@ -18,8 +18,6 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
   const { addToCart } = useCart();
   const { addToast } = useToast();
 
-  // TODO: crusty implementation, too many calls to Stripe. Have to restructure 
-  // CartItem later on
   const handleAddToCart = () => {
     addToCart(product);
     addToast({
@@ -32,6 +30,8 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
   const toggleDetails = () => {
     setDetailsVisible(!detailsVisible);
   }
+
+  const excludedKeys = ["type", "height", "length", "width", "weight"];
 
   return (
     <div className="container mx-auto px-4 py-20">
@@ -129,10 +129,10 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               </div>
               <ul className={`list-disc pl-5 text-df-text transition-all duration-300 ${detailsVisible ? "block" : "hidden"}`}>
                 {Object.entries(product.metadata)
-                  .filter(([key]) => key !== "type")
+                  .filter(([key]) => !excludedKeys.includes(key))
                   .map(([key, value]) => (
                   <li key={key}>
-                    <span className="text-lg text-df-text">{key}:</span> {value}
+                    <span className="text-lg text-df-text">{key}: {value}</span> 
                   </li>
                 ))}
               </ul>
@@ -141,7 +141,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 
           <div className="">
             <button
-                className="w-full bg-dfNew hover:bg-dfNew2 text-white py-2 px-4 rounded-md transition-colors"
+                className="w-full bg-dfNew2 hover:bg-dfNew hover:text-white text-df-text py-2 px-4 rounded-md transition-colors"
                 onClick={handleAddToCart}
             >
                 Add to Cart
@@ -157,9 +157,11 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               </div>
             </div>
           </div>
-          <SubscribeCard />
         </div>
       </div>
+      <div className="max-w-lg mx-auto mt-12">
+          <SubscribeCard />
+        </div>
     </div>
   );
 };

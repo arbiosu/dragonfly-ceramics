@@ -21,13 +21,20 @@ type Filter =
 
 export default function ProductGrid({ products }: ProductGridProps) {
     const [filter, setFilter] = useState<Filter>("all");
+    const [sortOrder, setSortOrder] = useState<"asc" | "desc" | "none">("none");
 
     const filteredProducts = useMemo(() => {
-        if (filter === "all") {
-            return products;
+        let filtered = filter === "all"
+        ? products
+        : products.filter((item) => item.metadata.type === filter);
+
+        if (sortOrder === "asc") {
+            filtered = [...filtered].sort((a, b) => Number(a.price) - Number(b.price));
+        } else if (sortOrder === "desc") {
+            filtered = [...filtered].sort((a, b) => Number(b.price) - Number(a.price));
         }
-        return products.filter((item) => item.metadata.type === filter);
-    }, [products, filter]);
+        return filtered;
+    }, [products, filter, sortOrder]);
 
     const filterButtons: Filter[] = [
         "all",
@@ -57,6 +64,35 @@ export default function ProductGrid({ products }: ProductGridProps) {
                         {label}
                     </button>
                 ))}
+            </div>
+            <div className="flex justify-center gap-4 mb-4">
+                <button
+                    onClick={() => setSortOrder("asc")}
+                    className={`px-4 py-2 text-df-text font-medium ${
+                        sortOrder === "asc"
+                        ? "border-solid border-b-4 border-dfNew"
+                        : "text-gray-500"
+                    }`}>
+                    Price: Low to High
+                </button>
+                <button
+                    onClick={() => setSortOrder("desc")}
+                    className={`px-4 py-2 text-df-text font-medium ${
+                        sortOrder === "desc"
+                        ? "border-solid border-b-4 border-dfNew"
+                        : "text-gray-500"
+                    }`}>
+                    Price: High to Low
+                </button>
+                <button
+                    onClick={() => setSortOrder("none")}
+                    className={`px-4 py-2 text-df-text font-medium ${
+                        sortOrder === "none"
+                        ? "border-solid border-b-4 border-dfNew"
+                        : "text-gray-500"
+                    }`}>
+                    Clear Price Sort
+                </button>
             </div>
             {filteredProducts.length > 0 ? (
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:mx-40">

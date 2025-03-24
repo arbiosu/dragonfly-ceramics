@@ -25,12 +25,6 @@ export default function ShoppingCart() {
         {cartItems.map((item, index) => (
           <CartItemCard product={item.product} quantity={item.quantity} key={index}/>
         ))}
-        <div className="flex items-center justify-between mb-4">
-          <span className="text-lg text-df-text">free ceramic magnet</span>
-          <button
-            className='w-6 h-6 border bg-white rounded'
-          ></button>
-        </div>
         <div>
           <h3 className="text-df-text text-xl mb-8">estimated subtotal: ${cartTotal}</h3>
         </div>

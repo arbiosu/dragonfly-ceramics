@@ -1,6 +1,8 @@
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { stripe } from '@/lib/stripe/stripe'
+import { deductInventory } from '@/lib/stripe/utils';
 import Stripe from "stripe";
 
 export async function POST(request: Request) {
@@ -25,7 +27,13 @@ export async function POST(request: Request) {
     switch (event.type) {
         case 'checkout.session.completed':
             console.log('[Webhook Success] Checkout Webhook Received!');
-            // TODO: send emails
+            await deductInventory(event.data.object.id)
+            break;
+        case 'product.created':
+        case 'product.updated':
+        case 'product.deleted':
+            console.log('[Webhook] revalidating shop path...');
+            revalidatePath('/shop', 'layout');
             break;
         default:
             console.log(`[Webhook] event received: ${event.type}`);

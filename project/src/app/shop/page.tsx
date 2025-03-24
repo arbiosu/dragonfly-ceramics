@@ -14,7 +14,6 @@ export default async function Shop() {
         const serialized = await serializeStripeProduct(product);
         serializedProducts.push(serialized)
     }
-
     return (
         <main className="py-28">
             <section className="container mx-auto text-center px-4">
