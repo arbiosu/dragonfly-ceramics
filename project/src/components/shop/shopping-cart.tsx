@@ -3,7 +3,7 @@
 import { useCart } from "@/contexts/CartContext";
 import { useState, useEffect } from "react";
 import CartItemCard from "@/components/shop/cart-item";
-import ShippingRateCalculator from "./shipping-calculator";
+import CheckoutButton from "./checkout";
 import Loading from "@/components/loading";
 
 
@@ -28,7 +28,7 @@ export default function ShoppingCart() {
         <div>
           <h3 className="text-df-text text-xl mb-8">estimated subtotal: ${cartTotal}</h3>
         </div>
-        <ShippingRateCalculator />
+        <CheckoutButton />
       </main>
     );
 };

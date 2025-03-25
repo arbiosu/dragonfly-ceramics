@@ -60,6 +60,10 @@ export const CartProvider = ({ children }: Props) => {
 
         if (existingCartItemIndex !== -1) {
             const existingCartItem = cartItems[existingCartItemIndex];
+            if (Number(existingCartItem.product.metadata.inventory) < existingCartItem.quantity +1) {
+                alert(`We only have ${existingCartItem.product.metadata.inventory} items left for ${existingCartItem.product.name}`);
+                return;
+            }
             const updatedCartItem = {
                 ...existingCartItem,
                 quantity: existingCartItem.quantity + 1,

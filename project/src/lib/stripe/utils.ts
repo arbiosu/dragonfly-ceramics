@@ -109,7 +109,7 @@ export async function validateCart(
                 }
     
                 const validatedQuantity = item.quantity > 0 ? item.quantity : 1;
-                const inventoryAvailable = validatedQuantity < Number(item.product.metadata.inventory)
+                const inventoryAvailable = validatedQuantity <= Number(item.product.metadata.inventory)
                 if (!inventoryAvailable) {
                     throw new Error(`[Stripe Checkout] Not enough inventory for ${item.product.id}`);
                 }

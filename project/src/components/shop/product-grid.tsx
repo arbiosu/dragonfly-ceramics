@@ -66,33 +66,17 @@ export default function ProductGrid({ products }: ProductGridProps) {
                 ))}
             </div>
             <div className="flex justify-center gap-4 mb-4">
-                <button
-                    onClick={() => setSortOrder("asc")}
-                    className={`px-4 py-2 text-df-text font-medium ${
-                        sortOrder === "asc"
-                        ? "border-solid border-b-4 border-dfNew"
-                        : "text-gray-500"
-                    }`}>
-                    Price: Low to High
-                </button>
-                <button
-                    onClick={() => setSortOrder("desc")}
-                    className={`px-4 py-2 text-df-text font-medium ${
-                        sortOrder === "desc"
-                        ? "border-solid border-b-4 border-dfNew"
-                        : "text-gray-500"
-                    }`}>
-                    Price: High to Low
-                </button>
-                <button
-                    onClick={() => setSortOrder("none")}
-                    className={`px-4 py-2 text-df-text font-medium ${
-                        sortOrder === "none"
-                        ? "border-solid border-b-4 border-dfNew"
-                        : "text-gray-500"
-                    }`}>
-                    Clear Price Sort
-                </button>
+                <label htmlFor="sortOrder" className="text-df-text text-lg hidden">Sort Products:</label>
+                <select
+                    id="sortOrder"
+                    onChange={(e) => setSortOrder(e.target.value as "asc" | "desc" | "none")}
+                    value={sortOrder}
+                    className="px-4 py-2 text-df-text text-lg bg-df-bg rounded"
+                >
+                    <option value="none">New Releases</option>
+                    <option value="asc">Price: Low to High</option>
+                    <option value="desc">Price: High to Low</option>
+                </select>
             </div>
             {filteredProducts.length > 0 ? (
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:mx-40">
