@@ -5,7 +5,6 @@ import AdminProductCard from "./admin-product-card";
 
 export default async function AdminPortal() {
     const products = await fetchProducts();
-    console.log(products[0].images)
     return (
         <section className="py-20">
             <h1 className="text-2xl text-center text-df-text">Admin Portal</h1>

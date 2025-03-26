@@ -1,17 +1,17 @@
 import * as React from 'react';
 
 interface SubscriptionEmailProps {
-    name: string;
+    email: string;
 }
 
 export const SubscriptionEmail: React.FC<Readonly<SubscriptionEmailProps>> = ({
-    name,
+    email,
 }) => (
-    <div>
-        <h1>Welcome, {name}!</h1>
-        <p>You have been added to Dragonfly Ceramics mailing list.</p>
-        <p>You will receive occasional updates on our product offerings.</p>
-        <p>Thanks for subscribing!</p>
+    <div className="bg-dfNew2">
+        <h1 className="text-xl">Welcome to Dragonfly Ceramics</h1>
+        <p className="text-xl text-df-text">
+            {`THANKS FOR SIGNING UP FOR THE NEWSLETTER. YOU WILL NOW RECEIVE UPDATES FOR DRAGONFLY CERAMICS AT ${email}`}
+        </p>
     </div>
 );
 

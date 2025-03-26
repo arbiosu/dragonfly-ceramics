@@ -6,6 +6,7 @@ import {
 import ProductGrid from "@/components/shop/product-grid"
 import Banner from "@/components/banner";
 
+export const revalidate = 3600 // revalidate every hour?
 
 export default async function Shop() {
     const products = await fetchProducts();

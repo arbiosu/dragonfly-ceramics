@@ -1,6 +1,7 @@
 import { resend } from "@/lib/resend/resend";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { SubscriptionEmail } from "@/components/email/subscription";
 
 
 // Rate limit configuration
@@ -48,10 +49,11 @@ export async function POST(req: Request) {
             from: 'Dragonfly Ceramics <noreply@updates.dragonflyceramics.com>',
             to: email,
             subject: "Dragonfly Ceramics Subscription Notification",
-            html: '<p>Thank you for subscribing! You will periodically receive updates on our product offerings. Have a great day!</p>',
+            react: SubscriptionEmail({ email: email }) as React.ReactElement
         });
 
         if (error) {
+            console.log(error)
             return NextResponse.json({ error }, { status: 500 });
         }
 
