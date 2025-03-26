@@ -33,7 +33,7 @@ export function FAQHorizontalScroll({ faqs }: FAQProps) {
     return (
         <div className="w-full max-w-7xl mx-auto py-6">
             <h2 className="text-2xl mb-6 text-center text-df-text">
-                Frequently Asked Questions
+                frequently asked questions
             </h2>
             <div
                 ref={scrollRef}
@@ -45,10 +45,10 @@ export function FAQHorizontalScroll({ faqs }: FAQProps) {
                         className="inline-block align-top p-6 mr-4 last:mr-0 flex-shrink-0 w-96"
                     >
                         <h3 className="text-lg text-dfNew mb-3">
-                            {faq.question}
+                            {faq.question.toLowerCase()}
                         </h3>
                         <p className="text-dfNew">
-                            {faq.answer}
+                            {faq.answer.toLowerCase()}
                         </p>
                     </div>
                 ))}

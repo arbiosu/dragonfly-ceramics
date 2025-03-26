@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { ralewayLight } from "@/../public/fonts/fonts"
 import Navbar from "@/components/nav";
 import Footer from "@/components/footer";
+import { CartProvider } from "@/contexts/CartContext";
+import { ToastProvider } from "@/contexts/ToastContext";
 import "./globals.css";
 
 
@@ -20,9 +22,14 @@ export default function RootLayout({
       <body
         className={`${ralewayLight.className} ${ralewayLight.className} antialiased bg-df-bg`}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <CartProvider>
+          <ToastProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </ToastProvider>
+        </CartProvider>
+
       </body>
     </html>
   );

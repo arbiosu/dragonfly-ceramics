@@ -39,7 +39,7 @@ export default function SubscribeCard() {
 
             if (!res.ok) {
                 if (res.status === 429) {
-                    setError(`Too many subscription attempts. Please try again in ${data.resetInMinutes} minutes.`);
+                    setError(`too many subscription attempts. please try again in ${data.resetInMinutes} minutes.`);
                 }
                 throw new Error(`Failed to send email`);
             }
@@ -58,7 +58,7 @@ export default function SubscribeCard() {
         <div className="w-full mx-auto rounded-lg p-6 flex flex-col h-full bg-dfNew">
             <div className="text-center mb-auto justify-items-center space-y-8">
                 <h2 className="text-xl text-white mb-2">
-                    Subscribe
+                    subscribe
                 </h2>
             </div>
             <div className="flex justify-center">
@@ -76,10 +76,10 @@ export default function SubscribeCard() {
             {submitted ? (
                 <div className="text-center py-4 px-6 bg-green-50 rounded-md">
                     <p className="text-green-600 font-medium">
-                        Thanks for subscribing!
+                        thanks for subscribing!
                     </p>
                     <p className="text-green-600 text-sm mt-1">
-                        We&apos;ll keep you updated with the latest news
+                        we&apos;ll keep you updated with the latest news
                     </p>
                 </div>
             ) : (
@@ -110,10 +110,10 @@ export default function SubscribeCard() {
                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
-                            Processing...
+                            processing...
                         </div>
                     ) : (
-                        "Subscribe Now"
+                        "subscribe now"
                     )}
                     </button>
                 </form>

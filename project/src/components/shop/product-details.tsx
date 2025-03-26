@@ -13,7 +13,7 @@ interface ProductDetailsProps {
 }
 
 export default function ProductDetails({ product }: ProductDetailsProps) {
-  const [selectedImage, setSelectedImage] = useState<string>(product.images[0])
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
   const [detailsVisible, setDetailsVisible] = useState<boolean>(false);
   const { addToCart } = useCart();
   const { addToast } = useToast();
@@ -31,6 +31,18 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
     setDetailsVisible(!detailsVisible);
   }
 
+  const handlePrevImage = () => {
+    setSelectedImageIndex((prevIndex) => 
+      prevIndex === 0 ? product.images.length - 1 : prevIndex - 1
+    );
+  }
+
+  const handleNextImage = () => {
+    setSelectedImageIndex((prevIndex) => 
+      prevIndex === product.images.length - 1 ? 0 : prevIndex + 1
+    );
+  }
+
   const excludedKeys = ["type", "height", "length", "width", "weight"];
 
   return (
@@ -38,72 +50,102 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
         {/* Product Images Section */}
         <div className="space-y-4">
-            <Link
-              href={"/shop"}
-              className="inline-flex items-center px-5 mb-4 gap-2 md:mx-36
-              text-df-text text-2xl
-              hover:text-dfNew2 focus:ring-4 focus:ring-white transition-colors"
+          <Link
+            href={"/shop"}
+            className="inline-flex items-center px-5 mb-4 gap-2 md:mx-36
+            text-df-text text-2xl
+            hover:text-dfNew2 focus:ring-4 focus:ring-white transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              className="shrink-0"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                className="shrink-0"
-              >
               <path d="M19 12H5" />
               <path d="M12 19l-7-7 7-7" />
-              </svg>
-              <span>Back to Shop</span>
-            </Link>
+            </svg>
+            <span>back to shop</span>
+          </Link>
+          
           {/* Main Image */}
-          <div className="relative w-full max-w-sm mx-auto aspect-square">
+          <div className="relative w-full max-w-lg mx-auto aspect-square">
             <Image
-              src={selectedImage || "/placeholder.svg"}
+              src={product.images[selectedImageIndex] || "/placeholder.svg"}
               alt={product.description || "Product image"}
               className="object-cover"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               placeholder="blur"
-              blurDataURL={selectedImage}
+              blurDataURL={product.images[selectedImageIndex]}
               priority
             />
           </div>
+
+          {/* Image Navigation */}
           {product.images.length > 1 && (
-            <div className="flex justify-center max-w-md mx-auto space-x-2 overflow-x-auto pb-2">
-              {product.images.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(image)}
-                  className={`relative w-20 h-20 rounded-md overflow-hidden border-2 ${
-                    selectedImage === image ? "border-df-text" : "border-transparent"
-                  }`}
+            <div className="flex justify-center items-center space-x-4 mt-4">
+              <button 
+                onClick={handlePrevImage}
+                className="bg-dfNew hover:bg-dfNew2 p-2 rounded-full 
+                focus:outline-none focus:ring-2 focus:ring-df-text"
+                aria-label="Previous Image"
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="24" 
+                  height="24" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
                 >
-                  <Image
-                    src={image || "/placeholder.svg"}
-                    alt={`Product image ${index + 1}`}
-                    className="object-cover"
-                    fill
-                    sizes="80px"
-                    placeholder="blur"
-                    blurDataURL={image}
-                  />
-                </button>
-              ))}
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+
+              {/* Image Counter */}
+              <div className="text-sm text-gray-600">
+                {selectedImageIndex + 1} / {product.images.length}
+              </div>
+
+              <button 
+                onClick={handleNextImage}
+                className="bg-dfNew hover:bg-dfNew2 p-2 rounded-full 
+                focus:outline-none focus:ring-2 focus:ring-df-text"
+                aria-label="Next Image"
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="24" 
+                  height="24" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                >
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </button>
             </div>
           )}
         </div>
 
-        {/* Product Details Section */}
+        {/* Rest of the component remains the same */}
         <div className="flex flex-col space-y-6 py-20">
           <div>
-            <h1 className="text-3xl text-df-text">{product.name}</h1>
+            <h1 className="text-3xl text-df-text">{product.name.toLowerCase()}</h1>
             {/* Price */}
             <div className="mt-4">
                 <p className="text-2xl text-df-text">${product.price}</p>
@@ -113,7 +155,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           {/* Description */}
           <div className="prose prose-sm max-w-none text-df-text">
             <h3 className="text-xl">description</h3>
-            <p>{product.description || "No description available"}</p>
+            <p>{product.description.toLowerCase() || "No description available"}</p>
           </div>
 
           {product.metadata && Object.keys(product.metadata).length > 0 && (

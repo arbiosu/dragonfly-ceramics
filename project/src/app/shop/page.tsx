@@ -17,7 +17,7 @@ export default async function Shop() {
     return (
         <main className="py-28">
             <section className="container mx-auto text-center px-4">
-                <h1 className="text-3xl md:text-5xl text-df-text mb-8">Shop</h1>
+                <h1 className="text-3xl md:text-5xl text-df-text mb-8">shop</h1>
                 <ProductGrid products={serializedProducts} />
                 <div className="py-20">
                     <Banner

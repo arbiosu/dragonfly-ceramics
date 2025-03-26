@@ -54,22 +54,22 @@ export default function ProductCard({ data }: ProductCardProps) {
                         href={`/shop/${data.id}`}
                         className="w-full bg-dfNew2 hover:bg-dfNew hover:text-white text-df-text py-2 px-4 rounded-md transition-colors"
                     >
-                        Details
+                        details
                     </Link>
                     <button
                         className="w-full bg-dfNew2 hover:bg-dfNew hover:text-white text-df-text py-2 px-4 rounded-md transition-colors"
                         onClick={handleAddToCart}
                     >
-                        Add to Cart
+                        add to cart
                     </button>
                 </div>
             </div>
             <div className="p-2">
                 <h3 className="text-lg text-df-text truncate">
-                    {data.name}
+                    {data.name.toLowerCase()}
                 </h3>
                 <div className="mt-auto">
-                    <p className="text-2xl text-df-text">${data.price}</p>
+                    <p className="text-xl text-df-text">${data.price}</p>
                 </div>
             </div>
         </div>

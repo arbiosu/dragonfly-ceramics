@@ -33,7 +33,7 @@ export async function POST(request: Request) {
         case 'product.updated':
         case 'product.deleted':
             console.log('[Webhook] revalidating shop path...');
-            revalidatePath('/shop', 'layout');
+            revalidatePath('/shop');
             break;
         default:
             console.log(`[Webhook] event received: ${event.type}`);

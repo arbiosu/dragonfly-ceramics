@@ -85,7 +85,7 @@ export function SocialMediaLinksCard() {
             </div>
             <div className="text-center my-16 py-4">
                 <p className="text-df-text text-lg">
-                    Keep up with Dragonfly Ceramics on YouTube, TikTok, and Instagram
+                    keep up with dragonfly ceramics on youTube, tiktok, and instagram
                 </p>
             </div>
             <div className="flex justify-center">

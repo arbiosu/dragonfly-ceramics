@@ -37,7 +37,7 @@ export default function LandingPage() {
                     placeholder="blur"
                     blurDataURL="/dragonfly-text-white.png"
                 />
-                <ShopLink label={"Shop Now"} />
+                <ShopLink label={"shop now"} />
             </div>
         </div>
     );

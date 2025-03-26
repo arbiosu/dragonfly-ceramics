@@ -10,9 +10,9 @@ export default function Footer() {
             {/* Brand and Copyright */}
             <div className="md:col-span-2">
               <Link href="/" className="flex items-center mb-4">
-                <span className="text-2xl">Dragonfly Ceramics</span>
+                <span className="text-2xl">dragonfly ceramics</span>
               </Link>
-              <p className="text-sm">&copy; {currentYear} Dragonfly Ceramics. All rights reserved.</p>
+              <p className="text-sm">&copy; {currentYear} dragonfly ceramics. all rights reserved.</p>
             </div>
   
             {/* Quick Links */}
@@ -20,17 +20,17 @@ export default function Footer() {
               <ul className="space-y-2">
                 <li>
                     <Link href="/shop" className="transition-colors">
-                        Shop
+                        shop
                     </Link>
                 </li>
                 <li>
                     <Link href="/about" className="transition-colors">
-                        About
+                        about
                     </Link>
                 </li>
                 <li>
                     <Link href="/contact" className="transition-colors">
-                        Contact
+                        contact
                     </Link>
                 </li>
               </ul>

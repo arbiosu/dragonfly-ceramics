@@ -3,6 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useState, useEffect } from "react"
+import { useCart } from "@/contexts/CartContext"
 
 
 const navLinks = [
@@ -15,6 +16,8 @@ const navLinks = [
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState<boolean>(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false)
+
+    const { cartCount } = useCart();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -84,6 +87,11 @@ export default function Navbar() {
                             <circle cx="20" cy="21" r="1"></circle>
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                         </svg>
+                        {cartCount > 0 && (
+                            <span className="absolute -top-1 -right-1 bg-dfNew text-xs text-white rounded-full w-5 h-5 flex items-center justify-center">
+                                {cartCount}
+                            </span>
+                        )}
                     </Link>
                 </div>
             </div>

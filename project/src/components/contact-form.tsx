@@ -91,9 +91,9 @@ export default function ContactForm() {
       case "customOrder":
         return (
           <div className="p-4 border-l-4 border-dfNew bg-dfNew2 rounded mb-4">
-            <h3 className="font-medium text-dfNew flex items-center">Custom Order Instructions</h3>
+            <h3 className="font-medium text-dfNew flex items-center">custom order instructions</h3>
             <p className="text-dfNew mt-1">
-              Please include details about your desired design, size, colors, and any specific requirements. If
+              please include details about your desired design, size, colors, and any specific requirements. if
               possible, mention your preferred date of completion.
             </p>
           </div>
@@ -101,13 +101,13 @@ export default function ContactForm() {
       case "wholesale":
         return (
           <div className="p-4 border-l-4 border-dfNew bg-dfNew2 rounded mb-4">
-            <h3 className="font-medium text-dfNew flex items-center">Wholesale Order Instructions</h3>
+            <h3 className="font-medium text-dfNew flex items-center">wholesale order instructions</h3>
             <p className="text-dfNew mt-1">
-              {`Please include information about your business, the products you're interested in, estimated quantities,
-              and your location. We'll respond with our wholesale catalog and pricing.
-              Times for production and shipping vary based on order size and custom requests.
-              50% deposit is required for wholesale orders. The remaining balance will be due prior to shipment.
-              Returns and exchanges are only accepted if items are damaged in transit.`}
+              {`please include information about your business, the products you're interested in, estimated quantities,
+              and your location. 
+              times for production and shipping vary based on order size and custom requests.
+              50% deposit is required for wholesale orders. the remaining balance will be due prior to shipment.
+              returns and exchanges are only accepted if items are damaged in transit.`}
             </p>
           </div>
         )
@@ -116,8 +116,8 @@ export default function ContactForm() {
           <div className="p-4 border-l-4 border-dfNew bg-dfNew2 rounded mb-4">
             <h3 className="font-medium text-dfNew flex items-center">General Inquiry</h3>
             <p className="text-dfNew mt-1">
-              {`Feel free to ask any questions about our products, shipping, returns, 
-              or any other information you need. We'll get back to you as soon as possible.`}
+              {`feel free to ask any questions about our products, shipping, returns, 
+              or any other information you need. we'll get back to you as soon as possible.`}
             </p>
           </div>
         )
@@ -130,12 +130,12 @@ export default function ContactForm() {
     <div className="max-w-6xl mx-auto p-6">
       <h1 className="text-3xl mb-2 text-df-text">Contact</h1>
       <h2 className="text-lg text-df-text mb-6">
-        For custom orders, wholesale, or general questions, please fill out the information below.
+        for custom orders, wholesale, or general questions, please fill out the information below.
       </h2>
       {submitted ? (
         <div className="text-center py-4 px-6 bg-green-50 rounded-md">
-          <p className="text-green-600 font-medium">Thanks for reaching out!</p>
-          <p className="text-green-600 text-sm mt-1">We&apos;ll give you a reply as soon as possible!</p>
+          <p className="text-green-600 font-medium">thanks for reaching out!</p>
+          <p className="text-green-600 text-sm mt-1">we&apos;ll give you a reply as soon as possible!</p>
         </div>
       ) : (
         <div className="flex flex-col md:flex-row gap-24">
@@ -144,7 +144,7 @@ export default function ContactForm() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="topic" className="block text-lg font-medium text-gray-700 mb-1">
-                  Topic
+                  topic
                 </label>
                 <select
                   id="topic"
@@ -156,17 +156,17 @@ export default function ContactForm() {
                   className="text-df-text text-lg w-full px-4 py-2 bg-df-bg border-b border-dfNew focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="" disabled>
-                    Select an option
+                    select an option
                   </option>
-                  <option value="customOrder">Custom Order</option>
-                  <option value="wholesale">Wholesale</option>
-                  <option value="general">General Inquiry</option>
+                  <option value="customOrder">custom order</option>
+                  <option value="wholesale">wholesale</option>
+                  <option value="general">general inquiry</option>
                 </select>
               </div>
               {topic && getTopicInstructions()}
               <div>
                 <label htmlFor="name" className="block text-lg font-medium text-gray-700 mb-1">
-                  Name
+                  name
                 </label>
                 <input
                   type="text"
@@ -182,7 +182,7 @@ export default function ContactForm() {
 
               <div>
                 <label htmlFor="email" className="block text-lg font-medium text-gray-700 mb-1">
-                  Email
+                  email
                 </label>
                 <input
                   type="email"
@@ -198,7 +198,7 @@ export default function ContactForm() {
 
               <div>
                 <label htmlFor="message" className="block text-lg font-medium text-gray-700 mb-1">
-                  Message
+                  message
                 </label>
                 <textarea
                   id="message"
@@ -214,7 +214,7 @@ export default function ContactForm() {
 
               <div>
                 <label htmlFor="source" className="block text-lg font-medium text-gray-700 mb-1">
-                  Where did you hear about me?
+                  where did you hear about me?
                 </label>
                 <select
                   id="source"
@@ -264,10 +264,10 @@ export default function ContactForm() {
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                       ></path>
                     </svg>
-                    Processing...
+                    processing...
                   </div>
                 ) : (
-                  "Submit"
+                  "submit"
                 )}
               </button>
             </form>

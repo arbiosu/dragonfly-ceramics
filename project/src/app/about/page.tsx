@@ -17,28 +17,28 @@ export default function About() {
                         className="object-contain bg-df-bg"
                     />
                 </div>
-                <div className="space-y-8">
+                <div className="space-y-8"> 
                     <div className='space-y-6'>
                         <h2 className="text-df-text text-5xl text-center md:text-left">
-                            Meet the Artist
+                            meet the artist
                         </h2>
-                        <p className="text-df-text leading-relaxed text-2xl text-center md:text-left">Kelly Slater (she/her)</p>
-                        <p className="text-df-text leading-relaxed text-lg text-center md:text-left italic">Ceramicist</p>
-                        <p className="text-df-text leading-relaxed text-lg text-center md:text-left italic">Based in NYC</p>
+                        <p className="text-df-text leading-relaxed text-2xl text-center md:text-left">kelly slater (she/her)</p>
+                        <p className="text-df-text leading-relaxed text-lg text-center md:text-left italic">ceramicist</p>
+                        <p className="text-df-text leading-relaxed text-lg text-center md:text-left italic">based in nyc</p>
                         <p className="text-df-text leading-relaxed">
-                            I first started working with clay in highschool and then pottery
-                            quickly became an obsession in college. I fell in love with the medium
-                            when I started to create both functional and nonfunctional things for myself. 
-                            Soon enough, I had so much pottery in my home, that I needed to share it with others. 
+                            i first started working with clay in highschool and then pottery
+                            quickly became an obsession in college. i fell in love with the medium
+                            when i started to create both functional and nonfunctional things for myself. 
+                            soon enough, i had so much pottery in my home, that i needed to share it with others. 
                         </p>
                         <p className="text-df-text leading-relaxed">
-                            I currently produce small batches of my work and list them here on
-                            my website when they are finished. I also offer the option to commission
-                            me for custom work and large batch items at a wholesale rate. Be sure to
+                            i currently produce small batches of my work and list them here on
+                            my website when they are finished. i also offer the option to commission
+                            me for custom work and large batch items at a wholesale rate. be sure to
                             sign up for my newsletter so you know when I restock and if anything else
                             exciting happens! 
                         </p>
-                        <ShopLink label={"Shop Now"}/>
+                        <ShopLink label={"shop now"}/>
                     </div>
                 </div>
             </div>

@@ -73,9 +73,9 @@ export default function ProductGrid({ products }: ProductGridProps) {
                     value={sortOrder}
                     className="px-4 py-2 text-df-text text-lg bg-df-bg rounded"
                 >
-                    <option value="none">New Releases</option>
-                    <option value="asc">Price: Low to High</option>
-                    <option value="desc">Price: High to Low</option>
+                    <option value="none">new releases</option>
+                    <option value="asc">price: low to high</option>
+                    <option value="desc">price: high to low</option>
                 </select>
             </div>
             {filteredProducts.length > 0 ? (
@@ -88,7 +88,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
                 </div>
             ) : (
                 <div className="flex justify-center items-center h-40">
-                    <p className="text-2xl font-semibold text-df-text">Sold Out!</p>
+                    <p className="text-2xl font-semibold text-df-text">sold out!</p>
                 </div>
             )}
         </div>
