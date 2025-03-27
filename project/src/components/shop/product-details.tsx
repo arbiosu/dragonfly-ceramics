@@ -46,6 +46,15 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
     const newQuantity = Number(e.target.value);
     setQuantity(newQuantity > 0 ? newQuantity : 1);
   }
+  
+  const incrementQuantity = () => {
+    const availableInventory = Number(product.metadata.inventory) || 10;
+    setQuantity(prev => Math.min(prev + 1, availableInventory));
+  }
+
+  const decrementQuantity = () => {
+    setQuantity(prev => Math.max(prev - 1, 1));
+  }
 
   const toggleDetails = () => {
     setDetailsVisible(!detailsVisible);
@@ -200,17 +209,54 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             </div>
           )}
 
-        <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 text-df-text">
             <label htmlFor="quantity" className="text-xl text-df-text">Quantity:</label>
-            <input 
-              type="number" 
-              id="quantity"
-              min="1"
-              max={Number(product.metadata.inventory) || 10}
-              value={quantity}
-              onChange={handleQuantityChange}
-              className="w-20 px-2 py-1 border rounded-md text-center text-df-text"
-            />
+            <div className="flex items-center border rounded-md overflow-hidden">
+              <button 
+                onClick={decrementQuantity}
+                className="px-3 py-2 transition-colors"
+                aria-label="Decrease Quantity"
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="24" 
+                  height="24" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </button>
+              <input 
+                type="number" 
+                id="quantity"
+                min="1"
+                max={Number(product.metadata.inventory) || 10}
+                value={quantity}
+                onChange={handleQuantityChange}
+                className="w-16 text-center appearance-none outline-none px-2 py-2"
+              />
+              <button 
+                onClick={incrementQuantity}
+                className="px-3 py-2 transition-colors"
+                aria-label="Increase Quantity"
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="24" 
+                  height="24" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2"
+                >
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </button>
+            </div>
           </div>
 
           <div className="">
