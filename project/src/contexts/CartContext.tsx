@@ -13,7 +13,7 @@ interface Props {
 
 interface CartContextValue {
     cartItems: CartItem[];
-    addToCart: (product: Product) => void;
+    addToCart: (product: Product, quantity: number) => void;
     removeFromCart: (productId: string) => void;
     updateCartItemQuantity: (productId: string, quantity: number) => void;
     purgeCart: () => void;
@@ -52,28 +52,36 @@ export const CartProvider = ({ children }: Props) => {
     }, [cartItems]);
     
 
-    const addToCart = (product: Product) => {
+    const addToCart = (product: Product, quantity: number = 1) => {
         // check if the product is in the cart
         const existingCartItemIndex = cartItems.findIndex(
             (item) => item.product.id === product.id
         );
 
+        const availableInventory = Number(product.metadata.inventory);
+
+
         if (existingCartItemIndex !== -1) {
             const existingCartItem = cartItems[existingCartItemIndex];
-            if (Number(existingCartItem.product.metadata.inventory) < existingCartItem.quantity +1) {
-                alert(`We only have ${existingCartItem.product.metadata.inventory} items left for ${existingCartItem.product.name}`);
+            const totalRequestedQuantity = existingCartItem.quantity + quantity;
+
+            if (totalRequestedQuantity > availableInventory) {
                 return;
             }
+
             const updatedCartItem = {
                 ...existingCartItem,
-                quantity: existingCartItem.quantity + 1,
+                quantity: totalRequestedQuantity,
             };
             const updatedCartItems = [...cartItems];
             updatedCartItems[existingCartItemIndex] = updatedCartItem;
             setCartItems(updatedCartItems);
         }
         else {
-            setCartItems([...cartItems, { product, quantity: 1}]);
+            if (quantity > availableInventory) {
+                return;
+            }
+            setCartItems([...cartItems, { product, quantity: quantity}]);
         }
     };
 
@@ -90,9 +98,13 @@ export const CartProvider = ({ children }: Props) => {
         );
         if (existingCartItemIndex !== -1) {
           const existingCartItem = cartItems[existingCartItemIndex];
+          const availableInventory = Number(existingCartItem.product.metadata.inventory);
+
+          const adjustedQuantity = Math.min(quantity, availableInventory);
+          
           const updatedCartItem = {
             ...existingCartItem,
-            quantity,
+            quantity: adjustedQuantity,
           };
           const updatedCartItems = [...cartItems];
           updatedCartItems[existingCartItemIndex] = updatedCartItem;

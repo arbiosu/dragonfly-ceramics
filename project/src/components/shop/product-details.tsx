@@ -15,16 +15,36 @@ interface ProductDetailsProps {
 export default function ProductDetails({ product }: ProductDetailsProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
   const [detailsVisible, setDetailsVisible] = useState<boolean>(false);
+  const [quantity, setQuantity] = useState<number>(1);
+
   const { addToCart } = useCart();
   const { addToast } = useToast();
 
   const handleAddToCart = () => {
-    addToCart(product);
+    const availableInventory = Number(product.metadata.inventory) || 0;
+    if (quantity > availableInventory) {
+      addToast({
+        title: "Inventory Limit",
+        description: `Only ${availableInventory} items available in stock`,
+        variant: "error",
+      });
+      return;
+    }
+
+    addToCart(product, quantity)
+
     addToast({
         title: "Added to Cart",
-        description: `${product.name} has successfully been added to your cart!`,
+        description: `${quantity} ${product.name}(s) added to your cart!`,
         variant: "success",
     });
+
+    setQuantity(1);
+  }
+
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newQuantity = Number(e.target.value);
+    setQuantity(newQuantity > 0 ? newQuantity : 1);
   }
 
   const toggleDetails = () => {
@@ -142,7 +162,6 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           )}
         </div>
 
-        {/* Rest of the component remains the same */}
         <div className="flex flex-col space-y-6 py-20">
           <div>
             <h1 className="text-3xl text-df-text">{product.name.toLowerCase()}</h1>
@@ -181,12 +200,25 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             </div>
           )}
 
+        <div className="flex items-center space-x-4">
+            <label htmlFor="quantity" className="text-xl text-df-text">Quantity:</label>
+            <input 
+              type="number" 
+              id="quantity"
+              min="1"
+              max={Number(product.metadata.inventory) || 10}
+              value={quantity}
+              onChange={handleQuantityChange}
+              className="w-20 px-2 py-1 border rounded-md text-center text-df-text"
+            />
+          </div>
+
           <div className="">
             <button
-                className="w-full bg-dfNew2 hover:bg-dfNew hover:text-white text-df-text py-2 px-4 rounded-md transition-colors"
-                onClick={handleAddToCart}
+              className="w-full bg-dfNew2 hover:bg-dfNew hover:text-white text-df-text py-2 px-4 rounded-md transition-colors"
+              onClick={handleAddToCart}
             >
-                Add to Cart
+              Add {quantity} to Cart
             </button>
           </div>
 
