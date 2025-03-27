@@ -128,7 +128,7 @@ export default function ContactForm() {
 
   return (
     <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl mb-2 text-df-text">Contact</h1>
+      <h1 className="text-3xl mb-2 text-df-text">contact</h1>
       <h2 className="text-lg text-df-text mb-6">
         for custom orders, wholesale, or general questions, please fill out the information below.
       </h2>

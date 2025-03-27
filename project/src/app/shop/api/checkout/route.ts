@@ -49,7 +49,7 @@ export async function POST(request: Request) {
             for (let i = 0; i < oilDispenser.quantity; i++) {
                 oilDispenserProps.custom_fields?.push({
                     key: `color_${colorFieldIndex++}`,
-                    label: { type: 'custom', custom: 'Choose a color for your Oil Dispenser' },
+                    label: { type: 'custom', custom: 'Choose a color for your Oil Dispenser top' },
                     type: "dropdown",
                     dropdown: {
                         options: [
