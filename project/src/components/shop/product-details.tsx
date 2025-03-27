@@ -76,7 +76,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           </Link>
           
           {/* Main Image */}
-          <div className="relative w-full max-w-lg mx-auto aspect-square">
+          <div className="relative w-full max-w-2xl mx-auto aspect-square">
             <Image
               src={product.images[selectedImageIndex] || "/placeholder.svg"}
               alt={product.description || "Product image"}
