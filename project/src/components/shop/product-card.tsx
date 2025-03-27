@@ -19,7 +19,7 @@ export default function ProductCard({ data }: ProductCardProps) {
     const { addToast } = useToast();
 
     const handleAddToCart = () => {
-        addToCart(data);
+        addToCart(data, 1);
         addToast({
             title: "Added to Cart",
             description: `${data.name} has successfully been added to your cart!`,

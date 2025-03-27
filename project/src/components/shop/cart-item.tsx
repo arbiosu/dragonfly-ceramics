@@ -20,7 +20,7 @@ export default function CartItemCard({ product, quantity }: CartItem) {
   }
 
   const handleAddToCart = () => {
-    addToCart(product)
+    addToCart(product, 1)
     addToast({
       title: "Added to Cart",
       description: `${product.name} has successfully been added to your cart!`,
