@@ -272,7 +272,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           <div className="border-t border-gray-200 pt-6 mt-6">
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
-                <p className="text-gray-500">Availability</p>
+                <p className="">Availability</p>
                 <p className="font-medium text-df-text">{product.active ? "In Stock" : "Out of Stock"}</p>
               </div>
             </div>
