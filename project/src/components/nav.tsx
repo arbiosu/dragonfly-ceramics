@@ -97,7 +97,7 @@ export default function Navbar() {
             </div>
             {/* Mobile menu overlay */}
             {isMobileMenuOpen && (
-                <div className="md:hidden absolute top-full min-h-screen left-0 right-0 bg-df-text shadow-md p-4">
+                <div className="md:hidden absolute top-full min-h-screen left-0 right-0 bg-df-text shadow-md p-4 transition-transform duration-300 ease-in-out">
                     <ul className="flex flex-col gap-4 text-white text-xl">
                         {navLinks.map((link, index) => (
                             <li key={index}>
