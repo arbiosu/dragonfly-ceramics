@@ -41,8 +41,7 @@ export default function ProductCard({ data }: ProductCardProps) {
                     className="object-cover"
                     fill
                     sizes="(max-width: 768px) 100vw, 256px"
-                    placeholder="blur"
-                    blurDataURL={data.images[0]}
+                    placeholder="empty"
                 />
                 {/* Hover Buttons - Appear on hover */}
                 <div
@@ -53,6 +52,7 @@ export default function ProductCard({ data }: ProductCardProps) {
                     <Link 
                         href={`/shop/${data.id}`}
                         className="w-full bg-dfNew2 hover:bg-dfNew hover:text-white text-df-text py-2 px-4 rounded-md transition-colors"
+                        prefetch={false}
                     >
                         details
                     </Link>
