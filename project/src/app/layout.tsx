@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ralewayLight } from "@/../public/fonts/fonts"
+import { Analytics } from "@vercel/analytics/next";
 import Navbar from "@/components/nav";
 import Footer from "@/components/footer";
 import { CartProvider } from "@/contexts/CartContext";
@@ -29,6 +30,7 @@ export default function RootLayout({
             <Footer />
           </ToastProvider>
         </CartProvider>
+        <Analytics />
 
       </body>
     </html>
