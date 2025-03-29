@@ -69,6 +69,7 @@ export default function SubscribeCard() {
                     height={100}
                     placeholder="blur"
                     blurDataURL="/mail-white.svg"
+                    unoptimized
                 />
             </div>
             <div className="text-center my-auto py-4">

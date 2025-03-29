@@ -28,6 +28,7 @@ export function SocialMediaLink({ src, link, alt }: SocialMediaData) {
                 height={48}
                 placeholder="blur"
                 blurDataURL={src}
+                unoptimized
             />
         </Link>
     )
@@ -81,6 +82,7 @@ export function SocialMediaLinksCard() {
                     height={100}
                     placeholder="blur"
                     blurDataURL="/profile.svg"
+                    unoptimized
                 />
             </div>
             <div className="text-center my-16 py-4">

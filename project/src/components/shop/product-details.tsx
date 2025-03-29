@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { type Product } from "@/lib/stripe/utils";
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/contexts/ToastContext";
 import SubscribeCard from "@/components/subscribe-card";
@@ -16,6 +16,10 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
   const [detailsVisible, setDetailsVisible] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
+  const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(null);
+
+  const images = useMemo(() => product.images, [product.images]);
+
 
   const { addToCart } = useCart();
   const { addToast } = useToast();
@@ -60,17 +64,21 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
     setDetailsVisible(!detailsVisible);
   }
 
-  const handlePrevImage = () => {
-    setSelectedImageIndex((prevIndex) => 
-      prevIndex === 0 ? product.images.length - 1 : prevIndex - 1
-    );
-  }
+  const handleChangeImage = useCallback((direction: "next" | "prev") => {
+    if (debounceTimeout) clearTimeout(debounceTimeout); // Clear previous timeout
 
-  const handleNextImage = () => {
-    setSelectedImageIndex((prevIndex) => 
-      prevIndex === product.images.length - 1 ? 0 : prevIndex + 1
-    );
-  }
+    const timeout = setTimeout(() => {
+      setSelectedImageIndex((prevIndex) => {
+        if (direction === "next") {
+          return prevIndex === images.length - 1 ? 0 : prevIndex + 1;
+        } else {
+          return prevIndex === 0 ? images.length - 1 : prevIndex - 1;
+        }
+      });
+    }, 300); // 300ms debounce
+
+    setDebounceTimeout(timeout);
+  }, [images.length, debounceTimeout]);
 
   const excludedKeys = ["type", "height", "length", "width", "weight"];
 
@@ -107,22 +115,22 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           {/* Main Image */}
           <div className="relative w-full max-w-2xl mx-auto aspect-square">
             <Image
-              src={product.images[selectedImageIndex] || "/placeholder.svg"}
+              src={images[selectedImageIndex] || "/placeholder.svg"}
               alt={product.description || "Product image"}
               className="object-cover"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              placeholder="blur"
-              blurDataURL={product.images[selectedImageIndex]}
+              placeholder="empty"
               priority
+              unoptimized
             />
           </div>
 
           {/* Image Navigation */}
-          {product.images.length > 1 && (
+          {images.length > 1 && (
             <div className="flex justify-center items-center space-x-4 mt-4">
               <button 
-                onClick={handlePrevImage}
+                onClick={() => handleChangeImage("prev")}
                 className="bg-dfNew hover:bg-dfNew2 p-2 rounded-full 
                 focus:outline-none focus:ring-2 focus:ring-df-text"
                 aria-label="Previous Image"
@@ -144,11 +152,11 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 
               {/* Image Counter */}
               <div className="text-sm text-gray-600">
-                {selectedImageIndex + 1} / {product.images.length}
+                {selectedImageIndex + 1} / {images.length}
               </div>
 
               <button 
-                onClick={handleNextImage}
+                onClick={() => handleChangeImage("next")}
                 className="bg-dfNew hover:bg-dfNew2 p-2 rounded-full 
                 focus:outline-none focus:ring-2 focus:ring-df-text"
                 aria-label="Next Image"
