@@ -42,6 +42,7 @@ export default function ProductCard({ data }: ProductCardProps) {
                     fill
                     sizes="(max-width: 768px) 100vw, 256px"
                     placeholder="empty"
+                    unoptimized
                 />
                 {/* Hover Buttons - Appear on hover */}
                 <div
