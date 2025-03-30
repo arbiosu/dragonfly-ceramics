@@ -177,12 +177,14 @@ export async function deductInventory(sessionId: string) {
         const session = await stripe.checkout.sessions.retrieve(sessionId, {
             expand: ['line_items']
         });
-        const lineItems = session.line_items?.data ?? [];
-        for (const product of lineItems) {
-            const prod = await fetchProductById(product.id)
-            await updateInventory(product.id, prod.metadata.inventory, product.quantity!) 
-        }
 
+        const lineItems = session.line_items?.data ?? [];
+        await Promise.all(
+            lineItems.map(async (product) => {
+                const prod = await fetchProductById(product.id);
+                await updateInventory(product.id, prod.metadata.inventory, product.quantity!);
+            })
+        );
     } catch (error) {
         throw new Error(`[deductInventory] Failed to deduct inventory with ${error}`)
     }
@@ -195,7 +197,8 @@ export async function updateInventory(productId: string, original: string, deduc
         await stripe.products.update(productId, {
             metadata: {
                 inventory: newInventoryString
-            }
+            },
+            active: newInventory > 0,
         });
     } catch (error) {
         throw new Error(`[updateInventory] failed to update inventory with error ${error}`);

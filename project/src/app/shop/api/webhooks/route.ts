@@ -1,6 +1,5 @@
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
 import { stripe } from '@/lib/stripe/stripe'
 import { deductInventory } from '@/lib/stripe/utils';
 import Stripe from "stripe";
@@ -20,7 +19,7 @@ export async function POST(request: Request) {
             endpoint
         );
     } catch (error) {
-        console.error("Webhook Error: ", error);
+        console.error("[Webhook Error] could not parse event: ", error);
         return new NextResponse(`[Stripe] Webhook Error`, { status: 400 })
     }
 
@@ -33,7 +32,9 @@ export async function POST(request: Request) {
         case 'product.updated':
         case 'product.deleted':
             console.log('[Webhook] revalidating shop path...');
-            revalidatePath('/shop');
+            await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL!}/shop/api/revalidate?path=/shop`, {
+                method: "GET"
+            })
             break;
         default:
             console.log(`[Webhook] event received: ${event.type}`);

@@ -14,6 +14,7 @@ export default async function Shop() {
     for (const product of products) {
         const serialized = await serializeStripeProduct(product);
         serializedProducts.push(serialized)
+        console.log(serialized.images);
     }
     return (
         <main className="py-28">
