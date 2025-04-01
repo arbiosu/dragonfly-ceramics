@@ -13,6 +13,7 @@ type Filter =
 | "mugs"
 | "vases"
 | "oil dispensers"
+| "comfy cups"
 | "soap dispensers"
 | "coasters"
 | "berry bowls"
@@ -41,6 +42,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
         "mugs",
         "vases",
         "oil dispensers",
+        "comfy cups",
         "soap dispensers",
         "coasters",
         "berry bowls",
