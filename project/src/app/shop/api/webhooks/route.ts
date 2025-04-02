@@ -31,6 +31,9 @@ export async function POST(request: Request) {
         case 'product.created':
         case 'product.updated':
         case 'product.deleted':
+        case 'price.created':
+        case 'price.deleted':
+        case 'price.updated':
             console.log('[Webhook] revalidating shop path...');
             await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL!}/shop/api/revalidate?path=/shop`, {
                 method: "GET"
