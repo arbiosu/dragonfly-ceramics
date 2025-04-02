@@ -2,30 +2,18 @@
 
 import type { CartItem } from "@/lib/stripe/utils"
 import { useCart } from "@/contexts/CartContext"
-import { useToast } from "@/contexts/ToastContext"
 import Image from "next/image"
 import Link from "next/link"
 
 export default function CartItemCard({ product, quantity }: CartItem) {
   const { removeFromCart, addToCart, updateCartItemQuantity } = useCart()
-  const { addToast } = useToast()
 
   const handleRemove = () => {
     removeFromCart(product.id)
-    addToast({
-      title: "Removed from Cart",
-      description: `${product.name} has been removed from your Cart.`,
-      variant: "warning",
-    })
   }
 
   const handleAddToCart = () => {
     addToCart(product, 1)
-    addToast({
-      title: "Added to Cart",
-      description: `${product.name} has successfully been added to your cart!`,
-      variant: "success",
-    })
   }
 
   const handleDecrementQuantity = () => {
@@ -34,11 +22,6 @@ export default function CartItemCard({ product, quantity }: CartItem) {
       return
     }
     updateCartItemQuantity(product.id, quantity - 1)
-    addToast({
-      title: "Removed from Cart",
-      description: `One ${product.name} has been removed from your cart!`,
-      variant: "warning",
-    })
   }
 
   return (

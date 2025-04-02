@@ -3,7 +3,6 @@
 import { Stripe } from "stripe";
 import { useEffect } from "react";
 import { useCart } from "@/contexts/CartContext";
-import { useToast } from "@/contexts/ToastContext"
 
 
 export interface SessionProps {
@@ -28,15 +27,8 @@ export default function OrderSummary({ session }: SessionProps) {
         return formattedAddress || 'N/A';
     };
 
-    const { addToast } = useToast();
-
     const handleOrderIdClick = () => {
         navigator.clipboard.writeText(session.id);
-        addToast({
-            title: "Order ID Copied to Clipboard!",
-            description: "Keep your order ID for any potential questions about your order.",
-            variant: "warning",
-        });
     }
 
     const { purgeCart } = useCart();

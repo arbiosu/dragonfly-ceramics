@@ -1,5 +1,7 @@
 import Image from "next/image"
 import SubscribeCard from "@/components/subscribe-card";
+
+
 export default function Hero() {
     return (
         <section className="grid min-h-[100dvh] w-full md:grid-cols-2 text-df-text">

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Product } from "@/lib/stripe/utils";
 import { useState } from "react"
 import { useCart } from "@/contexts/CartContext";
-import { useToast } from "@/contexts/ToastContext";
 
 
 interface ProductCardProps {
@@ -16,15 +15,9 @@ interface ProductCardProps {
 export default function ProductCard({ data }: ProductCardProps) {
     const [isHovered, setIsHovered] = useState<boolean>(false);
     const { addToCart } = useCart();
-    const { addToast } = useToast();
 
     const handleAddToCart = () => {
         addToCart(data, 1);
-        addToast({
-            title: "Added to Cart",
-            description: `${data.name} has successfully been added to your cart!`,
-            variant: "success",
-        });
     }
 
     return (

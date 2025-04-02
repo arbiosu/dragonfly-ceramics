@@ -5,7 +5,6 @@ import Link from "next/link";
 import { type Product } from "@/lib/stripe/utils";
 import { useState, useCallback, useMemo } from "react";
 import { useCart } from "@/contexts/CartContext";
-import { useToast } from "@/contexts/ToastContext";
 import SubscribeCard from "@/components/subscribe-card";
 
 interface ProductDetailsProps {
@@ -19,29 +18,16 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
   const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(null);
 
   const images = useMemo(() => product.images, [product.images]);
-
-
   const { addToCart } = useCart();
-  const { addToast } = useToast();
 
   const handleAddToCart = () => {
     const availableInventory = Number(product.metadata.inventory) || 0;
     if (quantity > availableInventory) {
-      addToast({
-        title: "Inventory Limit",
-        description: `Only ${availableInventory} items available in stock`,
-        variant: "error",
-      });
+      alert(`Only ${availableInventory} items available in stock.`)
       return;
     }
 
     addToCart(product, quantity)
-
-    addToast({
-        title: "Added to Cart",
-        description: `${quantity} ${product.name}(s) added to your cart!`,
-        variant: "success",
-    });
 
     setQuantity(1);
   }
@@ -267,7 +253,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             </div>
           </div>
 
-          <div className="">
+          <div>
             <button
               className="w-full bg-dfNew2 hover:bg-dfNew hover:text-white text-df-text py-2 px-4 rounded-md transition-colors"
               onClick={handleAddToCart}
