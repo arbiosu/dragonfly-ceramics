@@ -1,9 +1,9 @@
-import ContactForm from "@/components/contact-form";
+import ContactForm from '@/components/contact-form';
 
 export default async function Contact() {
-    return (
-        <main className="py-20">
-            <ContactForm />
-        </main>
-    );
+  return (
+    <main className='py-20'>
+      <ContactForm />
+    </main>
+  );
 }

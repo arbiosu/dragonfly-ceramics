@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: "trdshamrxoipypgbujnx.supabase.co",
+        hostname: 'trdshamrxoipypgbujnx.supabase.co',
         port: '',
       },
       {
@@ -15,14 +15,14 @@ const nextConfig: NextConfig = {
         port: '',
       },
     ],
-    formats: ["image/webp"],
+    formats: ['image/webp'],
     minimumCacheTTL: 2678400, // 31 days
     deviceSizes: [640, 750, 828, 1080, 1200], // Limit size variations
     imageSizes: [16, 32, 64, 96], // Limit size variations
   },
   api: {
     bodyParser: {
-        sizeLimit: '2mb',
+      sizeLimit: '2mb',
     },
   },
   experimental: {

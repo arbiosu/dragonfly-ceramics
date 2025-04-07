@@ -1,6 +1,6 @@
-import { Raleway } from "next/font/google";
+import { Raleway } from 'next/font/google';
 
 export const ralewayLight = Raleway({
-    subsets: ["latin"],
-    display: "swap",
+  subsets: ['latin'],
+  display: 'swap',
 });
