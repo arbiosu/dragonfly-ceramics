@@ -1,15 +1,13 @@
-import type { Metadata } from "next";
-import { ralewayLight } from "@/../public/fonts/fonts"
-import Navbar from "@/components/nav";
-import Footer from "@/components/footer";
-import { CartProvider } from "@/contexts/CartContext";
-import { ToastProvider } from "@/contexts/ToastContext";
-import "./globals.css";
-
+import type { Metadata } from 'next';
+import { ralewayLight } from '@/../public/fonts/fonts';
+import Navbar from '@/components/nav';
+import Footer from '@/components/footer';
+import { CartProvider } from '@/contexts/CartContext';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "Dragonfly Ceramics",
-  description: "Handcrafted Pottery Shop",
+  title: 'Dragonfly Ceramics',
+  description: 'Handcrafted Pottery Shop',
 };
 
 export default function RootLayout({
@@ -18,16 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body
-        className={`${ralewayLight.className} ${ralewayLight.className} antialiased bg-df-bg`}
+        className={`${ralewayLight.className} ${ralewayLight.className} bg-df-bg antialiased`}
       >
         <CartProvider>
-          <ToastProvider>
-            <Navbar />
-            {children}
-            <Footer />
-          </ToastProvider>
+          <Navbar />
+          {children}
+          <Footer />
         </CartProvider>
       </body>
     </html>

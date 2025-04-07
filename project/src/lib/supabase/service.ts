@@ -1,12 +1,12 @@
-import { createClient } from "@supabase/supabase-js"
+import { createClient } from '@supabase/supabase-js';
 
 /**
  * Supabase client for database services, only used server side.
- * @returns 
+ * @returns
  */
 export async function createServiceClient() {
-    return createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_KEY!,
-    );
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_KEY!
+  );
 }
