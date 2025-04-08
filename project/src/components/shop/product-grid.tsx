@@ -88,7 +88,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
         </select>
       </div>
       {filteredProducts.length > 0 ? (
-        <div className='grid grid-cols-2 gap-2 md:mx-40 md:grid-cols-4'>
+        <div className='grid grid-cols-2 gap-2 md:grid-cols-4'>
           {filteredProducts.map((product, index) => (
             <div key={index} className='flex justify-center'>
               <ProductCard data={product} />
