@@ -57,7 +57,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 
   const handleChangeImage = useCallback(
     (direction: 'next' | 'prev') => {
-      if (debounceTimeout) clearTimeout(debounceTimeout); // Clear previous timeout
+      if (debounceTimeout) clearTimeout(debounceTimeout);
 
       const timeout = setTimeout(() => {
         setSelectedImageIndex((prevIndex) => {
@@ -176,7 +176,15 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             </h1>
             {/* Price */}
             <div className='mt-4'>
-              <p className='text-2xl text-df-text'>${product.price}</p>
+            {product.active ? (
+          <p className='text-xl text-df-text'>
+            ${product.price}
+          </p>
+          ): (
+            <p className='text-xl text-df-text'>
+              <s>${product.price}</s><br></br>sold out!
+          </p>
+          )}
             </div>
           </div>
 

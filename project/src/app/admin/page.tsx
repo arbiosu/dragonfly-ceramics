@@ -1,15 +1,16 @@
 'use server';
 
-import LoginForm from './login';
-import { createClient } from '@/lib/supabase/server';
+import { checkUser } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
+import AdminPortal from '@/components/admin/portal';
+
 
 export default async function Page() {
-  const supabase = await createClient();
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
-    return <LoginForm />;
-  } else {
-    redirect('/admin/portal');
+  const { err } = await checkUser();
+  if (err) {
+    console.log('ERROR WITH AUTH')
+    redirect('/admin/login')
+    } else {
+      return <AdminPortal />
   }
 }

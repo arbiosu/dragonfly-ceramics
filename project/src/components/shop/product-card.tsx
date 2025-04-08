@@ -65,7 +65,15 @@ export default function ProductCard({ data }: ProductCardProps) {
           {data.name.toLowerCase()}
         </h3>
         <div className='mt-auto'>
-          <p className='text-xl text-df-text'>${data.price}</p>
+          {data.active ? (
+          <p className='text-xl text-df-text'>
+            ${data.price}
+          </p>
+          ): (
+            <p className='text-xl text-df-text'>
+              <s>${data.price}</s><br></br>sold out!
+          </p>
+          )}
         </div>
       </div>
     </div>
