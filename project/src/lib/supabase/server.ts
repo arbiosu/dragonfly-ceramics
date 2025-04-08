@@ -1,4 +1,5 @@
 import { createServerClient } from '@supabase/ssr';
+import type { User, AuthError } from "@supabase/supabase-js"
 import { cookies } from 'next/headers';
 
 export async function createClient() {
@@ -26,4 +27,25 @@ export async function createClient() {
       },
     }
   );
+}
+
+interface CheckUserResponse {
+  user: User | null;
+  err: AuthError | null;
+}
+
+export async function checkUser():  Promise<CheckUserResponse> {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.getUser();
+  if (error) {
+    return {
+      user: null,
+      err: error
+    };
+  }
+  
+  return {
+    user: data.user,
+    err: null
+  };
 }
