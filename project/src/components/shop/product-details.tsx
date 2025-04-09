@@ -1,7 +1,7 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
+import { NextImageWrapper } from '@/components/image';
 import { type Product } from '@/lib/stripe/utils';
 import { useState, useCallback, useMemo } from 'react';
 import { useCart } from '@/contexts/CartContext';
@@ -67,7 +67,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             return prevIndex === 0 ? images.length - 1 : prevIndex - 1;
           }
         });
-      }, 300); // 300ms debounce
+      }, 100); // 100ms debounce
 
       setDebounceTimeout(timeout);
     },
@@ -106,15 +106,10 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 
           {/* Main Image */}
           <div className='relative mx-auto aspect-square w-full max-w-2xl'>
-            <Image
-              src={images[selectedImageIndex] || "/placeholder.svg"}
-              alt={product.description || "Product image"}
-              className="object-cover"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              placeholder="empty"
-              priority
-              unoptimized
+            <NextImageWrapper
+              url={images[selectedImageIndex] || '/placeholder.svg'}
+              altText={product.description || 'Product image'}
+              sizeProps='(max-width: 768px) 100vw, 50vw'
             />
           </div>
 
@@ -176,15 +171,14 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             </h1>
             {/* Price */}
             <div className='mt-4'>
-            {product.active ? (
-          <p className='text-xl text-df-text'>
-            ${product.price}
-          </p>
-          ): (
-            <p className='text-xl text-df-text'>
-              <s>${product.price}</s><br></br>sold out!
-          </p>
-          )}
+              {product.active ? (
+                <p className='text-xl text-df-text'>${product.price}</p>
+              ) : (
+                <p className='text-xl text-df-text'>
+                  <s>${product.price}</s>
+                  <br></br>sold out!
+                </p>
+              )}
             </div>
           </div>
 
@@ -279,9 +273,8 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             <button
               className='w-full rounded-md bg-dfNew2 px-4 py-2 text-df-text transition-colors hover:bg-dfNew hover:text-white'
               onClick={handleAddToCart}
-              disabled={product.active}
             >
-              {product.active ? `add ${quantity} to cart` : "sold out!"}
+              {product.active ? `add ${quantity} to cart` : 'sold out!'}
             </button>
           </div>
 

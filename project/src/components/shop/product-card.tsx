@@ -1,7 +1,7 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
+import { NextImageWrapper } from '@/components/image';
 import { Product } from '@/lib/stripe/utils';
 import { useState } from 'react';
 import { useCart } from '@/contexts/CartContext';
@@ -29,14 +29,10 @@ export default function ProductCard({ data }: ProductCardProps) {
     >
       {/* Image Container TODO: add placeholder svg */}
       <div className='relative aspect-square w-full overflow-hidden'>
-        <Image
-          src={data.images[0] || "/placeholder.svg"}
-          alt={data.description || "No description"}
-          className="object-cover"
-          fill
-          sizes="(max-width: 768px) 100vw, 256px"
-          placeholder="empty"
-          unoptimized
+        <NextImageWrapper
+          url={data.images[0] || '/placeholder.svg'}
+          altText={data.description || 'No description'}
+          sizeProps='(max-width: 768px) 100vw, 256px'
         />
         {/* Hover Buttons - Appear on hover */}
         <div
@@ -55,7 +51,7 @@ export default function ProductCard({ data }: ProductCardProps) {
             className='w-full rounded-md bg-dfNew2 px-4 py-2 text-df-text transition-colors hover:bg-dfNew hover:text-white'
             onClick={handleAddToCart}
           >
-            {data.active ? "add to cart" : "sold out!"}
+            {data.active ? 'add to cart' : 'sold out!'}
           </button>
         </div>
       </div>
@@ -65,13 +61,12 @@ export default function ProductCard({ data }: ProductCardProps) {
         </h3>
         <div className='mt-auto'>
           {data.active ? (
-          <p className='text-xl text-df-text'>
-            ${data.price}
-          </p>
-          ): (
+            <p className='text-xl text-df-text'>${data.price}</p>
+          ) : (
             <p className='text-xl text-df-text'>
-              <s>${data.price}</s><br></br>sold out!
-          </p>
+              <s>${data.price}</s>
+              <br></br>sold out!
+            </p>
           )}
         </div>
       </div>

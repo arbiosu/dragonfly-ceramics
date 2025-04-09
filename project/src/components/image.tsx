@@ -2,6 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { IMG_WIDTHS } from '@/lib/images/sharp';
 
 interface ImageProps {
@@ -11,7 +12,13 @@ interface ImageProps {
   widths?: string[];
   className?: string;
   sizes?: string;
-  external?: boolean
+  external?: boolean;
+}
+
+interface NextImageWrapperProps {
+  url: string;
+  altText: string;
+  sizeProps: string;
 }
 
 /**
@@ -30,7 +37,7 @@ export default function CustomImage({
   priority = false,
   external = false,
   widths = IMG_WIDTHS,
-  className = "",
+  className = '',
   sizes = '(max-width: 640px) 320px, (max-width: 960px) 640px, (max-width: 1280px) 960px, (max-width: 1920px) 1280px, 1920px',
 }: ImageProps) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -49,7 +56,7 @@ export default function CustomImage({
   }, [source]);
 
   return (
-    <div className="relative">
+    <div className='relative'>
       {isLoading && (
         <div
           className='absolute inset-0 animate-pulse rounded bg-background'
@@ -67,7 +74,7 @@ export default function CustomImage({
         loading='lazy'
         fetchPriority={priority ? 'high' : 'auto'}
         alt={alt}
-        srcSet={external ? "" : srcset}
+        srcSet={external ? '' : srcset}
         sizes={sizes}
         className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
         decoding='async'
@@ -78,5 +85,26 @@ export default function CustomImage({
         }}
       />
     </div>
+  );
+}
+
+export function NextImageWrapper({
+  url,
+  altText,
+  sizeProps,
+}: NextImageWrapperProps) {
+
+  return (
+      <Image
+        src={url}
+        alt={altText}
+        fill
+        data-loaded='false'
+        className='object-cover data-[loaded=false]:bg-gray-400 data-[loaded=false]:animate-pulse data-[loaded=false]:bg-gray-100/10'
+        sizes={sizeProps}
+        unoptimized
+        onLoad={(e) => e.currentTarget.setAttribute('data-loaded', 'true')}
+        priority
+      />
   );
 }
