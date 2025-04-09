@@ -273,7 +273,6 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             <button
               className='w-full rounded-md bg-dfNew2 px-4 py-2 text-df-text transition-colors hover:bg-dfNew hover:text-white'
               onClick={handleAddToCart}
-              disabled={product.active}
             >
               {product.active ? `add ${quantity} to cart` : 'sold out!'}
             </button>
