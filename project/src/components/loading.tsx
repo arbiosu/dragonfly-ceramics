@@ -1,4 +1,4 @@
-export default function Loading() {
+export default function LoadingSkeleton() {
   return (
     <div className='flex min-h-screen flex-col items-center justify-center'>
       <svg className='h-10 w-10 animate-spin text-blue-500' viewBox='0 0 24 24'>

@@ -8,19 +8,19 @@ export type ShippoAddress = {
   city: string;
   state: string;
   zip: string;
-  country: "US";
+  country: 'US';
   is_residential: boolean;
   validate: true;
-}
+};
 
 export type ShippoParcel = {
-  mass_unit: "lb";
+  mass_unit: 'lb';
   weight: string;
-  distance_unit: "in";
+  distance_unit: 'in';
   height: string;
   length: string;
   width: string;
-}
+};
 
 /**
  * @address_from Shippo Address id of the recipient address
@@ -30,4 +30,4 @@ export type ShippoShipment = {
   address_from: string;
   address_to: string;
   parcels: ShippoParcel[];
-}
+};
