@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useCart } from '@/contexts/CartContext';
+import Loading from '@/components/loading';
+
 
 const navLinks = [
   { href: '/', label: 'home' },
@@ -15,10 +17,13 @@ const navLinks = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const [mounted, setMounted] = useState<boolean>(false);
+
 
   const { cartCount } = useCart();
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       if (window.scrollY > 10) {
         setIsScrolled(true);
@@ -30,6 +35,10 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  if (!mounted) {
+    return <Loading />
+  }
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
