@@ -2,6 +2,7 @@
 
 import Stripe from 'stripe';
 import { stripe } from './stripe';
+import { ShippoAddress } from '../shippo/types';
 
 export type Product = {
   id: string;
@@ -118,8 +119,8 @@ export async function validateCart(
         }
 
         const validatedQuantity = item.quantity > 0 ? item.quantity : 1;
-        const inventoryAvailable =
-          validatedQuantity <= Number(item.product.metadata.inventory);
+        const inventory = parseInt(item.product.metadata.inventory);
+        const inventoryAvailable = validatedQuantity <= inventory;
         if (!inventoryAvailable) {
           throw new Error(
             `[Stripe Checkout] Not enough inventory for ${item.product.id}`
@@ -142,16 +143,29 @@ export async function validateCart(
 export async function stripeCheckout(
   validatedCart: Stripe.Checkout.SessionCreateParams.LineItem[],
   origin: string | null,
-  oilDispenserProps: Partial<Stripe.Checkout.SessionCreateParams>,
-  shippingOptions: ShippingRateObject[]
+  customFieldProps: Partial<Stripe.Checkout.SessionCreateParams>,
+  shippingAddress: ShippoAddress,
+  shippingOptions: ShippingRateObject[],
+  email: string
 ) {
   try {
     const session = await stripe.checkout.sessions.create({
       line_items: validatedCart,
-      ...oilDispenserProps,
+      customer_email: email,
+      ...customFieldProps,
       billing_address_collection: 'required',
-      shipping_address_collection: {
-        allowed_countries: ['US'],
+      payment_intent_data: {
+        shipping: {
+          name: shippingAddress.name,
+          address: {
+            line1: shippingAddress.street1,
+            line2: shippingAddress.street2,
+            city: shippingAddress.city,
+            state: shippingAddress.state,
+            postal_code: shippingAddress.zip,
+            country: shippingAddress.country,
+          },
+        },
       },
       shipping_options: shippingOptions,
       mode: 'payment',
@@ -174,8 +188,14 @@ export async function stripeCheckoutSuccess(sessionId: string) {
 
     const status = session.status;
     const customerEmail = session.customer_details?.email;
+    const address =
+      session.payment_intent &&
+      typeof session.payment_intent !== 'string' &&
+      session.payment_intent.shipping
+        ? session.payment_intent.shipping.address
+        : null;
 
-    return { session, status, customerEmail };
+    return { session, status, customerEmail, address };
   } catch (error) {
     throw new Error(
       `Failed to retrieve session ${sessionId} with error - ${error}`
@@ -185,15 +205,17 @@ export async function stripeCheckoutSuccess(sessionId: string) {
 
 export async function deductInventory(sessionId: string) {
   try {
-    const sessionLineItems = await stripe.checkout.sessions.listLineItems(sessionId);
+    const sessionLineItems =
+      await stripe.checkout.sessions.listLineItems(sessionId);
     for (const item of sessionLineItems.data) {
       if (!item.price?.product || !item.quantity) continue;
 
-      const productId = typeof item.price.product === 'string'
-        ? item.price.product
-        : item.price.product.id
+      const productId =
+        typeof item.price.product === 'string'
+          ? item.price.product
+          : item.price.product.id;
 
-      await updateInventory(productId, item.quantity)
+      await updateInventory(productId, item.quantity);
     }
   } catch (error) {
     throw new Error(
@@ -202,10 +224,7 @@ export async function deductInventory(sessionId: string) {
   }
 }
 
-export async function updateInventory(
-  productId: string,
-  deduction: number
-) {
+export async function updateInventory(productId: string, deduction: number) {
   try {
     const product = await stripe.products.retrieve(productId);
     const currentInventory = parseInt(product.metadata.inventory);

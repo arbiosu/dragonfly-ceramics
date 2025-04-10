@@ -1,5 +1,6 @@
 import { shippo } from '@/lib/shippo/shippo';
 import { ShippoAddress, ShippoParcel, ShippoShipment } from './types';
+import { CarriersEnum } from 'shippo';
 
 export async function createShippoAddress(address: ShippoAddress) {
   const result = await shippo.addresses.create(address);
@@ -13,6 +14,10 @@ export async function createShippoParcel(parcel: ShippoParcel) {
 
 export async function createShippoShipment(shipment: ShippoShipment) {
   const result = await shippo.shipments.create(shipment);
-  console.log(result);
   return result;
+}
+
+export async function getCarrierAccounts() {
+  const usps = shippo.carrierAccounts.list({ carrier: CarriersEnum.Usps });
+  return usps;
 }

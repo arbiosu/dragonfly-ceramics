@@ -1,5 +1,5 @@
 export type MassUnits = 'g' | 'kg' | 'lb' | 'oz';
-export type DistanceUnits = "cm"| 'in' | "ft" | "m" | "mm" | "yd"
+export type DistanceUnits = 'cm' | 'in' | 'ft' | 'm' | 'mm' | 'yd';
 
 export type ShippoAddress = {
   name: string;
@@ -16,7 +16,7 @@ export type ShippoAddress = {
 };
 
 export type ShippoParcel = {
-  massUnit: MassUnits,
+  massUnit: MassUnits;
   weight: string;
   distanceUnit: DistanceUnits;
   height: string;
@@ -32,4 +32,5 @@ export type ShippoShipment = {
   addressFrom: string;
   addressTo: string;
   parcels: string[];
+  carrierAccounts: string[];
 };
