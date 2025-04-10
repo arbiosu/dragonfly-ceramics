@@ -183,24 +183,18 @@ export async function stripeCheckoutSuccess(sessionId: string) {
   }
 }
 
-//TODO: crusty implementation pls fix
 export async function deductInventory(sessionId: string) {
   try {
-    const session = await stripe.checkout.sessions.retrieve(sessionId, {
-      expand: ['line_items'],
-    });
+    const sessionLineItems = await stripe.checkout.sessions.listLineItems(sessionId);
+    for (const item of sessionLineItems.data) {
+      if (!item.price?.product || !item.quantity) continue;
 
-    const lineItems = session.line_items?.data ?? [];
-    await Promise.all(
-      lineItems.map(async (product) => {
-        const prod = await fetchProductById(product.id);
-        await updateInventory(
-          product.id,
-          prod.metadata.inventory,
-          product.quantity!
-        );
-      })
-    );
+      const productId = typeof item.price.product === 'string'
+        ? item.price.product
+        : item.price.product.id
+
+      await updateInventory(productId, item.quantity)
+    }
   } catch (error) {
     throw new Error(
       `[deductInventory] Failed to deduct inventory with ${error}`
@@ -210,11 +204,12 @@ export async function deductInventory(sessionId: string) {
 
 export async function updateInventory(
   productId: string,
-  original: string,
   deduction: number
 ) {
   try {
-    const newInventory = Number(original) - deduction;
+    const product = await stripe.products.retrieve(productId);
+    const currentInventory = parseInt(product.metadata.inventory);
+    const newInventory = currentInventory - deduction;
     const newInventoryString = newInventory.toString();
     await stripe.products.update(productId, {
       metadata: {
