@@ -1,8 +1,18 @@
 import { shippo } from '@/lib/shippo/shippo';
-import { ShippoAddress } from './types';
+import { ShippoAddress, ShippoParcel, ShippoShipment } from './types';
 
 export async function createShippoAddress(address: ShippoAddress) {
   const result = await shippo.addresses.create(address);
+  return result;
+}
+
+export async function createShippoParcel(parcel: ShippoParcel) {
+  const result = await shippo.parcels.create(parcel);
+  return result;
+}
+
+export async function createShippoShipment(shipment: ShippoShipment) {
+  const result = await shippo.shipments.create(shipment);
   console.log(result);
   return result;
 }
