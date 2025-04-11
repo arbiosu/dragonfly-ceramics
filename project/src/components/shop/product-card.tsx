@@ -23,8 +23,8 @@ export default function ProductCard({ data }: ProductCardProps) {
     setIsProcessing(true);
     try {
       addToCart(data, 1);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-    } catch (error){
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    } catch (error) {
       console.log(error);
     } finally {
       setIsProcessing(false);
@@ -61,7 +61,11 @@ export default function ProductCard({ data }: ProductCardProps) {
             className='w-full rounded-md bg-dfNew2 px-4 py-2 text-df-text transition-colors hover:bg-dfNew hover:text-white'
             onClick={handleAddToCart}
           >
-            {isProcessing ? 'added to cart!' : data.active ? 'add to cart' : 'sold out!'}
+            {isProcessing
+              ? 'added to cart!'
+              : data.active
+                ? 'add to cart'
+                : 'sold out!'}
           </button>
         </div>
       </div>

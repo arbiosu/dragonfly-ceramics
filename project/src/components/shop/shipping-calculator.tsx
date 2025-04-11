@@ -3,7 +3,7 @@
 import type React from 'react';
 
 import { useState, useRef } from 'react';
-import { validateEmail } from '@/lib/utils';
+import { validateEmail, validateZip } from '@/lib/utils';
 import { useCart } from '@/contexts/CartContext';
 
 const inputTextClass =
@@ -47,6 +47,13 @@ export function Form() {
 
     if (!validateEmail(formData.email)) {
       setError('Invalid email address. Please try again.');
+      setIsLoading(false);
+      return;
+    }
+
+    if (!validateZip(formData.zip)) {
+      setError('Invalid ZIP code. Please try again.');
+      setIsLoading(false);
       return;
     }
 
@@ -75,8 +82,12 @@ export function Form() {
   };
   return (
     <div className='text-df-text'>
-      <h1 className='text-3xl text-center'>please enter your shipping address</h1>
-      <h3 className='text-lg text-center'>the asterisk* indicates a required field</h3>
+      <h1 className='text-center text-3xl'>
+        please enter your shipping address
+      </h1>
+      <h3 className='text-center text-lg'>
+        the asterisk* indicates a required field
+      </h3>
       <div className='container mx-auto'>
         <form onSubmit={handleSubmit} className='mx-auto w-full max-w-4xl'>
           <div className='grid grid-cols-1 gap-2'>
@@ -160,135 +171,135 @@ export function Form() {
               </div>
 
               <div>
-              <label htmlFor='street2' className={labelClass}>
-                street address line 2
-              </label>
-              <input
-                type='text'
-                id='street2'
-                name='street2'
-                defaultValue=''
-                onChange={(e) => (street2Ref.current = e.target.value)}
-                disabled={isLoading}
-                className={inputTextClass}
-              />
-
-              <div>
-                <label htmlFor='city' className={labelClass}>
-                  city*
+                <label htmlFor='street2' className={labelClass}>
+                  street address line 2
                 </label>
                 <input
                   type='text'
-                  id='city'
-                  name='city'
+                  id='street2'
+                  name='street2'
                   defaultValue=''
-                  onChange={(e) => (cityRef.current = e.target.value)}
+                  onChange={(e) => (street2Ref.current = e.target.value)}
                   disabled={isLoading}
                   className={inputTextClass}
-                  required
                 />
-              </div>
 
-              <div>
-                <label htmlFor='state' className={labelClass}>
-                  state*
-                </label>
-                <select
-                  id='state'
-                  name='state'
-                  defaultValue=''
-                  onChange={(e) => (stateRef.current = e.target.value)}
-                  disabled={isLoading}
-                  required
-                  className={inputTextClass}
-                >
-                <option value='' disabled>
-                select an option
-                </option>
-                  <option value="AL">Alabama</option>
-                  <option value="AK">Alaska</option>
-                  <option value="AZ">Arizona</option>
-                  <option value="AR">Arkansas</option>
-                  <option value="CA">California</option>
-                  <option value="CO">Colorado</option>
-                  <option value="CT">Connecticut</option>
-                  <option value="DE">Delaware</option>
-                  <option value="DC">District Of Columbia</option>
-                  <option value="FL">Florida</option>
-                  <option value="GA">Georgia</option>
-                  <option value="HI">Hawaii</option>
-                  <option value="ID">Idaho</option>
-                  <option value="IL">Illinois</option>
-                  <option value="IN">Indiana</option>
-                  <option value="IA">Iowa</option>
-                  <option value="KS">Kansas</option>
-                  <option value="KY">Kentucky</option>
-                  <option value="LA">Louisiana</option>
-                  <option value="ME">Maine</option>
-                  <option value="MD">Maryland</option>
-                  <option value="MA">Massachusetts</option>
-                  <option value="MI">Michigan</option>
-                  <option value="MN">Minnesota</option>
-                  <option value="MS">Mississippi</option>
-                  <option value="MO">Missouri</option>
-                  <option value="MT">Montana</option>
-                  <option value="NE">Nebraska</option>
-                  <option value="NV">Nevada</option>
-                  <option value="NH">New Hampshire</option>
-                  <option value="NJ">New Jersey</option>
-                  <option value="NM">New Mexico</option>
-                  <option value="NY">New York</option>
-                  <option value="NC">North Carolina</option>
-                  <option value="ND">North Dakota</option>
-                  <option value="OH">Ohio</option>
-                  <option value="OK">Oklahoma</option>
-                  <option value="OR">Oregon</option>
-                  <option value="PA">Pennsylvania</option>
-                  <option value="RI">Rhode Island</option>
-                  <option value="SC">South Carolina</option>
-                  <option value="SD">South Dakota</option>
-                  <option value="TN">Tennessee</option>
-                  <option value="TX">Texas</option>
-                  <option value="UT">Utah</option>
-                  <option value="VT">Vermont</option>
-                  <option value="VA">Virginia</option>
-                  <option value="WA">Washington</option>
-                  <option value="WV">West Virginia</option>
-                  <option value="WI">Wisconsin</option>
-                  <option value="WY">Wyoming</option>
-                </select>
-              </div>
+                <div>
+                  <label htmlFor='city' className={labelClass}>
+                    city*
+                  </label>
+                  <input
+                    type='text'
+                    id='city'
+                    name='city'
+                    defaultValue=''
+                    onChange={(e) => (cityRef.current = e.target.value)}
+                    disabled={isLoading}
+                    className={inputTextClass}
+                    required
+                  />
+                </div>
 
-              <div>
-                <label htmlFor='zip' className={labelClass}>
-                  zip code*
-                </label>
-                <input
-                  type='text'
-                  id='zip'
-                  name='zip'
-                  defaultValue=''
-                  onChange={(e) => (zipRef.current = e.target.value)}
-                  disabled={isLoading}
-                  className={inputTextClass}
-                  required
-                />
-              </div>
+                <div>
+                  <label htmlFor='state' className={labelClass}>
+                    state*
+                  </label>
+                  <select
+                    id='state'
+                    name='state'
+                    defaultValue=''
+                    onChange={(e) => (stateRef.current = e.target.value)}
+                    disabled={isLoading}
+                    required
+                    className={inputTextClass}
+                  >
+                    <option value='' disabled>
+                      select an option
+                    </option>
+                    <option value='AL'>Alabama</option>
+                    <option value='AK'>Alaska</option>
+                    <option value='AZ'>Arizona</option>
+                    <option value='AR'>Arkansas</option>
+                    <option value='CA'>California</option>
+                    <option value='CO'>Colorado</option>
+                    <option value='CT'>Connecticut</option>
+                    <option value='DE'>Delaware</option>
+                    <option value='DC'>District Of Columbia</option>
+                    <option value='FL'>Florida</option>
+                    <option value='GA'>Georgia</option>
+                    <option value='HI'>Hawaii</option>
+                    <option value='ID'>Idaho</option>
+                    <option value='IL'>Illinois</option>
+                    <option value='IN'>Indiana</option>
+                    <option value='IA'>Iowa</option>
+                    <option value='KS'>Kansas</option>
+                    <option value='KY'>Kentucky</option>
+                    <option value='LA'>Louisiana</option>
+                    <option value='ME'>Maine</option>
+                    <option value='MD'>Maryland</option>
+                    <option value='MA'>Massachusetts</option>
+                    <option value='MI'>Michigan</option>
+                    <option value='MN'>Minnesota</option>
+                    <option value='MS'>Mississippi</option>
+                    <option value='MO'>Missouri</option>
+                    <option value='MT'>Montana</option>
+                    <option value='NE'>Nebraska</option>
+                    <option value='NV'>Nevada</option>
+                    <option value='NH'>New Hampshire</option>
+                    <option value='NJ'>New Jersey</option>
+                    <option value='NM'>New Mexico</option>
+                    <option value='NY'>New York</option>
+                    <option value='NC'>North Carolina</option>
+                    <option value='ND'>North Dakota</option>
+                    <option value='OH'>Ohio</option>
+                    <option value='OK'>Oklahoma</option>
+                    <option value='OR'>Oregon</option>
+                    <option value='PA'>Pennsylvania</option>
+                    <option value='RI'>Rhode Island</option>
+                    <option value='SC'>South Carolina</option>
+                    <option value='SD'>South Dakota</option>
+                    <option value='TN'>Tennessee</option>
+                    <option value='TX'>Texas</option>
+                    <option value='UT'>Utah</option>
+                    <option value='VT'>Vermont</option>
+                    <option value='VA'>Virginia</option>
+                    <option value='WA'>Washington</option>
+                    <option value='WV'>West Virginia</option>
+                    <option value='WI'>Wisconsin</option>
+                    <option value='WY'>Wyoming</option>
+                  </select>
+                </div>
 
-              <div>
-                <label htmlFor='country' className={labelClass}>
-                  country*
-                </label>
-                <input
-                  type='text'
-                  id='country'
-                  name='country'
-                  defaultValue='US'
-                  disabled={true}
-                  className={inputTextClass}
-                  required
-                />
-              </div>
+                <div>
+                  <label htmlFor='zip' className={labelClass}>
+                    zip code*
+                  </label>
+                  <input
+                    type='text'
+                    id='zip'
+                    name='zip'
+                    defaultValue=''
+                    onChange={(e) => (zipRef.current = e.target.value)}
+                    disabled={isLoading}
+                    className={inputTextClass}
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor='country' className={labelClass}>
+                    country*
+                  </label>
+                  <input
+                    type='text'
+                    id='country'
+                    name='country'
+                    defaultValue='US'
+                    disabled={true}
+                    className={inputTextClass}
+                    required
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -300,9 +311,7 @@ export function Form() {
             className='mt-6 w-full rounded-md bg-dfNew2 px-4 py-2 text-xl text-df-text transition-colors duration-200 hover:bg-dfNew hover:text-white'
             disabled={isLoading}
           >
-            {isLoading
-              ? 'Processing...'
-              : 'proceed to checkout'}
+            {isLoading ? 'processing...' : 'proceed to checkout'}
           </button>
         </form>
       </div>

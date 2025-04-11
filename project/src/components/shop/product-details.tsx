@@ -20,7 +20,6 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
   );
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
-
   const images = useMemo(() => product.images, [product.images]);
   const { addToCart } = useCart();
 
@@ -36,7 +35,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
     try {
       setIsProcessing(true);
       addToCart(product, quantity);
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     } catch (error) {
       console.log(error);
     } finally {
@@ -282,7 +281,11 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               className='w-full rounded-md bg-dfNew2 px-4 py-2 text-df-text transition-colors hover:bg-dfNew hover:text-white'
               onClick={handleAddToCart}
             >
-              {isProcessing ? "added to cart!" : product.active ? `add ${quantity} to cart` : 'sold out!'}
+              {isProcessing
+                ? 'added to cart!'
+                : product.active
+                  ? `add ${quantity} to cart`
+                  : 'sold out!'}
             </button>
           </div>
 

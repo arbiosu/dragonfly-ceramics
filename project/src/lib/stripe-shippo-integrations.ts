@@ -29,8 +29,6 @@ export function convertShippoShipmentsToStripe(
   const shippingOptions: ShippingRateObject[] = [];
   for (const item of shipment.rates) {
     if (item.servicelevel.token === 'usps_priority') {
-      console.log('price string', item.amount);
-      console.log('parseInt', parseInt(item.amount));
       selectedRate.push(item);
     }
   }

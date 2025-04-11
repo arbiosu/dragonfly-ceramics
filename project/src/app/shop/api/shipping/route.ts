@@ -34,6 +34,7 @@ export async function POST(req: Request) {
     }
 
     const parcel = determineParcelSize(cartItems);
+    console.log('Shippo parcel:', parcel);
     const result = await createShippoParcel(parcel);
     if (result.objectId == null) {
       throw new Error(`Failed to create a parcel`);
@@ -51,9 +52,6 @@ export async function POST(req: Request) {
     const shippingOptions = convertShippoShipmentsToStripe(shipment);
     if (shippingOptions.length < 1) {
       throw new Error(`Error fetching shipping options`);
-    }
-    for (const option of shippingOptions) {
-      console.log(option);
     }
 
     const customFieldProps: Partial<Stripe.Checkout.SessionCreateParams> = {

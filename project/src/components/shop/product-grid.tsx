@@ -46,7 +46,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
 
   const visibleProducts = useMemo(() => {
     return filteredProducts.slice(0, visibleCount);
-  }, [filteredProducts, visibleCount])
+  }, [filteredProducts, visibleCount]);
 
   const observerRef = useRef<HTMLDivElement | null>(null);
 
@@ -54,7 +54,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
     if (visibleCount < filteredProducts.length) {
       setVisibleCount((prev) => prev + PRODUCTS_VISIBLE);
     }
-  }, [visibleCount, filteredProducts.length])
+  }, [visibleCount, filteredProducts.length]);
 
   useEffect(() => {
     if (observerRef.current === null) return;
@@ -66,11 +66,11 @@ export default function ProductGrid({ products }: ProductGridProps) {
         }
       },
       { threshold: 1.0 }
-    )
+    );
     observer.observe(observerRef.current);
 
     return () => observer.disconnect();
-  }, [loadMore])
+  }, [loadMore]);
 
   const filterButtons: Filter[] = [
     'all',
@@ -131,8 +131,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
           <p className='text-2xl font-semibold text-df-text'>sold out!</p>
         </div>
       )}
-      <div ref={observerRef} className="h-10" />
+      <div ref={observerRef} className='h-10' />
     </div>
-    
   );
 }
