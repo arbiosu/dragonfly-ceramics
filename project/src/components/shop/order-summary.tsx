@@ -11,7 +11,7 @@ export interface SessionProps {
 interface Session {
   id: string;
   amountTotal: number | null;
-  address: Stripe.Address| null;
+  address: Stripe.Address | null;
   lineItems: Stripe.ApiList<Stripe.LineItem> | undefined;
   email: string;
 }

@@ -6,20 +6,16 @@ import {
   createShippoParcel,
   createShippoShipment,
 } from '@/lib/shippo/utils';
-import {
-  type MassUnits,
-  type DistanceUnits,
-  type ShippoAddress,
-} from '@/lib/shippo/types';
+import { type ShippoAddress } from '@/lib/shippo/types';
 import {
   stripeCheckout,
   validateCart,
   type CartItem,
 } from '@/lib/stripe/utils';
-import { convertShippoShipmentsToStripe } from '@/lib/stripe-shippo-integrations';
-
-const mass: MassUnits = 'lb';
-const dist: DistanceUnits = 'in';
+import {
+  convertShippoShipmentsToStripe,
+  determineParcelSize,
+} from '@/lib/stripe-shippo-integrations';
 
 export async function POST(req: Request) {
   try {
@@ -37,31 +33,28 @@ export async function POST(req: Request) {
       throw new Error('Invalid address');
     }
 
-    const pkgs: string[] = [];
-    const parcelPromises = cartItems.map(async (item) => {
-      const parcel = {
-        massUnit: mass,
-        weight: item.product.metadata.weight,
-        distanceUnit: dist,
-        height: item.product.metadata.height,
-        length: item.product.metadata.length,
-        width: item.product.metadata.width,
-      };
-      const result = await createShippoParcel(parcel);
-      if (result.objectId && result.objectState === 'VALID') {
-        pkgs.push(result.objectId);
-      }
-    });
-
-    await Promise.all(parcelPromises);
+    const parcel = determineParcelSize(cartItems);
+    const result = await createShippoParcel(parcel);
+    if (result.objectId == null) {
+      throw new Error(`Failed to create a parcel`);
+    }
+    if (result.objectState == null) {
+      throw new Error(`Invalid parcel`);
+    }
 
     const shipment = await createShippoShipment({
       addressFrom: 'b86852b1c9de48a49f272563318ca4dd',
       addressTo: lookup.objectId!,
-      parcels: pkgs,
+      parcels: [result.objectId],
       carrierAccounts: ['5584b761c37843d881dbbf8ab6225bd4'],
     });
     const shippingOptions = convertShippoShipmentsToStripe(shipment);
+    if (shippingOptions.length < 1) {
+      throw new Error(`Error fetching shipping options`);
+    }
+    for (const option of shippingOptions) {
+      console.log(option);
+    }
 
     const customFieldProps: Partial<Stripe.Checkout.SessionCreateParams> = {
       custom_fields: [],

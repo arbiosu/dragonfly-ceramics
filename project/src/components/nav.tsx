@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import Loading from '@/components/loading';
 
-
 const navLinks = [
   { href: '/', label: 'home' },
   { href: '/shop', label: 'shop' },
@@ -18,7 +17,6 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [mounted, setMounted] = useState<boolean>(false);
-
 
   const { cartCount } = useCart();
 
@@ -37,7 +35,7 @@ export default function Navbar() {
   }, []);
 
   if (!mounted) {
-    return <Loading />
+    return <Loading />;
   }
 
   const toggleMobileMenu = () => {

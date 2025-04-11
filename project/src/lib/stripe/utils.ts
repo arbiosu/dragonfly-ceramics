@@ -29,16 +29,6 @@ export interface ShippingRateObject {
       currency: string;
     };
     display_name: string;
-    delivery_estimate: {
-      minimum: {
-        unit: 'business_day';
-        value: number;
-      };
-      maximum: {
-        unit: 'business_day';
-        value: number;
-      };
-    };
   };
 }
 

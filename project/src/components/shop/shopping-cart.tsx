@@ -2,8 +2,8 @@
 
 import { useCart } from '@/contexts/CartContext';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import CartItemCard from '@/components/shop/cart-item';
-import CheckoutButton from './checkout';
 import Loading from '@/components/loading';
 
 export default function ShoppingCart() {
@@ -33,7 +33,11 @@ export default function ShoppingCart() {
           estimated subtotal: ${cartTotal}
         </h3>
       </div>
-      <CheckoutButton />
+      <Link href='/shop/cart/shipping'>
+        <button className='w-full rounded-md bg-dfNew2 px-4 py-2 text-xl text-df-text transition-colors duration-200 hover:bg-dfNew hover:text-white'>
+          checkout
+        </button>
+      </Link>
     </main>
   );
 }

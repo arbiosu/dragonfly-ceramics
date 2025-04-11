@@ -1,7 +1,7 @@
 'use client';
 
 import type { Product } from '@/lib/stripe/utils';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useCallback, useEffect } from 'react';
 import ProductCard from '@/components/shop/product-card';
 
 interface ProductGridProps {
@@ -19,9 +19,12 @@ type Filter =
   | 'berry bowls'
   | 'merch';
 
+const PRODUCTS_VISIBLE = 8;
+
 export default function ProductGrid({ products }: ProductGridProps) {
   const [filter, setFilter] = useState<Filter>('all');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc' | 'none'>('none');
+  const [visibleCount, setVisibleCount] = useState<number>(PRODUCTS_VISIBLE);
 
   const filteredProducts = useMemo(() => {
     let filtered =
@@ -40,6 +43,34 @@ export default function ProductGrid({ products }: ProductGridProps) {
     }
     return filtered;
   }, [products, filter, sortOrder]);
+
+  const visibleProducts = useMemo(() => {
+    return filteredProducts.slice(0, visibleCount);
+  }, [filteredProducts, visibleCount])
+
+  const observerRef = useRef<HTMLDivElement | null>(null);
+
+  const loadMore = useCallback(() => {
+    if (visibleCount < filteredProducts.length) {
+      setVisibleCount((prev) => prev + PRODUCTS_VISIBLE);
+    }
+  }, [visibleCount, filteredProducts.length])
+
+  useEffect(() => {
+    if (observerRef.current === null) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          loadMore();
+        }
+      },
+      { threshold: 1.0 }
+    )
+    observer.observe(observerRef.current);
+
+    return () => observer.disconnect();
+  }, [loadMore])
 
   const filterButtons: Filter[] = [
     'all',
@@ -87,9 +118,9 @@ export default function ProductGrid({ products }: ProductGridProps) {
           <option value='desc'>price: high to low</option>
         </select>
       </div>
-      {filteredProducts.length > 0 ? (
+      {visibleProducts.length > 0 ? (
         <div className='grid grid-cols-2 gap-2 md:grid-cols-4'>
-          {filteredProducts.map((product, index) => (
+          {visibleProducts.map((product, index) => (
             <div key={index} className='flex justify-center'>
               <ProductCard data={product} />
             </div>
@@ -100,6 +131,8 @@ export default function ProductGrid({ products }: ProductGridProps) {
           <p className='text-2xl font-semibold text-df-text'>sold out!</p>
         </div>
       )}
+      <div ref={observerRef} className="h-10" />
     </div>
+    
   );
 }

@@ -18,12 +18,14 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
   const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(
     null
   );
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+
 
   const images = useMemo(() => product.images, [product.images]);
   const { addToCart } = useCart();
 
-  const handleAddToCart = () => {
-    if (!product.active) {
+  const handleAddToCart = async () => {
+    if (!product.active || isProcessing) {
       return;
     }
     const availableInventory = Number(product.metadata.inventory) || 0;
@@ -31,9 +33,15 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
       alert(`Only ${availableInventory} items available in stock.`);
       return;
     }
-
-    addToCart(product, quantity);
-
+    try {
+      setIsProcessing(true);
+      addToCart(product, quantity);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsProcessing(false);
+    }
     setQuantity(1);
   };
 
@@ -274,7 +282,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               className='w-full rounded-md bg-dfNew2 px-4 py-2 text-df-text transition-colors hover:bg-dfNew hover:text-white'
               onClick={handleAddToCart}
             >
-              {product.active ? `add ${quantity} to cart` : 'sold out!'}
+              {isProcessing ? "added to cart!" : product.active ? `add ${quantity} to cart` : 'sold out!'}
             </button>
           </div>
 
