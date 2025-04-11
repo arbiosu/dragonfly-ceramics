@@ -34,7 +34,6 @@ export async function POST(req: Request) {
     }
 
     const parcel = determineParcelSize(cartItems);
-    console.log('Shippo parcel:', parcel);
     const result = await createShippoParcel(parcel);
     if (result.objectId == null) {
       throw new Error(`Failed to create a parcel`);
