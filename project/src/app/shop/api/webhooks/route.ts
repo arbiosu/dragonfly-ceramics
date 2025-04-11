@@ -1,8 +1,8 @@
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
+import Stripe from 'stripe';
 import { stripe } from '@/lib/stripe/stripe';
 import { deductInventory } from '@/lib/stripe/utils';
-import Stripe from 'stripe';
 
 export async function POST(request: Request) {
   const body = await request.text();

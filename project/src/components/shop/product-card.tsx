@@ -12,13 +12,23 @@ interface ProductCardProps {
 
 export default function ProductCard({ data }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+
   const { addToCart } = useCart();
 
-  const handleAddToCart = () => {
-    if (!data.active) {
+  const handleAddToCart = async () => {
+    if (!data.active || isProcessing) {
       return;
     }
-    addToCart(data, 1);
+    setIsProcessing(true);
+    try {
+      addToCart(data, 1);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -51,7 +61,11 @@ export default function ProductCard({ data }: ProductCardProps) {
             className='w-full rounded-md bg-dfNew2 px-4 py-2 text-df-text transition-colors hover:bg-dfNew hover:text-white'
             onClick={handleAddToCart}
           >
-            {data.active ? 'add to cart' : 'sold out!'}
+            {isProcessing
+              ? 'added to cart!'
+              : data.active
+                ? 'add to cart'
+                : 'sold out!'}
           </button>
         </div>
       </div>

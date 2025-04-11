@@ -1,22 +1,24 @@
+export type MassUnits = 'g' | 'kg' | 'lb' | 'oz';
+export type DistanceUnits = 'cm' | 'in' | 'ft' | 'm' | 'mm' | 'yd';
+
 export type ShippoAddress = {
   name: string;
   email: string;
   phone: string;
   street1: string;
   street2: string;
-  street3: string;
   city: string;
   state: string;
   zip: string;
-  country: 'US';
-  is_residential: boolean;
-  validate: true;
+  country: string;
+  isResidential: boolean;
+  validate: boolean;
 };
 
 export type ShippoParcel = {
-  mass_unit: 'lb';
+  massUnit: MassUnits;
   weight: string;
-  distance_unit: 'in';
+  distanceUnit: DistanceUnits;
   height: string;
   length: string;
   width: string;
@@ -27,7 +29,8 @@ export type ShippoParcel = {
  * @field address_to: Shippo Address id of the sending address
  */
 export type ShippoShipment = {
-  address_from: string;
-  address_to: string;
-  parcels: ShippoParcel[];
+  addressFrom: string;
+  addressTo: string;
+  parcels: string[];
+  carrierAccounts: string[];
 };

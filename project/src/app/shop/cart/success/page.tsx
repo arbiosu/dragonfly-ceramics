@@ -12,13 +12,13 @@ export default async function Success({
     throw new Error(`Please provide a valid session id`);
   }
 
-  const { session, status, customerEmail } =
+  const { session, status, customerEmail, address } =
     await stripeCheckoutSuccess(session_id);
 
   const orderSummary = {
     id: session.id,
     amountTotal: session.amount_total,
-    address: session.shipping_details?.address || 'N/A',
+    address: address ? address : null,
     lineItems: session.line_items,
     email: customerEmail ? customerEmail : 'No email',
   };

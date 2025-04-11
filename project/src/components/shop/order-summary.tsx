@@ -11,13 +11,12 @@ export interface SessionProps {
 interface Session {
   id: string;
   amountTotal: number | null;
-  address: Stripe.Address | string;
+  address: Stripe.Address | null;
   lineItems: Stripe.ApiList<Stripe.LineItem> | undefined;
   email: string;
 }
 
 export default function OrderSummary({ session }: SessionProps) {
-  // todo: extract to stripe/utils
   const formatAddress = (address: Stripe.Address) => {
     const { line1, line2, city, state, postal_code, country } = address;
     const formattedAddress = [line1, line2, city, state, postal_code, country]
@@ -55,12 +54,12 @@ export default function OrderSummary({ session }: SessionProps) {
           Total Amount: ${session.amountTotal / 100}
         </p>
       )}
-      {typeof session.address !== 'string' ? (
+      {session.address ? (
         <p className='mb-4 text-lg text-df-text'>
           Shipping Address: {formatAddress(session.address)}
         </p>
       ) : (
-        <p>Shipping address not found! Contact...</p>
+        <p>Shipping address not found!</p>
       )}
       <div>
         <h3 className='mb-2 text-2xl font-semibold text-df-text'>
