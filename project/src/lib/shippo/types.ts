@@ -32,4 +32,5 @@ export type ShippoShipment = {
   addressFrom: string;
   addressTo: string;
   parcels: string[];
+  carrierAccounts: string[];
 };
