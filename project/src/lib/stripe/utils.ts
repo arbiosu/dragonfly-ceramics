@@ -3,21 +3,10 @@
 import Stripe from 'stripe';
 import { stripe } from './stripe';
 import { ShippoAddress } from '../shippo/types';
-
-export type Product = {
-  id: string;
-  active: boolean;
-  description: string;
-  name: string;
-  images: string[];
-  metadata: {
-    [key: string]: string;
-  };
-  price: string;
-};
+import { Tables } from '../supabase/database';
 
 export interface CartItem {
-  product: Product;
+  product: Tables<'products'>;
   quantity: number;
 }
 
@@ -57,25 +46,6 @@ export async function fetchProductById(id: string): Promise<Stripe.Product> {
   }
 }
 
-export async function serializeStripeProduct(
-  product: Stripe.Product
-): Promise<Product> {
-  return {
-    id: product.id,
-    active: product.active,
-    description: product.description || 'No description',
-    name: product.name,
-    images: product.images,
-    metadata: product.metadata,
-    price:
-      product.default_price &&
-      typeof product.default_price !== 'string' &&
-      product.default_price.unit_amount
-        ? (product.default_price.unit_amount / 100).toString()
-        : 'No pricing data.',
-  };
-}
-
 export async function updateProductImagesById(
   id: string,
   newImages: string[]
@@ -99,18 +69,17 @@ export async function validateCart(
     cart.map(async (item) => {
       try {
         const validatedProduct = await stripe.products.retrieve(
-          item.product.id
+          item.product.stripe_id
         );
         if (
-          !validatedProduct.default_price ||
+          validatedProduct.default_price == null ||
           typeof validatedProduct.default_price !== 'string'
         ) {
           throw new Error('Invalid or missing price');
         }
 
         const validatedQuantity = item.quantity > 0 ? item.quantity : 1;
-        const inventory = parseInt(item.product.metadata.inventory);
-        const inventoryAvailable = validatedQuantity <= inventory;
+        const inventoryAvailable = item.product.inventory >= validatedQuantity;
         if (!inventoryAvailable) {
           throw new Error(
             `[Stripe Checkout] Not enough inventory for ${item.product.id}`
