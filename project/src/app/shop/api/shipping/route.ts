@@ -71,7 +71,7 @@ export async function POST(req: Request) {
     });
 
     const hasOilDispensers = cartItems.filter(
-      (item) => item.product.metadata.type === 'oil dispensers'
+      (item) => item.product.type === 'oil dispensers'
     );
 
     let colorFieldIndex = 0;
