@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { fetchProductById } from '@/lib/stripe/utils';
+import { retrieveProductByStripeId } from '@/lib/supabase/model';
 import ProductDetails from '@/components/shop/product-details';
 
 export default async function ProductDetailPage({
@@ -8,28 +8,16 @@ export default async function ProductDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const id = (await params).slug;
-  const stripeProduct = await fetchProductById(id);
+  const { data, error } = await retrieveProductByStripeId(id);
 
-  if (!stripeProduct) {
+  if (error) {
+    console.log(error);
     redirect('/shop');
   }
-  const product = {
-    id: stripeProduct.id,
-    active: stripeProduct.active,
-    description: stripeProduct.description || 'No description',
-    name: stripeProduct.name,
-    images: stripeProduct.images,
-    metadata: stripeProduct.metadata,
-    price:
-      stripeProduct.default_price &&
-      typeof stripeProduct.default_price !== 'string' &&
-      stripeProduct.default_price.unit_amount
-        ? (stripeProduct.default_price.unit_amount / 100).toString()
-        : 'No pricing data.',
-  };
+
   return (
     <main className='flex justify-center py-20'>
-      <ProductDetails product={product} />
+      <ProductDetails product={data} />
     </main>
   );
 }
