@@ -79,6 +79,60 @@ export type Database = {
         };
         Relationships: [];
       };
+      products: {
+        Row: {
+          active: boolean;
+          created_at: string;
+          description: string;
+          height: string;
+          id: number;
+          images: string[];
+          inventory: number;
+          length: string;
+          name: string;
+          price: number;
+          stripe_id: string;
+          stripe_price_id: string;
+          type: string;
+          weight: string;
+          width: string;
+        };
+        Insert: {
+          active?: boolean;
+          created_at?: string;
+          description?: string;
+          height?: string;
+          id?: number;
+          images?: string[];
+          inventory?: number;
+          length?: string;
+          name?: string;
+          price?: number;
+          stripe_id?: string;
+          stripe_price_id?: string;
+          type?: string;
+          weight?: string;
+          width?: string;
+        };
+        Update: {
+          active?: boolean;
+          created_at?: string;
+          description?: string;
+          height?: string;
+          id?: number;
+          images?: string[];
+          inventory?: number;
+          length?: string;
+          name?: string;
+          price?: number;
+          stripe_id?: string;
+          stripe_price_id?: string;
+          type?: string;
+          weight?: string;
+          width?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;
