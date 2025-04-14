@@ -68,7 +68,7 @@ export function Form() {
         if (res.status === 429) {
           setError('Too many attempts. You have been locked out for 1 hour.');
         }
-        throw new Error('Failed to calculate shipping TODO FIX');
+        throw new Error('Failed to calculate shipping');
       }
 
       const data = await res.json();

@@ -9,7 +9,7 @@ export default function CartItemCard({ product, quantity }: CartItem) {
   const { removeFromCart, addToCart, updateCartItemQuantity } = useCart();
 
   const handleRemove = () => {
-    removeFromCart(product.id);
+    removeFromCart(product.stripe_id);
   };
 
   const handleAddToCart = () => {
@@ -21,7 +21,7 @@ export default function CartItemCard({ product, quantity }: CartItem) {
       handleRemove();
       return;
     }
-    updateCartItemQuantity(product.id, quantity - 1);
+    updateCartItemQuantity(product.stripe_id, quantity - 1);
   };
 
   return (
@@ -30,7 +30,7 @@ export default function CartItemCard({ product, quantity }: CartItem) {
         {/* Product info */}
         <div className='col-span-3 flex items-center sm:col-span-1'>
           <div className='relative mr-3 h-20 w-20 flex-shrink-0 sm:mr-4 sm:h-24 sm:w-24'>
-            <Link href={`/shop/${product.id}`}>
+            <Link href={`/shop/${product.stripe_id}`}>
               <Image
                 src={product.images[0] || '/placeholder.svg'}
                 alt={product.description}
@@ -76,7 +76,7 @@ export default function CartItemCard({ product, quantity }: CartItem) {
         {/* Price and remove */}
         <div className='col-span-3 mt-2 flex items-center justify-between sm:col-span-1 sm:mt-0 sm:justify-end'>
           <span className='text-base font-medium sm:text-lg'>
-            ${Number(product.price) * quantity}
+            ${(product.price * quantity) / 100}
           </span>
           <button
             onClick={handleRemove}
