@@ -21,7 +21,7 @@ export interface ShippingRateObject {
   };
 }
 
-export async function fetchProducts(): Promise<Stripe.Product[]> {
+export async function fetchStripeProducts(): Promise<Stripe.Product[]> {
   try {
     const products = await stripe.products.list({
       expand: ['data.default_price'],

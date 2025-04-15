@@ -4,10 +4,10 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useTransition } from 'react';
 
 const sortOptions = [
-  { label: 'newest releases', value: 'date_asc' },
+  { label: 'newest releases', value: 'date_desc' },
   { label: 'price: low to high', value: 'price_asc' },
   { label: 'price: high to low', value: 'price_desc' },
-  { label: 'oldest releases', value: 'date_desc' },
+  { label: 'oldest releases', value: 'date_asc' },
 ];
 
 export default function SortSelector() {
@@ -25,7 +25,7 @@ export default function SortSelector() {
     });
   };
 
-  const currentSort = searchParams.get('sort') || 'date_asc';
+  const currentSort = searchParams.get('sort') || 'date_desc';
 
   return (
     <div data-pending={isPending ? '' : undefined} className='mb-4'>

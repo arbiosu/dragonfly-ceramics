@@ -21,7 +21,7 @@ export default async function Shop({
     ? searchParams.sort
     : searchParams.sort
       ? [searchParams.sort]
-      : ['date_asc'];
+      : ['date_desc'];
 
   const page = Array.isArray(searchParams.page)
     ? searchParams.page
