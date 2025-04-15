@@ -7,11 +7,10 @@ import Banner from '@/components/banner';
 
 const PAGE_SIZE = 8;
 
-export default async function Shop({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
+export default async function Shop(props: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  const searchParams = await props.searchParams;
   const filters = Array.isArray(searchParams.filter)
     ? searchParams.filter
     : searchParams.filter
