@@ -3,7 +3,7 @@
 import Stripe from 'stripe';
 import { stripe } from './stripe';
 import { ShippoAddress } from '../shippo/types';
-import { Tables } from '../supabase/database';
+import { Tables } from '@/lib/supabase/database';
 
 export interface CartItem {
   product: Tables<'products'>;

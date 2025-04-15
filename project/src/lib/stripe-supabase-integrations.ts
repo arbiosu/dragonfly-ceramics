@@ -1,5 +1,5 @@
-import { TablesInsert } from './supabase/database';
 import Stripe from 'stripe';
+import { TablesInsert } from './supabase/database';
 
 export function serializeStripeProduct(
   product: Stripe.Product
@@ -29,5 +29,6 @@ export function serializeStripeProduct(
     height: product.metadata.height,
     inventory: parseInt(product.metadata.inventory),
     type: product.metadata.type,
+    care: product.metadata.care,
   };
 }
