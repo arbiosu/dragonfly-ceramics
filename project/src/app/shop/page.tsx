@@ -7,11 +7,13 @@ import Banner from '@/components/banner';
 
 const PAGE_SIZE = 8;
 
-export default async function Shop({
-  searchParams,
-}: {
+// Define the expected props structure for a Next.js App Router page
+type ShopPageProps = {
+  params: object; // Even if not used, include it. Empty object for non-dynamic routes.
   searchParams: { [key: string]: string | string[] | undefined };
-}) {
+};
+
+export default async function Shop({ searchParams }: ShopPageProps) {
   const filters = Array.isArray(searchParams.filter)
     ? searchParams.filter
     : searchParams.filter
