@@ -26,7 +26,8 @@ export type ShippoParcel = {
 
 /**
  * @address_from Shippo Address id of the recipient address
- * @field address_to: Shippo Address id of the sending address
+ * @address_to Shippo Address id of the sending address
+ * @carrierAccounts filter rates by carrier id
  */
 export type ShippoShipment = {
   addressFrom: string;

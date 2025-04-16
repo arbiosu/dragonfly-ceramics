@@ -10,7 +10,8 @@ import {
   useEffect,
   useCallback,
 } from 'react';
-import { CartItem, Product } from '@/lib/stripe/utils';
+import { CartItem } from '@/lib/stripe/utils';
+import { Tables } from '@/lib/supabase/database';
 
 interface Props {
   children: React.ReactNode;
@@ -18,7 +19,7 @@ interface Props {
 
 interface CartContextValue {
   cartItems: CartItem[];
-  addToCart: (product: Product, quantity: number) => void;
+  addToCart: (product: Tables<'products'>, quantity: number) => void;
   removeFromCart: (productId: string) => void;
   updateCartItemQuantity: (productId: string, quantity: number) => void;
   purgeCart: () => void;
@@ -54,19 +55,17 @@ export const CartProvider = ({ children }: Props) => {
     }
   }, [cartItems]);
 
-  const addToCart = (product: Product, quantity: number = 1) => {
+  const addToCart = (product: Tables<'products'>, quantity: number = 1) => {
     // check if the product is in the cart
     const existingCartItemIndex = cartItems.findIndex(
       (item) => item.product.id === product.id
     );
 
-    const availableInventory = Number(product.metadata.inventory);
-
     if (existingCartItemIndex !== -1) {
       const existingCartItem = cartItems[existingCartItemIndex];
       const totalRequestedQuantity = existingCartItem.quantity + quantity;
 
-      if (totalRequestedQuantity > availableInventory) {
+      if (totalRequestedQuantity > product.inventory) {
         return;
       }
 
@@ -78,7 +77,7 @@ export const CartProvider = ({ children }: Props) => {
       updatedCartItems[existingCartItemIndex] = updatedCartItem;
       setCartItems(updatedCartItems);
     } else {
-      if (quantity > availableInventory) {
+      if (quantity > product.inventory) {
         return;
       }
       setCartItems([...cartItems, { product, quantity: quantity }]);
@@ -87,22 +86,22 @@ export const CartProvider = ({ children }: Props) => {
 
   const removeFromCart = (productId: string) => {
     const updatedCartItems = cartItems.filter(
-      (item) => item.product.id !== productId
+      (item) => item.product.stripe_id !== productId
     );
     setCartItems(updatedCartItems);
   };
 
   const updateCartItemQuantity = (productId: string, quantity: number) => {
     const existingCartItemIndex = cartItems.findIndex(
-      (item) => item.product.id === productId
+      (item) => item.product.stripe_id === productId
     );
     if (existingCartItemIndex !== -1) {
       const existingCartItem = cartItems[existingCartItemIndex];
-      const availableInventory = Number(
-        existingCartItem.product.metadata.inventory
-      );
 
-      const adjustedQuantity = Math.min(quantity, availableInventory);
+      const adjustedQuantity = Math.min(
+        quantity,
+        existingCartItem.product.inventory
+      );
 
       const updatedCartItem = {
         ...existingCartItem,
@@ -120,10 +119,10 @@ export const CartProvider = ({ children }: Props) => {
 
   const addUpCartTotal = cartItems.reduce((total, item) => {
     const price = item.product.price;
-    return total + Number(price) * item.quantity;
+    return total + price * item.quantity;
   }, 0);
 
-  const cartTotal = addUpCartTotal;
+  const cartTotal = addUpCartTotal / 100;
   const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0);
 
   return (

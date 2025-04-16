@@ -55,10 +55,10 @@ export function determineParcelSize(cart: CartItem[]): ShippoParcel {
   let maxHeight = 0;
 
   for (const item of cart) {
-    const weight = parseInt(item.product.metadata.weight) * item.quantity;
-    const length = parseInt(item.product.metadata.length);
-    const width = parseInt(item.product.metadata.width);
-    const height = parseInt(item.product.metadata.height);
+    const weight = parseInt(item.product.weight) * item.quantity;
+    const length = parseInt(item.product.length);
+    const width = parseInt(item.product.width);
+    const height = parseInt(item.product.height);
 
     totalWeight += weight;
     totalVolume += item.quantity * (length * width * height);
