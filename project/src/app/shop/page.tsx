@@ -5,7 +5,7 @@ import PaginationControls from '@/components/shop/pagination-controls';
 import ProductsGrid from '@/components/shop/products-grid';
 import Banner from '@/components/banner';
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE = 12;
 
 export default async function Shop(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

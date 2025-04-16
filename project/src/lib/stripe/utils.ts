@@ -46,6 +46,15 @@ export async function fetchProductById(id: string): Promise<Stripe.Product> {
   }
 }
 
+export async function fetchUnitAmountByPriceId(id: string) {
+  try {
+    const price = await stripe.prices.retrieve(id);
+    return price;
+  } catch (error) {
+    throw new Error(`Failed to retrieve price with error: ${error}`);
+  }
+}
+
 export async function updateProductImagesById(
   id: string,
   newImages: string[]

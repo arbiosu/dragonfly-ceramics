@@ -2,7 +2,8 @@ import Stripe from 'stripe';
 import { TablesInsert } from './supabase/database';
 
 export function serializeStripeProduct(
-  product: Stripe.Product
+  product: Stripe.Product,
+  unitAmount: number
 ): TablesInsert<'products'> {
   return {
     name: product.name,
@@ -14,13 +15,7 @@ export function serializeStripeProduct(
         : product.default_price == null
           ? ''
           : product.default_price.id,
-    price:
-      product.default_price == null
-        ? 0
-        : typeof product.default_price !== 'string' &&
-            product.default_price.unit_amount
-          ? product.default_price.unit_amount
-          : 0,
+    price: unitAmount,
     description: product.description ? product.description : '',
     images: product.images,
     weight: product.metadata.weight,
