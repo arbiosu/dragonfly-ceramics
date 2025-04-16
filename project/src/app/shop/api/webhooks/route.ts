@@ -48,6 +48,8 @@ async function handleProductChange(product: Stripe.Product, eventType: string) {
     `[Webhook] Processing ${eventType} for product ID: ${product.id}`
   );
   const serializedProduct = serializeStripeProduct(product);
+  console.log('Product', product);
+  console.log('Serialized', serializedProduct);
 
   if (eventType === 'product.created') {
     await upsertProduct(serializedProduct);
