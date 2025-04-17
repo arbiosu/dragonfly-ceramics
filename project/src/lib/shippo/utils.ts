@@ -21,3 +21,10 @@ export async function getCarrierAccounts() {
   const usps = shippo.carrierAccounts.list({ carrier: CarriersEnum.Usps });
   return usps;
 }
+
+export async function createShippingLabel(rateId: string) {
+  return await shippo.transactions.create({
+    rate: rateId,
+    labelFileType: 'PDF_4x6',
+  });
+}

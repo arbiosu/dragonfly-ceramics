@@ -5,6 +5,8 @@ import { stripe } from '@/lib/stripe/stripe';
 import { deductInventory, fetchUnitAmountByPriceId } from '@/lib/stripe/utils';
 import { retrieveProductByStripeId, upsertProduct } from '@/lib/supabase/model';
 import { serializeStripeProduct } from '@/lib/stripe-supabase-integrations';
+import { createShippingLabel } from '@/lib/shippo/utils';
+import { sendShippingLabelEmail } from '@/lib/resend/utils';
 
 function logWebhookError(
   message: string,
@@ -41,20 +43,40 @@ async function handleCheckoutSessionCompleted(
 ) {
   console.log(`[Webhook Success] Checkout Session ${session.id} completed.`);
   await deductInventory(session.id);
+  if (session.metadata == null) {
+    logWebhookError(
+      'No rate stored in checkout.session.metadata. Could not create shipping label',
+      undefined
+    );
+    return;
+  }
+  const data = await createShippingLabel(session.metadata.rate);
+  if (data.labelUrl == null || data.trackingNumber == null) {
+    logWebhookError('Could not create shipping label', undefined);
+    return;
+  }
+  const { data: resendData, error } = await sendShippingLabelEmail(
+    data.labelUrl,
+    data.trackingNumber,
+    session.id
+  );
+  if (error || resendData == null) {
+    logWebhookError('Could not send shipping label email', undefined);
+    return;
+  }
+  console.log('[Webhook Success] Created shipping label and sent email.');
 }
 
 async function handleProductChange(product: Stripe.Product, eventType: string) {
   console.log(
     `[Webhook] Processing ${eventType} for product ID: ${product.id}`
   );
-  console.log('Product: ', product);
   const priceId =
     typeof product.default_price === 'string' ? product.default_price : '';
   const price = await fetchUnitAmountByPriceId(priceId);
   const unitAmount = price.unit_amount ? price.unit_amount : 0;
 
   const serializedProduct = serializeStripeProduct(product, unitAmount);
-  console.log('Serialized Product: ', serializedProduct);
 
   if (eventType === 'product.created') {
     await upsertProduct(serializedProduct);

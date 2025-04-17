@@ -11,11 +11,14 @@ import {
   stripeCheckout,
   validateCart,
   type CartItem,
+  type ShippingRateObject,
 } from '@/lib/stripe/utils';
 import {
-  convertShippoShipmentsToStripe,
   determineParcelSize,
+  isUSPSPriorityMail,
+  convertShippoRateToStripeShippingOption,
 } from '@/lib/stripe-shippo-integrations';
+import { Rate } from 'shippo';
 
 export async function POST(req: Request) {
   try {
@@ -47,10 +50,25 @@ export async function POST(req: Request) {
       addressTo: lookup.objectId!,
       parcels: [result.objectId],
       carrierAccounts: ['5584b761c37843d881dbbf8ab6225bd4'],
+      extra: {
+        insurance: {
+          amount: '100',
+          currency: 'USD',
+          content: 'Pottery',
+        },
+      },
     });
-    const shippingOptions = convertShippoShipmentsToStripe(shipment);
-    if (shippingOptions.length < 1) {
-      throw new Error(`Error fetching shipping options`);
+    let selectedRate: Rate | null = null;
+    const shippingOptions: ShippingRateObject[] = [];
+    for (const rate of shipment.rates) {
+      if (isUSPSPriorityMail(rate)) {
+        const option = convertShippoRateToStripeShippingOption(rate);
+        shippingOptions.push(option);
+        selectedRate = rate;
+      }
+    }
+    if (selectedRate == null) {
+      throw new Error('Failed to select a rate');
     }
 
     const customFieldProps: Partial<Stripe.Checkout.SessionCreateParams> = {
@@ -100,7 +118,8 @@ export async function POST(req: Request) {
       customFieldProps,
       address,
       shippingOptions,
-      address.email
+      address.email,
+      selectedRate.objectId
     );
 
     if (!session.url) {
