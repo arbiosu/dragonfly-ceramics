@@ -1,4 +1,4 @@
-import { type Shipment, type Rate } from 'shippo';
+import { type Rate } from 'shippo';
 import { type ShippingRateObject, type CartItem } from '@/lib/stripe/utils';
 import { ShippoParcel } from './shippo/types';
 
@@ -22,29 +22,26 @@ const largeCubicBox: Box = {
   volume: 12 * 12 * 8,
 };
 
-export function convertShippoShipmentsToStripe(
-  shipment: Shipment
-): ShippingRateObject[] {
-  const selectedRate: Rate[] = [];
-  const shippingOptions: ShippingRateObject[] = [];
-  for (const item of shipment.rates) {
-    if (item.servicelevel.token === 'usps_priority') {
-      selectedRate.push(item);
-    }
-  }
-  for (const rate of selectedRate) {
-    shippingOptions.push({
-      shipping_rate_data: {
-        type: 'fixed_amount',
-        fixed_amount: {
-          amount: Math.round(parseFloat(rate.amount) * 100),
-          currency: 'usd',
-        },
-        display_name: rate.servicelevel.name ?? 'no service name available',
+export function isUSPSPriorityMail(rate: Rate): boolean {
+  return rate.servicelevel.token === 'usps_priority';
+}
+
+export function convertShippoRateToStripeShippingOption(
+  rate: Rate
+): ShippingRateObject {
+  const amountInCents = parseFloat(rate.amount) * 100;
+  return {
+    shipping_rate_data: {
+      type: 'fixed_amount',
+      fixed_amount: {
+        amount: Math.round(amountInCents),
+        currency: 'usd',
       },
-    });
-  }
-  return shippingOptions;
+      display_name: rate.servicelevel.name
+        ? rate.servicelevel.name
+        : 'Standard Shipping',
+    },
+  };
 }
 
 export function determineParcelSize(cart: CartItem[]): ShippoParcel {

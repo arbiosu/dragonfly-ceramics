@@ -114,7 +114,8 @@ export async function stripeCheckout(
   customFieldProps: Partial<Stripe.Checkout.SessionCreateParams>,
   shippingAddress: ShippoAddress,
   shippingOptions: ShippingRateObject[],
-  email: string
+  email: string,
+  shippoRateId: string
 ) {
   try {
     const session = await stripe.checkout.sessions.create({
@@ -134,6 +135,9 @@ export async function stripeCheckout(
             country: shippingAddress.country,
           },
         },
+      },
+      metadata: {
+        rate: shippoRateId,
       },
       shipping_options: shippingOptions,
       mode: 'payment',
