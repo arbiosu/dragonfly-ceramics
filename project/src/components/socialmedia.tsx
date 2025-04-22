@@ -56,7 +56,7 @@ export default function SocialMediaLinksComponent() {
     },
     {
       src: '/instagram.svg',
-      link: 'https://www.instagram.com/dragonflyceramics.kelly?igsh=Y3ZxYTZqbzZjMWxx&utm_source=qr',
+      link: 'https://www.instagram.com/dragonflyceramics_?igsh=Y3ZxYTZqbzZjMWxx&utm_source=qr',
       alt: 'Instagram',
     },
   ];
