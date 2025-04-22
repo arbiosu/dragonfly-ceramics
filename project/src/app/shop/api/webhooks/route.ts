@@ -102,6 +102,7 @@ async function handleProductChange(product: Stripe.Product, eventType: string) {
         undefined,
         eventType
       );
+      await upsertProduct({ ...serializedProduct });
     } else {
       const productToUpsert = {
         id: existingProductData.id,
