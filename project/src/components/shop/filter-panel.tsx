@@ -5,12 +5,10 @@ import { useOptimistic, useTransition } from 'react';
 
 const filterOptions = [
   'mugs',
-  'vases',
   'oil dispensers',
-  'comfy cups',
-  'soap dispensers',
-  'coasters',
+  'vases',
   'berry bowls',
+  'comfy cups',
   'merch',
 ];
 
