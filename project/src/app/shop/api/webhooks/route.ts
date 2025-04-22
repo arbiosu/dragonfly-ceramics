@@ -72,7 +72,19 @@ async function handleProductChange(product: Stripe.Product, eventType: string) {
     `[Webhook] Processing ${eventType} for product ID: ${product.id}`
   );
   const priceId =
-    typeof product.default_price === 'string' ? product.default_price : '';
+    typeof product.default_price === 'string'
+      ? product.default_price
+      : product.default_price?.id;
+  if (priceId == null) {
+    logWebhookError(
+      `Failed to get priceId for product ${product.id}`,
+      undefined,
+      eventType,
+      undefined
+    );
+    return;
+  }
+  console.log('handleProductChange priceId:', priceId);
   const price = await fetchUnitAmountByPriceId(priceId);
   const unitAmount = price.unit_amount ? price.unit_amount : 0;
 
