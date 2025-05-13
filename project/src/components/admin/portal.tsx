@@ -2,7 +2,13 @@ import { fetchProducts } from '@/lib/supabase/model';
 import AdminProductCard from './admin-product-card';
 
 export default async function AdminPortal() {
-  const { data, count, error } = await fetchProducts(0, 100, null, 'date_desc');
+  const { data, count, error } = await fetchProducts(
+    0,
+    100,
+    null,
+    null,
+    'date_desc'
+  );
   if (error || count == null) {
     return (
       <h1 className='text-3xl text-df-text'>

@@ -68,15 +68,16 @@ export async function retrieveProductByStripeId(productId: string) {
 export async function fetchProducts(
   pageIndex: number,
   pageSize: number,
-  active: boolean,
+  active: boolean | null,
   type: string | null,
   sortOrder: string
 ) {
   const supabase = await createServiceClient();
-  let query = supabase
-    .from('products')
-    .select('*', { count: 'exact' })
-    .eq('active', active);
+  let query = supabase.from('products').select('*', { count: 'exact' });
+
+  if (active) {
+    query = query.eq('active', active);
+  }
 
   if (type) {
     query = query.eq('type', type);
