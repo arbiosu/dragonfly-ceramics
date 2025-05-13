@@ -75,7 +75,7 @@ export async function fetchProducts(
   const supabase = await createServiceClient();
   let query = supabase.from('products').select('*', { count: 'exact' });
 
-  if (active) {
+  if (active !== null) {
     query = query.eq('active', active);
   }
 
@@ -92,6 +92,7 @@ export async function fetchProducts(
       break;
     case 'date_asc':
       query = query.order('created_at', { ascending: true });
+      break;
     case 'date_desc':
     default:
       query = query.order('created_at', { ascending: false });
