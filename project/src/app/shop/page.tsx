@@ -2,6 +2,7 @@ import { fetchProducts } from '@/lib/supabase/model';
 import FilterPanel from '@/components/shop/filter-panel';
 import SortSelector from '@/components/shop/sort-panel';
 import PaginationControls from '@/components/shop/pagination-controls';
+import ActiveSelector from '@/components/shop/active-selector';
 import ProductsGrid from '@/components/shop/products-grid';
 import Banner from '@/components/banner';
 
@@ -28,9 +29,17 @@ export default async function Shop(props: {
       ? [searchParams.page]
       : ['0'];
 
+  const active = Array.isArray(searchParams.active)
+    ? searchParams.active
+    : searchParams.active
+      ? [searchParams.active]
+      : ['true'];
+  const isActive = active[0] === 'true' ? true : false;
+
   const { data, error, count } = await fetchProducts(
     parseInt(page[0]),
     PAGE_SIZE,
+    isActive,
     filters[0],
     sort[0]
   );
@@ -45,9 +54,12 @@ export default async function Shop(props: {
   return (
     <main className='py-28'>
       <section className='container mx-auto px-4 text-center'>
-        <h1 className='mb-8 text-3xl text-df-text md:text-5xl'>shop</h1>
         <FilterPanel filters={filters} />
-        <SortSelector />
+        <div className='flex justify-center gap-8'>
+          <SortSelector />
+          <ActiveSelector />
+        </div>
+
         <ProductsGrid products={data} />
         <PaginationControls
           currentPage={currentPage}
