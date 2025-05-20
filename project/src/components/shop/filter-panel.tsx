@@ -9,7 +9,7 @@ const filterOptions = [
   'vases',
   'berry bowls',
   'comfy cups',
-  'merch',
+  'seconds',
 ];
 
 export default function FilterPanel({ filters }: { filters: string[] }) {

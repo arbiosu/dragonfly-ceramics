@@ -43,7 +43,11 @@ export default function ProductCard({
         </h3>
         <div className='mt-auto'>
           {product.active ? (
-            <p className='text-xl text-df-text'>${product.price / 100}</p>
+            <p className='text-xl text-df-text'>
+              <span>${product.price / 100}</span>
+              <br></br>
+              <span>{product.inventory} left!</span>
+            </p>
           ) : (
             <p className='text-xl text-df-text'>
               <s>${product.price / 100}</s>

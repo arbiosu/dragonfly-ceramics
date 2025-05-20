@@ -5,6 +5,7 @@ import { useState, useRef } from 'react';
 import { Tables } from '@/lib/supabase/database';
 import { uploadImage } from '@/lib/supabase/model';
 import { updateProductImagesById } from '@/lib/stripe/utils';
+import { deleteProductById } from '@/lib/supabase/model';
 
 export default function AdminProductCard(props: {
   product: Tables<'products'>;
@@ -12,6 +13,14 @@ export default function AdminProductCard(props: {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [deleting, setDeleting] = useState<boolean>(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState<boolean>(false);
+
+  const handleDelete = async () => {
+    setDeleting(true);
+    await deleteProductById(product.stripe_id);
+    setShowDeleteConfirm(false);
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
@@ -112,7 +121,7 @@ export default function AdminProductCard(props: {
           </div>
         </div>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='py-2'>
         <label className='mb-4 text-df-text'>
           {`Add an Image to ${product.name}`}
         </label>
@@ -132,6 +141,43 @@ export default function AdminProductCard(props: {
           {loading ? 'Uploading...' : 'Upload Image'}
         </button>
       </form>
+      {/* Delete Button */}
+      <button
+        onClick={() => setShowDeleteConfirm(true)}
+        className='w-full rounded bg-red-600 p-2 text-white hover:bg-red-700'
+      >
+        Delete Product
+      </button>
+
+      {/* Delete Confirmation Dialog */}
+      {showDeleteConfirm && (
+        <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50'>
+          <div className='w-80 rounded bg-white p-6 shadow-lg'>
+            <h4 className='mb-4 text-lg font-semibold text-gray-800'>
+              Confirm Delete
+            </h4>
+            <p className='mb-6 text-sm text-gray-600'>
+              Are you sure you want to delete {product.name}? This action cannot
+              be undone.
+            </p>
+            <div className='flex justify-end space-x-2'>
+              <button
+                onClick={() => setShowDeleteConfirm(false)}
+                className='rounded border border-gray-300 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDelete}
+                disabled={deleting}
+                className='rounded bg-red-600 px-4 py-2 text-sm text-white hover:bg-red-700 disabled:opacity-50'
+              >
+                {deleting ? 'Deleting...' : 'Delete'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

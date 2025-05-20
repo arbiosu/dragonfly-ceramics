@@ -13,8 +13,7 @@ export default function Home() {
     {
       id: 2,
       question: 'Where do you ship?',
-      answer:
-        'As of now, I only ship in the United States but hope to eventually expand internationally!',
+      answer: 'I currently ship worldwide to all locations!',
     },
     {
       id: 3,
