@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useTransition } from 'react';
 
 const activeOptions = [
+  { label: 'show all', value: 'all' },
   { label: 'available', value: 'true' },
   { label: 'sold out', value: 'false' },
 ];
@@ -23,7 +24,7 @@ export default function ActiveSelector() {
     });
   };
 
-  const currentActiveFilter = searchParams.get('active') || 'true';
+  const currentActiveFilter = searchParams.get('active') || 'all';
 
   return (
     <div data-pending={isPending ? '' : undefined} className='mb-4'>
@@ -34,8 +35,8 @@ export default function ActiveSelector() {
         onChange={(e) => handleSortChange(e.target.value)}
       >
         <option value=''>-- Select --</option>
-        {activeOptions.map((option) => (
-          <option key={option.value} value={option.value}>
+        {activeOptions.map((option, index) => (
+          <option key={index} value={option.value}>
             {option.label}
           </option>
         ))}

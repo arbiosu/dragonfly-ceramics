@@ -3,6 +3,7 @@
 import { createServiceClient } from './service';
 import { type ShippoAddress } from '../shippo/types';
 import { TablesInsert } from './database';
+import { revalidatePath } from 'next/cache';
 
 export async function uploadImage(file: File, productId: string) {
   const fileName = `product_images/${productId}/${Date.now()}`;
@@ -105,4 +106,38 @@ export async function fetchProducts(
   query = query.range(from, to);
 
   return await query;
+}
+
+export async function deleteProductById(id: string) {
+  try {
+    const supabase = await createServiceClient();
+    const { data: deleteData, error: deleteError } = await supabase
+      .from('products')
+      .delete()
+      .eq('stripe_id', id)
+      .select()
+      .single();
+    if (deleteError || !deleteData) {
+      console.error(`Failed to delete article with stripe_id ${id}`);
+      return {
+        data: null,
+        error: `Failed to delete product. Code: ${deleteError?.code || 'UNKNOWN'}`,
+      };
+    }
+    // -- Success --
+    revalidatePath('/shop');
+    revalidatePath('/admin');
+    return {
+      data: deleteData,
+      error: null,
+    };
+  } catch (error) {
+    console.log(error);
+    if (error instanceof Error) {
+      return {
+        data: null,
+        error: `Failed to delete product: ${error.message}`,
+      };
+    }
+  }
 }

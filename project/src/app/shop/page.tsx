@@ -33,8 +33,9 @@ export default async function Shop(props: {
     ? searchParams.active
     : searchParams.active
       ? [searchParams.active]
-      : ['true'];
-  const isActive = active[0] === 'true' ? true : false;
+      : [null];
+  const isActive =
+    active[0] === 'true' ? true : active[0] === 'false' ? false : null;
 
   const { data, error, count } = await fetchProducts(
     parseInt(page[0]),
