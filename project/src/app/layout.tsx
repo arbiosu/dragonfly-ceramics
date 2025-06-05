@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${ralewayLight.className} ${ralewayLight.className} bg-df-bg antialiased`}
+        className={`${ralewayLight.className} ${ralewayLight.className} bg-white antialiased`}
       >
         <CartProvider>
           <Navbar />

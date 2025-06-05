@@ -4,7 +4,7 @@ import SocialMediaLinksComponent from '@/components/socialmedia';
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className='bg-df-bg py-8 text-df-text'>
+    <footer className='py-8 text-df-text'>
       <div className='container mx-auto px-4'>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-4'>
           {/* Brand and Copyright */}

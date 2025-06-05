@@ -29,10 +29,7 @@ export function FAQHorizontalScroll({ faqs }: FAQProps) {
   };
 
   return (
-    <div className='mx-auto w-full max-w-7xl py-6'>
-      <h2 className='mb-6 text-center text-2xl text-df-text'>
-        frequently asked questions
-      </h2>
+    <div className='mx-auto w-full max-w-7xl py-6 text-dfNew'>
       <div
         ref={scrollRef}
         className='relative flex flex-nowrap overflow-x-auto px-2 py-4'
@@ -42,10 +39,12 @@ export function FAQHorizontalScroll({ faqs }: FAQProps) {
             key={faq.id}
             className='mr-4 inline-block w-96 flex-shrink-0 p-6 align-top last:mr-0'
           >
-            <h3 className='mb-3 text-lg text-dfNew'>
+            <p className='mb-8 text-xl font-medium md:text-2xl'>
               {faq.question.toLowerCase()}
-            </h3>
-            <p className='text-dfNew'>{faq.answer.toLowerCase()}</p>
+            </p>
+            <p className='text-lg leading-4 tracking-tighter'>
+              {faq.answer.toLowerCase()}
+            </p>
           </div>
         ))}
       </div>
@@ -53,7 +52,7 @@ export function FAQHorizontalScroll({ faqs }: FAQProps) {
       <div className='mt-6 flex justify-between'>
         <button
           onClick={scrollLeft}
-          className='rounded-full bg-dfNew2 p-2 shadow-md hover:bg-blue-300'
+          className='rounded-full p-2 hover:bg-dfNew2'
           aria-label='Scroll left'
         >
           <Image
@@ -65,7 +64,7 @@ export function FAQHorizontalScroll({ faqs }: FAQProps) {
         </button>
         <button
           onClick={scrollRight}
-          className='rounded-full bg-dfNew2 p-2 shadow-md hover:bg-blue-300'
+          className='rounded-full p-2 hover:bg-dfNew2'
           aria-label='Scroll left'
         >
           <Image

@@ -1,5 +1,5 @@
-import ShopLink from '@/components/shop/shop-link';
 import Image from 'next/image';
+import { Button } from './shop/shop-button';
 
 function LandinPageVideo() {
   return (
@@ -28,15 +28,20 @@ export default function LandingPage() {
       <LandinPageVideo />
       <div className='absolute inset-0 mx-8 flex flex-col items-center justify-center'>
         <Image
-          src='/dragonfly-text-white.png'
+          src='/df-logo-text-new.png'
           alt='Dragonfly Ceramics'
-          width={600}
-          height={400}
-          className='mb-4'
+          width={1000}
+          height={800}
+          className='mb-4 md:absolute md:bottom-0 md:left-0'
           placeholder='blur'
           blurDataURL='/dragonfly-text-white.png'
+          unoptimized
         />
-        <ShopLink label={'shop now'} />
+        <div className='absolute bottom-8 right-0'>
+          <Button href={'/shop'} variant={'default'} size={'large'}>
+            shop
+          </Button>
+        </div>
       </div>
     </div>
   );
