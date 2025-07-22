@@ -2,9 +2,9 @@
 
 import type React from 'react';
 
-import { useState, useEffect, useRef } from 'react';
-import { validateEmail } from '@/lib/utils';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
+import { validateEmail } from '@/lib/utils';
 
 export default function ContactForm() {
   // Create refs for form fields that don't need immediate UI updates
@@ -18,22 +18,6 @@ export default function ContactForm() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
-  const [selectedImage, setSelectedImage] =
-    useState<string>('/customOrder.jpeg');
-
-  // Update image when topic changes
-  useEffect(() => {
-    switch (topic) {
-      case 'wholesale':
-        setSelectedImage('/wholesale.jpeg');
-        break;
-      case 'general':
-        setSelectedImage('/pottery1.jpg');
-        break;
-      default:
-        setSelectedImage('/customOrder.jpeg'); // Default image
-    }
-  }, [topic]);
 
   const handleTopicChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setTopic(e.target.value);
@@ -123,7 +107,7 @@ export default function ContactForm() {
         return (
           <div className='mb-4 rounded border-l-4 border-dfNew bg-dfNew2 p-4'>
             <h3 className='flex items-center font-medium text-dfNew'>
-              General Inquiry
+              general inquiry
             </h3>
             <p className='mt-1 text-dfNew'>
               {`feel free to ask any questions about our products, shipping, returns, 
@@ -137,186 +121,199 @@ export default function ContactForm() {
   };
 
   return (
-    <div className='mx-auto max-w-6xl p-6'>
-      <h1 className='mb-2 text-3xl text-df-text'>contact</h1>
-      <h2 className='mb-6 text-lg text-df-text'>
-        for custom orders, wholesale, or general questions, please fill out the
-        information below.
-      </h2>
-      {submitted ? (
-        <div className='rounded-md bg-green-50 px-6 py-4 text-center'>
-          <p className='font-medium text-green-600'>thanks for reaching out!</p>
-          <p className='mt-1 text-sm text-green-600'>
-            we&apos;ll give you a reply as soon as possible!
-          </p>
-        </div>
-      ) : (
-        <div className='flex flex-col gap-24 md:flex-row'>
-          {/* Form Section */}
-          <div className='flex-1'>
-            <form onSubmit={handleSubmit} className='space-y-6'>
-              <div>
-                <label
-                  htmlFor='topic'
-                  className='mb-1 block text-lg font-medium text-gray-700'
-                >
-                  topic
-                </label>
-                <select
-                  id='topic'
-                  name='topic'
-                  value={topic}
-                  onChange={handleTopicChange}
-                  disabled={isLoading}
-                  required
-                  className='w-full border-b border-dfNew bg-df-bg px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
-                >
-                  <option value='' disabled>
-                    select an option
-                  </option>
-                  <option value='customOrder'>custom order</option>
-                  <option value='wholesale'>wholesale</option>
-                  <option value='general'>general inquiry</option>
-                </select>
-              </div>
-              {topic && getTopicInstructions()}
-              <div>
-                <label
-                  htmlFor='name'
-                  className='mb-1 block text-lg font-medium text-gray-700'
-                >
-                  name
-                </label>
-                <input
-                  type='text'
-                  id='name'
-                  name='name'
-                  defaultValue=''
-                  onChange={(e) => (nameRef.current = e.target.value)}
-                  disabled={isLoading}
-                  required
-                  className='bg w-full border-b border-dfNew bg-df-bg px-4 py-2 text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor='email'
-                  className='mb-1 block text-lg font-medium text-gray-700'
-                >
-                  email
-                </label>
-                <input
-                  type='email'
-                  id='email'
-                  name='email'
-                  defaultValue=''
-                  onChange={(e) => (emailRef.current = e.target.value)}
-                  disabled={isLoading}
-                  required
-                  className='bg w-full border-b border-dfNew bg-df-bg px-4 py-2 text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor='message'
-                  className='mb-1 block text-lg font-medium text-gray-700'
-                >
-                  message
-                </label>
-                <textarea
-                  id='message'
-                  name='message'
-                  defaultValue=''
-                  onChange={(e) => (messageRef.current = e.target.value)}
-                  disabled={isLoading}
-                  required
-                  rows={4}
-                  className='bg w-full border-b border-dfNew bg-df-bg px-4 py-2 text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor='source'
-                  className='mb-1 block text-lg font-medium text-gray-700'
-                >
-                  where did you hear about me?
-                </label>
-                <select
-                  id='source'
-                  name='source'
-                  defaultValue=''
-                  onChange={(e) => (sourceRef.current = e.target.value)}
-                  disabled={isLoading}
-                  required
-                  className='w-full border-b border-dfNew bg-df-bg px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
-                >
-                  <option value='' disabled>
-                    Select an option
-                  </option>
-                  <option value='family/friend'>Family/Friend</option>
-                  <option value='tiktok'>TikTok</option>
-                  <option value='instagram'>Instagram</option>
-                  <option value='in person sales'>In Person Sales</option>
-                  <option value='other'>Other</option>
-                </select>
-                {error && <p className='mt-2 text-red-600'>{error}</p>}
-              </div>
-
-              <button
-                type='submit'
-                disabled={isLoading}
-                className='w-full rounded-md bg-dfNew2 px-4 py-2 text-df-text transition duration-300 ease-in-out hover:bg-dfNew hover:text-white'
-              >
-                {isLoading ? (
-                  <div className='flex items-center justify-center'>
-                    <svg
-                      className='-ml-1 mr-3 h-5 w-5 animate-spin text-white'
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                    >
-                      <circle
-                        className='opacity-25'
-                        cx='12'
-                        cy='12'
-                        r='10'
-                        stroke='currentColor'
-                        strokeWidth='4'
-                      ></circle>
-                      <path
-                        className='opacity-75'
-                        fill='currentColor'
-                        d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-                      ></path>
-                    </svg>
-                    processing...
-                  </div>
-                ) : (
-                  'submit'
-                )}
-              </button>
-            </form>
+    <div className='mx-auto text-black'>
+      <div className='relative z-10 flex min-h-screen flex-col items-center justify-between lg:flex-row'>
+        <div className='flex-1 p-10'>
+          <h1 className='mb-2 text-8xl font-light tracking-tighter'>contact</h1>
+          <div className='max-w-xl p-2'>
+            <h4 className='mb-6 text-xl leading-4 tracking-tighter'>
+              {
+                "have a question about a piece or just want to say hi? i'm all ears. for general inquiries, brand collaborations, or custom wholesale orders - whether you're looking for handmade gifts for your team, ceramic dinnerware for your restaurant, or a large batch of unique pieces for a special event - please reach out using the form below."
+              }
+            </h4>
           </div>
 
-          {/* Image Section */}
-          <div className='flex flex-1 items-center justify-center'>
-            <div className='relative h-full w-full overflow-hidden shadow-lg'>
+          {submitted ? (
+            <div className='rounded-md bg-green-50 px-6 py-4 text-center'>
+              <p className='font-medium text-green-600'>
+                thanks for reaching out!
+              </p>
+              <p className='mt-1 text-sm text-green-600'>
+                we&apos;ll give you a reply as soon as possible!
+              </p>
+            </div>
+          ) : (
+            <div className='flex flex-col gap-24 md:flex-row'>
+              {/* Form Section */}
+              <div className='flex-1'>
+                <form onSubmit={handleSubmit} className='space-y-6'>
+                  <div>
+                    <label
+                      htmlFor='topic'
+                      className='mb-1 block text-xl font-light'
+                    >
+                      topic
+                    </label>
+                    <select
+                      id='topic'
+                      name='topic'
+                      value={topic}
+                      onChange={handleTopicChange}
+                      disabled={isLoading}
+                      required
+                      className='w-full rounded-lg border border-dfNew px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
+                    >
+                      <option value='' disabled>
+                        select an option
+                      </option>
+                      <option value='customOrder'>custom order</option>
+                      <option value='wholesale'>wholesale</option>
+                      <option value='general'>general inquiry</option>
+                    </select>
+                  </div>
+                  {topic && getTopicInstructions()}
+                  <div>
+                    <label
+                      htmlFor='name'
+                      className='mb-1 block text-xl font-light'
+                    >
+                      name
+                    </label>
+                    <input
+                      type='text'
+                      id='name'
+                      name='name'
+                      defaultValue=''
+                      onChange={(e) => (nameRef.current = e.target.value)}
+                      disabled={isLoading}
+                      required
+                      className='w-full rounded-lg border border-dfNew px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor='email'
+                      className='mb-1 block text-xl font-light'
+                    >
+                      email
+                    </label>
+                    <input
+                      type='email'
+                      id='email'
+                      name='email'
+                      defaultValue=''
+                      onChange={(e) => (emailRef.current = e.target.value)}
+                      disabled={isLoading}
+                      required
+                      className='w-full rounded-lg border border-dfNew px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor='message'
+                      className='mb-1 block text-xl font-light'
+                    >
+                      message
+                    </label>
+                    <textarea
+                      id='message'
+                      name='message'
+                      defaultValue=''
+                      onChange={(e) => (messageRef.current = e.target.value)}
+                      disabled={isLoading}
+                      required
+                      rows={4}
+                      className='w-full rounded-lg border border-dfNew px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor='source'
+                      className='mb-1 block text-xl font-light'
+                    >
+                      how did you hear about me?
+                    </label>
+                    <select
+                      id='source'
+                      name='source'
+                      defaultValue=''
+                      onChange={(e) => (sourceRef.current = e.target.value)}
+                      disabled={isLoading}
+                      required
+                      className='w-full rounded-lg border border-dfNew px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
+                    >
+                      <option value='' disabled>
+                        Select an option
+                      </option>
+                      <option value='family/friend'>Family/Friend</option>
+                      <option value='tiktok'>TikTok</option>
+                      <option value='instagram'>Instagram</option>
+                      <option value='in person sales'>In Person Sales</option>
+                      <option value='other'>Other</option>
+                    </select>
+                    {error && <p className='mt-2 text-red-600'>{error}</p>}
+                  </div>
+
+                  <button
+                    type='submit'
+                    disabled={isLoading}
+                    className='group relative inline-flex transform items-center justify-center overflow-hidden rounded-3xl border border-black bg-dfNew2 px-6 py-2 text-xl font-light text-black transition-all duration-300 hover:scale-105 hover:bg-stone-800 hover:bg-white/10 hover:text-white hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+                  >
+                    {isLoading ? (
+                      <div className='flex items-center justify-center'>
+                        <svg
+                          className='-ml-1 mr-3 h-5 w-5 animate-spin text-white'
+                          xmlns='http://www.w3.org/2000/svg'
+                          fill='none'
+                          viewBox='0 0 24 24'
+                        >
+                          <circle
+                            className='opacity-25'
+                            cx='12'
+                            cy='12'
+                            r='10'
+                            stroke='currentColor'
+                            strokeWidth='4'
+                          ></circle>
+                          <path
+                            className='opacity-75'
+                            fill='currentColor'
+                            d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                          ></path>
+                        </svg>
+                        processing...
+                      </div>
+                    ) : (
+                      <>
+                        <span className='relative z-10'>submit</span>
+                        <div className='absolute inset-0 origin-left scale-x-0 transform bg-dfNew transition-transform duration-300 group-hover:scale-x-100'></div>
+                      </>
+                    )}
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className='relative right-0 mt-12 max-w-2xl flex-1 lg:mt-0'>
+          <div className='group relative'>
+            <div className='relative overflow-hidden'>
               <Image
-                src={selectedImage || '/placeholder.svg'}
-                alt={`${topic} image`}
-                fill
-                className='object-cover transition-opacity duration-300'
+                src='/contact-mug-unoptimized.png'
+                width={800}
+                height={800}
+                className='contrast-105 h-auto w-full object-cover brightness-105 filter'
+                alt='Dragonfly Ceramics Mug - Handcrafed Pottery'
                 priority
-                placeholder='blur'
-                blurDataURL={selectedImage}
               />
             </div>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

@@ -35,9 +35,7 @@ export default function Hero() {
 export function HeroSection() {
   return (
     <section className='relative min-h-screen w-full overflow-hidden'>
-      {/* Main content container */}
       <div className='relative z-10 flex min-h-screen flex-col items-center justify-between lg:flex-row'>
-        {/* Text content */}
         <div className='flex-1 space-y-8 px-6 text-center lg:pr-12 lg:text-left'>
           <div>
             <h1 className='text-7xl tracking-tight text-black md:text-8xl lg:text-9xl'>
