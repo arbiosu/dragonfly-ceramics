@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { ralewayLight } from '@/../public/fonts/fonts';
+import { inter } from '@/../public/fonts/fonts';
 import Navbar from '@/components/nav';
 import Footer from '@/components/footer';
 import { CartProvider } from '@/contexts/CartContext';
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${ralewayLight.className} ${ralewayLight.className} bg-white antialiased`}
+        className={`${inter.className} ${inter.className} bg-white antialiased`}
       >
         <CartProvider>
           <Navbar />

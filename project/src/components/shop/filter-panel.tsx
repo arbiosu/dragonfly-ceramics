@@ -34,7 +34,7 @@ export default function FilterPanel({ filters }: { filters: string[] }) {
 
   return (
     <div data-pending={isPending ? '' : undefined} className='text-df-text'>
-      <div className='mb-6 flex flex-wrap justify-center gap-2'>
+      <div className='mb-6 flex flex-col'>
         {filterOptions.map((filter) => (
           <div key={filter} className='relative'>
             <input
@@ -51,7 +51,7 @@ export default function FilterPanel({ filters }: { filters: string[] }) {
             />
             <label
               htmlFor={`filter-${filter}`}
-              className={`relative inline-block cursor-pointer px-6 py-3 ${optimisticFilters.includes(filter) ? 'border-b-2 border-df-text' : ''}`}
+              className={`relative inline-block cursor-pointer ${optimisticFilters.includes(filter) ? 'border-b-2 border-df-text' : ''}`}
             >
               {filter}
             </label>

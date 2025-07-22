@@ -118,9 +118,9 @@ export default function PaginationControls({
           next
         </button>
       </div>
-      <span className='p-4'>
+      <p className='text-center'>
         Page {optimisticPage + 1} of {totalPages}
-      </span>
+      </p>
     </div>
   );
 }

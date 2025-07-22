@@ -5,6 +5,7 @@ import PaginationControls from '@/components/shop/pagination-controls';
 import ActiveSelector from '@/components/shop/active-selector';
 import ProductsGrid from '@/components/shop/products-grid';
 import Banner from '@/components/banner';
+import Image from 'next/image';
 
 const PAGE_SIZE = 12;
 
@@ -54,11 +55,29 @@ export default async function Shop(props: {
 
   return (
     <main className='py-28'>
-      <section className='container mx-auto px-4 text-center'>
-        <FilterPanel filters={filters} />
-        <div className='flex justify-center gap-8'>
-          <SortSelector />
-          <ActiveSelector />
+      <section className='container mx-auto'>
+        <div className='mb-8 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12'>
+          <div className='order-2 px-2 md:order-1 md:col-span-1 lg:col-span-3'>
+            <FilterPanel filters={filters} />
+          </div>
+
+          <div className='order-1 flex items-center justify-center md:order-2 md:col-span-2 lg:col-span-6'>
+            <div className='w-full max-w-md'>
+              <Image
+                src='/shop-header.png'
+                alt='Handmade in NYC'
+                height={300}
+                width={300}
+                className='h-auto w-full'
+                unoptimized
+              />
+            </div>
+          </div>
+
+          <div className='order-3 flex flex-col justify-end px-2 md:col-span-1 md:items-end lg:col-span-3'>
+            <SortSelector />
+            <ActiveSelector />
+          </div>
         </div>
 
         <ProductsGrid products={data} />
