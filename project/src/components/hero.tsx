@@ -36,12 +36,13 @@ export function HeroSection() {
   return (
     <section className='relative min-h-screen w-full overflow-hidden'>
       {/* Main content container */}
-      <div className='relative z-10 flex min-h-screen flex-col items-center justify-between px-6 md:px-12 lg:flex-row lg:px-20'>
+      <div className='relative z-10 flex min-h-screen flex-col items-center justify-between lg:flex-row'>
         {/* Text content */}
-        <div className='flex-1 space-y-8 text-center lg:pr-12 lg:text-left'>
+        <div className='flex-1 space-y-8 px-6 text-center lg:pr-12 lg:text-left'>
           <div>
             <h1 className='text-7xl tracking-tight text-black md:text-8xl lg:text-9xl'>
-              <span className='block'>crafted with love</span>
+              <span className='block'>crafted</span>
+              <span className='block'>with love</span>
             </h1>
           </div>
 
@@ -50,7 +51,7 @@ export function HeroSection() {
               <Image
                 src='/hand-made-in-nyc.png'
                 alt='Handmade in NYC'
-                height={120}
+                height={300}
                 width={300}
                 unoptimized
               />
@@ -73,10 +74,8 @@ export function HeroSection() {
         {/* Hero Image */}
         <div className='relative mt-12 max-w-2xl flex-1 lg:mt-0'>
           <div className='group relative'>
-            {/* Floating shadow effect */}
-
             {/* Main image */}
-            <div className='relative transform overflow-hidden rounded-3xl transition-all duration-700 group-hover:scale-105'>
+            <div className='relative overflow-hidden'>
               <Image
                 src='/df-hero-new-compressed.png'
                 width={800}
