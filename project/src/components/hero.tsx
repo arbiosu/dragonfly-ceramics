@@ -72,7 +72,6 @@ export function HeroSection() {
         {/* Hero Image */}
         <div className='relative mt-12 max-w-2xl flex-1 lg:mt-0'>
           <div className='group relative'>
-            {/* Main image */}
             <div className='relative overflow-hidden'>
               <Image
                 src='/df-hero-new-compressed.png'
