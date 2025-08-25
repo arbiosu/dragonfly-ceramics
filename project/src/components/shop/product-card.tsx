@@ -25,7 +25,7 @@ export default function ProductCard({
       className='shadow-t-md relative w-full max-w-sm overflow-hidden'
     >
       {/* Image */}
-      <div className='relative aspect-square w-full overflow-hidden rounded-3xl border-4 border-dfNew2 p-4'>
+      <div className='relative aspect-square w-full overflow-hidden rounded-3xl border border-black p-4'>
         <NextImageWrapper
           url={product.images[0]}
           altText={product.description}

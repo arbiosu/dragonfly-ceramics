@@ -19,7 +19,7 @@ export default function SubscribePage() {
       </div>
       {/* Top section (e.g. a colored header) */}
       <div className='p-6'>
-        <SubscribeCard />
+        <SubscribeCard text={"don't miss a beat"} />
       </div>
     </section>
   );

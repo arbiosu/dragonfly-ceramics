@@ -1,6 +1,6 @@
-import { Raleway, Inter } from 'next/font/google';
+import { Manrope, Inter } from 'next/font/google';
 
-export const ralewayLight = Raleway({
+export const manrope = Manrope({
   subsets: ['latin'],
   display: 'swap',
 });

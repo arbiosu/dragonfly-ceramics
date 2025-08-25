@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { inter } from '@/../public/fonts/fonts';
+import { manrope } from '@/../public/fonts/fonts';
 import Navbar from '@/components/nav';
 import Footer from '@/components/footer';
 import { CartProvider } from '@/contexts/CartContext';
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${inter.className} ${inter.className} bg-white antialiased`}
+        className={`${manrope.className} ${manrope.className} bg-white antialiased`}
       >
         <CartProvider>
           <Navbar />

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { validateEmail } from '@/lib/utils';
 import { Input } from './ui/input';
 
-export default function SubscribeCard() {
+export default function SubscribeCard({ text }: { text: string }) {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -56,9 +56,9 @@ export default function SubscribeCard() {
   };
 
   return (
-    <div className='container mx-auto'>
-      <div className='text-center tracking-tighter'>
-        <h2 className='text-6xl md:text-8xl'>{"don't miss a beat"}</h2>
+    <div>
+      <div className='text-center -tracking-widest'>
+        <h2 className='text-6xl md:text-8xl'>{text}</h2>
         <p className='text-lg'>
           sign up for the mailing list and never miss an update
         </p>

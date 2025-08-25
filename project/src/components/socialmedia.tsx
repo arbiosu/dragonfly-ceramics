@@ -34,7 +34,7 @@ export function SocialMediaLink({ src, link, alt }: SocialMediaData) {
 
 export function SocialMediaLinks({ items }: SocialMediaLinkProps) {
   return (
-    <div className='flex justify-start space-x-8'>
+    <div className='flex space-x-4'>
       {items.map((sm, index) => (
         <SocialMediaLink src={sm.src} link={sm.link} alt={sm.alt} key={index} />
       ))}
@@ -61,32 +61,6 @@ export default function SocialMediaLinksComponent() {
     },
   ];
   return <SocialMediaLinks items={socials} />;
-}
-
-export function SocialMediaLinksCard() {
-  return (
-    <div className='relative mx-auto flex h-full w-full flex-col overflow-hidden p-6'>
-      <div className='flex justify-center'>
-        <Image
-          src='/profile.svg'
-          alt='Profile icon with heart'
-          width={100}
-          height={100}
-          placeholder='blur'
-          blurDataURL='/profile.svg'
-          unoptimized
-        />
-      </div>
-      <div className='my-16 py-4 text-center'>
-        <p className='text-lg text-df-text'>
-          keep up with dragonfly ceramics on youTube, tiktok, and instagram
-        </p>
-      </div>
-      <div className='flex justify-center'>
-        <SocialMediaLinksComponent />
-      </div>
-    </div>
-  );
 }
 
 export function SocialMediaCard() {

@@ -41,7 +41,7 @@ const faqs = [
 
 export default function FAQPage() {
   return (
-    <section className='relative w-full bg-yellow-100 text-black'>
+    <section className='relative w-full bg-yellow-100 -tracking-widest text-black'>
       <div className='absolute inset-0 z-10'>
         <Image
           src='/df-oil-dispenser-faqs.png'

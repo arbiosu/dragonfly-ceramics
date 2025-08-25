@@ -11,7 +11,7 @@ export default function ProductsGrid({
   return (
     <div>
       {products.length > 0 ? (
-        <div className='grid grid-cols-2 gap-2 md:grid-cols-4'>
+        <div className='grid grid-cols-2 gap-2 md:grid-cols-3'>
           {products.map((product) => (
             <div key={product.id} className='flex justify-center'>
               <ProductCard product={product} key={product.id} />
