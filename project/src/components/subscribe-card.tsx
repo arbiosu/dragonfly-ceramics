@@ -59,9 +59,7 @@ export default function SubscribeCard({ text }: { text: string }) {
     <div>
       <div className='text-center -tracking-widest'>
         <h2 className='text-6xl md:text-8xl'>{text}</h2>
-        <p className='text-lg'>
-          sign up for the mailing list and never miss an update
-        </p>
+        <p className='text-lg'>sign up for the mailing list</p>
       </div>
       <div className='my-auto py-4 text-center'></div>
       {submitted ? (

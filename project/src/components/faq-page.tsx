@@ -41,10 +41,10 @@ const faqs = [
 
 export default function FAQPage() {
   return (
-    <section className='relative w-full bg-yellow-100 -tracking-widest text-black'>
+    <section className='relative w-full bg-yellow-100 tracking-[-4%] text-black'>
       <div className='absolute inset-0 z-10'>
         <Image
-          src='/df-oil-dispenser-faqs.png'
+          src='/df-hero-dispenser.png'
           alt='Dragonfly Ceramics Bowl'
           width={600}
           height={200}

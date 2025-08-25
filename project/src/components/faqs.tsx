@@ -42,7 +42,7 @@ export function FAQHorizontalScroll({ faqs }: FAQProps) {
             <p className='mb-8 text-xl font-medium md:text-2xl'>
               {faq.question.toLowerCase()}
             </p>
-            <p className='text-lg leading-4 tracking-tighter'>
+            <p className='text-lg leading-none tracking-[-4%]'>
               {faq.answer.toLowerCase()}
             </p>
           </div>

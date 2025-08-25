@@ -3,13 +3,13 @@ import { Button } from './shop/shop-button';
 
 export function HeroSection() {
   return (
-    <section className='relative min-h-screen w-full overflow-hidden -tracking-widest'>
+    <section className='relative min-h-screen w-full overflow-hidden'>
       <div className='relative z-10 flex min-h-screen flex-col items-center justify-between lg:flex-row'>
         <div className='flex-1 space-y-8 px-6 text-center lg:pr-12 lg:text-left'>
           <div>
             <h1 className='text-7xl text-black md:text-8xl lg:text-9xl'>
-              <span className='block'>crafted</span>
-              <span className='block'>with love</span>
+              <span className='block tracking-[-6.9%]'>crafted</span>
+              <span className='block tracking-[-6.9%]'>with love</span>
             </h1>
           </div>
 
