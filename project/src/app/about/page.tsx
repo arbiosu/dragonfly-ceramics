@@ -39,29 +39,29 @@ export default function About() {
 
             <div className='max-w-lg space-y-6 px-4 pt-8'>
               <div className='space-y-0'>
-                <p className='text-lg font-light leading-4 tracking-[-4%]'>
+                <p className='text-lg font-light leading-4 tracking-[-0.04em]'>
                   she/her
                 </p>
-                <p className='text-lg font-light leading-4 tracking-[-4%]'>
+                <p className='text-lg font-light leading-4 tracking-[-0.04em]'>
                   ceramicist
                 </p>
-                <p className='text-lg font-light leading-4 tracking-[-4%]'>
+                <p className='text-lg font-light leading-4 tracking-[-0.04em]'>
                   nyc
                 </p>
               </div>
 
-              <p className='text-base font-light leading-4 tracking-[-4%]'>
+              <p className='text-base font-light leading-4 tracking-[-0.04em]'>
                 dragonfly ceramics started in 2025 and we focus on handmade
                 functional ceramics for the home with an emphasis on unique
                 colors.
               </p>
-              <p className='text-base font-light leading-4 tracking-[-4%]'>
+              <p className='text-base font-light leading-4 tracking-[-0.04em]'>
                 after getting a degree in filmmaking and ceramics, kelly
                 combined her knowledge in the two mediums creating frequent
                 social content and while striving to constantly learn and
                 perfect her ceramic abilities.
               </p>
-              <p className='text-base font-light leading-none tracking-[-4%] sm:text-lg'>
+              <p className='text-base font-light leading-none tracking-[-0.04em] sm:text-lg'>
                 check out @dragonflyceramics on{' '}
                 <Link
                   href='https://www.instagram.com/dragonflyceramics_/'
@@ -90,7 +90,7 @@ export default function About() {
                   youtube!
                 </Link>
               </p>
-              <p className='text-base font-light leading-none tracking-[-4%]'>
+              <p className='text-base font-light leading-none tracking-[-0.04em]'>
                 for press and inquires{' '}
                 <Link href='/contact' className='font-bold hover:underline'>
                   contact the studio.
@@ -131,32 +131,32 @@ export default function About() {
 
             <div className='max-w-2xl flex-1 space-y-8'>
               <div className='flex flex-col items-start lg:-space-y-2'>
-                <p className='text-xl leading-4 tracking-[-4%] lg:text-2xl'>
+                <p className='text-xl leading-4 tracking-[-0.04em] lg:text-2xl'>
                   she/her
                 </p>
-                <p className='text-xl leading-4 tracking-[-4%] lg:text-2xl'>
+                <p className='text-xl leading-4 tracking-[-0.04em] lg:text-2xl'>
                   ceramicist
                 </p>
-                <p className='text-xl leading-4 tracking-[-4%] lg:text-2xl'>
+                <p className='text-xl leading-4 tracking-[-0.04em] lg:text-2xl'>
                   nyc
                 </p>
               </div>
 
               <div className='max-w-md space-y-6 pt-60'>
-                <p className='text-2xl font-light leading-none tracking-[-4%]'>
+                <p className='text-2xl font-light leading-none tracking-[-0.04em]'>
                   {' '}
                   dragonfly ceramics started in 2025 and we focus on handmade
                   functional ceramics for the home with an emphasis on unique
                   colors.
                 </p>
-                <p className='text-2xl font-light leading-none tracking-[-4%]'>
+                <p className='text-2xl font-light leading-none tracking-[-0.04em]'>
                   {' '}
                   after getting a degree in filmmaking and ceramics, kelly
                   combined her knowledge in the two mediums creating frequent
                   social content and while striving to constantly learn and
                   perfect her ceramic abilities.
                 </p>
-                <p className='text-2xl font-light leading-none tracking-[-4%]'>
+                <p className='text-2xl font-light leading-none tracking-[-0.04em]'>
                   check out @dragonflyceramics on{' '}
                   <Link
                     href='https://www.instagram.com/dragonflyceramics_/'
@@ -185,7 +185,7 @@ export default function About() {
                     youtube!
                   </Link>
                 </p>
-                <p className='text-2xl font-light leading-none tracking-[-4%]'>
+                <p className='text-2xl font-light leading-none tracking-[-0.04em]'>
                   for press and inquires{' '}
                   <Link href='/contact' className='font-bold hover:underline'>
                     contact the studio.

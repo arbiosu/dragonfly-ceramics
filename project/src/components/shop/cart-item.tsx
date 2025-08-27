@@ -49,10 +49,8 @@ export default function CartItemCard({ product, quantity }: CartItem) {
           </div>
         </div>
 
-        {/* Quantity controls */}
         <div className='col-span-2 mt-2 flex items-center justify-between sm:col-span-1 sm:mt-0 sm:justify-center'>
-          <span className='text-sm sm:mr-2 sm:text-base'>Quantity:</span>
-          <div className='flex items-center rounded border'>
+          <div className='flex items-center rounded'>
             <button
               onClick={handleDecrementQuantity}
               className='px-2 py-1 text-lg transition-colors hover:bg-gray-100'
@@ -73,7 +71,6 @@ export default function CartItemCard({ product, quantity }: CartItem) {
           </div>
         </div>
 
-        {/* Price and remove */}
         <div className='col-span-3 mt-2 flex items-center justify-between sm:col-span-1 sm:mt-0 sm:justify-end'>
           <span className='text-base font-medium sm:text-lg'>
             ${(product.price * quantity) / 100}
@@ -87,7 +84,7 @@ export default function CartItemCard({ product, quantity }: CartItem) {
           </button>
         </div>
       </div>
-      <hr className='my-4 border-dfNew sm:my-6' />
+      <hr className='my-4 border-gray-200 sm:my-6' />
     </>
   );
 }
