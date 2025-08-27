@@ -3,26 +3,81 @@ import Image from 'next/image';
 import SocialMediaLinksComponent from '@/components/socialmedia';
 import SubscribeCard from '@/components/subscribe-card';
 
+const footerLinks = [
+  { href: '/shop', label: 'shop' },
+  { href: '/shop?page=0&filter=seconds', label: 'seconds' },
+  { href: '/about', label: 'about' },
+  { href: '/gallery', label: 'gallery' },
+  { href: '/contact', label: 'contact' },
+  { href: '/consulting', label: 'consulting' },
+];
+
+export function NewFooter() {
+  const currentYear = new Date().getFullYear();
+  return (
+    <footer className='bg-dfNew2 text-black'>
+      <div className='container mx-auto'>
+        <div className='grid grid-cols-2 grid-rows-2 md:grid-cols-4'>
+          <div className='col-span-2'>
+            <Image
+              src='/df-red-text.png'
+              alt='Dragonfly Ceramics'
+              height={200}
+              width={400}
+              unoptimized
+              className='md:-mx-6'
+            />
+          </div>
+          <div className='md:row-start-2'>
+            <ul className='-space-y-2 text-xl'>
+              {footerLinks.map((link, index) => (
+                <li key={index}>
+                  <Link
+                    href={link.href}
+                    className='tracking-[-0.069em] transition-colors hover:underline'
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className='col-span-2 row-start-2 md:col-start-4 md:row-start-1 md:pt-10'>
+            <SubscribeCard text='' />
+          </div>
+          <div className='justify-items-end md:col-start-4'>
+            <SocialMediaLinksComponent />
+            <p className='pt-6 text-xs md:text-sm'>
+              &copy; {currentYear} dragonfly ceramics. all rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className='bg-dfNew2 py-8 -tracking-widest text-black'>
+    <footer className='bg-dfNew2 py-8 text-black'>
       <div className='container mx-auto px-4'>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
-          {/* Brand and Copyright */}
           <div className='md:col-span-2'>
             <Image
               src='/df-red-text.png'
               alt='Dragonfly Ceramics'
               height={200}
               width={400}
+              unoptimized
+              className='md:-mx-6'
             />
             <div>
               <ul className='-space-y-2 text-xl'>
                 <li>
                   <Link
                     href='/shop'
-                    className='transition-colors hover:underline'
+                    className='tracking-[-0.069em] transition-colors hover:underline'
                   >
                     shop
                   </Link>
@@ -30,7 +85,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/shop'
-                    className='transition-colors hover:underline'
+                    className='tracking-[-0.069em] transition-colors hover:underline'
                   >
                     seconds
                   </Link>
@@ -38,7 +93,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/about'
-                    className='transition-colors hover:underline'
+                    className='tracking-[-0.069em] transition-colors hover:underline'
                   >
                     about
                   </Link>
@@ -46,7 +101,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/gallery'
-                    className='transition-colors hover:underline'
+                    className='tracking-[-0.069em] transition-colors hover:underline'
                   >
                     gallery
                   </Link>
@@ -54,7 +109,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/contact'
-                    className='transition-colors hover:underline'
+                    className='tracking-[-0.069em] transition-colors hover:underline'
                   >
                     contact
                   </Link>
@@ -62,7 +117,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/consulting'
-                    className='transition-colors hover:underline'
+                    className='tracking-[-0.069em] transition-colors hover:underline'
                   >
                     consulting
                   </Link>
@@ -71,14 +126,14 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
+          <div className='justify-items-center md:justify-items-end'>
             <SubscribeCard text='' />
-            <div className='space-y-4'>
+            <div className='pt-10'>
               <SocialMediaLinksComponent />
-              <p className='text-sm'>
-                &copy; {currentYear} dragonfly ceramics. all rights reserved.
-              </p>
             </div>
+            <p className='pt-10 text-sm'>
+              &copy; {currentYear} dragonfly ceramics. all rights reserved.
+            </p>
           </div>
         </div>
       </div>

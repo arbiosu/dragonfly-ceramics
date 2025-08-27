@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { validateEmail } from '@/lib/utils';
 import { Input } from './ui/input';
 
@@ -59,7 +58,7 @@ export default function SubscribeCard({ text }: { text: string }) {
     <div>
       <div className='text-center'>
         <h2 className='text-6xl tracking-[-0.069em] md:text-8xl'>{text}</h2>
-        <p className='text-lg tracking-[-0.069em]'>
+        <p className='text-xl tracking-[-0.069em]'>
           sign up for the mailing list
         </p>
       </div>
@@ -124,14 +123,6 @@ export default function SubscribeCard({ text }: { text: string }) {
           {error && <p className='mt-2 text-center text-red-600'>{error}</p>}
         </form>
       )}
-      <Image
-        src='/logo-cropped-black.png'
-        alt='Dragonfly Ceramics Logo Black'
-        width={100}
-        height={100}
-        className='mx-auto p-6'
-        unoptimized
-      />
     </div>
   );
 }

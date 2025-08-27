@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import SubscribeCard from './subscribe-card';
 
 export default function SubscribePage() {
@@ -19,6 +20,14 @@ export default function SubscribePage() {
       </div>
       <div className='p-6'>
         <SubscribeCard text={"don't miss a beat"} />
+        <Image
+          src='/logo-cropped-black.png'
+          alt='Dragonfly Ceramics Logo Black'
+          width={100}
+          height={100}
+          className='mx-auto p-6'
+          unoptimized
+        />
       </div>
     </section>
   );
