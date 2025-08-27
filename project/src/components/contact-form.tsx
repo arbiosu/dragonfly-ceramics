@@ -7,13 +7,11 @@ import Image from 'next/image';
 import { validateEmail } from '@/lib/utils';
 
 export default function ContactForm() {
-  // Create refs for form fields that don't need immediate UI updates
   const nameRef = useRef('');
   const emailRef = useRef('');
   const messageRef = useRef('');
   const sourceRef = useRef('');
 
-  // Keep topic in state since it affects UI (image changes)
   const [topic, setTopic] = useState('customOrder');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -26,7 +24,6 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Get current ref values
     const formData = {
       name: nameRef.current,
       email: emailRef.current,
@@ -72,7 +69,6 @@ export default function ContactForm() {
     }
   };
 
-  // Topic-specific instructions
   const getTopicInstructions = () => {
     switch (topic) {
       case 'customOrder':
@@ -120,183 +116,194 @@ export default function ContactForm() {
     }
   };
 
+  if (submitted) {
+    return (
+      <div className='relative text-center md:p-40'>
+        <p className='text-6xl tracking-[-0.069em] text-black'>submitted!</p>
+        <p className='mt-1 text-lg tracking-[-0.069em] text-black'>
+          thanks for submitting the form! i will get back to you as soon as i
+          can!
+        </p>
+
+        <div className='relative w-full overflow-hidden'>
+          <Image
+            src='/contact-mug-unoptimized.png'
+            width={600}
+            height={200}
+            alt='Dragonfly Ceramics Mug - Handcrafed Pottery'
+            priority
+            className='contrast-105 ml-auto brightness-105 filter'
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className='mx-auto text-black'>
       <div className='relative z-10 flex min-h-screen flex-col items-center justify-between lg:flex-row'>
         <div className='flex-1 p-10'>
-          <h1 className='mb-2 text-8xl font-light tracking-tighter'>contact</h1>
+          <h1 className='mb-2 text-8xl tracking-[-0.069em]'>contact</h1>
           <div className='max-w-xl p-2'>
-            <h4 className='mb-6 text-xl leading-4 tracking-tighter'>
+            <h4 className='mb-6 text-xl font-light leading-none tracking-[-0.069em]'>
               {
                 "have a question about a piece or just want to say hi? i'm all ears. for general inquiries, brand collaborations, or custom wholesale orders - whether you're looking for handmade gifts for your team, ceramic dinnerware for your restaurant, or a large batch of unique pieces for a special event - please reach out using the form below."
               }
             </h4>
           </div>
-
-          {submitted ? (
-            <div className='rounded-md bg-green-50 px-6 py-4 text-center'>
-              <p className='font-medium text-green-600'>
-                thanks for reaching out!
-              </p>
-              <p className='mt-1 text-sm text-green-600'>
-                we&apos;ll give you a reply as soon as possible!
-              </p>
-            </div>
-          ) : (
-            <div className='flex flex-col gap-24 md:flex-row'>
-              {/* Form Section */}
-              <div className='flex-1'>
-                <form onSubmit={handleSubmit} className='space-y-6'>
-                  <div>
-                    <label
-                      htmlFor='topic'
-                      className='mb-1 block text-xl font-light'
-                    >
-                      topic
-                    </label>
-                    <select
-                      id='topic'
-                      name='topic'
-                      value={topic}
-                      onChange={handleTopicChange}
-                      disabled={isLoading}
-                      required
-                      className='w-full rounded-lg border border-dfNew px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
-                    >
-                      <option value='' disabled>
-                        select an option
-                      </option>
-                      <option value='customOrder'>custom order</option>
-                      <option value='wholesale'>wholesale</option>
-                      <option value='general'>general inquiry</option>
-                    </select>
-                  </div>
-                  {topic && getTopicInstructions()}
-                  <div>
-                    <label
-                      htmlFor='name'
-                      className='mb-1 block text-xl font-light'
-                    >
-                      name
-                    </label>
-                    <input
-                      type='text'
-                      id='name'
-                      name='name'
-                      defaultValue=''
-                      onChange={(e) => (nameRef.current = e.target.value)}
-                      disabled={isLoading}
-                      required
-                      className='w-full rounded-lg border border-dfNew px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor='email'
-                      className='mb-1 block text-xl font-light'
-                    >
-                      email
-                    </label>
-                    <input
-                      type='email'
-                      id='email'
-                      name='email'
-                      defaultValue=''
-                      onChange={(e) => (emailRef.current = e.target.value)}
-                      disabled={isLoading}
-                      required
-                      className='w-full rounded-lg border border-dfNew px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor='message'
-                      className='mb-1 block text-xl font-light'
-                    >
-                      message
-                    </label>
-                    <textarea
-                      id='message'
-                      name='message'
-                      defaultValue=''
-                      onChange={(e) => (messageRef.current = e.target.value)}
-                      disabled={isLoading}
-                      required
-                      rows={4}
-                      className='w-full rounded-lg border border-dfNew px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor='source'
-                      className='mb-1 block text-xl font-light'
-                    >
-                      how did you hear about me?
-                    </label>
-                    <select
-                      id='source'
-                      name='source'
-                      defaultValue=''
-                      onChange={(e) => (sourceRef.current = e.target.value)}
-                      disabled={isLoading}
-                      required
-                      className='w-full rounded-lg border border-dfNew px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
-                    >
-                      <option value='' disabled>
-                        Select an option
-                      </option>
-                      <option value='family/friend'>Family/Friend</option>
-                      <option value='tiktok'>TikTok</option>
-                      <option value='instagram'>Instagram</option>
-                      <option value='in person sales'>In Person Sales</option>
-                      <option value='other'>Other</option>
-                    </select>
-                    {error && <p className='mt-2 text-red-600'>{error}</p>}
-                  </div>
-
-                  <button
-                    type='submit'
-                    disabled={isLoading}
-                    className='group relative inline-flex transform items-center justify-center overflow-hidden rounded-3xl border border-black bg-dfNew2 px-6 py-2 text-xl font-light text-black transition-all duration-300 hover:scale-105 hover:bg-stone-800 hover:bg-white/10 hover:text-white hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+          <div className='flex flex-col gap-24 md:flex-row'>
+            {/* Form Section */}
+            <div className='flex-1'>
+              <form onSubmit={handleSubmit} className='space-y-6'>
+                <div>
+                  <label
+                    htmlFor='topic'
+                    className='mb-1 block text-xl font-light'
                   >
-                    {isLoading ? (
-                      <div className='flex items-center justify-center'>
-                        <svg
-                          className='-ml-1 mr-3 h-5 w-5 animate-spin text-white'
-                          xmlns='http://www.w3.org/2000/svg'
-                          fill='none'
-                          viewBox='0 0 24 24'
-                        >
-                          <circle
-                            className='opacity-25'
-                            cx='12'
-                            cy='12'
-                            r='10'
-                            stroke='currentColor'
-                            strokeWidth='4'
-                          ></circle>
-                          <path
-                            className='opacity-75'
-                            fill='currentColor'
-                            d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-                          ></path>
-                        </svg>
-                        processing...
-                      </div>
-                    ) : (
-                      <>
-                        <span className='relative z-10'>submit</span>
-                        <div className='absolute inset-0 origin-left scale-x-0 transform bg-dfNew transition-transform duration-300 group-hover:scale-x-100'></div>
-                      </>
-                    )}
-                  </button>
-                </form>
-              </div>
+                    topic
+                  </label>
+                  <select
+                    id='topic'
+                    name='topic'
+                    value={topic}
+                    onChange={handleTopicChange}
+                    disabled={isLoading}
+                    required
+                    className='w-full rounded-lg border border-dfNew px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
+                  >
+                    <option value='' disabled>
+                      select an option
+                    </option>
+                    <option value='customOrder'>custom order</option>
+                    <option value='wholesale'>wholesale</option>
+                    <option value='general'>general inquiry</option>
+                  </select>
+                </div>
+                {topic && getTopicInstructions()}
+                <div>
+                  <label
+                    htmlFor='name'
+                    className='mb-1 block text-xl font-light'
+                  >
+                    name
+                  </label>
+                  <input
+                    type='text'
+                    id='name'
+                    name='name'
+                    defaultValue=''
+                    onChange={(e) => (nameRef.current = e.target.value)}
+                    disabled={isLoading}
+                    required
+                    className='w-full rounded-lg border border-dfNew px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor='email'
+                    className='mb-1 block text-xl font-light'
+                  >
+                    email
+                  </label>
+                  <input
+                    type='email'
+                    id='email'
+                    name='email'
+                    defaultValue=''
+                    onChange={(e) => (emailRef.current = e.target.value)}
+                    disabled={isLoading}
+                    required
+                    className='w-full rounded-lg border border-dfNew px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor='message'
+                    className='mb-1 block text-xl font-light'
+                  >
+                    message
+                  </label>
+                  <textarea
+                    id='message'
+                    name='message'
+                    defaultValue=''
+                    onChange={(e) => (messageRef.current = e.target.value)}
+                    disabled={isLoading}
+                    required
+                    rows={4}
+                    className='w-full rounded-lg border border-dfNew px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor='source'
+                    className='mb-1 block text-xl font-light'
+                  >
+                    how did you hear about me?
+                  </label>
+                  <select
+                    id='source'
+                    name='source'
+                    defaultValue=''
+                    onChange={(e) => (sourceRef.current = e.target.value)}
+                    disabled={isLoading}
+                    required
+                    className='w-full rounded-lg border border-dfNew px-4 py-2 text-lg text-df-text focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500'
+                  >
+                    <option value='' disabled>
+                      Select an option
+                    </option>
+                    <option value='family/friend'>Family/Friend</option>
+                    <option value='tiktok'>TikTok</option>
+                    <option value='instagram'>Instagram</option>
+                    <option value='in person sales'>In Person Sales</option>
+                    <option value='other'>Other</option>
+                  </select>
+                  {error && <p className='mt-2 text-red-600'>{error}</p>}
+                </div>
+
+                <button
+                  type='submit'
+                  disabled={isLoading}
+                  className='bg-df-yellow group relative inline-flex transform items-center justify-center overflow-hidden rounded-3xl border border-black px-6 py-2 text-xl font-light text-black transition-all duration-300 hover:scale-105 hover:bg-stone-800 hover:bg-white/10 hover:text-white hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+                >
+                  {isLoading ? (
+                    <div className='flex items-center justify-center'>
+                      <svg
+                        className='-ml-1 mr-3 h-5 w-5 animate-spin text-white'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                      >
+                        <circle
+                          className='opacity-25'
+                          cx='12'
+                          cy='12'
+                          r='10'
+                          stroke='currentColor'
+                          strokeWidth='4'
+                        ></circle>
+                        <path
+                          className='opacity-75'
+                          fill='currentColor'
+                          d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                        ></path>
+                      </svg>
+                      processing...
+                    </div>
+                  ) : (
+                    <>
+                      <span className='relative z-10'>submit</span>
+                      <div className='absolute inset-0 origin-left scale-x-0 transform bg-dfNew transition-transform duration-300 group-hover:scale-x-100'></div>
+                    </>
+                  )}
+                </button>
+              </form>
             </div>
-          )}
+          </div>
         </div>
 
         <div className='relative right-0 mt-12 max-w-2xl flex-1 lg:mt-0'>
