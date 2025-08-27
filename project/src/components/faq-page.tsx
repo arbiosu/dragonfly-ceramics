@@ -47,8 +47,8 @@ export default function FAQPage() {
           src='/df-hero-dispenser.png'
           alt='Dragonfly Ceramics Bowl'
           width={600}
-          height={200}
-          className='absolute md:left-0'
+          height={400}
+          className='absolute -mx-4 -mt-20 md:left-0 md:-mt-24'
         />
       </div>
       <div className='leading-0 left-0 top-0 w-full overflow-hidden'>
