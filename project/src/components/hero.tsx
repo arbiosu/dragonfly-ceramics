@@ -5,11 +5,11 @@ export function HeroSection() {
   return (
     <section className='relative min-h-screen w-full overflow-hidden'>
       <div className='relative z-10 flex min-h-screen flex-col items-center justify-between lg:flex-row'>
-        <div className='flex-1 space-y-8 px-6 text-center lg:pr-12 lg:text-left'>
+        <div className='flex-1 space-y-8 px-6 pt-10 text-center md:pt-0 lg:pr-12 lg:text-left'>
           <div>
             <h1 className='text-7xl text-black md:text-8xl lg:text-9xl'>
-              <span className='block tracking-[-6.9%]'>crafted</span>
-              <span className='block tracking-[-6.9%]'>with love</span>
+              <span className='block tracking-[-0.069em]'>crafted</span>
+              <span className='block tracking-[-0.069em]'>with love</span>
             </h1>
           </div>
 
@@ -38,7 +38,6 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* Hero Image */}
         <div className='relative mt-12 max-w-2xl flex-1 lg:mt-0'>
           <div className='group relative'>
             <div className='relative overflow-hidden'>

@@ -17,7 +17,6 @@ export default function SubscribePage() {
           ></path>
         </svg>
       </div>
-      {/* Top section (e.g. a colored header) */}
       <div className='p-6'>
         <SubscribeCard text={"don't miss a beat"} />
       </div>

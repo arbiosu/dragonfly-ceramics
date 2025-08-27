@@ -2,17 +2,17 @@ import { resend } from '@/lib/resend/resend';
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
-interface ContactMessage {
+interface ConsultingMessage {
   name: string;
   email: string;
-  source: string;
-  topic: string;
+  businessName: string;
+  preferredDate: string;
   message: string;
 }
 
 const RATE_LIMIT = 3;
 const RATE_LIMIT_WINDOW = 60 * 60 * 1000;
-const COOKIE_NAME = 'contact_submissions';
+const COOKIE_NAME = 'consulting_submissions';
 
 export async function POST(req: Request) {
   try {
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
     }
     if (submissions.count >= RATE_LIMIT) {
       const resetTime = submissions.timestamp + RATE_LIMIT_WINDOW;
-      const timeRemaining = Math.ceil((resetTime - Date.now()) / 60000); // in minutes
+      const timeRemaining = Math.ceil((resetTime - Date.now()) / 60000);
 
       return NextResponse.json(
         {
@@ -47,22 +47,17 @@ export async function POST(req: Request) {
       );
     }
 
-    const body: ContactMessage = await req.json();
+    const body: ConsultingMessage = await req.json();
 
     const { data, error } = await resend.emails.send({
-      from: 'Dragonfly Contact Form <noreply@updates.dragonflyceramics.com>',
+      from: 'Dragonfly Consulting Form <noreply@updates.dragonflyceramics.com>',
       to: 'dragonflyceramics.kelly@gmail.com',
-      subject: `Message from Contact Form: ${body.topic}`,
-      html: `<p>
-                    From: ${body.name} ${body.email}
-                    </p>
-                    <br></br>
-                    <p>Source: ${body.source}</p>
-                    <br></br>
-                    <p>Topic: ${body.topic}</p>
-                    <br></br>
-                    <p>Message: ${body.message}</p>
-                    `,
+      subject: `Consulting Request from ${body.businessName}`,
+      html: `
+      <p>From: ${body.name} --- ${body.businessName} --- ${body.email}</p>
+      <p>Preferred Date/Time: ${body.preferredDate}</p>
+      <p>Message: ${body.message}</p>
+      `,
     });
 
     if (error) {

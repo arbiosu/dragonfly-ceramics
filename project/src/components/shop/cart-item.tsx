@@ -48,7 +48,6 @@ export default function CartItemCard({ product, quantity }: CartItem) {
             </span>
           </div>
         </div>
-
         <div className='col-span-2 mt-2 flex items-center justify-between sm:col-span-1 sm:mt-0 sm:justify-center'>
           <div className='flex items-center rounded'>
             <button

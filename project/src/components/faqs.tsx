@@ -29,7 +29,7 @@ export function FAQHorizontalScroll({ faqs }: FAQProps) {
   };
 
   return (
-    <div className='mx-auto w-full max-w-7xl py-6 text-dfNew'>
+    <div className='mx-auto w-full max-w-7xl py-6 text-black'>
       <div
         ref={scrollRef}
         className='relative flex flex-nowrap overflow-x-auto px-2 py-4'
@@ -37,18 +37,17 @@ export function FAQHorizontalScroll({ faqs }: FAQProps) {
         {faqs.map((faq) => (
           <div
             key={faq.id}
-            className='mr-4 inline-block w-96 flex-shrink-0 p-6 align-top last:mr-0'
+            className='mr-4 inline-flex w-96 flex-shrink-0 flex-col p-6 last:mr-0'
           >
-            <p className='mb-8 text-xl font-medium md:text-2xl'>
+            <p className='mb-8 h-20 text-3xl tracking-[-0.069em]'>
               {faq.question.toLowerCase()}
             </p>
-            <p className='text-lg leading-none tracking-[-4%]'>
+            <p className='text-xl font-light leading-5 tracking-[-0.069em]'>
               {faq.answer.toLowerCase()}
             </p>
           </div>
         ))}
       </div>
-      {/* Buttons */}
       <div className='mt-6 flex justify-between'>
         <button
           onClick={scrollLeft}
