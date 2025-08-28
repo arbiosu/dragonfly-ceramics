@@ -31,7 +31,7 @@ export default function SortSelector() {
     <div data-pending={isPending ? '' : undefined} className='mb-4'>
       <label className='hidden'>sort by:</label>
       <select
-        className='rounded bg-df-bg px-4 py-2 text-lg text-df-text'
+        className='w-full rounded px-4 py-2 text-lg tracking-[-0.069em] text-black'
         value={currentSort}
         onChange={(e) => handleSortChange(e.target.value)}
       >

@@ -34,7 +34,7 @@ export default function FilterPanel({ filters }: { filters: string[] }) {
 
   return (
     <div data-pending={isPending ? '' : undefined} className='text-df-text'>
-      <div className='mb-6 flex flex-col'>
+      <div className='mb-6 flex flex-col -space-y-1 truncate'>
         {filterOptions.map((filter) => (
           <div key={filter} className='relative'>
             <input

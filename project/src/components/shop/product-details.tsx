@@ -117,7 +117,7 @@ export default function ProductDetails({
         </div>
       </div>
       <div className='mx-auto mt-12 max-w-lg'>
-        <SubscribeCard />
+        <SubscribeCard text='' />
       </div>
     </div>
   );

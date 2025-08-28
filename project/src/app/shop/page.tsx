@@ -4,7 +4,6 @@ import SortSelector from '@/components/shop/sort-panel';
 import PaginationControls from '@/components/shop/pagination-controls';
 import ActiveSelector from '@/components/shop/active-selector';
 import ProductsGrid from '@/components/shop/products-grid';
-import Banner from '@/components/banner';
 import Image from 'next/image';
 
 const PAGE_SIZE = 12;
@@ -54,10 +53,10 @@ export default async function Shop(props: {
   const currentPage = parseInt(page[0]);
 
   return (
-    <main className='py-28'>
+    <main className='py-28 tracking-[-0.069em]'>
       <section className='container mx-auto'>
         <div className='mb-8 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12'>
-          <div className='order-2 px-2 md:order-1 md:col-span-1 lg:col-span-3'>
+          <div className='order-2 px-2 md:order-1 md:col-span-1 lg:col-span-3 lg:px-16'>
             <FilterPanel filters={filters} />
           </div>
 
@@ -74,9 +73,11 @@ export default async function Shop(props: {
             </div>
           </div>
 
-          <div className='order-3 flex flex-col justify-end px-2 md:col-span-1 md:items-end lg:col-span-3'>
-            <SortSelector />
-            <ActiveSelector />
+          <div className='order-3 flex flex-col justify-end md:col-span-1 md:items-end lg:col-span-3'>
+            <div className='-mx-2 w-48 lg:mx-16'>
+              <SortSelector />
+              <ActiveSelector />
+            </div>
           </div>
         </div>
 
@@ -87,15 +88,6 @@ export default async function Shop(props: {
           hasNextPage={currentPage < totalPages - 1}
           hasPrevPage={currentPage > 0}
         />
-        <div className='py-20'>
-          <Banner
-            title={'for custom orders, wholesale, and any other questions:'}
-            description=''
-            buttonText='contact form'
-            buttonLink='/contact'
-            variant='default'
-          />
-        </div>
       </section>
     </main>
   );

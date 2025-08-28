@@ -96,6 +96,18 @@ export default function AdminProductCard(props: {
           Care: {product.care}
         </p>
         <p className='mb-4 flex-grow text-sm text-df-text'>
+          Color: {product.color}
+        </p>
+        <p className='mb-4 flex-grow text-sm text-df-text'>
+          Set: {product.set}
+        </p>
+        <p className='mb-4 flex-grow text-sm text-df-text'>
+          Capacity: {product.capacity}
+        </p>
+        <p className='mb-4 flex-grow text-sm text-df-text'>
+          Single: {product.single}
+        </p>
+        <p className='mb-4 flex-grow text-sm text-df-text'>
           Price: {product.price / 100}
         </p>
         <div className='mb-4'>

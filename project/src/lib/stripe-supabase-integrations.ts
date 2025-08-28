@@ -25,5 +25,9 @@ export function serializeStripeProduct(
     inventory: parseInt(product.metadata.inventory),
     type: product.metadata.type,
     care: product.metadata.care,
+    color: product.metadata.color,
+    set: product.metadata.set,
+    capacity: product.metadata.capacity,
+    single: product.metadata.single === 'true' ? true : false,
   };
 }
