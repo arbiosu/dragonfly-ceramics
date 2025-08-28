@@ -16,7 +16,7 @@ export function NewFooter() {
   const currentYear = new Date().getFullYear();
   return (
     <footer className='bg-dfNew2 text-black'>
-      <div className='container mx-auto'>
+      <div className='container mx-auto px-4'>
         <div className='grid grid-cols-2 grid-rows-2 md:grid-cols-4'>
           <div className='col-span-2'>
             <Image

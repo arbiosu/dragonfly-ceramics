@@ -23,16 +23,41 @@ export default function Navbar() {
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 10);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Close mobile menu when clicking outside or pressing escape
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (isMobileMenuOpen && !target.closest('nav')) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    if (isMobileMenuOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.addEventListener('click', handleClickOutside);
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener('click', handleClickOutside);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
 
   if (!mounted) {
     return <Loading />;
@@ -42,16 +67,23 @@ export default function Navbar() {
     setIsMobileMenuOpen((prev) => !prev);
   };
 
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <nav
-      className={`fixed left-0 right-0 top-0 z-50 p-4 transition-all duration-300 ${isScrolled ? 'bg-df-text shadow-md' : 'bg-transparent'}`}
+      className={`fixed left-0 right-0 top-0 z-50 p-4 transition-all duration-300 ${
+        isScrolled ? 'bg-df-text shadow-md' : 'bg-transparent'
+      }`}
     >
       <div className='relative flex items-center justify-between'>
         {/* Hamburger Menu (mobile only) */}
         <button
-          className='text-white md:hidden'
+          className='z-60 text-white md:hidden'
           onClick={toggleMobileMenu}
-          aria-label='Toggle menu'
+          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMobileMenuOpen}
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -63,10 +95,24 @@ export default function Navbar() {
             strokeWidth='2'
             strokeLinecap='round'
             strokeLinejoin='round'
+            className={`transition-transform duration-300 ${
+              isMobileMenuOpen ? 'rotate-90' : ''
+            }`}
           >
-            <line x1='3' y1='12' x2='21' y2='12'></line>
-            <line x1='3' y1='6' x2='21' y2='6'></line>
-            <line x1='3' y1='18' x2='21' y2='18'></line>
+            {isMobileMenuOpen ? (
+              // X icon when menu is open
+              <>
+                <line x1='18' y1='6' x2='6' y2='18'></line>
+                <line x1='6' y1='6' x2='18' y2='18'></line>
+              </>
+            ) : (
+              // Hamburger icon when menu is closed
+              <>
+                <line x1='3' y1='12' x2='21' y2='12'></line>
+                <line x1='3' y1='6' x2='21' y2='6'></line>
+                <line x1='3' y1='18' x2='21' y2='18'></line>
+              </>
+            )}
           </svg>
         </button>
 
@@ -83,8 +129,9 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
+
         {/* Centered Logo */}
-        <div className='absolute bottom-0 left-1/2 top-2 z-10 -translate-x-1/2 -translate-y-1/2'>
+        <div className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2'>
           <Link href='/' aria-label='Home'>
             <Image
               src='/logo-cropped.png'
@@ -97,8 +144,9 @@ export default function Navbar() {
             />
           </Link>
         </div>
+
         {/* Shopping Cart right aligned */}
-        <div className='m-2 text-white'>
+        <div className='relative m-2 text-white'>
           <Link href='/shop/cart' aria-label='Shopping Cart'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -123,16 +171,54 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
-      {/* Mobile menu overlay */}
+
+      {/* Backdrop overlay */}
       {isMobileMenuOpen && (
-        <div className='absolute left-0 right-0 top-full min-h-screen bg-df-text p-4 shadow-md transition-transform duration-300 ease-in-out md:hidden'>
-          <ul className='flex flex-col gap-4 text-xl text-white'>
+        <div
+          className='fixed inset-0 z-30 bg-black/50 md:hidden'
+          onClick={closeMobileMenu}
+          aria-hidden='true'
+        />
+      )}
+
+      {/* Mobile menu overlay */}
+      <div
+        className={`fixed left-0 top-0 z-40 h-screen w-full bg-df-text transition-transform duration-300 ease-in-out md:hidden ${
+          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        {/* Close button inside mobile menu */}
+        <div className='absolute right-4 top-4 z-50'>
+          <button
+            onClick={closeMobileMenu}
+            className='text-white transition-colors hover:text-dfNew2'
+            aria-label='Close menu'
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='32'
+              height='32'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+            >
+              <line x1='18' y1='6' x2='6' y2='18'></line>
+              <line x1='6' y1='6' x2='18' y2='18'></line>
+            </svg>
+          </button>
+        </div>
+
+        <div className='flex h-full flex-col justify-center px-8'>
+          <ul className='flex flex-col gap-8 text-center'>
             {navLinks.map((link, index) => (
               <li key={index}>
                 <Link
                   href={link.href}
-                  className='transition-colors hover:text-blue-300'
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  className='text-3xl font-light text-white transition-colors hover:text-dfNew2 focus:text-dfNew2 focus:outline-none'
+                  onClick={closeMobileMenu}
                 >
                   {link.label}
                 </Link>
@@ -140,7 +226,7 @@ export default function Navbar() {
             ))}
           </ul>
         </div>
-      )}
+      </div>
     </nav>
   );
 }
