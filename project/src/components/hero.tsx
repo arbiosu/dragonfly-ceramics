@@ -3,9 +3,9 @@ import { Button } from './shop/shop-button';
 
 export function HeroSection() {
   return (
-    <section className='relative min-h-screen w-full overflow-hidden'>
-      <div className='relative z-10 flex min-h-screen flex-col items-center justify-between lg:flex-row'>
-        <div className='flex-1 space-y-8 px-6 pt-10 text-center md:pt-0 lg:pr-12 lg:text-left'>
+    <section className='relative w-full overflow-hidden'>
+      <div className='relative z-10 flex min-h-screen flex-col items-center justify-between md:flex-row'>
+        <div className='flex-1 space-y-8 px-6 pt-2 text-center lg:pr-12 lg:text-left'>
           <div>
             <h1 className='text-7xl text-black md:text-8xl lg:text-9xl'>
               <span className='block tracking-[-0.069em]'>crafted</span>
@@ -25,20 +25,19 @@ export function HeroSection() {
             </div>
           </div>
 
-          <div>
+          <div className='mx-2'>
             <Button
               href={'/shop'}
               variant={'outline'}
               size={'large'}
-              className='group relative transform overflow-hidden border-2 border-stone-800 bg-transparent px-12 py-4 text-lg font-medium text-stone-800 transition-all duration-300 hover:scale-105 hover:bg-stone-800 hover:text-white hover:shadow-2xl'
+              className='transition-all duration-300 hover:scale-105 hover:shadow-2xl'
             >
               <span className='relative z-10 text-2xl'>shop</span>
-              <div className='absolute inset-0 origin-left scale-x-0 transform bg-stone-800 transition-transform duration-300 group-hover:scale-x-100'></div>
             </Button>
           </div>
         </div>
 
-        <div className='relative mt-12 max-w-2xl flex-1 lg:mt-0'>
+        <div className='relative mt-12 max-w-2xl lg:mt-0'>
           <div className='group relative'>
             <div className='relative overflow-hidden'>
               <Image

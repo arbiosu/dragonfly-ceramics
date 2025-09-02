@@ -5,12 +5,11 @@ import {
   Container,
   Head,
   Html,
-  //Link,
+  Img,
   Preview,
   Section,
   Text,
   Tailwind,
-  Hr,
 } from '@react-email/components';
 
 interface SubscriptionEmailProps {
@@ -31,30 +30,48 @@ export const SubscriptionEmail: React.FC<Readonly<SubscriptionEmailProps>> = ({
               dfNew: '#2b2340',
               dfNew2: '#dfd1ee',
             },
+            fontFamily: {
+              manrope: ['Manrope', 'sans-serif'],
+            },
           },
         },
       }}
     >
       <Head />
       <Preview>Welcome to Dragonfly Ceramics!</Preview>
-      <Body className='bg-white'>
-        <Container className='bg-dfNew2'>
-          <Section className='p-12'>
-            <Text className='text-2xl text-df-text'>
-              Welcome to Dragonfly Ceramics, {email}!
-            </Text>
-            <Hr />
-            <Text className='text-xl text-df-text'>
-              THANKS FOR SIGNING UP FOR THE NEWSLETTER. YOU WILL NOW RECEIVE
-              UPDATES FOR DRAGONFLY CERAMICS.
-            </Text>
-            <Button
-              className='mr-3 inline-flex w-full items-center justify-center rounded-lg bg-dfNew px-5 py-3 text-center text-white'
-              href='https://dragonflyceramics.com/shop'
-            >
-              Shop Now
-            </Button>
+      <Body className='font-manrope bg-white'>
+        <Container className='mx-auto max-w-md rounded-xl bg-white p-10 text-center shadow'>
+          <Text className='m-0 text-3xl font-light text-black'>you’re in</Text>
+          <Section>
+            <Img
+              src='https://trdshamrxoipypgbujnx.supabase.co/storage/v1/object/public/content/emails/Studio%20Session-030.jpeg'
+              alt='Logo'
+              width='200'
+              height='200'
+              className='mx-auto mb-6'
+            />
+            <Img
+              src='https://trdshamrxoipypgbujnx.supabase.co/storage/v1/object/public/content/emails/hand-made-in-nyc.png'
+              alt='Logo'
+              width='400'
+              height='80'
+              className='mx-auto mb-6'
+            />
           </Section>
+          <Button
+            className='inline-flex items-center justify-center rounded-3xl border-2 border-black bg-white text-xl tracking-[-0.069em] text-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+            href='https://dragonflyceramics.com/shop'
+          >
+            shop
+          </Button>
+          <Container>
+            <Button
+              className='inline-flex items-center justify-center rounded-3xl border-2 border-black bg-white text-xl tracking-[-0.069em] text-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+              href={`https://dragonflyceramics.com/shop/unsubscribe?email=${email}`}
+            >
+              unsubscribe
+            </Button>
+          </Container>
         </Container>
       </Body>
     </Tailwind>

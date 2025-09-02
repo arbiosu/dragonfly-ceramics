@@ -7,7 +7,7 @@ import { Tables } from '@/lib/supabase/database';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'rounded-md bg-dfNew2 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base text-df-text transition-colors hover:bg-dfNew hover:text-white',
+  'text-black w-full rounded-3xl border border-black bg-df-yellow px-4 py-2 text-xl transition-colors duration-200 hover:bg-dfNew2',
   {
     variants: {
       variant: {

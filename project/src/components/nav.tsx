@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import Loading from '@/components/loading';
@@ -74,7 +73,7 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed left-0 right-0 top-0 z-50 p-4 transition-all duration-300 ${
-        isScrolled ? 'bg-df-text shadow-md' : 'bg-transparent'
+        isScrolled ? 'bg-transparent/20 shadow-md' : 'bg-transparent'
       }`}
     >
       <div className='relative flex items-center justify-between'>
@@ -129,21 +128,6 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-
-        {/* Centered Logo */}
-        <div className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2'>
-          <Link href='/' aria-label='Home'>
-            <Image
-              src='/logo-cropped.png'
-              alt='Dragonfly Ceramics'
-              width={100}
-              height={60}
-              className='object-contain'
-              placeholder='blur'
-              blurDataURL='/logo-cropped.png'
-            />
-          </Link>
-        </div>
 
         {/* Shopping Cart right aligned */}
         <div className='relative m-2 text-white'>

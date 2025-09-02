@@ -33,7 +33,7 @@ export default function FilterPanel({ filters }: { filters: string[] }) {
   };
 
   return (
-    <div data-pending={isPending ? '' : undefined} className='text-df-text'>
+    <div data-pending={isPending ? '' : undefined} className='text-black'>
       <div className='mb-6 flex flex-col -space-y-1 truncate'>
         {filterOptions.map((filter) => (
           <div key={filter} className='relative'>
@@ -51,7 +51,7 @@ export default function FilterPanel({ filters }: { filters: string[] }) {
             />
             <label
               htmlFor={`filter-${filter}`}
-              className={`relative inline-block cursor-pointer ${optimisticFilters.includes(filter) ? 'border-b-2 border-df-text' : ''}`}
+              className={`relative inline-block cursor-pointer ${optimisticFilters.includes(filter) ? 'font-bold' : ''}`}
             >
               {filter}
             </label>

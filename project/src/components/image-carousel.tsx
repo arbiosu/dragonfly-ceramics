@@ -17,19 +17,19 @@ export default function ImageCarousel({ images }: { images: string[] }) {
   };
 
   return (
-    <div className='text-df-text'>
-      <div className='relative mx-auto aspect-square w-full max-w-2xl'>
+    <div className='text-black'>
+      <div className='relative mx-auto aspect-square w-full max-w-xl overflow-hidden rounded-3xl border border-black p-4'>
         <NextImageWrapper
           url={memoizedImages[selectedImageIndex]}
           altText={`Product Image #${selectedImageIndex}`}
-          sizeProps='(max-width: 768px) 100vw, 50vw'
+          sizeProps='(max-width: 768px) 100vw, 256px'
         />
       </div>
       {memoizedImages.length > 1 && (
         <div className='mt-4 flex items-center justify-center space-x-4'>
           <button
             onClick={() => handleChangeImage('prev')}
-            className='rounded-full bg-dfNew p-2 text-white hover:bg-dfNew2 hover:text-df-text focus:outline-none focus:ring-2 focus:ring-df-text'
+            className='rounded-2xl border border-black px-4 py-2 text-black hover:bg-dfNew2 focus:outline-none focus:ring-2 focus:ring-df-text'
             aria-label='Previous Image'
           >
             <svg
@@ -46,12 +46,12 @@ export default function ImageCarousel({ images }: { images: string[] }) {
               <path d='M15 18l-6-6 6-6' />
             </svg>
           </button>
-          <div className='text-sm'>
+          <div className='text-lg font-light tracking-[-0.069em]'>
             {selectedImageIndex + 1} / {images.length}
           </div>
           <button
             onClick={() => handleChangeImage('next')}
-            className='rounded-full bg-dfNew p-2 text-white hover:bg-dfNew2 hover:text-df-text focus:outline-none focus:ring-2 focus:ring-df-text'
+            className='rounded-2xl border border-black px-4 py-2 text-black hover:bg-dfNew2 focus:outline-none focus:ring-2 focus:ring-df-text'
             aria-label='Next Image'
           >
             <svg

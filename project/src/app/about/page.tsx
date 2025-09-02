@@ -19,7 +19,7 @@ export default function About() {
                 width={200}
                 height={200}
                 unoptimized
-                className='relative object-cover shadow-xl'
+                className='relative object-cover'
                 priority
               />
             </div>

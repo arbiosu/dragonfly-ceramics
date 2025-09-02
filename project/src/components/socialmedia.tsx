@@ -45,9 +45,9 @@ export function SocialMediaLinks({ items }: SocialMediaLinkProps) {
 export default function SocialMediaLinksComponent() {
   const socials = [
     {
-      src: '/youtube.svg',
-      link: 'https://youtube.com/@dragonflyceramics?si=z3XyaYTzbkfRsiAe',
-      alt: 'Youtube',
+      src: '/instagram.svg',
+      link: 'https://www.instagram.com/dragonflyceramics_?igsh=Y3ZxYTZqbzZjMWxx&utm_source=qr',
+      alt: 'Instagram',
     },
     {
       src: '/tiktok.svg',
@@ -55,9 +55,9 @@ export default function SocialMediaLinksComponent() {
       alt: 'Tiktok',
     },
     {
-      src: '/instagram.svg',
-      link: 'https://www.instagram.com/dragonflyceramics_?igsh=Y3ZxYTZqbzZjMWxx&utm_source=qr',
-      alt: 'Instagram',
+      src: '/youtube.svg',
+      link: 'https://youtube.com/@dragonflyceramics?si=z3XyaYTzbkfRsiAe',
+      alt: 'Youtube',
     },
   ];
   return <SocialMediaLinks items={socials} />;

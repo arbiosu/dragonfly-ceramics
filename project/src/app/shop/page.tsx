@@ -55,26 +55,36 @@ export default async function Shop(props: {
   return (
     <main className='py-28 tracking-[-0.069em]'>
       <section className='container mx-auto'>
-        <div className='mb-8 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12'>
-          <div className='order-2 px-2 md:order-1 md:col-span-1 lg:col-span-3 lg:px-16'>
+        <div className='flex max-w-sm justify-center md:hidden'>
+          <Image
+            src='/shop-header.png'
+            alt='Handmade in NYC'
+            height={200}
+            width={400}
+            className='h-auto w-full'
+            unoptimized
+          />
+        </div>
+        <div className='mb-8 flex items-center justify-between gap-4 md:grid md:grid-cols-12 md:items-start'>
+          <div className='flex-shrink-0 px-2 md:col-span-3 lg:px-16'>
             <FilterPanel filters={filters} />
           </div>
 
-          <div className='order-1 flex items-center justify-center md:order-2 md:col-span-2 lg:col-span-6'>
-            <div className='w-full max-w-md'>
+          <div className='hidden w-full justify-center md:col-span-6 md:flex'>
+            <div className='w-full max-w-sm'>
               <Image
                 src='/shop-header.png'
                 alt='Handmade in NYC'
-                height={300}
-                width={300}
+                height={200}
+                width={200}
                 className='h-auto w-full'
                 unoptimized
               />
             </div>
           </div>
 
-          <div className='order-3 flex flex-col justify-end md:col-span-1 md:items-end lg:col-span-3'>
-            <div className='-mx-2 w-48 lg:mx-16'>
+          <div className='flex flex-col items-end px-2 md:col-span-3 lg:px-8'>
+            <div className='w-48'>
               <SortSelector />
               <ActiveSelector />
             </div>
@@ -82,6 +92,7 @@ export default async function Shop(props: {
         </div>
 
         <ProductsGrid products={data} />
+
         <PaginationControls
           currentPage={currentPage}
           totalPages={totalPages}

@@ -268,7 +268,7 @@ export default function ContactForm() {
                 <button
                   type='submit'
                   disabled={isLoading}
-                  className='bg-df-yellow group relative inline-flex transform items-center justify-center overflow-hidden rounded-3xl border border-black px-6 py-2 text-xl font-light text-black transition-all duration-300 hover:scale-105 hover:bg-stone-800 hover:bg-white/10 hover:text-white hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+                  className='group relative inline-flex transform items-center justify-center overflow-hidden rounded-3xl border border-black bg-df-yellow px-6 py-2 text-xl font-light text-black transition-all duration-300 hover:scale-105 hover:bg-dfNew2 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
                 >
                   {isLoading ? (
                     <div className='flex items-center justify-center'>
@@ -297,7 +297,6 @@ export default function ContactForm() {
                   ) : (
                     <>
                       <span className='relative z-10'>submit</span>
-                      <div className='absolute inset-0 origin-left scale-x-0 transform bg-dfNew transition-transform duration-300 group-hover:scale-x-100'></div>
                     </>
                   )}
                 </button>
