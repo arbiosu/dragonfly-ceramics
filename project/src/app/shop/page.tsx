@@ -53,7 +53,7 @@ export default async function Shop(props: {
   const currentPage = parseInt(page[0]);
 
   return (
-    <main className='py-28 tracking-[-0.069em]'>
+    <main className='py-28 tracking-[-0.04em]'>
       <section className='container mx-auto'>
         <div className='flex max-w-sm justify-center md:hidden'>
           <Image

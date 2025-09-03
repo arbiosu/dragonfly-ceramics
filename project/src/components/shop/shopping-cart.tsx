@@ -21,8 +21,8 @@ export default function ShoppingCart() {
 
   if (cartTotal < 1) {
     return (
-      <main className='p-8'>
-        <h1 className='text-center text-4xl tracking-[-0.069em] text-black md:text-6xl lg:text-9xl'>
+      <section className='min-h-screen'>
+        <h1 className='text-center text-4xl tracking-[-0.04em] text-black md:text-6xl lg:text-9xl'>
           your cart is empty. oh no!
         </h1>
         <div className='mt-8 flex justify-center'>
@@ -30,13 +30,13 @@ export default function ShoppingCart() {
             shop
           </Button>
         </div>
-      </main>
+      </section>
     );
   }
 
   return (
     <main className='container mx-auto max-w-4xl flex-grow px-4 py-8 text-black'>
-      <h1 className='mb-8 text-4xl tracking-[-0.069em] md:text-6xl lg:text-9xl'>
+      <h1 className='mb-8 text-4xl tracking-[-0.04em] md:text-6xl lg:text-9xl'>
         your cart
       </h1>
       {cartItems.map((item, index) => (
@@ -47,10 +47,10 @@ export default function ShoppingCart() {
         />
       ))}
       <div className='flex justify-end gap-8'>
-        <p className='mb-8 text-right text-xl font-extralight tracking-[-0.069em] md:text-2xl'>
+        <p className='mb-8 text-right text-xl font-extralight tracking-[-0.04em] md:text-2xl'>
           subtotal:
         </p>
-        <p className='mb-8 text-right text-xl font-medium tracking-[-0.069em] md:text-2xl'>
+        <p className='mb-8 text-right text-xl font-medium tracking-[-0.04em] md:text-2xl'>
           {cartTotal}.00
         </p>
       </div>

@@ -29,5 +29,6 @@ export function serializeStripeProduct(
     set: product.metadata.set,
     capacity: product.metadata.capacity,
     single: product.metadata.single === 'true' ? true : false,
+    discount: product.metadata.discount,
   };
 }

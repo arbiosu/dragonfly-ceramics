@@ -10,14 +10,12 @@ interface Contact {
 }
 
 export default function ContactCard({ contact }: { contact: Contact }) {
-  const isSubscribed = !contact.unsubscribed;
   const joined = new Date(contact.created_at).toLocaleDateString();
 
   return (
     <div className='max-w-sm p-2 text-lg'>
-      <p className='font-bold'>EMAIL: {contact.email}</p>
+      <p className='font-bold'>{contact.email}</p>
       <p>Subscribed on: {joined}</p>
-      <p>Currently Subscribed?: {isSubscribed}</p>
     </div>
   );
 }

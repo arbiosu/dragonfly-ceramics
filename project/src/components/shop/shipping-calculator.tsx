@@ -10,7 +10,7 @@ import { useCart } from '@/contexts/CartContext';
 
 const inputTextClass =
   'w-full border rounded-lg border-black  px-4 py-2 text-black focus:border-transparent focus:outline-none focus:ring-1 focus:ring-dfNew';
-const labelClass = 'mb-1 block text-lg text-black tracking-[-0.069em]';
+const labelClass = 'mb-1 block text-lg text-black tracking-[-0.04em]';
 
 export function Form() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -95,10 +95,10 @@ export function Form() {
 
       <div className='container mx-auto'>
         <form onSubmit={handleSubmit} className='mx-auto w-full max-w-4xl'>
-          <h1 className='mb-2 text-3xl font-medium tracking-[-0.069em] md:text-6xl'>
+          <h1 className='mb-2 text-3xl font-medium tracking-[-0.04em] md:text-6xl'>
             shipping address
           </h1>
-          <h3 className='mb-2 text-lg tracking-[-0.069em]'>
+          <h3 className='mb-2 text-lg tracking-[-0.04em]'>
             * indicates a required field
           </h3>
           <div className='grid grid-cols-1 gap-2'>
@@ -319,7 +319,7 @@ export function Form() {
           <div className='flex gap-4 p-10'>
             <Link
               href={isLoading ? '#' : '/shop/cart'}
-              className={`bg-df-yellow rounded-3xl border border-black px-4 py-2 text-center text-xl tracking-[-0.069em] transition-colors duration-200 hover:bg-dfNew hover:text-white ${
+              className={`rounded-3xl border border-black bg-df-yellow px-4 py-2 text-center text-xl tracking-[-0.04em] transition-colors duration-200 hover:bg-dfNew hover:text-white ${
                 isLoading
                   ? 'pointer-events-none cursor-not-allowed opacity-50'
                   : ''
@@ -330,7 +330,7 @@ export function Form() {
 
             <button
               type='submit'
-              className='bg-df-yellow flex-1 rounded-3xl border border-black px-4 py-2 text-xl tracking-[-0.069em] transition-colors duration-200 hover:bg-dfNew hover:text-white disabled:cursor-not-allowed disabled:opacity-50'
+              className='flex-1 rounded-3xl border border-black bg-df-yellow px-4 py-2 text-xl tracking-[-0.04em] transition-colors duration-200 hover:bg-dfNew hover:text-white disabled:cursor-not-allowed disabled:opacity-50'
               disabled={isLoading}
             >
               {isLoading ? 'processing...' : 'continue to payment'}

@@ -8,8 +8,8 @@ export function HeroSection() {
         <div className='flex-1 space-y-8 px-6 pt-2 text-center lg:pr-12 lg:text-left'>
           <div>
             <h1 className='text-7xl text-black md:text-8xl lg:text-9xl'>
-              <span className='block tracking-[-0.069em]'>crafted</span>
-              <span className='block tracking-[-0.069em]'>with love</span>
+              <span className='block tracking-[-0.04em]'>crafted</span>
+              <span className='block tracking-[-0.04em]'>with love</span>
             </h1>
           </div>
 

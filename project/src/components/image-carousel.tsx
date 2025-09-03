@@ -46,7 +46,7 @@ export default function ImageCarousel({ images }: { images: string[] }) {
               <path d='M15 18l-6-6 6-6' />
             </svg>
           </button>
-          <div className='text-lg font-light tracking-[-0.069em]'>
+          <div className='text-lg font-light tracking-[-0.04em]'>
             {selectedImageIndex + 1} / {images.length}
           </div>
           <button

@@ -41,7 +41,7 @@ const faqs = [
 
 export default function FAQPage() {
   return (
-    <section className='bg-df-yellow relative w-full text-black'>
+    <section className='relative w-full bg-df-yellow text-black'>
       <div className='absolute inset-0 z-10'>
         <Image
           src='/df-hero-dispenser.png'
@@ -65,7 +65,7 @@ export default function FAQPage() {
           ></path>
         </svg>
       </div>
-      <h4 className='mx-8 text-right text-6xl tracking-[-0.069em] md:text-9xl'>
+      <h4 className='mx-8 text-right text-6xl tracking-[-0.04em] md:text-9xl'>
         frequently <br></br>asked {"q's"}
       </h4>
       <div className='relative z-20'>

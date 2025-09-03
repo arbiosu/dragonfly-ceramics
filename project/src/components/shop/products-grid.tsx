@@ -21,8 +21,8 @@ export default function ProductsGrid({
         </div>
       ) : (
         <div className='flex h-40 items-center justify-center'>
-          <p className='text-4xl tracking-[-0.069em] text-black'>sold out!</p>
-          <p className='text-2xl tracking-[-0.069em] text-black'>
+          <p className='text-4xl tracking-[-0.04em] text-black'>sold out!</p>
+          <p className='text-2xl tracking-[-0.04em] text-black'>
             {
               'not seeing what you’re looking for? sign up for my newsletter so you don’t miss when new items come out of the kiln!'
             }

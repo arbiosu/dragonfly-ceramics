@@ -46,17 +46,17 @@ export default function SocialMediaLinksComponent() {
   const socials = [
     {
       src: '/instagram.svg',
-      link: 'https://www.instagram.com/dragonflyceramics_?igsh=Y3ZxYTZqbzZjMWxx&utm_source=qr',
+      link: 'https://www.instagram.com/dragonflyceramics_/',
       alt: 'Instagram',
     },
     {
       src: '/tiktok.svg',
-      link: 'https://www.tiktok.com/@dragonflyceramics?_t=ZT-8uFd3TGlJe7&_r=1',
+      link: 'https://www.tiktok.com/@dragonflyceramics',
       alt: 'Tiktok',
     },
     {
       src: '/youtube.svg',
-      link: 'https://youtube.com/@dragonflyceramics?si=z3XyaYTzbkfRsiAe',
+      link: 'https://www.youtube.com/@dragonflyceramics',
       alt: 'Youtube',
     },
   ];
@@ -66,7 +66,7 @@ export default function SocialMediaLinksComponent() {
 export function SocialMediaCard() {
   return (
     <section className='w-full px-4 py-8'>
-      <h6 className='mb-12 text-center text-6xl tracking-[-0.069em] lg:text-9xl'>
+      <h6 className='mb-12 text-center text-6xl tracking-[-0.04em] lg:text-9xl'>
         socials
       </h6>
       <div className='mx-auto grid max-w-4xl grid-cols-3 gap-8'>

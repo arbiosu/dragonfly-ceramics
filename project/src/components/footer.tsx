@@ -34,7 +34,7 @@ export function NewFooter() {
                 <li key={index}>
                   <Link
                     href={link.href}
-                    className='tracking-[-0.069em] transition-colors hover:underline'
+                    className='tracking-[-0.04em] transition-colors hover:underline'
                   >
                     {link.label}
                   </Link>
@@ -77,7 +77,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/shop'
-                    className='tracking-[-0.069em] transition-colors hover:underline'
+                    className='tracking-[-0.04em] transition-colors hover:underline'
                   >
                     shop
                   </Link>
@@ -85,7 +85,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/shop'
-                    className='tracking-[-0.069em] transition-colors hover:underline'
+                    className='tracking-[-0.04em] transition-colors hover:underline'
                   >
                     seconds
                   </Link>
@@ -93,7 +93,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/about'
-                    className='tracking-[-0.069em] transition-colors hover:underline'
+                    className='tracking-[-0.04em] transition-colors hover:underline'
                   >
                     about
                   </Link>
@@ -101,7 +101,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/gallery'
-                    className='tracking-[-0.069em] transition-colors hover:underline'
+                    className='tracking-[-0.04em] transition-colors hover:underline'
                   >
                     gallery
                   </Link>
@@ -109,7 +109,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/contact'
-                    className='tracking-[-0.069em] transition-colors hover:underline'
+                    className='tracking-[-0.04em] transition-colors hover:underline'
                   >
                     contact
                   </Link>
@@ -117,7 +117,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href='/consulting'
-                    className='tracking-[-0.069em] transition-colors hover:underline'
+                    className='tracking-[-0.04em] transition-colors hover:underline'
                   >
                     consulting
                   </Link>

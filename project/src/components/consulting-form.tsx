@@ -68,8 +68,8 @@ export default function ConsultingForm() {
   if (submitted) {
     return (
       <div className='relative text-center md:p-40'>
-        <p className='text-6xl tracking-[-0.069em] text-black'>submitted!</p>
-        <p className='mt-1 text-lg tracking-[-0.069em] text-black'>
+        <p className='text-6xl tracking-[-0.04em] text-black'>submitted!</p>
+        <p className='mt-1 text-lg tracking-[-0.04em] text-black'>
           thanks for submitting the form! i will get back to you as soon as i
           can!
         </p>
@@ -92,16 +92,16 @@ export default function ConsultingForm() {
     <div className='mx-auto text-black'>
       <div className='relative z-10 flex min-h-screen flex-col items-center justify-between lg:flex-row'>
         <div className='flex-1 p-10'>
-          <h1 className='mb-2 text-7xl tracking-[-0.069em] md:text-8xl'>
+          <h1 className='mb-2 text-7xl tracking-[-0.04em] md:text-8xl'>
             consulting
           </h1>
           <div className='max-w-xl p-2'>
-            <h4 className='mb-6 text-xl font-light leading-none tracking-[-0.069em]'>
+            <h4 className='mb-6 text-xl font-light leading-none tracking-[-0.04em]'>
               {
                 'Do you have questions about growing your brand on social media? Or about your specific ceramic business, what or how to sell? You can fill out this form for consultations! This meeting will happen over video call and the rate is $75 per hour. Usually everything is covered in an hour but be sure to come with questions for me or please send me your questions before hand so I can be prepared! '
               }
             </h4>
-            <p className='mb-6 text-xl font-light leading-none tracking-[-0.069em]'>
+            <p className='mb-6 text-xl font-light leading-none tracking-[-0.04em]'>
               Note: Filling out this form does not sign you up for a time slot,
               once filled out you will be sent an email to figure out details!
             </p>

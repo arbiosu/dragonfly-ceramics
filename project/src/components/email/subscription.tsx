@@ -41,32 +41,34 @@ export const SubscriptionEmail: React.FC<Readonly<SubscriptionEmailProps>> = ({
       <Preview>Welcome to Dragonfly Ceramics!</Preview>
       <Body className='font-manrope bg-white'>
         <Container className='mx-auto max-w-md rounded-xl bg-white p-10 text-center shadow'>
-          <Text className='m-0 text-3xl font-light text-black'>you’re in</Text>
           <Section>
+            <Text className='m-0 text-left text-3xl font-light tracking-[-0.04em] text-black'>
+              you’re in.
+            </Text>
             <Img
-              src='https://trdshamrxoipypgbujnx.supabase.co/storage/v1/object/public/content/emails/Studio%20Session-030.jpeg'
-              alt='Logo'
-              width='200'
-              height='200'
-              className='mx-auto mb-6'
+              src='https://trdshamrxoipypgbujnx.supabase.co/storage/v1/object/public/content/emails/email.png'
+              alt='pottery'
+              width='300'
+              height='300'
+              className='mx-auto mb-6 text-left'
             />
             <Img
-              src='https://trdshamrxoipypgbujnx.supabase.co/storage/v1/object/public/content/emails/hand-made-in-nyc.png'
+              src='https://trdshamrxoipypgbujnx.supabase.co/storage/v1/object/public/content/emails/dc.png'
               alt='Logo'
-              width='400'
-              height='80'
+              width='600'
+              height='100'
               className='mx-auto mb-6'
             />
           </Section>
           <Button
-            className='inline-flex items-center justify-center rounded-3xl border-2 border-black bg-white text-xl tracking-[-0.069em] text-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+            className='inline-flex items-center justify-center rounded-3xl border border-black bg-white p-4 text-2xl tracking-[-0.04em] text-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
             href='https://dragonflyceramics.com/shop'
           >
             shop
           </Button>
           <Container>
             <Button
-              className='inline-flex items-center justify-center rounded-3xl border-2 border-black bg-white text-xl tracking-[-0.069em] text-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+              className='inline-flex items-center justify-center rounded-3xl border border-black bg-white text-sm tracking-[-0.04em] text-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
               href={`https://dragonflyceramics.com/shop/unsubscribe?email=${email}`}
             >
               unsubscribe

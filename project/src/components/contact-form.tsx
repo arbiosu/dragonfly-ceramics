@@ -119,8 +119,8 @@ export default function ContactForm() {
   if (submitted) {
     return (
       <div className='relative text-center md:p-40'>
-        <p className='text-6xl tracking-[-0.069em] text-black'>submitted!</p>
-        <p className='mt-1 text-lg tracking-[-0.069em] text-black'>
+        <p className='text-6xl tracking-[-0.04em] text-black'>submitted!</p>
+        <p className='mt-1 text-lg tracking-[-0.04em] text-black'>
           thanks for submitting the form! i will get back to you as soon as i
           can!
         </p>
@@ -143,9 +143,9 @@ export default function ContactForm() {
     <div className='mx-auto text-black'>
       <div className='relative z-10 flex min-h-screen flex-col items-center justify-between lg:flex-row'>
         <div className='flex-1 p-10'>
-          <h1 className='mb-2 text-8xl tracking-[-0.069em]'>contact</h1>
+          <h1 className='mb-2 text-8xl tracking-[-0.04em]'>contact</h1>
           <div className='max-w-xl p-2'>
-            <h4 className='mb-6 text-xl font-light leading-none tracking-[-0.069em]'>
+            <h4 className='mb-6 text-xl font-light leading-none tracking-[-0.04em]'>
               {
                 "have a question about a piece or just want to say hi? i'm all ears. for general inquiries, brand collaborations, or custom wholesale orders - whether you're looking for handmade gifts for your team, ceramic dinnerware for your restaurant, or a large batch of unique pieces for a special event - please reach out using the form below."
               }

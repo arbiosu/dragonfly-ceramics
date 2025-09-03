@@ -39,10 +39,10 @@ export function FAQHorizontalScroll({ faqs }: FAQProps) {
             key={faq.id}
             className='mr-4 inline-flex w-96 flex-shrink-0 flex-col p-6 last:mr-0'
           >
-            <p className='mb-8 h-20 text-3xl tracking-[-0.069em]'>
+            <p className='mb-8 h-20 text-3xl tracking-[-0.04em]'>
               {faq.question.toLowerCase()}
             </p>
-            <p className='text-xl font-light leading-5 tracking-[-0.069em]'>
+            <p className='text-xl font-light leading-5 tracking-[-0.04em]'>
               {faq.answer.toLowerCase()}
             </p>
           </div>

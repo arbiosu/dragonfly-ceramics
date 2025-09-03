@@ -51,7 +51,10 @@ export default function ProductCard({
             </div>
             <div className='ml-4 flex shrink-0 flex-col items-end'>
               {product.active ? (
-                <p className='text-lg font-light'>${product.price / 100}</p>
+                <>
+                  <s>{product.discount}</s>
+                  <p className='text-lg font-light'>${product.price / 100}</p>
+                </>
               ) : (
                 <p className='text-lg font-light'>
                   <s>${product.price / 100}</s>

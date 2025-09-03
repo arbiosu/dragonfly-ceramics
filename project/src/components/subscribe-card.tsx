@@ -57,8 +57,8 @@ export default function SubscribeCard({ text }: { text: string }) {
   return (
     <div>
       <div className='text-center'>
-        <h2 className='text-6xl tracking-[-0.069em] md:text-8xl'>{text}</h2>
-        <p className='text-xl tracking-[-0.069em]'>
+        <h2 className='text-6xl tracking-[-0.04em] md:text-8xl'>{text}</h2>
+        <p className='text-xl tracking-[-0.04em]'>
           sign up for the mailing list
         </p>
       </div>

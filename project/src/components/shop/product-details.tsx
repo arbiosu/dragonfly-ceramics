@@ -39,20 +39,20 @@ export default function ProductDetails({
 
         <div className='-mt-4 flex flex-col space-y-4'>
           <div>
-            <h1 className='text-6xl font-medium tracking-[-0.069em]'>
+            <h1 className='text-6xl font-medium tracking-[-0.04em]'>
               {product.type.slice(0, -1).toLowerCase()}
             </h1>
-            <p className='text-6xl font-extralight tracking-[-0.069em]'>
+            <p className='text-6xl font-extralight tracking-[-0.04em]'>
               {product.color}
             </p>
             {/* Price */}
             <div>
               {product.active ? (
-                <p className='mx-1 mt-2 text-4xl font-medium tracking-[-0.069em]'>
+                <p className='mx-1 mt-2 text-4xl font-medium tracking-[-0.04em]'>
                   ${product.price / 100}.00
                 </p>
               ) : (
-                <p className='mx-1 mt-2 text-4xl font-medium tracking-[-0.069em]'>
+                <p className='mx-1 mt-2 text-4xl font-medium tracking-[-0.04em]'>
                   <s>${product.price / 100}</s>
                   <br></br>sold out!
                 </p>

@@ -3,7 +3,7 @@ export default function Page() {
   return (
     <main className='py-20'>
       <section className='py-36'>
-        <h1 className='text-center text-6xl tracking-[-0.069em] text-black'>
+        <h1 className='text-center text-6xl tracking-[-0.04em] text-black'>
           {'coming soon! :)'}
         </h1>
         <div className='flex justify-center py-8'>

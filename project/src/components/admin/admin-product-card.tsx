@@ -72,43 +72,46 @@ export default function AdminProductCard(props: {
           Created at: {new Date(product.created_at).toLocaleDateString()}
         </p>
         <p className='mb-4 flex-grow text-sm text-df-text'>
-          Is active: {product.active ? 'TRUE' : 'FALSE'}
+          Is active: <strong>{product.active ? 'TRUE' : 'FALSE'}</strong>
         </p>
         <p className='mb-4 flex-grow text-sm text-df-text'>
-          Type: {product.type}
+          Type: <strong>{product.type}</strong>
         </p>
         <p className='mb-4 flex-grow text-sm text-df-text'>
-          Inventory: {product.inventory}
+          Inventory: <strong>{product.inventory}</strong>
         </p>
         <p className='mb-4 flex-grow text-sm text-df-text'>
-          Weight: {product.weight}
+          Weight: <strong>{product.weight}</strong>
         </p>
         <p className='mb-4 flex-grow text-sm text-df-text'>
-          Length: {product.length}
+          Length: <strong>{product.length}</strong>
         </p>
         <p className='mb-4 flex-grow text-sm text-df-text'>
-          Width: {product.width}
+          Width: <strong>{product.width}</strong>
         </p>
         <p className='mb-4 flex-grow text-sm text-df-text'>
-          Height: {product.height}
+          Height: <strong>{product.height}</strong>
         </p>
         <p className='mb-4 flex-grow text-sm text-df-text'>
-          Care: {product.care}
+          Care: <strong>{product.care}</strong>
         </p>
         <p className='mb-4 flex-grow text-sm text-df-text'>
-          Color: {product.color}
+          Color: <strong>{product.color}</strong>
         </p>
         <p className='mb-4 flex-grow text-sm text-df-text'>
-          Set: {product.set}
+          Set: <strong>{product.set}</strong>
         </p>
         <p className='mb-4 flex-grow text-sm text-df-text'>
-          Capacity: {product.capacity}
+          Capacity: <strong>{product.capacity}</strong>
         </p>
         <p className='mb-4 flex-grow text-sm text-df-text'>
-          Single: {product.single}
+          Single: <strong>{product.single}</strong>
         </p>
         <p className='mb-4 flex-grow text-sm text-df-text'>
-          Price: {product.price / 100}
+          Price: <strong>{product.price / 100}</strong>
+        </p>
+        <p className='mb-4 flex-grow text-sm text-df-text'>
+          Discount: <strong>{product.discount}</strong>
         </p>
         <div className='mb-4'>
           <p className='mb-2 text-sm text-df-text'>Images: </p>

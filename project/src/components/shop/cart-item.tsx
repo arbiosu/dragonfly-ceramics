@@ -42,10 +42,10 @@ export default function CartItemCard({ product, quantity }: CartItem) {
             </Link>
           </div>
           <div className='flex flex-col'>
-            <span className='text-2xl font-medium tracking-[-0.069em]'>
+            <span className='text-2xl font-medium tracking-[-0.04em]'>
               {product.type.slice(0, -1).toLowerCase()}
             </span>
-            <span className='text-2xl font-extralight tracking-[-0.069em]'>
+            <span className='text-2xl font-extralight tracking-[-0.04em]'>
               {product.color}
             </span>
           </div>

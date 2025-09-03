@@ -89,6 +89,7 @@ async function handleProductChange(product: Stripe.Product, eventType: string) {
   const unitAmount = price.unit_amount ? price.unit_amount : 0;
 
   const serializedProduct = serializeStripeProduct(product, unitAmount);
+  console.log(serializedProduct);
 
   if (eventType === 'product.created') {
     await upsertProduct(serializedProduct);

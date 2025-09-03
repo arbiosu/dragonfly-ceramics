@@ -9,7 +9,7 @@ export default function About() {
       <div className='flex min-h-screen items-center justify-center px-4 py-24 pt-32 md:px-10'>
         <div className='w-full max-w-7xl'>
           <div className='flex flex-col items-center space-y-8 md:hidden'>
-            <h1 className='text-6xl tracking-[-0.069em] sm:text-7xl'>about</h1>
+            <h1 className='text-6xl tracking-[-0.04em] sm:text-7xl'>about</h1>
 
             <div className='relative'>
               <div className='absolute -inset-1 bg-gradient-to-r from-neutral-200 to-neutral-300 opacity-75 blur'></div>
