@@ -20,22 +20,24 @@ export default function About() {
           ></path>
         </svg>
       </div>
-      <div className='relative z-10 grid grid-cols-4 gap-1 lg:grid-cols-5 xl:grid-cols-8'>
+      <div className='relative z-10 grid grid-cols-4 gap-2 lg:grid-cols-5 xl:grid-cols-8'>
         <div className='justify-items-end'>
           <h1 className='text-6xl tracking-[-0.04em] [text-orientation:mixed] [writing-mode:sideways-lr] md:text-9xl'>
             about
           </h1>
         </div>
-        <Image
-          src='/about-kelly-redesign.png'
-          alt='Kelly Slater, Owner, Dragonfly Ceramics'
-          width={200}
-          height={800}
-          unoptimized
-        />
+        <div className='bg-black'>
+          <Image
+            src='/about-kelly-redesign.png'
+            alt='Kelly Slater, Owner, Dragonfly Ceramics'
+            width={200}
+            height={800}
+            unoptimized
+          />
+        </div>
 
         <div className='col-span-2 flex flex-col justify-items-start lg:col-span-3'>
-          <div>
+          <div className='flex h-full flex-col justify-start'>
             <Image
               src='/kelly-name.png'
               width={150}
@@ -44,64 +46,62 @@ export default function About() {
               unoptimized
               className='-mx-5'
             />
-          </div>
-          <div>
             <p className='-mt-2 text-sm md:text-xl'>she/her</p>
             <p className='-mt-2 text-sm md:text-xl'>ceramicist</p>
             <p className='-mt-2 text-sm md:text-xl'>nyc</p>
-          </div>
-
-          <div className='flex h-full flex-col justify-end gap-4'>
-            <p className='text-sm font-light leading-none tracking-[-0.04em] md:text-2xl'>
-              {' '}
-              dragonfly ceramics started in 2025 and we focus on handmade
-              functional ceramics for the home with an emphasis on unique
-              colors.
-            </p>
-            <p className='text-sm font-light leading-none tracking-[-0.04em] md:text-2xl'>
-              {' '}
-              after getting a degree in filmmaking and ceramics, kelly combined
-              her knowledge in the two mediums creating frequent social content
-              and while striving to constantly learn and perfect her ceramic
-              abilities.
-            </p>
-            <p className='text-sm font-light leading-none tracking-[-0.04em] md:text-2xl'>
-              check out @dragonflyceramics on{' '}
-              <Link
-                href='https://www.instagram.com/dragonflyceramics_/'
-                className='hover:underline'
-                rel='noopener noreferrer'
-                target='_blank'
-              >
-                instagram
-              </Link>
-              ,{' '}
-              <Link
-                href='https://www.tiktok.com/@dragonflyceramics'
-                className='hover:underline'
-                rel='noopener noreferrer'
-                target='_blank'
-              >
-                tiktok
-              </Link>
-              , and{' '}
-              <Link
-                href='https://www.youtube.com/@dragonflyceramics'
-                className='hover:underline'
-                rel='noopener noreferrer'
-                target='_blank'
-              >
-                youtube!
-              </Link>
-            </p>
-            <p className='text-sm font-light leading-none tracking-[-0.04em] md:text-2xl'>
-              for press and inquires{' '}
-              <Link href='/contact' className='font-bold hover:underline'>
-                contact the studio.
-              </Link>
-            </p>
+            <div className='flex h-full flex-col justify-end gap-4'>
+              <p className='text-sm font-light leading-none tracking-[-0.04em] md:text-2xl'>
+                {' '}
+                dragonfly ceramics started in 2025 and we focus on handmade
+                functional ceramics for the home with an emphasis on unique
+                colors.
+              </p>
+              <p className='text-sm font-light leading-none tracking-[-0.04em] md:text-2xl'>
+                {' '}
+                after getting a degree in filmmaking and ceramics, kelly
+                combined her knowledge in the two mediums creating frequent
+                social content and while striving to constantly learn and
+                perfect her ceramic abilities.
+              </p>
+              <p className='text-sm font-light leading-none tracking-[-0.04em] md:text-2xl'>
+                check out @dragonflyceramics on{' '}
+                <Link
+                  href='https://www.instagram.com/dragonflyceramics_/'
+                  className='hover:underline'
+                  rel='noopener noreferrer'
+                  target='_blank'
+                >
+                  instagram
+                </Link>
+                ,{' '}
+                <Link
+                  href='https://www.tiktok.com/@dragonflyceramics'
+                  className='hover:underline'
+                  rel='noopener noreferrer'
+                  target='_blank'
+                >
+                  tiktok
+                </Link>
+                , and{' '}
+                <Link
+                  href='https://www.youtube.com/@dragonflyceramics'
+                  className='hover:underline'
+                  rel='noopener noreferrer'
+                  target='_blank'
+                >
+                  youtube!
+                </Link>
+              </p>
+              <p className='text-xs font-light leading-none tracking-[-0.04em] md:text-2xl'>
+                for press and inquires{' '}
+                <Link href='/contact' className='font-bold hover:underline'>
+                  contact the studio.
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
+
         <div className='col-start-2 flex justify-center pt-2'>
           <Button href='/shop' variant='outline' className='hover:shadow-lg'>
             shop
