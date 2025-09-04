@@ -27,7 +27,6 @@ interface CartContextValue {
   cartCount: number;
 }
 
-// Default context
 const CartContext = createContext<CartContextValue>({
   cartItems: [],
   addToCart: () => {},
@@ -38,7 +37,6 @@ const CartContext = createContext<CartContextValue>({
   cartCount: 0,
 });
 
-// Create a provider component that wraps the children components
 export const CartProvider = ({ children }: Props) => {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     if (typeof window !== 'undefined') {
@@ -48,7 +46,6 @@ export const CartProvider = ({ children }: Props) => {
     return [];
   });
 
-  // Whenever cartItems changes, sync to localStorage
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('cartItems', JSON.stringify(cartItems));

@@ -12,7 +12,7 @@ const footerLinks = [
   { href: '/consulting', label: 'consulting' },
 ];
 
-export function NewFooter() {
+export function Footer() {
   const currentYear = new Date().getFullYear();
   return (
     <footer className='bg-dfNew2 text-black'>
@@ -48,90 +48,6 @@ export function NewFooter() {
           <div className='justify-items-end md:col-start-4'>
             <SocialMediaLinksComponent />
             <p className='pt-6 text-xs md:text-sm'>
-              &copy; {currentYear} dragonfly ceramics. all rights reserved.
-            </p>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-export default function Footer() {
-  const currentYear = new Date().getFullYear();
-  return (
-    <footer className='bg-dfNew2 py-8 text-black'>
-      <div className='container mx-auto px-4'>
-        <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
-          <div className='md:col-span-2'>
-            <Image
-              src='/df-red-text.png'
-              alt='Dragonfly Ceramics'
-              height={200}
-              width={400}
-              unoptimized
-              className='md:-mx-6'
-            />
-            <div>
-              <ul className='-space-y-2 text-xl'>
-                <li>
-                  <Link
-                    href='/shop'
-                    className='tracking-[-0.04em] transition-colors hover:underline'
-                  >
-                    shop
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href='/shop'
-                    className='tracking-[-0.04em] transition-colors hover:underline'
-                  >
-                    seconds
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href='/about'
-                    className='tracking-[-0.04em] transition-colors hover:underline'
-                  >
-                    about
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href='/gallery'
-                    className='tracking-[-0.04em] transition-colors hover:underline'
-                  >
-                    gallery
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href='/contact'
-                    className='tracking-[-0.04em] transition-colors hover:underline'
-                  >
-                    contact
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href='/consulting'
-                    className='tracking-[-0.04em] transition-colors hover:underline'
-                  >
-                    consulting
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className='justify-items-center md:justify-items-end'>
-            <SubscribeCard text='' />
-            <div className='pt-10'>
-              <SocialMediaLinksComponent />
-            </div>
-            <p className='pt-10 text-sm'>
               &copy; {currentYear} dragonfly ceramics. all rights reserved.
             </p>
           </div>
