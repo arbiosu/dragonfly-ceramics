@@ -1,15 +1,11 @@
-'use server';
-
 import { checkUser } from '@/lib/supabase/server';
+import GalleryPortal from '@/components/admin/gallery-portal';
 import { redirect } from 'next/navigation';
-import AdminPortal from '@/components/admin/admin-portal';
 
 export default async function Page() {
   const { err } = await checkUser();
   if (err) {
-    console.log('ERROR WITH AUTH');
     redirect('/admin/login');
-  } else {
-    return <AdminPortal />;
   }
+  return <GalleryPortal />;
 }

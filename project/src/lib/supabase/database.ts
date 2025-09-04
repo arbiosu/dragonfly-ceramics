@@ -39,6 +39,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      gallery_images: {
+        Row: {
+          color: string
+          created_at: string
+          id: number
+          name: string
+          path: string
+          type: string
+          year: number
+        }
+        Insert: {
+          color?: string
+          created_at?: string
+          id?: number
+          name?: string
+          path?: string
+          type?: string
+          year?: number
+        }
+        Update: {
+          color?: string
+          created_at?: string
+          id?: number
+          name?: string
+          path?: string
+          type?: string
+          year?: number
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
           checkout_session_id: string

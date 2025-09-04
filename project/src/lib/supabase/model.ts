@@ -141,3 +141,44 @@ export async function deleteProductById(id: string) {
     }
   }
 }
+
+export async function createGalleryImage(
+  image: TablesInsert<'gallery_images'>
+) {
+  const supabase = await createServiceClient();
+  return await supabase.from('gallery_images').insert({ ...image });
+}
+
+export async function fetchGalleryImages(
+  pageIndex: number,
+  pageSize: number,
+  type: string | null,
+  sortOrder: string
+) {
+  const supabase = await createServiceClient();
+
+  let query = supabase.from('gallery_images').select('*', { count: 'exact' });
+
+  if (type) {
+    query = query.eq('type', type);
+  }
+
+  switch (sortOrder) {
+    case 'date_asc':
+      query = query.order('created_at', { ascending: true });
+      break;
+    case 'date_desc':
+      query = query.order('created_at', { ascending: false });
+      break;
+    default:
+      query = query.order('created_at', { ascending: false });
+      break;
+  }
+
+  const from = pageIndex * pageSize;
+  const to = from + pageSize - 1;
+
+  query = query.range(from, to);
+
+  return await query;
+}

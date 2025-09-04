@@ -9,13 +9,19 @@ export default async function AdminPortal() {
           href='/admin/products'
           className='max-w-sm rounded-xl bg-dfNew2 p-4 text-center transition duration-300 hover:scale-105'
         >
-          Manage your products
+          Manage your Products
         </Link>
         <Link
           href='/admin/email'
           className='max-w-sm rounded-xl bg-df-yellow p-4 text-center transition duration-300 hover:scale-105'
         >
-          Manage your subscribers
+          Manage your Subscribers
+        </Link>
+        <Link
+          href='/admin/gallery'
+          className='max-w-sm rounded-xl bg-blue-200 p-4 text-center transition duration-300 hover:scale-105'
+        >
+          Manage your Gallery
         </Link>
       </section>
     </main>

@@ -4,11 +4,12 @@ import { useState, useRef, useCallback } from 'react';
 import { Input } from '../ui/input';
 import { createClient } from '@/lib/supabase/client';
 import { generateSignedUploadUrl } from '@/lib/supabase/storage';
+import { createGalleryImage } from '@/lib/supabase/model';
 
 interface ImageFormData {
   image: File | null;
   folder: 'chain_vases' | 'raku_pieces' | 'stoneware' | 'miscellaneous';
-  type: string;
+  type: 'chain vases' | 'raku pieces' | 'stoneware' | 'miscellaneous';
   color: string;
   year: string;
 }
@@ -28,7 +29,7 @@ const INITIAL_STATUS: FormStatus = {
 const INITIAL_FORM_DATA: ImageFormData = {
   image: null,
   folder: 'miscellaneous',
-  type: '',
+  type: 'miscellaneous',
   color: '',
   year: '',
 };
@@ -132,6 +133,21 @@ export default function UploadImageForm() {
           return;
         }
         if (uploadData) {
+          const galleryImage = {
+            name: filename,
+            type: formData.type,
+            color: formData.color,
+            year: parseInt(formData.year),
+            path: uploadData.fullPath,
+          };
+          const { error } = await createGalleryImage(galleryImage);
+          if (error) {
+            setStatus({
+              isLoading: false,
+              error: `Upload to database failed. Contact the dev.: ${error}`,
+              success: null,
+            });
+          }
           setStatus({
             isLoading: false,
             error: null,
@@ -152,121 +168,124 @@ export default function UploadImageForm() {
   };
   const isSubmitDisabled = status.isLoading;
   return (
-    <div>
-      <h2></h2>
-      <div>
+    <div className='text-black'>
+      <form onSubmit={handleSubmit} className='space-y-4'>
         <div>
-          <form onSubmit={handleSubmit} className='space-y-4'>
-            <div>
-              <label htmlFor='image' className='text-xl'>
-                Image*
-              </label>
-              <Input
-                id='image'
-                name='image'
-                type='file'
-                accept='image/*'
-                onChange={handleFileChange}
-                ref={fileInputRef}
-                disabled={status.isLoading}
-                required
-              />
-              <p className='mt-1 text-sm text-gray-500'>
-                2 MB file size limit - please wait until upload is complete -
-                you will see a green success message.
-              </p>
-            </div>
-
-            <div>
-              <label className='text-xl'>Folder*</label>
-              <div className='mt-2 space-y-2'>
-                {[
-                  'chain_vases',
-                  'raku_pieces',
-                  'stoneware',
-                  'miscellaneous',
-                ].map((f) => (
-                  <label key={f} className='flex items-center gap-2'>
-                    <input
-                      type='radio'
-                      name='folder'
-                      value={f}
-                      checked={formData.folder === f}
-                      onChange={(e) =>
-                        setFormData((prev) => ({
-                          ...prev,
-                          folder: e.target.value as ImageFormData['folder'],
-                        }))
-                      }
-                      disabled={status.isLoading}
-                    />
-                    {f.replace('_', ' ')}
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor='type' className='text-xl'>
-                Type*
-              </label>
-              <Input
-                id='type'
-                name='type'
-                type='text'
-                value={formData.type}
-                onChange={handleInputChange}
-                placeholder='Chain Vase...'
-                disabled={status.isLoading}
-                required
-                className='mt-1'
-              />
-            </div>
-            <div>
-              <label htmlFor='color' className='text-xl'>
-                Color*
-              </label>
-              <Input
-                id='color'
-                name='color'
-                type='text'
-                value={formData.color}
-                onChange={handleInputChange}
-                placeholder='Color'
-                disabled={status.isLoading}
-                required
-                className='mt-1'
-              />
-            </div>
-            <div>
-              <label htmlFor='year' className='text-xl'>
-                Year*
-              </label>
-              <Input
-                id='year'
-                name='year'
-                type='text'
-                value={formData.year}
-                onChange={handleInputChange}
-                placeholder='Year'
-                disabled={status.isLoading}
-                required
-                className='mt-1'
-              />
-            </div>
-            <div className='mt-4 min-h-[20px]'>
-              {' '}
-              {status.error && <p className='text-red-600'>{status.error}</p>}
-              {status.success && (
-                <p className='text-green-600'>{status.success}</p>
-              )}
-            </div>
-            <button type='submit' disabled={isSubmitDisabled}>
-              {status.isLoading ? 'Uploading...' : 'Upload Image'}
-            </button>
-          </form>
+          <label htmlFor='image' className='text-xl'>
+            Image*
+          </label>
+          <Input
+            id='image'
+            name='image'
+            type='file'
+            accept='image/*'
+            onChange={handleFileChange}
+            ref={fileInputRef}
+            disabled={status.isLoading}
+            required
+          />
+          <p className='mt-1 text-sm text-gray-500'>
+            2 MB file size limit - please wait until upload is complete - you
+            will see a green success message.
+          </p>
         </div>
-      </div>
+
+        <div>
+          <label className='text-xl'>Folder*</label>
+          <div className='mt-2 space-y-2'>
+            {['chain_vases', 'raku_pieces', 'stoneware', 'miscellaneous'].map(
+              (f) => (
+                <label key={f} className='flex items-center gap-2'>
+                  <input
+                    type='radio'
+                    name='folder'
+                    value={f}
+                    checked={formData.folder === f}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        folder: e.target.value as ImageFormData['folder'],
+                      }))
+                    }
+                    disabled={status.isLoading}
+                  />
+                  {f.replace('_', ' ')}
+                </label>
+              )
+            )}
+          </div>
+        </div>
+        <div>
+          <label className='text-xl'>Type*</label>
+          <div className='mt-2 space-y-2'>
+            {['chain vases', 'raku pieces', 'stoneware', 'miscellaneous'].map(
+              (f) => (
+                <label key={f} className='flex items-center gap-2'>
+                  <input
+                    type='radio'
+                    name='folder'
+                    value={f}
+                    checked={formData.folder === f}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        folder: e.target.value as ImageFormData['folder'],
+                      }))
+                    }
+                    disabled={status.isLoading}
+                  />
+                  {f}
+                </label>
+              )
+            )}
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor='color' className='text-xl'>
+            Color*
+          </label>
+          <Input
+            id='color'
+            name='color'
+            type='text'
+            value={formData.color}
+            onChange={handleInputChange}
+            placeholder='Color'
+            disabled={status.isLoading}
+            required
+            className='mt-1'
+          />
+        </div>
+        <div>
+          <label htmlFor='year' className='text-xl'>
+            Year*
+          </label>
+          <Input
+            id='year'
+            name='year'
+            type='text'
+            value={formData.year}
+            onChange={handleInputChange}
+            placeholder='Year'
+            disabled={status.isLoading}
+            required
+            className='mt-1'
+          />
+        </div>
+        <div className='mt-4 min-h-[20px]'>
+          {' '}
+          {status.error && <p className='text-red-600'>{status.error}</p>}
+          {status.success && <p className='text-green-600'>{status.success}</p>}
+        </div>
+        <button
+          type='submit'
+          disabled={isSubmitDisabled}
+          className='rounded bg-dfNew2 p-4 text-xl transition duration-300 hover:scale-105'
+        >
+          {status.isLoading ? 'Uploading...' : 'Upload Image'}
+        </button>
+      </form>
     </div>
   );
 }
