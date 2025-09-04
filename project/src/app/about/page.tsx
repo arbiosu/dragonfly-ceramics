@@ -5,213 +5,110 @@ import { SocialMediaCard } from '@/components/socialmedia';
 
 export default function About() {
   return (
-    <section className='relative min-h-screen text-black'>
-      <div className='flex min-h-screen items-center justify-center px-4 py-24 pt-32 md:px-10'>
-        <div className='w-full max-w-7xl'>
-          <div className='flex flex-col items-center space-y-8 md:hidden'>
-            <h1 className='text-6xl tracking-[-0.04em] sm:text-7xl'>about</h1>
+    <section className='min-h-screen bg-df-yellow py-20 tracking-[-0.04em] text-black'>
+      <div className='absolute left-0 top-0 w-full overflow-hidden leading-[0]'>
+        <svg
+          data-name='Layer 1'
+          xmlns='http://www.w3.org/2000/svg'
+          viewBox='0 0 1200 120'
+          preserveAspectRatio='none'
+          className='relative block h-[500px] w-[calc(170%+1.3px)] lg:h-[800px]'
+        >
+          <path
+            d='M0,0V7.23C0,65.52,268.63,112.77,600,112.77S1200,65.52,1200,7.23V0Z'
+            className='fill-white'
+          ></path>
+        </svg>
+      </div>
+      <div className='relative z-10 grid grid-cols-4 gap-1 lg:grid-cols-5 xl:grid-cols-8'>
+        <div className='justify-items-end'>
+          <h1 className='text-6xl tracking-[-0.04em] [text-orientation:mixed] [writing-mode:sideways-lr] md:text-9xl'>
+            about
+          </h1>
+        </div>
+        <Image
+          src='/about-kelly-redesign.png'
+          alt='Kelly Slater, Owner, Dragonfly Ceramics'
+          width={200}
+          height={800}
+          unoptimized
+        />
 
-            <div className='relative'>
-              <div className='absolute -inset-1 bg-gradient-to-r from-neutral-200 to-neutral-300 opacity-75 blur'></div>
-              <Image
-                src='/about-kelly-redesign.png'
-                alt='Kelly Slater, Owner, Dragonfly Ceramics'
-                width={200}
-                height={200}
-                unoptimized
-                className='relative object-cover'
-                priority
-              />
-            </div>
-
-            <div className='flex justify-center'>
-              <Button
-                href='/shop'
-                variant='outline'
-                size='large'
-                className='hover:shadow-lg'
-              >
-                shop
-              </Button>
-            </div>
-
-            <div className='max-w-lg space-y-6 px-4 pt-8'>
-              <div className='space-y-0'>
-                <Image
-                  src='/kelly-name.png'
-                  width={200}
-                  height={200}
-                  alt='Kelly Slater'
-                  className='-mx-8'
-                  unoptimized
-                />
-                <p className='text-xl font-light leading-4 tracking-[-0.04em]'>
-                  she/her
-                </p>
-                <p className='text-xl font-light leading-4 tracking-[-0.04em]'>
-                  ceramicist
-                </p>
-                <p className='text-xl font-light leading-4 tracking-[-0.04em]'>
-                  nyc
-                </p>
-              </div>
-
-              <p className='text-xl font-light leading-4 tracking-[-0.04em]'>
-                dragonfly ceramics started in 2025 and we focus on handmade
-                functional ceramics for the home with an emphasis on unique
-                colors.
-              </p>
-              <p className='text-xl font-light leading-4 tracking-[-0.04em]'>
-                after getting a degree in filmmaking and ceramics, kelly
-                combined her knowledge in the two mediums creating frequent
-                social content and while striving to constantly learn and
-                perfect her ceramic abilities.
-              </p>
-              <p className='text-xl font-light leading-none tracking-[-0.04em] sm:text-lg'>
-                check out @dragonflyceramics on{' '}
-                <Link
-                  href='https://www.instagram.com/dragonflyceramics_/'
-                  className='hover:underline'
-                  rel='noopener noreferrer'
-                  target='_blank'
-                >
-                  instagram
-                </Link>
-                ,{' '}
-                <Link
-                  href='https://www.tiktok.com/@dragonflyceramics'
-                  className='hover:underline'
-                  rel='noopener noreferrer'
-                  target='_blank'
-                >
-                  tiktok
-                </Link>
-                , and{' '}
-                <Link
-                  href='https://www.youtube.com/@dragonflyceramics'
-                  className='hover:underline'
-                  rel='noopener noreferrer'
-                  target='_blank'
-                >
-                  youtube!
-                </Link>
-              </p>
-              <p className='text-xl font-light leading-none tracking-[-0.04em]'>
-                for press and inquires{' '}
-                <Link href='/contact' className='font-bold hover:underline'>
-                  contact the studio.
-                </Link>
-              </p>
-            </div>
+        <div className='col-span-2 flex flex-col justify-items-start lg:col-span-3'>
+          <div>
+            <Image
+              src='/kelly-name.png'
+              width={150}
+              height={150}
+              alt='Kelly Slater'
+              unoptimized
+              className='-mx-5'
+            />
+          </div>
+          <div>
+            <p className='-mt-2 text-sm md:text-xl'>she/her</p>
+            <p className='-mt-2 text-sm md:text-xl'>ceramicist</p>
+            <p className='-mt-2 text-sm md:text-xl'>nyc</p>
           </div>
 
-          {/* Desktop Layout */}
-          <div className='hidden md:flex md:items-start md:gap-4'>
-            <h1 className='flex-shrink-0 text-8xl -tracking-widest [text-orientation:mixed] [writing-mode:sideways-lr] lg:text-9xl'>
-              about
-            </h1>
-
-            <div className='flex flex-col items-center space-y-6'>
-              <div className='relative flex-shrink-0'>
-                <div className='absolute -inset-2 bg-gradient-to-r from-neutral-200 to-neutral-300 opacity-75 blur'></div>
-                <Image
-                  src='/about-kelly-redesign.png'
-                  alt='Kelly Slater, Owner, Dragonfly Ceramics'
-                  width={250}
-                  height={250}
-                  unoptimized
-                  className='relative object-cover shadow-xl'
-                  priority
-                />
-              </div>
-
-              <Button
-                href='/shop'
-                variant='outline'
-                size='large'
-                className='hover:shadow-lg'
+          <div className='flex h-full flex-col justify-end gap-4'>
+            <p className='text-sm font-light leading-none tracking-[-0.04em] md:text-2xl'>
+              {' '}
+              dragonfly ceramics started in 2025 and we focus on handmade
+              functional ceramics for the home with an emphasis on unique
+              colors.
+            </p>
+            <p className='text-sm font-light leading-none tracking-[-0.04em] md:text-2xl'>
+              {' '}
+              after getting a degree in filmmaking and ceramics, kelly combined
+              her knowledge in the two mediums creating frequent social content
+              and while striving to constantly learn and perfect her ceramic
+              abilities.
+            </p>
+            <p className='text-sm font-light leading-none tracking-[-0.04em] md:text-2xl'>
+              check out @dragonflyceramics on{' '}
+              <Link
+                href='https://www.instagram.com/dragonflyceramics_/'
+                className='hover:underline'
+                rel='noopener noreferrer'
+                target='_blank'
               >
-                shop
-              </Button>
-            </div>
-
-            <div className='max-w-2xl flex-1 space-y-8'>
-              <div className='flex flex-col items-start lg:-space-y-2'>
-                <Image
-                  src='/kelly-name.png'
-                  width={200}
-                  height={200}
-                  alt='Kelly Slater'
-                  className='-mx-8'
-                  unoptimized
-                />
-                <p className='text-xl leading-4 tracking-[-0.04em] lg:text-2xl'>
-                  she/her
-                </p>
-                <p className='text-xl leading-4 tracking-[-0.04em] lg:text-2xl'>
-                  ceramicist
-                </p>
-                <p className='text-xl leading-4 tracking-[-0.04em] lg:text-2xl'>
-                  nyc
-                </p>
-              </div>
-
-              <div className='max-w-md space-y-6 pt-60'>
-                <p className='text-2xl font-light leading-none tracking-[-0.04em]'>
-                  {' '}
-                  dragonfly ceramics started in 2025 and we focus on handmade
-                  functional ceramics for the home with an emphasis on unique
-                  colors.
-                </p>
-                <p className='text-2xl font-light leading-none tracking-[-0.04em]'>
-                  {' '}
-                  after getting a degree in filmmaking and ceramics, kelly
-                  combined her knowledge in the two mediums creating frequent
-                  social content and while striving to constantly learn and
-                  perfect her ceramic abilities.
-                </p>
-                <p className='text-2xl font-light leading-none tracking-[-0.04em]'>
-                  check out @dragonflyceramics on{' '}
-                  <Link
-                    href='https://www.instagram.com/dragonflyceramics_/'
-                    className='hover:underline'
-                    rel='noopener noreferrer'
-                    target='_blank'
-                  >
-                    instagram
-                  </Link>
-                  ,{' '}
-                  <Link
-                    href='https://www.tiktok.com/@dragonflyceramics'
-                    className='hover:underline'
-                    rel='noopener noreferrer'
-                    target='_blank'
-                  >
-                    tiktok
-                  </Link>
-                  , and{' '}
-                  <Link
-                    href='https://www.youtube.com/@dragonflyceramics'
-                    className='hover:underline'
-                    rel='noopener noreferrer'
-                    target='_blank'
-                  >
-                    youtube!
-                  </Link>
-                </p>
-                <p className='text-2xl font-light leading-none tracking-[-0.04em]'>
-                  for press and inquires{' '}
-                  <Link href='/contact' className='font-bold hover:underline'>
-                    contact the studio.
-                  </Link>
-                </p>
-              </div>
-            </div>
+                instagram
+              </Link>
+              ,{' '}
+              <Link
+                href='https://www.tiktok.com/@dragonflyceramics'
+                className='hover:underline'
+                rel='noopener noreferrer'
+                target='_blank'
+              >
+                tiktok
+              </Link>
+              , and{' '}
+              <Link
+                href='https://www.youtube.com/@dragonflyceramics'
+                className='hover:underline'
+                rel='noopener noreferrer'
+                target='_blank'
+              >
+                youtube!
+              </Link>
+            </p>
+            <p className='text-sm font-light leading-none tracking-[-0.04em] md:text-2xl'>
+              for press and inquires{' '}
+              <Link href='/contact' className='font-bold hover:underline'>
+                contact the studio.
+              </Link>
+            </p>
           </div>
         </div>
+        <div className='col-start-2 flex justify-center pt-2'>
+          <Button href='/shop' variant='outline' className='hover:shadow-lg'>
+            shop
+          </Button>
+        </div>
       </div>
-
-      <div>
+      <div className='relative z-10'>
         <SocialMediaCard />
       </div>
     </section>

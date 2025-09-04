@@ -41,7 +41,7 @@ const faqs = [
 
 export default function FAQPage() {
   return (
-    <section className='relative w-full bg-df-yellow text-black'>
+    <section className='relative min-h-screen w-full bg-df-yellow text-black'>
       <div className='absolute inset-0 z-10'>
         <Image
           src='/df-hero-dispenser.png'
@@ -51,21 +51,22 @@ export default function FAQPage() {
           className='absolute -mx-4 -mt-20 md:left-0 md:-mt-24'
         />
       </div>
-      <div className='leading-0 left-0 top-0 w-full overflow-hidden'>
+      <div className='py-40 lg:py-52'></div>
+      <div className='absolute left-0 top-0 w-full rotate-180 overflow-hidden leading-[0]'>
         <svg
           data-name='Layer 2'
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 1200 120'
           preserveAspectRatio='none'
-          className='relative block h-[500px] w-[calc(133%+1.3px)]'
+          className='relative block h-[700px] w-[calc(206%+1.3px)]'
         >
           <path
-            d='M0,0V7.23C0,65.52,268.63,112.77,600,112.77S1200,65.52,1200,7.23V0Z'
+            d='M598.97 114.72L0 0 0 120 1200 120 1200 0 598.97 114.72z'
             className='fill-white'
           ></path>
         </svg>
       </div>
-      <h4 className='mx-8 text-right text-6xl tracking-[-0.04em] md:text-9xl'>
+      <h4 className='relative z-10 mx-8 text-right text-6xl tracking-[-0.04em] md:text-8xl lg:px-40 lg:text-9xl'>
         frequently <br></br>asked {"q's"}
       </h4>
       <div className='relative z-20'>

@@ -1,11 +1,11 @@
+import Image from 'next/image';
 import { fetchProducts } from '@/lib/supabase/model';
 import FilterPanel from '@/components/shop/filter-panel';
 import SortSelector from '@/components/shop/sort-panel';
 import PaginationControls from '@/components/shop/pagination-controls';
 import ActiveSelector from '@/components/shop/active-selector';
-//import ProductsGrid from '@/components/shop/products-grid';
-import Image from 'next/image';
 import ProductCard from '@/components/shop/product-card';
+import SubscribeCard from '@/components/subscribe-card';
 
 const PAGE_SIZE = 12;
 
@@ -74,6 +74,25 @@ export default async function Shop(props: {
             <ActiveSelector />
           </div>
         </div>
+        {data.length < 1 && (
+          <div className='flex flex-col items-center'>
+            <div>
+              <p className='mb-4 text-6xl font-medium tracking-[-0.04em] text-black lg:text-9xl'>
+                sold out!
+              </p>
+            </div>
+            <div className='md:px-40'>
+              <p className='text-center text-2xl tracking-[-0.04em] text-black'>
+                not seeing what you&apos;re looking for?{' '}
+                <strong>sign up for my newsletter</strong> so you don&apos;t
+                miss when new items come out of the kiln!
+              </p>
+            </div>
+            <div className='pt-10'>
+              <SubscribeCard text='' />
+            </div>
+          </div>
+        )}
         <div className='grid grid-cols-2 gap-8 lg:grid-cols-3'>
           {data.map((product) => (
             <div key={product.id}>
@@ -81,12 +100,14 @@ export default async function Shop(props: {
             </div>
           ))}
         </div>
-        <PaginationControls
-          currentPage={currentPage}
-          totalPages={totalPages}
-          hasNextPage={currentPage < totalPages - 1}
-          hasPrevPage={currentPage < 0}
-        />
+        {data.length > 1 && (
+          <PaginationControls
+            currentPage={currentPage}
+            totalPages={totalPages}
+            hasNextPage={currentPage < totalPages - 1}
+            hasPrevPage={currentPage < 0}
+          />
+        )}
       </section>
     </main>
   );
