@@ -46,7 +46,7 @@ export default function QuantityControls({
       </div>
       <div className='w-full'>
         <AddToCartButton
-          label={`add ${quantity} to cart`}
+          label={`add to order`}
           variant={'default'}
           product={product}
           quantity={quantity}
