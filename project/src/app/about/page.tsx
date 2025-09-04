@@ -36,7 +36,7 @@ export default function About() {
           />
         </div>
 
-        <div className='col-span-2 flex flex-col justify-items-start lg:col-span-3'>
+        <div className='col-span-2 mr-4 flex flex-col justify-items-start lg:col-span-3'>
           <div className='flex h-full flex-col justify-start'>
             <Image
               src='/kelly-name.png'

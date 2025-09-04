@@ -223,13 +223,13 @@ export default function UploadImageForm() {
                 <label key={f} className='flex items-center gap-2'>
                   <input
                     type='radio'
-                    name='folder'
+                    name='type'
                     value={f}
-                    checked={formData.folder === f}
+                    checked={formData.type === f}
                     onChange={(e) =>
                       setFormData((prev) => ({
                         ...prev,
-                        folder: e.target.value as ImageFormData['folder'],
+                        type: e.target.value as ImageFormData['type'],
                       }))
                     }
                     disabled={status.isLoading}

@@ -73,13 +73,13 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed left-0 right-0 top-0 z-50 p-4 transition-all duration-300 ${
-        isScrolled ? 'bg-transparent/20 shadow-md' : 'bg-transparent'
+        isScrolled ? 'bg-white' : 'bg-transparent'
       }`}
     >
       <div className='relative flex items-center justify-between'>
         {/* Hamburger Menu (mobile only) */}
         <button
-          className='z-60 text-white md:hidden'
+          className='z-60 text-black md:hidden'
           onClick={toggleMobileMenu}
           aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isMobileMenuOpen}
@@ -116,7 +116,7 @@ export default function Navbar() {
         </button>
 
         {/* Desktop Navigation Links */}
-        <ul className='hidden gap-8 text-lg text-white md:flex md:text-3xl lg:text-4xl'>
+        <ul className='hidden gap-8 text-lg text-black md:flex md:text-3xl lg:text-4xl'>
           {navLinks.map((link, index) => (
             <li key={index}>
               <Link
@@ -130,7 +130,7 @@ export default function Navbar() {
         </ul>
 
         {/* Shopping Cart right aligned */}
-        <div className='relative m-2 text-white'>
+        <div className='relative m-2 text-black'>
           <Link href='/shop/cart' aria-label='Shopping Cart'>
             <svg
               xmlns='http://www.w3.org/2000/svg'

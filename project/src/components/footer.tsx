@@ -4,6 +4,7 @@ import SocialMediaLinksComponent from '@/components/socialmedia';
 import SubscribeCard from '@/components/subscribe-card';
 
 const footerLinks = [
+  { href: '/', label: 'home' },
   { href: '/shop', label: 'shop' },
   { href: '/shop?page=0&filter=seconds', label: 'seconds' },
   { href: '/about', label: 'about' },
@@ -15,8 +16,8 @@ const footerLinks = [
 export function Footer() {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className='bg-dfNew2 text-black'>
-      <div className='container mx-auto px-4'>
+    <footer className='bg-dfNew2 p-2 text-black'>
+      <div className='container mx-auto mb-4 px-4'>
         <div className='grid grid-cols-2 grid-rows-2 md:grid-cols-4'>
           <div className='col-span-2'>
             <Image

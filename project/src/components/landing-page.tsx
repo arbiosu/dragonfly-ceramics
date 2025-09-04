@@ -24,7 +24,7 @@ function LandinPageVideo() {
 
 export default function LandingPage() {
   return (
-    <div className='relative h-screen w-full'>
+    <div className='relative min-h-screen w-full'>
       <LandinPageVideo />
       <div className='absolute inset-0 mx-8 flex flex-col items-center justify-center'>
         <Image

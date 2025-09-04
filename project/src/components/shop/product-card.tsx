@@ -1,8 +1,5 @@
-'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
 import { Tables } from '@/lib/supabase/database';
 
 export default function ProductCard({
@@ -10,14 +7,6 @@ export default function ProductCard({
 }: {
   product: Tables<'products'>;
 }) {
-  const [showDetails, setShowDetails] = useState<boolean>(false);
-
-  const handleProductClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setShowDetails(!showDetails);
-  };
-
   return (
     <div className='w-full overflow-hidden transition-transform duration-300 hover:scale-[1.03]'>
       <div className='relative aspect-square w-full overflow-hidden rounded-[3em] border border-black p-4 md:rounded-[5em]'>
@@ -50,31 +39,10 @@ export default function ProductCard({
         ) : null}
       </div>
 
-      <div
-        className='flex-flex-col cursor-pointer p-4 text-black'
-        onClick={handleProductClick}
-      >
-        <div className='-mt-2 flex justify-center'>
-          <p className='text-xs text-gray-500'></p>
-          <svg
-            className={`h-6 w-6 text-dfNew transition-transform duration-300 ease-in-out ${
-              showDetails ? 'rotate-180' : ''
-            }`}
-            fill='none'
-            stroke='currentColor'
-            viewBox='0 0 24 24'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={2}
-              d='M19 9l-7 7-7-7'
-            />
-          </svg>
-        </div>
+      <div className='flex-flex-col p-4 text-black'>
         <div className='flex items-start'>
           <div
-            className={`grid w-full transition-all duration-300 ease-in-out ${showDetails ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+            className={`grid w-full transition-all duration-300 ease-in-out`}
           >
             <div className='flex w-full flex-col'>
               <div>

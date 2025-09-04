@@ -83,7 +83,7 @@ export function SocialMediaCard() {
               alt='TikTok'
               width={120}
               height={120}
-              className='h-24 w-24 rounded-full border border-black md:h-32 md:w-32'
+              className='h-24 w-24 rounded-full border border-black bg-white md:h-32 md:w-32'
               unoptimized
             />
           </Link>
@@ -103,7 +103,7 @@ export function SocialMediaCard() {
               alt='Instagram'
               width={120}
               height={120}
-              className='h-24 w-24 rounded-full border border-black md:h-32 md:w-32'
+              className='h-24 w-24 rounded-full border border-black bg-white md:h-32 md:w-32'
               unoptimized
             />
           </Link>
@@ -123,7 +123,7 @@ export function SocialMediaCard() {
               alt='YouTube'
               width={120}
               height={120}
-              className='h-24 w-24 rounded-full border border-black md:h-32 md:w-32'
+              className='h-24 w-24 rounded-full border border-black bg-white md:h-32 md:w-32'
               unoptimized
             />
           </Link>

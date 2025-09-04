@@ -94,7 +94,7 @@ export function Form() {
       </div>
 
       <div className='container mx-auto'>
-        <form onSubmit={handleSubmit} className='mx-auto w-full max-w-4xl'>
+        <form onSubmit={handleSubmit} className='mx-auto w-full max-w-4xl px-4'>
           <h1 className='mb-2 text-3xl font-medium tracking-[-0.04em] md:text-6xl'>
             shipping address
           </h1>

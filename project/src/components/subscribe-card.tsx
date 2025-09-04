@@ -73,7 +73,7 @@ export default function SubscribeCard({ text }: { text: string }) {
       ) : (
         <form onSubmit={handleSubmit} className='space-y-4'>
           <div className='flex justify-center'>
-            <div className='relative w-full max-w-sm'>
+            <div className='relative w-full max-w-lg'>
               <Input
                 id='email'
                 type='text'
@@ -82,12 +82,12 @@ export default function SubscribeCard({ text }: { text: string }) {
                   setEmail(() => e.target.value);
                 }}
                 placeholder='name@example.com'
-                className='w-full pr-24'
+                className='m-2 w-full p-6'
                 disabled={isLoading}
               />
               <button
                 type='submit'
-                className='absolute right-2 top-1/2 inline-flex h-8 -translate-y-1/2 items-center justify-center rounded-full border-2 border-black bg-yellow-100 px-4 text-sm text-black transition-colors hover:bg-yellow-100/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+                className='absolute right-2 top-1/2 inline-flex h-8 -translate-y-1/2 items-center justify-center rounded-full border border-black bg-yellow-100 px-4 text-sm text-black transition-colors hover:bg-yellow-100/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
                 disabled={isLoading}
               >
                 {isLoading ? (

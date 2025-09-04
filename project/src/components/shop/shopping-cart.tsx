@@ -51,8 +51,8 @@ export default function ShoppingCart() {
   }
 
   return (
-    <main className='container mx-auto mb-2 min-h-screen max-w-4xl flex-grow px-4 py-8 text-black'>
-      <h1 className='mb-8 text-4xl tracking-[-0.04em] md:text-6xl lg:text-9xl'>
+    <main className='container mx-auto mb-20 max-w-full flex-grow px-8 pt-20 text-black'>
+      <h1 className='mb-16 text-6xl tracking-[-0.04em] lg:text-9xl'>
         your cart
       </h1>
       {cartItems.map((item, index) => (

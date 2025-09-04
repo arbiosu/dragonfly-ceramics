@@ -54,13 +54,13 @@ export default async function Shop(props: {
   const currentPage = parseInt(page[0]);
 
   return (
-    <main className='flex min-h-screen flex-col items-center px-2 py-20 tracking-[-0.04em] text-black'>
-      <section className='w-full max-w-7xl'>
+    <main className='flex min-h-screen flex-col items-center px-2 py-28 tracking-[-0.04em] text-black'>
+      <section className='w-full max-w-full lg:px-8'>
         <div className='grid grid-cols-3 items-center gap-2'>
           <div>
             <FilterPanel filters={filters} />
           </div>
-          <div>
+          <div className='justify-items-center'>
             <Image
               src={'/shop-header.png'}
               alt='Gallery'
@@ -69,7 +69,7 @@ export default async function Shop(props: {
               unoptimized
             />
           </div>
-          <div>
+          <div className='justify-items-end'>
             <SortSelector />
             <ActiveSelector />
           </div>
@@ -93,7 +93,7 @@ export default async function Shop(props: {
             </div>
           </div>
         )}
-        <div className='grid grid-cols-2 gap-8 lg:grid-cols-3'>
+        <div className='mt-10 grid grid-cols-2 gap-8 lg:grid-cols-3'>
           {data.map((product) => (
             <div key={product.id}>
               <ProductCard product={product} />
