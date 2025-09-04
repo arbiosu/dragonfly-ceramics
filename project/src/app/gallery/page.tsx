@@ -75,7 +75,7 @@ export default async function Gallery(props: {
         <PaginationControls
           currentPage={currentPage}
           totalPages={totalPages}
-          hasNextPage={currentPage < totalPages}
+          hasNextPage={currentPage < totalPages - 1}
           hasPrevPage={currentPage < 0}
         />
       </section>

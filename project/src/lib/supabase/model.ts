@@ -142,6 +142,16 @@ export async function deleteProductById(id: string) {
   }
 }
 
+export async function getGalleryImageById(id: number) {
+  const supabase = await createServiceClient();
+  return await supabase
+    .from('gallery_images')
+    .select()
+    .eq('id', id)
+    .limit(1)
+    .single();
+}
+
 export async function createGalleryImage(
   image: TablesInsert<'gallery_images'>
 ) {

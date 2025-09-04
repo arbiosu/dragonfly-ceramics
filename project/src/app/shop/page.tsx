@@ -3,8 +3,9 @@ import FilterPanel from '@/components/shop/filter-panel';
 import SortSelector from '@/components/shop/sort-panel';
 import PaginationControls from '@/components/shop/pagination-controls';
 import ActiveSelector from '@/components/shop/active-selector';
-import ProductsGrid from '@/components/shop/products-grid';
+//import ProductsGrid from '@/components/shop/products-grid';
 import Image from 'next/image';
+import ProductCard from '@/components/shop/product-card';
 
 const PAGE_SIZE = 12;
 
@@ -53,51 +54,38 @@ export default async function Shop(props: {
   const currentPage = parseInt(page[0]);
 
   return (
-    <main className='py-28 tracking-[-0.04em]'>
-      <section className='container mx-auto'>
-        <div className='flex max-w-sm justify-center md:hidden'>
-          <Image
-            src='/shop-header.png'
-            alt='Handmade in NYC'
-            height={200}
-            width={400}
-            className='h-auto w-full'
-            unoptimized
-          />
-        </div>
-        <div className='mb-8 flex items-center justify-between gap-4 md:grid md:grid-cols-12 md:items-start'>
-          <div className='flex-shrink-0 px-2 md:col-span-3 lg:px-16'>
+    <main className='flex min-h-screen flex-col items-center px-2 py-20 tracking-[-0.04em] text-black'>
+      <section className='w-full max-w-7xl'>
+        <div className='grid grid-cols-3 items-center gap-2'>
+          <div>
             <FilterPanel filters={filters} />
           </div>
-
-          <div className='hidden w-full justify-center md:col-span-6 md:flex'>
-            <div className='w-full max-w-sm'>
-              <Image
-                src='/shop-header.png'
-                alt='Handmade in NYC'
-                height={200}
-                width={200}
-                className='h-auto w-full'
-                unoptimized
-              />
-            </div>
+          <div>
+            <Image
+              src={'/shop-header.png'}
+              alt='Gallery'
+              height={200}
+              width={400}
+              unoptimized
+            />
           </div>
-
-          <div className='flex flex-col items-end px-2 md:col-span-3 lg:px-8'>
-            <div className='w-48'>
-              <SortSelector />
-              <ActiveSelector />
-            </div>
+          <div>
+            <SortSelector />
+            <ActiveSelector />
           </div>
         </div>
-
-        <ProductsGrid products={data} />
-
+        <div className='grid grid-cols-2 gap-8 lg:grid-cols-3'>
+          {data.map((product) => (
+            <div key={product.id}>
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
         <PaginationControls
           currentPage={currentPage}
           totalPages={totalPages}
           hasNextPage={currentPage < totalPages - 1}
-          hasPrevPage={currentPage > 0}
+          hasPrevPage={currentPage < 0}
         />
       </section>
     </main>
