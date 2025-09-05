@@ -46,13 +46,13 @@ export default async function Gallery(props: {
   const currentPage = parseInt(page[0]);
 
   return (
-    <main className='mx-auto flex min-h-screen flex-col items-center px-2 py-20 tracking-[-0.04em] text-black'>
-      <section>
-        <div className='grid grid-cols-3 items-center gap-8 md:gap-x-40'>
+    <main className='flex min-h-screen flex-col items-center px-2 py-28 tracking-[-0.04em] text-black xl:m-20'>
+      <section className='w-full max-w-full lg:px-8'>
+        <div className='grid grid-cols-3 items-center gap-2'>
           <div>
             <FilterPanel filters={filters} />
           </div>
-          <div>
+          <div className='justify-items-center'>
             <Image
               src={'/shop-header.png'}
               alt='Gallery'
@@ -61,11 +61,11 @@ export default async function Gallery(props: {
               unoptimized
             />
           </div>
-          <div>
+          <div className='justify-items-end'>
             <SortPanel />
           </div>
         </div>
-        <div className='grid grid-cols-2 items-center gap-8 md:gap-x-40'>
+        <div className='mt-10 grid grid-cols-2 gap-4 xl:gap-12'>
           {data.map((image) => (
             <div key={image.id} className=''>
               <GalleryCard image={image} />

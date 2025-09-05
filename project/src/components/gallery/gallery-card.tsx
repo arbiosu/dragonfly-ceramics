@@ -8,7 +8,7 @@ export default function GalleryCard({
   image: Tables<'gallery_images'>;
 }) {
   return (
-    <div className='relative w-full max-w-sm overflow-hidden transition-transform hover:scale-[1.01]'>
+    <div className='relative w-full overflow-hidden'>
       <Link
         href={`/gallery/${image.id}`}
         prefetch={false}

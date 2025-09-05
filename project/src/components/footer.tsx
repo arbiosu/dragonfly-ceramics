@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import SocialMediaLinksComponent from '@/components/socialmedia';
+import SocialMediaLinks from '@/components/socialmedia';
 import SubscribeCard from '@/components/subscribe-card';
 
 const footerLinks = [
@@ -29,8 +29,8 @@ export function Footer() {
               className='md:-mx-6'
             />
           </div>
-          <div className='md:row-start-2'>
-            <ul className='-space-y-2 text-xl'>
+          <div className='flex flex-col justify-end md:row-start-2'>
+            <ul className='items-end -space-y-2 text-xl md:text-2xl'>
               {footerLinks.map((link, index) => (
                 <li key={index}>
                   <Link
@@ -46,8 +46,8 @@ export function Footer() {
           <div className='col-span-2 row-start-2 md:col-start-4 md:row-start-1 md:pt-10'>
             <SubscribeCard text='' />
           </div>
-          <div className='justify-items-end md:col-start-4'>
-            <SocialMediaLinksComponent />
+          <div className='flex flex-col items-end justify-end md:col-start-4'>
+            <SocialMediaLinks />
             <p className='pt-6 text-xs md:text-sm'>
               &copy; {currentYear} dragonfly ceramics. all rights reserved.
             </p>

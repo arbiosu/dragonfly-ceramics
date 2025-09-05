@@ -14,7 +14,6 @@ const navLinks = [
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [mounted, setMounted] = useState<boolean>(false);
 
   const { cartCount } = useCart();
@@ -29,186 +28,47 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when clicking outside or pressing escape
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
-    const handleClickOutside = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (isMobileMenuOpen && !target.closest('nav')) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
-    if (isMobileMenuOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.addEventListener('click', handleClickOutside);
-      // Prevent body scroll when menu is open
-      document.body.style.overflow = 'hidden';
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.removeEventListener('click', handleClickOutside);
-      document.body.style.overflow = 'unset';
-    };
-  }, [isMobileMenuOpen]);
-
   if (!mounted) {
     return <Loading />;
   }
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen((prev) => !prev);
-  };
-
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-  };
-
   return (
     <nav
-      className={`fixed left-0 right-0 top-0 z-50 p-4 transition-all duration-300 ${
+      className={`fixed left-0 right-0 top-0 z-50 p-4 text-black transition-all duration-300 ${
         isScrolled ? 'bg-white' : 'bg-transparent'
       }`}
     >
-      <div className='relative flex items-center justify-between'>
-        {/* Hamburger Menu (mobile only) */}
-        <button
-          className='z-60 text-black md:hidden'
-          onClick={toggleMobileMenu}
-          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={isMobileMenuOpen}
-        >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            className={`transition-transform duration-300 ${
-              isMobileMenuOpen ? 'rotate-90' : ''
-            }`}
-          >
-            {isMobileMenuOpen ? (
-              // X icon when menu is open
-              <>
-                <line x1='18' y1='6' x2='6' y2='18'></line>
-                <line x1='6' y1='6' x2='18' y2='18'></line>
-              </>
-            ) : (
-              // Hamburger icon when menu is closed
-              <>
-                <line x1='3' y1='12' x2='21' y2='12'></line>
-                <line x1='3' y1='6' x2='21' y2='6'></line>
-                <line x1='3' y1='18' x2='21' y2='18'></line>
-              </>
-            )}
-          </svg>
-        </button>
-
-        {/* Desktop Navigation Links */}
-        <ul className='hidden gap-8 text-lg text-black md:flex md:text-3xl lg:text-4xl'>
-          {navLinks.map((link, index) => (
-            <li key={index}>
-              <Link
-                href={link.href}
-                className='transition-colors hover:text-dfNew2'
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        {/* Shopping Cart right aligned */}
-        <div className='relative m-2 text-black'>
-          <Link href='/shop/cart' aria-label='Shopping Cart'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='30'
-              height='30'
-              viewBox='0 0 24 24'
-              fill='none'
-              stroke='currentColor'
-              strokeWidth='2'
-              strokeLinecap='round'
-              strokeLinejoin='round'
+      <div className='flex items-center gap-2 tracking-[-0.04em] md:gap-6'>
+        {navLinks.map((link, index) => (
+          <div key={index}>
+            <Link
+              href={link.href}
+              className='text-lg transition-colors hover:text-dfNew2 md:text-4xl'
             >
-              <circle cx='9' cy='21' r='1'></circle>
-              <circle cx='20' cy='21' r='1'></circle>
-              <path d='M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6'></path>
-            </svg>
+              {link.label}
+            </Link>
+          </div>
+        ))}
+        <div className='ml-auto'>
+          <Link href='/shop/cart' aria-label='Shopping Cart' className='flex'>
             {cartCount > 0 && (
-              <span className='absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-dfNew text-xs text-white'>
+              <div className='flex h-8 w-8 items-center rounded-xl border border-black bg-white px-3 text-sm'>
                 {cartCount}
-              </span>
+              </div>
             )}
-          </Link>
-        </div>
-      </div>
-
-      {/* Backdrop overlay */}
-      {isMobileMenuOpen && (
-        <div
-          className='fixed inset-0 z-30 bg-black/50 md:hidden'
-          onClick={closeMobileMenu}
-          aria-hidden='true'
-        />
-      )}
-
-      {/* Mobile menu overlay */}
-      <div
-        className={`fixed left-0 top-0 z-40 h-screen w-full bg-df-text transition-transform duration-300 ease-in-out md:hidden ${
-          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
-      >
-        {/* Close button inside mobile menu */}
-        <div className='absolute right-4 top-4 z-50'>
-          <button
-            onClick={closeMobileMenu}
-            className='text-white transition-colors hover:text-dfNew2'
-            aria-label='Close menu'
-          >
             <svg
-              xmlns='http://www.w3.org/2000/svg'
               width='32'
               height='32'
-              viewBox='0 0 24 24'
+              viewBox='0 0 48 60'
               fill='none'
-              stroke='currentColor'
-              strokeWidth='2'
-              strokeLinecap='round'
-              strokeLinejoin='round'
+              xmlns='http://www.w3.org/2000/svg'
             >
-              <line x1='18' y1='6' x2='6' y2='18'></line>
-              <line x1='6' y1='6' x2='18' y2='18'></line>
+              <path
+                d='M42 12H36C36 5.37 30.63 0 24 0C17.37 0 12 5.37 12 12H6C2.7 12 0 14.7 0 18V54C0 57.3 2.7 60 6 60H42C45.3 60 48 57.3 48 54V18C48 14.7 45.3 12 42 12ZM24 6C27.3 6 30 8.7 30 12H18C18 8.7 20.7 6 24 6ZM42 54H6V18H12V24C12 25.65 13.35 27 15 27C16.65 27 18 25.65 18 24V18H30V24C30 25.65 31.35 27 33 27C34.65 27 36 25.65 36 24V18H42V54Z'
+                fill='black'
+              />
             </svg>
-          </button>
-        </div>
-
-        <div className='flex h-full flex-col justify-center px-8'>
-          <ul className='flex flex-col gap-8 text-center'>
-            {navLinks.map((link, index) => (
-              <li key={index}>
-                <Link
-                  href={link.href}
-                  className='text-3xl font-light text-white transition-colors hover:text-dfNew2 focus:text-dfNew2 focus:outline-none'
-                  onClick={closeMobileMenu}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          </Link>
         </div>
       </div>
     </nav>

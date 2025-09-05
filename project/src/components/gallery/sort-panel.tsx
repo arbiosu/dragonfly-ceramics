@@ -29,7 +29,7 @@ export default function SortPanel() {
     <div data-pending={isPending ? '' : undefined} className='text-left'>
       <label className='hidden'>sort by:</label>
       <select
-        className='w-full rounded px-4 py-2 text-lg tracking-[-0.04em] text-gray-400'
+        className='w-full truncate rounded px-4 py-2 text-lg tracking-[-0.04em] text-gray-400'
         value={currentSort}
         onChange={(e) => handleSortChange(e.target.value)}
       >

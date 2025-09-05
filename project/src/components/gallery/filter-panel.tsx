@@ -33,7 +33,7 @@ export default function FilterPanel({ filters }: { filters: string[] }) {
 
   return (
     <div data-pending={isPending ? '' : undefined} className='text-black'>
-      <div className='mb-6 flex flex-col -space-y-1 truncate'>
+      <div className='mb-6 flex flex-col -space-y-1 truncate text-base md:text-xl'>
         {filterOptions.map((filter) => (
           <div key={filter} className='relative'>
             <input

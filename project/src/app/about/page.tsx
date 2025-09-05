@@ -5,7 +5,7 @@ import { SocialMediaCard } from '@/components/socialmedia';
 
 export default function About() {
   return (
-    <section className='min-h-screen bg-df-yellow py-20 tracking-[-0.04em] text-black'>
+    <section className='mx-auto min-h-screen bg-df-yellow py-20 tracking-[-0.04em] text-black'>
       <div className='absolute left-0 top-0 w-full overflow-hidden leading-[0]'>
         <svg
           data-name='Layer 1'
@@ -50,20 +50,20 @@ export default function About() {
             <p className='-mt-2 text-sm md:text-xl'>ceramicist</p>
             <p className='-mt-2 text-sm md:text-xl'>nyc</p>
             <div className='flex h-full flex-col justify-end gap-4'>
-              <p className='text-sm font-light leading-none tracking-[-0.04em] md:text-2xl'>
+              <p className='text-xs font-light leading-none tracking-[-0.04em] md:text-2xl'>
                 {' '}
                 dragonfly ceramics started in 2025 and we focus on handmade
                 functional ceramics for the home with an emphasis on unique
                 colors.
               </p>
-              <p className='text-sm font-light leading-none tracking-[-0.04em] md:text-2xl'>
+              <p className='text-xs font-light leading-none tracking-[-0.04em] md:text-2xl'>
                 {' '}
                 after getting a degree in filmmaking and ceramics, kelly
                 combined her knowledge in the two mediums creating frequent
                 social content and while striving to constantly learn and
                 perfect her ceramic abilities.
               </p>
-              <p className='text-sm font-light leading-none tracking-[-0.04em] md:text-2xl'>
+              <p className='text-xs font-light leading-none tracking-[-0.04em] md:text-2xl'>
                 check out @dragonflyceramics on{' '}
                 <Link
                   href='https://www.instagram.com/dragonflyceramics_/'

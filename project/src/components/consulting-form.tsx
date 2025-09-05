@@ -249,10 +249,10 @@ export default function ConsultingForm() {
         </div>
 
         <div className='relative right-0 mt-12 max-w-2xl flex-1 lg:mt-0'>
-          <div className='group relative'>
-            <div className='relative overflow-hidden'>
+          <div className='group relative z-10'>
+            <div className='relative'>
               <Image
-                src='/contact-mug-unoptimized.png'
+                src='/consulting-page.jpeg'
                 width={800}
                 height={800}
                 className='contrast-105 h-auto w-full object-cover brightness-105 filter'
