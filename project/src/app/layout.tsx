@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { manrope } from '@/../public/fonts/fonts';
 import Navbar from '@/components/nav';
-
 import { Footer } from '@/components/footer';
 import { CartProvider } from '@/contexts/CartContext';
 import { Analytics } from '@vercel/analytics/next';

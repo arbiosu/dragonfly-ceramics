@@ -72,7 +72,7 @@ export default function ShoppingCart() {
       </div>
       <div className='flex justify-end'>
         <Link href='/shop/cart/shipping'>
-          <button className='w-full rounded-3xl border border-black bg-df-yellow px-4 py-2 text-xl transition-colors duration-200 hover:bg-dfNew hover:text-white'>
+          <button className='w-full rounded-3xl border border-black bg-df-yellow px-4 py-2 text-xl transition-colors duration-200 hover:bg-dfNew2'>
             checkout
           </button>
         </Link>

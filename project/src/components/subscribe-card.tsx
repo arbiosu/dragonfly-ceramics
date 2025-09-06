@@ -4,7 +4,17 @@ import { useState } from 'react';
 import { validateEmail } from '@/lib/utils';
 import { Input } from './ui/input';
 
-export default function SubscribeCard({ text }: { text: string }) {
+export default function SubscribeCard({
+  headingText,
+  subText,
+  subTextSize,
+  subTextAlignment,
+}: {
+  headingText: string;
+  subText: string;
+  subTextSize: string;
+  subTextAlignment: string;
+}) {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -56,13 +66,14 @@ export default function SubscribeCard({ text }: { text: string }) {
 
   return (
     <div>
-      <div className='text-center'>
-        <h2 className='text-6xl tracking-[-0.04em] md:text-8xl'>{text}</h2>
-        <p className='text-right text-xl tracking-[-0.04em]'>
-          sign up for the mailing list
-        </p>
-      </div>
-      <div className='my-auto py-4 text-center'></div>
+      <h2 className='text-center text-6xl tracking-[-0.04em] md:text-8xl'>
+        {headingText}
+      </h2>
+      <p className={`${subTextAlignment} ${subTextSize} tracking-[-0.04em]`}>
+        {subText}
+      </p>
+
+      <div className='my-auto py-2 text-center'></div>
       {submitted ? (
         <div className='rounded-md bg-green-50 px-6 py-4 text-center'>
           <p className='font-medium text-green-600'>thanks for subscribing!</p>
@@ -87,7 +98,7 @@ export default function SubscribeCard({ text }: { text: string }) {
               />
               <button
                 type='submit'
-                className='absolute right-2 top-1/2 inline-flex h-8 -translate-y-1/2 items-center justify-center rounded-full border border-black bg-yellow-100 px-4 text-sm text-black transition-colors hover:bg-yellow-100/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+                className='absolute right-2 top-1/2 inline-flex h-8 -translate-y-1/2 items-center justify-center rounded-full border border-black bg-df-yellow px-4 text-sm text-black transition-colors hover:bg-dfNew2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
                 disabled={isLoading}
               >
                 {isLoading ? (

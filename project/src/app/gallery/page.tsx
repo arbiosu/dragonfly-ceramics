@@ -54,10 +54,10 @@ export default async function Gallery(props: {
           </div>
           <div className='justify-items-center'>
             <Image
-              src={'/shop-header.png'}
+              src={'/gallery-header.png'}
               alt='Gallery'
-              height={200}
-              width={200}
+              height={400}
+              width={400}
               unoptimized
             />
           </div>

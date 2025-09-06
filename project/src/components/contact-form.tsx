@@ -127,7 +127,7 @@ export default function ContactForm() {
 
         <div className='relative w-full overflow-hidden'>
           <Image
-            src='/contact-mug-unoptimized.png'
+            src='/contact-mug.webp'
             width={600}
             height={200}
             alt='Dragonfly Ceramics Mug - Handcrafed Pottery'
@@ -140,8 +140,8 @@ export default function ContactForm() {
   }
 
   return (
-    <div className='mx-auto text-black'>
-      <div className='relative z-10 flex min-h-screen flex-col items-center justify-between lg:flex-row'>
+    <div className='mx-auto min-h-screen text-black'>
+      <div className='relative z-10 flex flex-col items-center justify-between lg:flex-row'>
         <div className='flex-1 p-10'>
           <h1 className='mb-2 text-8xl tracking-[-0.04em]'>contact</h1>
           <div className='max-w-xl p-2'>
@@ -268,7 +268,7 @@ export default function ContactForm() {
                 <button
                   type='submit'
                   disabled={isLoading}
-                  className='group relative inline-flex transform items-center justify-center overflow-hidden rounded-3xl border border-black bg-df-yellow px-6 py-2 text-xl font-light text-black transition-all duration-300 hover:scale-105 hover:bg-dfNew2 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+                  className='group relative inline-flex transform items-center justify-center overflow-hidden rounded-3xl border border-black bg-df-yellow px-6 py-2 text-xl font-light text-black transition-all duration-300 hover:bg-dfNew2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
                 >
                   {isLoading ? (
                     <div className='flex items-center justify-center'>
@@ -309,7 +309,7 @@ export default function ContactForm() {
           <div className='group relative'>
             <div className='relative overflow-hidden'>
               <Image
-                src='/contact-mug-unoptimized.png'
+                src='/contact-mug.webp'
                 width={800}
                 height={800}
                 className='contrast-105 h-auto w-full object-cover brightness-105 filter'

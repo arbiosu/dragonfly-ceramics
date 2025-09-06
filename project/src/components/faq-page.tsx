@@ -41,24 +41,24 @@ const faqs = [
 
 export default function FAQPage() {
   return (
-    <section className='relative min-h-screen w-full bg-df-yellow text-black'>
-      <div className='absolute inset-0 z-10'>
+    <section className='relative min-h-screen w-full overflow-x-hidden bg-df-yellow text-black'>
+      <div className='absolute inset-0 z-10 -mx-20 -mt-20 md:-mx-32'>
         <Image
-          src='/df-hero-dispenser.png'
+          src='/oil-dispenser.png'
           alt='Dragonfly Ceramics Bowl'
-          width={600}
-          height={400}
-          className='absolute -mx-4 -mt-20 md:left-0 md:-mt-24'
+          width={500}
+          height={500}
+          className='absolute left-0 top-0 h-auto w-[300px] -rotate-[18deg] md:w-[400px] lg:w-[500px]'
         />
       </div>
-      <div className='py-40 lg:py-52'></div>
+      <div className='py-40 md:py-52'></div>
       <div className='absolute left-0 top-0 w-full rotate-180 overflow-hidden leading-[0]'>
         <svg
           data-name='Layer 2'
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 1200 120'
           preserveAspectRatio='none'
-          className='relative block h-[700px] w-[calc(206%+1.3px)]'
+          className='relative block h-[900px] w-[calc(206%+1.3px)]'
         >
           <path
             d='M598.97 114.72L0 0 0 120 1200 120 1200 0 598.97 114.72z'
@@ -66,7 +66,7 @@ export default function FAQPage() {
           ></path>
         </svg>
       </div>
-      <h4 className='relative z-10 mx-8 text-right text-6xl tracking-[-0.04em] md:text-8xl lg:px-40 lg:text-9xl'>
+      <h4 className='relative z-10 mx-8 text-right text-6xl tracking-[-0.04em] md:text-8xl lg:text-9xl'>
         frequently <br></br>asked {"q's"}
       </h4>
       <div className='relative z-20'>

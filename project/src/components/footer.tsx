@@ -44,7 +44,12 @@ export function Footer() {
             </ul>
           </div>
           <div className='col-span-2 row-start-2 md:col-start-4 md:row-start-1 md:pt-10'>
-            <SubscribeCard text='' />
+            <SubscribeCard
+              headingText=''
+              subText='sign up for mailing list'
+              subTextAlignment='text-center'
+              subTextSize='text-2xl'
+            />
           </div>
           <div className='flex flex-col items-end justify-end md:col-start-4'>
             <SocialMediaLinks />

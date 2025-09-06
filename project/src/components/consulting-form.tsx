@@ -89,7 +89,7 @@ export default function ConsultingForm() {
   }
 
   return (
-    <div className='mx-auto text-black'>
+    <div className='mx-auto overflow-x-hidden text-black'>
       <div className='relative z-10 flex min-h-screen flex-col items-center justify-between lg:flex-row'>
         <div className='flex-1 p-10'>
           <h1 className='mb-2 text-7xl tracking-[-0.04em] md:text-8xl'>
@@ -211,7 +211,7 @@ export default function ConsultingForm() {
                 <button
                   type='submit'
                   disabled={isLoading}
-                  className='group relative inline-flex transform items-center justify-center overflow-hidden rounded-3xl border border-black bg-df-yellow px-6 py-2 text-xl font-light text-black transition-all duration-300 hover:scale-105 hover:bg-dfNew2 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+                  className='group relative inline-flex transform items-center justify-center overflow-hidden rounded-3xl border border-black bg-df-yellow px-6 py-2 text-xl font-light text-black transition-all duration-300 hover:bg-dfNew2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
                 >
                   {isLoading ? (
                     <div className='flex items-center justify-center'>
@@ -249,14 +249,15 @@ export default function ConsultingForm() {
         </div>
 
         <div className='relative right-0 mt-12 max-w-2xl flex-1 lg:mt-0'>
-          <div className='group relative z-10'>
-            <div className='relative'>
+          <div className='group relative z-10 overflow-x-hidden'>
+            <div className='relative overflow-hidden'>
               <Image
                 src='/consulting-page.jpeg'
                 width={800}
                 height={800}
-                className='contrast-105 h-auto w-full object-cover brightness-105 filter'
-                alt='Dragonfly Ceramics Mug - Handcrafed Pottery'
+                className='contrast-105 h-auto w-full rotate-[40deg] object-cover brightness-105 filter'
+                alt='Dragonfly Ceramics Oil Dispenser - Handcrafed Pottery'
+                unoptimized
                 priority
               />
             </div>

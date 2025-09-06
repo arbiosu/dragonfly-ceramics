@@ -19,7 +19,12 @@ export default function SubscribePage() {
         </svg>
       </div>
       <div className='p-6'>
-        <SubscribeCard text={"don't miss a beat"} />
+        <SubscribeCard
+          headingText={"don't miss a beat"}
+          subText='sign up for the mailing list and never miss an update'
+          subTextAlignment='text-center'
+          subTextSize='text-xl'
+        />
         <Image
           src='/logo-cropped-black.png'
           alt='Dragonfly Ceramics Logo Black'

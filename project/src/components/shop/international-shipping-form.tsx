@@ -5,15 +5,16 @@ import type React from 'react';
 import { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { validateEmail, validateZip } from '@/lib/utils';
+import { validateEmail } from '@/lib/utils';
 import { useCart } from '@/contexts/CartContext';
 
 const inputTextClass =
   'w-full border rounded-lg border-black  px-4 py-2 text-black focus:border-transparent focus:outline-none focus:ring-1 focus:ring-dfNew';
 const labelClass = 'mb-1 block text-lg text-black tracking-[-0.04em]';
 
-export function Form() {
+export function InternationShippingForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [submitted, setSubmitted] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const firstNameRef = useRef<string>('');
@@ -25,7 +26,7 @@ export function Form() {
   const cityRef = useRef<string>('');
   const stateRef = useRef<string>('');
   const zipRef = useRef<string>('');
-  const countryRef = useRef<string>('US');
+  const countryRef = useRef<string>('');
 
   const { cartItems } = useCart();
 
@@ -53,35 +54,51 @@ export function Form() {
       return;
     }
 
-    if (!validateZip(formData.zip)) {
-      setError('Invalid ZIP code. Please try again.');
-      setIsLoading(false);
-      return;
-    }
-
     try {
-      const res = await fetch('/shop/api/shipping', {
+      const res = await fetch('/shop/api/international', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ address: formData, cartItems: cartItems }),
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
         if (res.status === 429) {
-          setError('Too many attempts. You have been locked out for 1 hour.');
+          setError(
+            `Too many contact attempts. Please try again in ${data.resetInMinutes} minutes.`
+          );
         }
-        throw new Error('Failed to calculate shipping');
+        throw new Error('Failed to calculate international shipping');
       }
-
-      const data = await res.json();
-      window.location.href = data.url;
+      if (data !== null) {
+        setSubmitted(true);
+        setError(null);
+      }
     } catch (error) {
       console.log(error);
-      setError('Failed to calculate shipping. Please try again later');
+      setError('Failed to submit your order. Please try again later');
     } finally {
       setIsLoading(false);
     }
   };
+
+  if (submitted) {
+    return (
+      <div className='relative text-center md:p-40'>
+        <p className='text-6xl tracking-[-0.04em] text-black'>submitted!</p>
+        <p className='mt-1 text-lg tracking-[-0.04em] text-black'>
+          thanks for submitting the form!{' '}
+          <strong>
+            if accepted, you will receive a secure payment link from
+            dragonflyceramics.kelly@gmail.com.
+          </strong>
+          i will get back to you as soon as i can!
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className='text-black'>
       <div className='flex justify-center'>
@@ -96,17 +113,11 @@ export function Form() {
       <div className='container mx-auto'>
         <form onSubmit={handleSubmit} className='mx-auto w-full max-w-4xl px-4'>
           <h1 className='mb-2 text-3xl font-medium tracking-[-0.04em] md:text-6xl'>
-            shipping address
+            international shipping
           </h1>
-          <h3 className='text-lg tracking-[-0.04em]'>
+          <h3 className='mb-2 text-lg tracking-[-0.04em]'>
             * indicates a required field
           </h3>
-          <Link
-            href='/shop/cart/shipping/international'
-            className='mb-2 text-sm hover:underline'
-          >
-            international order? click here!
-          </Link>
           <div className='grid grid-cols-1 gap-2'>
             <div className='space-y-4'>
               <div>
@@ -158,7 +169,7 @@ export function Form() {
 
               <div>
                 <label htmlFor='phoneNumber' className={labelClass}>
-                  phone number
+                  phone number*
                 </label>
                 <input
                   type='text'
@@ -203,7 +214,7 @@ export function Form() {
 
                 <div>
                   <label htmlFor='city' className={labelClass}>
-                    city*
+                    city/locality*
                   </label>
                   <input
                     type='text'
@@ -219,77 +230,23 @@ export function Form() {
 
                 <div>
                   <label htmlFor='state' className={labelClass}>
-                    state*
+                    state/province*
                   </label>
-                  <select
+                  <input
+                    type='text'
                     id='state'
                     name='state'
                     defaultValue=''
                     onChange={(e) => (stateRef.current = e.target.value)}
                     disabled={isLoading}
-                    required
                     className={inputTextClass}
-                  >
-                    <option value='' disabled>
-                      select an option
-                    </option>
-                    <option value='AL'>Alabama</option>
-                    <option value='AK'>Alaska</option>
-                    <option value='AZ'>Arizona</option>
-                    <option value='AR'>Arkansas</option>
-                    <option value='CA'>California</option>
-                    <option value='CO'>Colorado</option>
-                    <option value='CT'>Connecticut</option>
-                    <option value='DE'>Delaware</option>
-                    <option value='DC'>District Of Columbia</option>
-                    <option value='FL'>Florida</option>
-                    <option value='GA'>Georgia</option>
-                    <option value='HI'>Hawaii</option>
-                    <option value='ID'>Idaho</option>
-                    <option value='IL'>Illinois</option>
-                    <option value='IN'>Indiana</option>
-                    <option value='IA'>Iowa</option>
-                    <option value='KS'>Kansas</option>
-                    <option value='KY'>Kentucky</option>
-                    <option value='LA'>Louisiana</option>
-                    <option value='ME'>Maine</option>
-                    <option value='MD'>Maryland</option>
-                    <option value='MA'>Massachusetts</option>
-                    <option value='MI'>Michigan</option>
-                    <option value='MN'>Minnesota</option>
-                    <option value='MS'>Mississippi</option>
-                    <option value='MO'>Missouri</option>
-                    <option value='MT'>Montana</option>
-                    <option value='NE'>Nebraska</option>
-                    <option value='NV'>Nevada</option>
-                    <option value='NH'>New Hampshire</option>
-                    <option value='NJ'>New Jersey</option>
-                    <option value='NM'>New Mexico</option>
-                    <option value='NY'>New York</option>
-                    <option value='NC'>North Carolina</option>
-                    <option value='ND'>North Dakota</option>
-                    <option value='OH'>Ohio</option>
-                    <option value='OK'>Oklahoma</option>
-                    <option value='OR'>Oregon</option>
-                    <option value='PA'>Pennsylvania</option>
-                    <option value='RI'>Rhode Island</option>
-                    <option value='SC'>South Carolina</option>
-                    <option value='SD'>South Dakota</option>
-                    <option value='TN'>Tennessee</option>
-                    <option value='TX'>Texas</option>
-                    <option value='UT'>Utah</option>
-                    <option value='VT'>Vermont</option>
-                    <option value='VA'>Virginia</option>
-                    <option value='WA'>Washington</option>
-                    <option value='WV'>West Virginia</option>
-                    <option value='WI'>Wisconsin</option>
-                    <option value='WY'>Wyoming</option>
-                  </select>
+                    required
+                  />
                 </div>
 
                 <div>
                   <label htmlFor='zip' className={labelClass}>
-                    zip code*
+                    postal code*
                   </label>
                   <input
                     type='text'
@@ -311,8 +268,9 @@ export function Form() {
                     type='text'
                     id='country'
                     name='country'
-                    defaultValue='US'
-                    disabled={true}
+                    defaultValue=''
+                    onChange={(e) => (countryRef.current = e.target.value)}
+                    disabled={isLoading}
                     className={inputTextClass}
                     required
                   />
@@ -322,7 +280,7 @@ export function Form() {
           </div>
 
           {error && <p className='mt-4 text-red-600'>{error}</p>}
-          <div className='flex items-center gap-4 p-10'>
+          <div className='flex gap-4 p-10'>
             <Link
               href={isLoading ? '#' : '/shop/cart'}
               className={`rounded-3xl border border-black bg-df-yellow px-4 py-2 text-center text-xl tracking-[-0.04em] transition-colors duration-200 hover:bg-dfNew2 ${
@@ -339,7 +297,7 @@ export function Form() {
               className='flex-1 rounded-3xl border border-black bg-df-yellow px-4 py-2 text-xl tracking-[-0.04em] transition-colors duration-200 hover:bg-dfNew2 disabled:cursor-not-allowed disabled:opacity-50'
               disabled={isLoading}
             >
-              {isLoading ? 'processing...' : 'continue to payment'}
+              {isLoading ? 'processing...' : 'submit'}
             </button>
           </div>
         </form>

@@ -89,7 +89,12 @@ export default async function Shop(props: {
               </p>
             </div>
             <div className='pt-10'>
-              <SubscribeCard text='' />
+              <SubscribeCard
+                headingText=''
+                subText='sign up and never miss an update'
+                subTextAlignment=''
+                subTextSize='text-2xl'
+              />
             </div>
           </div>
         )}

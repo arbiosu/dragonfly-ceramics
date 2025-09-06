@@ -29,7 +29,7 @@ export function FAQHorizontalScroll({ faqs }: FAQProps) {
   };
 
   return (
-    <div className='mx-auto w-full max-w-7xl py-6 text-black'>
+    <div className='mx-auto w-full max-w-full py-6 text-black'>
       <div
         ref={scrollRef}
         className='relative flex flex-nowrap overflow-x-auto px-2 py-4'

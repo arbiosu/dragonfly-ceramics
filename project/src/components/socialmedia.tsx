@@ -24,7 +24,7 @@ const socials = [
 
 export default function SocialMediaLinks() {
   return (
-    <div className='flex w-3/5 items-center justify-between'>
+    <div className='flex items-center justify-evenly space-x-8'>
       {socials.map((sm, i) => (
         <div key={i}>
           <Link
