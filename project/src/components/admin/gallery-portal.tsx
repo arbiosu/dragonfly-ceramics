@@ -1,5 +1,4 @@
 import { fetchGalleryImages } from '@/lib/supabase/model';
-import Link from 'next/link';
 import GalleryUploader from './gallery-uploader';
 import AdminGalleryCard from './gallery-admin-card';
 
