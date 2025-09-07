@@ -93,12 +93,12 @@ export default function SubscribeCard({
                   setEmail(() => e.target.value);
                 }}
                 placeholder='name@example.com'
-                className='m-2 w-full p-6'
+                className='w-full py-6'
                 disabled={isLoading}
               />
               <button
                 type='submit'
-                className='absolute right-2 top-1/2 inline-flex h-8 -translate-y-1/2 items-center justify-center rounded-full border border-black bg-df-yellow px-4 text-sm text-black transition-colors hover:bg-dfNew2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+                className='absolute right-4 top-1/2 inline-flex h-8 -translate-y-1/2 items-center justify-center rounded-full border border-black bg-df-yellow px-4 text-sm text-black transition-colors hover:bg-dfNew2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
                 disabled={isLoading}
               >
                 {isLoading ? (

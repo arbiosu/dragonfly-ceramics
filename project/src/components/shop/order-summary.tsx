@@ -3,6 +3,7 @@
 import { Stripe } from 'stripe';
 import { useEffect } from 'react';
 import { useCart } from '@/contexts/CartContext';
+import { Button } from './shop-button';
 
 export interface SessionProps {
   session: Session;
@@ -36,44 +37,46 @@ export default function OrderSummary({ session }: SessionProps) {
   }, [purgeCart]);
 
   return (
-    <div className='container mx-auto py-20'>
-      <h2 className='mb-4 text-3xl font-semibold text-df-text'>
-        Thank you! Your Order Summary:
-      </h2>
-      <p className='text-lg text-df-text'>
+    <div className='container mx-auto py-20 text-black'>
+      <h2 className='mb-4 text-3xl'>thank you for your order</h2>
+      <Button
+        href={'/shop'}
+        variant={'outline'}
+        size={'large'}
+        className='transition-all duration-300 hover:scale-105 hover:shadow-2xl'
+      >
+        <span className='relative z-10 text-2xl'>shop</span>
+      </Button>
+
+      <p className='text-lg'>
         Order ID - keep this for your records:
         <span
           onClick={handleOrderIdClick}
-          className='rounded-lg p-1 font-semibold text-df-text hover:cursor-pointer hover:bg-blue-300'
+          className='rounded-lg p-1 font-semibold hover:cursor-pointer hover:bg-blue-300'
         >
           {session.id}
         </span>
       </p>
-      {session.amountTotal && (
-        <p className='text-lg text-df-text'>
-          Total Amount: ${session.amountTotal / 100}
-        </p>
-      )}
+
       {session.address ? (
-        <p className='mb-4 text-lg text-df-text'>
+        <p className='mb-4 text-lg'>
           Shipping Address: {formatAddress(session.address)}
         </p>
       ) : (
         <p>Shipping address not found!</p>
       )}
-      <div>
-        <h3 className='mb-2 text-2xl font-semibold text-df-text'>
-          Your receipt
-        </h3>
+      <div className='flex justify-center'>
+        <h3 className='mb-2 text-2xl'>order summary</h3>
         {session.lineItems?.data.map((item) => (
           <div key={item.id}>
-            <p className='text-lg text-df-text'>{item.description}</p>
-            <p className='text-lg text-df-text'>Quantity: {item.quantity}</p>
-            <p className='text-lg text-df-text'>
-              Price: ${item.amount_total / 100}
-            </p>
+            <p className='text-lg'>{item.description}</p>
+            <p className='text-lg'>Quantity: {item.quantity}</p>
+            <p className='text-lg'>Price: ${item.amount_total / 100}</p>
           </div>
         ))}
+        {session.amountTotal && (
+          <p className='text-lg'>Total Amount: ${session.amountTotal / 100}</p>
+        )}
       </div>
     </div>
   );

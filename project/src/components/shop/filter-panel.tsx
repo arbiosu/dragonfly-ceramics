@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useOptimistic, useTransition } from 'react';
 
 const filterOptions = [
+  'all',
   'mugs',
   'oil dispensers',
   'vases',
@@ -22,7 +23,7 @@ export default function FilterPanel({ filters }: { filters: string[] }) {
     const newParams = new URLSearchParams(searchParams);
     newParams.set('page', '0');
     newParams.set('filter', filters[0]);
-    if (filters[0] == null) {
+    if (filters[0] == null || filters[0] === 'all') {
       newParams.delete('filter');
     }
 

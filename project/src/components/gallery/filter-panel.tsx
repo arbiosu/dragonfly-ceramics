@@ -5,6 +5,7 @@ import { useOptimistic, useTransition } from 'react';
 
 // todo: make one component
 const filterOptions = [
+  'all',
   'chain vases',
   'raku pieces',
   'stoneware',
@@ -21,7 +22,7 @@ export default function FilterPanel({ filters }: { filters: string[] }) {
     const newParams = new URLSearchParams(searchParams);
     newParams.set('page', '0');
     newParams.set('filter', filters[0]);
-    if (filters[0] == null) {
+    if (filters[0] == null || filters[0] === 'all') {
       newParams.delete('filter');
     }
 

@@ -30,7 +30,7 @@ export default function About() {
             <p className='-rotate-90 text-6xl md:text-9xl'>a</p>
           </div>
         </div>
-        <div className='bg-black'>
+        <div className=''>
           <Image
             src='/about-kelly-redesign.png'
             alt='Kelly Slater, Owner, Dragonfly Ceramics'
