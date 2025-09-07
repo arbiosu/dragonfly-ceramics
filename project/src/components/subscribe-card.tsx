@@ -65,7 +65,7 @@ export default function SubscribeCard({
   };
 
   return (
-    <div>
+    <div className='m-2'>
       <h2 className='text-center text-5xl tracking-[-0.04em] md:text-8xl'>
         {headingText}
       </h2>
@@ -84,7 +84,7 @@ export default function SubscribeCard({
       ) : (
         <form onSubmit={handleSubmit} className='space-y-4'>
           <div className='flex justify-center'>
-            <div className='relative w-full max-w-lg'>
+            <div className='relative w-full max-w-xs md:max-w-lg'>
               <Input
                 id='email'
                 type='text'

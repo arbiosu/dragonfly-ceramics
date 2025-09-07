@@ -49,20 +49,20 @@ export default function FAQPage() {
           alt='Dragonfly Ceramics Bowl'
           width={500}
           height={500}
-          className='absolute left-0 top-0 h-auto w-[300px] -rotate-[18deg] md:w-[400px] lg:w-[500px]'
+          className='absolute left-0 top-0 h-auto w-[300px] md:w-[400px] lg:w-[500px]'
         />
       </div>
       <div className='py-40 md:py-52'></div>
-      <div className='absolute left-0 top-0 w-full rotate-180 overflow-hidden leading-[0]'>
+      <div className='absolute left-0 top-0 w-full overflow-hidden leading-[0]'>
         <svg
           data-name='Layer 2'
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 1200 120'
           preserveAspectRatio='none'
-          className='relative block h-[900px] w-[calc(206%+1.3px)]'
+          className='relative block h-[900px] w-[calc(137%+1.3px)]'
         >
           <path
-            d='M598.97 114.72L0 0 0 120 1200 120 1200 0 598.97 114.72z'
+            d='M0,0V7.23C0,65.52,268.63,112.77,600,112.77S1200,65.52,1200,7.23V0Z'
             className='fill-white'
           ></path>
         </svg>
