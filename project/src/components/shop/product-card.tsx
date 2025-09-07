@@ -7,6 +7,8 @@ export default function ProductCard({
 }: {
   product: Tables<'products'>;
 }) {
+  // drops
+  if (!product.active && product.inventory > 0) return null;
   return (
     <div className='w-full overflow-hidden transition-transform duration-300 hover:scale-[1.03]'>
       <div className='relative aspect-square w-full overflow-hidden rounded-[3em] border border-black p-4 md:rounded-[5em]'>
