@@ -21,10 +21,14 @@ export default function About() {
         </svg>
       </div>
       <div className='relative z-10 grid grid-cols-4 gap-2 lg:grid-cols-5 xl:grid-cols-8'>
-        <div className='justify-items-end'>
-          <h1 className='text-6xl tracking-[-0.04em] [text-orientation:mixed] [writing-mode:sideways-lr] md:text-9xl'>
-            about
-          </h1>
+        <div className='flex justify-end'>
+          <div className='flex flex-col -space-y-8 md:mx-2 md:-space-y-16'>
+            <p className='-rotate-90 text-6xl md:text-9xl'>t</p>
+            <p className='-rotate-90 text-6xl md:text-9xl'>u</p>
+            <p className='-rotate-90 text-6xl md:text-9xl'>o</p>
+            <p className='-rotate-90 text-6xl md:text-9xl'>b</p>
+            <p className='-rotate-90 text-6xl md:text-9xl'>a</p>
+          </div>
         </div>
         <div className='bg-black'>
           <Image
@@ -35,7 +39,6 @@ export default function About() {
             unoptimized
           />
         </div>
-
         <div className='col-span-2 mr-4 flex flex-col justify-items-start lg:col-span-3'>
           <div className='flex h-full max-w-md flex-col justify-start'>
             <Image
@@ -51,20 +54,18 @@ export default function About() {
             <p className='-mt-2 text-sm md:text-xl'>nyc</p>
             <div className='flex h-full flex-col justify-end gap-4'>
               <p className='text-xs font-light leading-none tracking-[-0.04em] md:text-2xl'>
-                {' '}
                 dragonfly ceramics started in 2025 and we focus on handmade
                 functional ceramics for the home with an emphasis on unique
                 colors.
               </p>
               <p className='text-xs font-light leading-none tracking-[-0.04em] md:text-2xl'>
-                {' '}
                 after getting a degree in filmmaking and ceramics, kelly
                 combined her knowledge in the two mediums creating frequent
                 social content and while striving to constantly learn and
                 perfect her ceramic abilities.
               </p>
               <p className='text-xs font-light leading-none tracking-[-0.04em] md:text-2xl'>
-                check out @dragonflyceramics on{' '}
+                check out @dragonflyceramics on
                 <Link
                   href='https://www.instagram.com/dragonflyceramics_/'
                   className='hover:underline'
@@ -73,7 +74,7 @@ export default function About() {
                 >
                   instagram
                 </Link>
-                ,{' '}
+                ,
                 <Link
                   href='https://www.tiktok.com/@dragonflyceramics'
                   className='hover:underline'
@@ -82,7 +83,7 @@ export default function About() {
                 >
                   tiktok
                 </Link>
-                , and{' '}
+                , and
                 <Link
                   href='https://www.youtube.com/@dragonflyceramics'
                   className='hover:underline'
@@ -93,7 +94,7 @@ export default function About() {
                 </Link>
               </p>
               <p className='text-xs font-light leading-none tracking-[-0.04em] md:text-2xl'>
-                for press and inquires{' '}
+                for press and inquires
                 <Link href='/contact' className='font-bold hover:underline'>
                   contact the studio.
                 </Link>
@@ -101,7 +102,6 @@ export default function About() {
             </div>
           </div>
         </div>
-
         <div className='col-start-2 flex justify-center pt-2'>
           <Button href='/shop' variant='outline' className='hover:shadow-lg'>
             shop

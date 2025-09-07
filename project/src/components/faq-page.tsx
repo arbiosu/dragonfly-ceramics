@@ -11,7 +11,8 @@ const faqs = [
   {
     id: 2,
     question: 'Where do you ship?',
-    answer: 'I currently ship worldwide to all locations!',
+    answer:
+      'I currently ship worldwide to all locations! Once you picked out your items, click on “checkout” and there will be an option to fill out an international shipping form!',
   },
   {
     id: 3,

@@ -60,7 +60,7 @@ export default async function Shop(props: {
           <div>
             <FilterPanel filters={filters} />
           </div>
-          <div className='justify-items-center'>
+          <div className='flex justify-center'>
             <Image
               src={'/shop-header.png'}
               alt='Gallery'
@@ -69,7 +69,7 @@ export default async function Shop(props: {
               unoptimized
             />
           </div>
-          <div className='justify-items-end'>
+          <div className='grid justify-items-end'>
             <SortSelector />
             <ActiveSelector />
           </div>

@@ -48,20 +48,20 @@ export default async function Gallery(props: {
   return (
     <main className='flex min-h-screen flex-col items-center px-2 py-28 tracking-[-0.04em] text-black xl:m-20'>
       <section className='w-full max-w-full lg:px-8'>
-        <div className='grid grid-cols-3 items-center gap-2'>
+        <div className='flex items-center gap-2 md:grid md:grid-cols-3'>
           <div>
             <FilterPanel filters={filters} />
           </div>
-          <div className='justify-items-center'>
+          <div className='flex justify-center'>
             <Image
               src={'/gallery-header.png'}
               alt='Gallery'
-              height={400}
-              width={400}
+              height={800}
+              width={800}
               unoptimized
             />
           </div>
-          <div className='justify-items-end'>
+          <div className='flex justify-end'>
             <SortPanel />
           </div>
         </div>
