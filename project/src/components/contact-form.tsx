@@ -140,10 +140,25 @@ export default function ContactForm() {
   }
 
   return (
-    <div className='min-h-screen text-black'>
-      <div className='relative z-10 flex flex-col items-center justify-between lg:flex-row'>
-        <div className='flex-1 p-10'>
+    <div className='min-h-screen bg-df-yellow text-black'>
+      <div className='relative flex flex-col items-center justify-between lg:flex-row'>
+        <div className='absolute left-0 top-0 w-full overflow-hidden leading-[0]'>
+          <svg
+            data-name='Layer 2'
+            xmlns='http://www.w3.org/2000/svg'
+            viewBox='0 0 1200 120'
+            preserveAspectRatio='none'
+            className='relative block h-[800px] w-[calc(137%+1.3px)]'
+          >
+            <path
+              d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z'
+              className='fill-white'
+            ></path>
+          </svg>
+        </div>
+        <div className='z-10 flex-1 p-10'>
           <h1 className='mb-2 text-8xl tracking-[-0.04em]'>contact</h1>
+
           <div className='max-w-xl p-2'>
             <h4 className='mb-6 text-xl font-light leading-none tracking-[-0.04em]'>
               {
@@ -271,7 +286,7 @@ export default function ContactForm() {
                 <button
                   type='submit'
                   disabled={isLoading}
-                  className='group relative inline-flex transform items-center justify-center overflow-hidden rounded-3xl border border-black bg-df-yellow px-6 py-2 text-xl font-light text-black transition-all duration-300 hover:bg-dfNew2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+                  className='group relative inline-flex transform items-center justify-center overflow-hidden rounded-3xl border border-black bg-white px-6 py-2 text-xl font-light text-black transition-all duration-300 hover:bg-dfNew2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
                 >
                   {isLoading ? (
                     <div className='flex items-center justify-center'>

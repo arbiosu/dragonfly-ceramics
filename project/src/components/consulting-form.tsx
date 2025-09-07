@@ -89,9 +89,23 @@ export default function ConsultingForm() {
   }
 
   return (
-    <div className='overflow-x-hidden text-black'>
-      <div className='relative z-10 flex min-h-screen flex-col items-center justify-between lg:flex-row'>
-        <div className='flex-1 p-10'>
+    <div className='relative min-h-screen w-full overflow-x-hidden bg-df-yellow text-black'>
+      <div className='relative flex min-h-screen flex-col items-center justify-between lg:flex-row'>
+        <div className='absolute left-0 top-0 w-full overflow-hidden leading-[0]'>
+          <svg
+            data-name='Layer 2'
+            xmlns='http://www.w3.org/2000/svg'
+            viewBox='0 0 1200 120'
+            preserveAspectRatio='none'
+            className='relative block h-[900px] w-[calc(137%+1.3px)]'
+          >
+            <path
+              d='M0,0V7.23C0,65.52,268.63,112.77,600,112.77S1200,65.52,1200,7.23V0Z'
+              className='fill-white'
+            ></path>
+          </svg>
+        </div>
+        <div className='z-10 flex-1 p-10'>
           <h1 className='mb-2 text-7xl tracking-[-0.04em] md:text-8xl'>
             consulting
           </h1>
@@ -214,7 +228,7 @@ export default function ConsultingForm() {
                 <button
                   type='submit'
                   disabled={isLoading}
-                  className='group relative inline-flex transform items-center justify-center overflow-hidden rounded-3xl border border-black bg-df-yellow px-6 py-2 text-xl font-light text-black transition-all duration-300 hover:bg-dfNew2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
+                  className='group relative inline-flex transform items-center justify-center overflow-hidden rounded-3xl border border-black bg-white px-6 py-2 text-xl font-light text-black transition-all duration-300 hover:bg-dfNew2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
                 >
                   {isLoading ? (
                     <div className='flex items-center justify-center'>
@@ -252,7 +266,7 @@ export default function ConsultingForm() {
         </div>
         <div className='mt-12 flex flex-1 items-end justify-end overflow-hidden lg:mt-0'>
           <Image
-            src='/consulting-page.jpeg'
+            src='/consulting-page.png'
             width={800}
             height={800}
             alt='Dragonfly Ceramics Oil Dispenser - Handcrafted Pottery'

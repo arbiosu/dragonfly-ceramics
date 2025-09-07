@@ -77,7 +77,16 @@ export async function fetchProducts(
   let query = supabase.from('products').select('*', { count: 'exact' });
 
   if (active !== null) {
-    query = query.eq('active', active);
+    if (active === true) {
+      // Show only active products
+      query = query.eq('active', true);
+    } else {
+      // Show only sold out products
+      query = query.eq('active', false).eq('inventory', 0);
+    }
+  } else {
+    // Show all except drops (inactive with inventory > 0)
+    query = query.or('active.eq.true,and(active.eq.false,inventory.eq.0)');
   }
 
   if (type) {
@@ -191,4 +200,52 @@ export async function fetchGalleryImages(
   query = query.range(from, to);
 
   return await query;
+}
+
+export async function deleteGalleryImageById(id: number) {
+  try {
+    const supabase = await createServiceClient();
+    const { data: deleteData, error: deleteError } = await supabase
+      .from('gallery_images')
+      .delete()
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (deleteError || !deleteData) {
+      console.error(`Failed to delete gallery image with id: ${id}`);
+      return {
+        data: null,
+        error: `Failed to delete gallery image. Code: ${deleteError?.code || 'UNKNOWN'}`,
+      };
+    }
+    const { data: storageDeleteData, error: storageDeleteError } =
+      await supabase.storage.from('gallery').remove([deleteData.path.slice(8)]);
+
+    if (storageDeleteError || !storageDeleteData) {
+      console.error(
+        `Failed to delete gallery image from storage with id: ${id}`
+      );
+      return {
+        data: null,
+        error: `Failed to delete gallery image from storage. Code: ${storageDeleteError || 'UNKNOWN'}`,
+      };
+    }
+
+    // -- Success --
+    revalidatePath('/gallery');
+    revalidatePath('/admin');
+    return {
+      data: deleteData,
+      error: null,
+    };
+  } catch (error) {
+    console.log(error);
+    if (error instanceof Error) {
+      return {
+        data: null,
+        error: `Failed to delete product: ${error.message}`,
+      };
+    }
+  }
 }
