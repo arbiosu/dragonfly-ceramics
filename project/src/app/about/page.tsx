@@ -61,8 +61,7 @@ export default function About() {
               <p className='text-xs font-light leading-none tracking-[-0.04em] md:text-2xl'>
                 after getting a degree in filmmaking and ceramics, kelly
                 combined her knowledge in the two mediums creating frequent
-                social content and while striving to constantly learn and
-                perfect her ceramic abilities.
+                social content and consistently releasing new ceramic work.
               </p>
               <p className='text-xs font-light leading-none tracking-[-0.04em] md:text-2xl'>
                 check out @dragonflyceramics on
@@ -72,6 +71,7 @@ export default function About() {
                   rel='noopener noreferrer'
                   target='_blank'
                 >
+                  {' '}
                   instagram
                 </Link>
                 ,
@@ -81,6 +81,7 @@ export default function About() {
                   rel='noopener noreferrer'
                   target='_blank'
                 >
+                  {' '}
                   tiktok
                 </Link>
                 , and
@@ -90,12 +91,14 @@ export default function About() {
                   rel='noopener noreferrer'
                   target='_blank'
                 >
+                  {' '}
                   youtube!
                 </Link>
               </p>
               <p className='text-xs font-light leading-none tracking-[-0.04em] md:text-2xl'>
                 for press and inquires
                 <Link href='/contact' className='font-bold hover:underline'>
+                  {' '}
                   contact the studio.
                 </Link>
               </p>

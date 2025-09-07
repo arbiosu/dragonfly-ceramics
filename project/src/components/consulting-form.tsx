@@ -98,7 +98,7 @@ export default function ConsultingForm() {
           <div className='max-w-xl p-2'>
             <h4 className='mb-6 text-xl font-light leading-none tracking-[-0.04em]'>
               {
-                'Do you have questions about growing your brand on social media? Or about your specific ceramic business, what or how to sell? You can fill out this form for consultations! This meeting will happen over video call and the rate is $75 per hour. Usually everything is covered in an hour but be sure to come with questions for me or please send me your questions before hand so I can be prepared! '
+                'Do you have questions about growing your brand on social media? Need guidance on your ceramic or art focused business? You can fill out this form for consultations! This meeting will happen over video call and the rate is $75 per hour. Usually everything is covered in an hour but be sure to come with questions for me or please send me your questions before hand so I can be prepared! '
               }
             </h4>
             <p className='mb-6 text-xl font-light leading-none tracking-[-0.04em]'>

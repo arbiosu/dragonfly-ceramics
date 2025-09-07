@@ -37,8 +37,12 @@ export default function LandingPage() {
           blurDataURL='/dragonfly-text-white.png'
           unoptimized
         />
-        <div className='md:absolute md:bottom-8 md:right-0'>
-          <Button href={'/shop'} variant={'default'} size={'large'}>
+        <div className='absolute bottom-80 right-0 md:absolute md:bottom-8 md:right-0'>
+          <Button
+            href={'/shop'}
+            variant={'default'}
+            className='h-12 px-6 py-4 text-3xl md:h-16 md:px-8 md:text-4xl'
+          >
             shop
           </Button>
         </div>

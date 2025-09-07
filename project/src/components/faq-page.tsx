@@ -36,7 +36,7 @@ const faqs = [
     id: 6,
     question: 'How do I purchase a custom or wholesale order?',
     answer:
-      'Please fill out the form under the “contact” page and allow up to 72 hours for me to respond!',
+      "please fill out the form under the contact page and i'll get back to you as soon as i can!",
   },
 ];
 
