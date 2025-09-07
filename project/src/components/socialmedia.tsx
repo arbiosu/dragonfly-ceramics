@@ -1,90 +1,84 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface SocialMediaData {
-  src: string;
-  link: string;
-  alt: string;
-}
+const socials = [
+  {
+    icon: '/tiktok.svg',
+    thumbnail: '/tiktok.png',
+    link: 'https://www.tiktok.com/@dragonflyceramics',
+    alt: 'tiktok',
+  },
+  {
+    icon: '/instagram.svg',
+    thumbnail: '/instagram.png',
+    link: 'https://www.instagram.com/dragonflyceramics_/',
+    alt: 'instagram',
+  },
+  {
+    icon: '/youtube.svg',
+    thumbnail: '/youtube.png',
+    link: 'https://www.youtube.com/@dragonflyceramics',
+    alt: 'youtube',
+  },
+];
 
-interface SocialMediaLinkProps {
-  items: SocialMediaData[];
-}
-
-export function SocialMediaLink({ src, link, alt }: SocialMediaData) {
+export default function SocialMediaLinks() {
   return (
-    <Link
-      href={link}
-      rel='noopener noreferrer'
-      className='block transition-transform hover:scale-110 focus:scale-110 active:scale-95'
-      target='_blank'
-    >
-      <Image
-        src={src}
-        alt={alt}
-        width={48}
-        height={48}
-        placeholder='blur'
-        blurDataURL={src}
-        unoptimized
-      />
-    </Link>
-  );
-}
-
-export function SocialMediaLinks({ items }: SocialMediaLinkProps) {
-  return (
-    <div className='flex justify-start space-x-8'>
-      {items.map((sm, index) => (
-        <SocialMediaLink src={sm.src} link={sm.link} alt={sm.alt} key={index} />
+    <div className='flex items-center justify-evenly space-x-8'>
+      {socials.map((sm, i) => (
+        <div key={i}>
+          <Link
+            href={sm.link}
+            rel='noopener noreferrer'
+            className='block transition-transform hover:scale-110 focus:scale-110'
+            target='_blank'
+          >
+            <Image
+              src={sm.icon}
+              alt={sm.alt}
+              width={48}
+              height={48}
+              placeholder='blur'
+              blurDataURL={sm.icon}
+              unoptimized
+            />
+          </Link>
+        </div>
       ))}
     </div>
   );
 }
 
-export default function SocialMediaLinksComponent() {
-  const socials = [
-    {
-      src: '/youtube.svg',
-      link: 'https://youtube.com/@dragonflyceramics?si=z3XyaYTzbkfRsiAe',
-      alt: 'Youtube',
-    },
-    {
-      src: '/tiktok.svg',
-      link: 'https://www.tiktok.com/@dragonflyceramics?_t=ZT-8uFd3TGlJe7&_r=1',
-      alt: 'Tiktok',
-    },
-    {
-      src: '/instagram.svg',
-      link: 'https://www.instagram.com/dragonflyceramics_?igsh=Y3ZxYTZqbzZjMWxx&utm_source=qr',
-      alt: 'Instagram',
-    },
-  ];
-  return <SocialMediaLinks items={socials} />;
-}
-
-export function SocialMediaLinksCard() {
+export function SocialMediaCard() {
   return (
-    <div className='relative mx-auto flex h-full w-full flex-col overflow-hidden p-6'>
+    <section className='w-full px-4 py-8'>
+      <p className='mb-12 text-center text-6xl tracking-[-0.04em] lg:text-9xl'>
+        socials
+      </p>
       <div className='flex justify-center'>
-        <Image
-          src='/profile.svg'
-          alt='Profile icon with heart'
-          width={100}
-          height={100}
-          placeholder='blur'
-          blurDataURL='/profile.svg'
-          unoptimized
-        />
+        <div className='grid max-w-4xl grid-cols-3 justify-items-center gap-6 md:gap-20'>
+          {socials.map((sm, i) => (
+            <div key={i} className='flex flex-col items-center'>
+              <Link
+                href={sm.link}
+                rel='noopener noreferrer'
+                className='mb-4 block transition-transform hover:scale-110 focus:scale-110 active:scale-95'
+                target='_blank'
+              >
+                <Image
+                  src={sm.thumbnail}
+                  alt={sm.alt}
+                  width={600}
+                  height={600}
+                  className='h-24 w-24 rounded-full border border-black bg-white md:h-32 md:w-32'
+                  unoptimized
+                />
+              </Link>
+              <p className='text-center text-lg md:text-xl'>{sm.alt}</p>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className='my-16 py-4 text-center'>
-        <p className='text-lg text-df-text'>
-          keep up with dragonfly ceramics on youTube, tiktok, and instagram
-        </p>
-      </div>
-      <div className='flex justify-center'>
-        <SocialMediaLinksComponent />
-      </div>
-    </div>
+    </section>
   );
 }

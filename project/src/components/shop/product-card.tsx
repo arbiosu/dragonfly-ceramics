@@ -1,10 +1,6 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Tables } from '@/lib/supabase/database';
-import AddToCartButton from '@/components/shop/add-to-cart';
-import { NextImageWrapper } from '@/components/image';
-
-const linkClass =
-  'hidden group-hover:block w-full rounded-md bg-dfNew2 px-2 py-1 md:px-4 md:py-2 text-sm md:text-base text-df-text transition-colors hover:bg-dfNew hover:text-white';
 
 export default function ProductCard({
   product,
@@ -12,48 +8,83 @@ export default function ProductCard({
   product: Tables<'products'>;
 }) {
   return (
-    <div className='shadow-t-md relative w-full max-w-sm overflow-hidden'>
-      {/* Image */}
-      <div className='relative aspect-square w-full overflow-hidden'>
-        <NextImageWrapper
-          url={product.images[0]}
-          altText={product.description}
-          sizeProps='(max-width: 768px) 100vw, 256px'
-        />
-        {/* Buttons on hover */}
-        <div className='group absolute inset-0 flex flex-col items-center justify-center gap-2 p-4 transition-opacity duration-200 hover:bg-black/40'>
-          <Link
-            href={`/shop/${product.stripe_id}`}
-            prefetch={false}
-            className={linkClass}
-          >
-            details
-          </Link>
-          <AddToCartButton
-            label='add to cart'
-            product={product}
-            quantity={1}
-            variant={'hidden'}
+    <div className='w-full overflow-hidden transition-transform duration-300 hover:scale-[1.03]'>
+      <div className='relative aspect-square w-full overflow-hidden rounded-[3em] border border-black p-4 md:rounded-[5em]'>
+        <Link
+          href={`/shop/${product.stripe_id}`}
+          prefetch={false}
+          className='cursor-pointer select-none'
+        >
+          <Image
+            src={product.images[0]}
+            alt={product.description}
+            fill
+            sizes='100vw'
+            unoptimized
           />
-        </div>
+        </Link>
+        {(!product.single && product.inventory > 0) ||
+        product.inventory === 0 ? (
+          <div
+            className={`absolute right-6 top-3 w-1/3 rotate-12 rounded-[50%] px-1 py-1 text-center text-sm shadow md:w-1/4 md:px-2 md:py-2 md:text-lg ${
+              product.active && product.inventory > 0
+                ? 'bg-df-yellow text-black'
+                : 'bg-red-500 text-white'
+            }`}
+          >
+            {product.active && product.inventory > 0
+              ? `${product.inventory} left`
+              : 'sold out'}
+          </div>
+        ) : null}
       </div>
-      <div className='p-2'>
-        <h3 className='truncate text-lg text-df-text'>
-          {product.name.toLowerCase()}
-        </h3>
-        <div className='mt-auto'>
-          {product.active ? (
-            <p className='text-xl text-df-text'>
-              <span>${product.price / 100}</span>
-              <br></br>
-              <span>{product.inventory} left!</span>
-            </p>
-          ) : (
-            <p className='text-xl text-df-text'>
-              <s>${product.price / 100}</s>
-              <br></br>sold out!
-            </p>
-          )}
+
+      <div className='flex-flex-col p-4 text-black'>
+        <div className='flex items-start'>
+          <div
+            className={`grid w-full transition-all duration-300 ease-in-out`}
+          >
+            <div className='flex w-full flex-col'>
+              <div>
+                <div className='flex w-full flex-row justify-between'>
+                  <p className='-mt-2 text-base font-medium md:text-xl'>
+                    {product.type.slice(0, -1).toLowerCase()}
+                  </p>
+                  <div className='mx-2 flex flex-col justify-end'>
+                    {product.active ? (
+                      <>
+                        <s>{product.discount}</s>
+                        <p className='-mt-2 text-base font-extralight md:text-xl'>
+                          ${product.price / 100}
+                        </p>
+                      </>
+                    ) : (
+                      <p className='-mt-2 text-base font-extralight md:text-xl'>
+                        <s>${product.price / 100}</s>
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p className='-mt-2 text-base font-extralight md:text-xl'>
+                  {product.color}
+                </p>
+              </div>
+              <div>
+                <p className='-mt-2 text-base font-extralight md:text-xl'>
+                  {product.capacity}
+                </p>
+              </div>
+              <div>
+                {product.set && (
+                  <p className='-mt-2 text-base font-extralight md:text-xl'>
+                    set of {product.set}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

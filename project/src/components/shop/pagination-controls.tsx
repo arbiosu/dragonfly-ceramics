@@ -79,48 +79,45 @@ export default function PaginationControls({
   const pageNumbersToDisplay = getPageNumbers();
 
   return (
-    <div data-pending={isPending ? '' : undefined} className='p-4 text-df-text'>
-      <div className='flex items-center justify-center space-x-2 py-4 text-df-text'>
-        <button
-          disabled={!hasPrevPage || isPending}
-          className='rounded-md bg-dfNew2 p-2 transition-opacity disabled:cursor-not-allowed disabled:opacity-50'
-          onClick={() => updatePage(currentPage - 1)}
-        >
-          previous
-        </button>
-        {/* Page Numbers */}
-        {pageNumbersToDisplay.map((page, index) =>
-          page === -1 ? (
-            <span key={`ellipsis-${index}`} className='px-2 py-2'>
-              ...
-            </span>
-          ) : (
-            <button
-              key={page}
-              onClick={() => updatePage(page)} // page is 0-indexed
-              disabled={isPending || optimisticPage === page}
-              className={`rounded-md px-4 py-2 transition-opacity ${
-                optimisticPage === page
-                  ? 'cursor-default bg-blue-100 text-df-text'
-                  : 'bg-dfNew2 hover:bg-dfNew2/80'
-              } ${isPending ? 'disabled:cursor-not-allowed disabled:opacity-50' : ''} `}
-            >
-              {page + 1}
-            </button>
-          )
-        )}
+    <div className='flex flex-wrap items-center justify-center gap-2 py-4 text-black'>
+      <button
+        disabled={!hasPrevPage || isPending}
+        className='rounded-3xl border border-black px-2 text-sm transition-opacity hover:bg-dfNew2 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:text-base'
+        onClick={() => updatePage(currentPage - 1)}
+      >
+        <span className='sm:hidden'>‹</span>
+        <span className='hidden sm:inline'>previous</span>
+      </button>
 
-        <button
-          disabled={!hasNextPage || isPending}
-          className='rounded-md bg-dfNew2 p-2 transition-opacity disabled:cursor-not-allowed disabled:opacity-50'
-          onClick={() => updatePage(currentPage + 1)}
-        >
-          next
-        </button>
-      </div>
-      <span className='p-4'>
-        Page {optimisticPage + 1} of {totalPages}
-      </span>
+      {pageNumbersToDisplay.map((page, index) =>
+        page === -1 ? (
+          <span key={`ellipsis-${index}`} className='px-2 py-1'>
+            ...
+          </span>
+        ) : (
+          <button
+            key={page}
+            onClick={() => updatePage(page)}
+            disabled={isPending || optimisticPage === page}
+            className={`rounded-3xl border border-black px-2 text-sm transition-opacity sm:px-4 sm:text-base ${
+              optimisticPage === page
+                ? 'cursor-default bg-dfNew2 text-black'
+                : 'hover:bg-dfNew2/80'
+            } disabled:cursor-not-allowed disabled:opacity-50`}
+          >
+            {page + 1}
+          </button>
+        )
+      )}
+
+      <button
+        disabled={!hasNextPage || isPending}
+        className='rounded-3xl border border-black px-2 text-sm transition-opacity hover:bg-dfNew2 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:text-base'
+        onClick={() => updatePage(currentPage + 1)}
+      >
+        <span className='sm:hidden'>›</span>
+        <span className='hidden sm:inline'>next</span>
+      </button>
     </div>
   );
 }

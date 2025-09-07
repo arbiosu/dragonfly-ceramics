@@ -15,6 +15,7 @@ export default {
         'df-bg': '#eee4d1',
         dfNew: '#2b2340',
         dfNew2: '#dfd1ee',
+        'df-yellow': '#FBFFA8',
       },
     },
   },

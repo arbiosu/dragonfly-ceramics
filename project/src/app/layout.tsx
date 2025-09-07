@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
-import { ralewayLight } from '@/../public/fonts/fonts';
+import { manrope } from '@/../public/fonts/fonts';
 import Navbar from '@/components/nav';
-import Footer from '@/components/footer';
+import { Footer } from '@/components/footer';
 import { CartProvider } from '@/contexts/CartContext';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -18,11 +19,12 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${ralewayLight.className} ${ralewayLight.className} bg-df-bg antialiased`}
+        className={`${manrope.className} ${manrope.className} bg-white antialiased`}
       >
         <CartProvider>
           <Navbar />
           {children}
+          <Analytics />
           <Footer />
         </CartProvider>
       </body>

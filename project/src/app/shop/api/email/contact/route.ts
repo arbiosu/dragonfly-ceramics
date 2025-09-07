@@ -10,9 +10,8 @@ interface ContactMessage {
   message: string;
 }
 
-// Rate limit configuration
-const RATE_LIMIT = 3; // Number of allowed submissions
-const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // Time window in milliseconds (1 hour)
+const RATE_LIMIT = 3;
+const RATE_LIMIT_WINDOW = 60 * 60 * 1000;
 const COOKIE_NAME = 'contact_submissions';
 
 export async function POST(req: Request) {
@@ -70,10 +69,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error }, { status: 500 });
     }
 
-    // Update submission count
     submissions.count += 1;
 
-    // Create the response
     const response = NextResponse.json(
       {
         data,
@@ -82,7 +79,6 @@ export async function POST(req: Request) {
       { status: 200 }
     );
 
-    // Set the updated cookie
     response.cookies.set({
       name: COOKIE_NAME,
       value: JSON.stringify(submissions),

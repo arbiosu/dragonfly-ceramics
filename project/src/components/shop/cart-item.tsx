@@ -27,7 +27,6 @@ export default function CartItemCard({ product, quantity }: CartItem) {
   return (
     <>
       <div className='mb-6 flex w-full flex-col gap-4 text-df-text sm:grid sm:grid-cols-3'>
-        {/* Product info */}
         <div className='col-span-3 flex items-center sm:col-span-1'>
           <div className='relative mr-3 h-20 w-20 flex-shrink-0 sm:mr-4 sm:h-24 sm:w-24'>
             <Link href={`/shop/${product.stripe_id}`}>
@@ -38,34 +37,34 @@ export default function CartItemCard({ product, quantity }: CartItem) {
                 placeholder='blur'
                 blurDataURL={product.images[0]}
                 sizes='(max-width: 640px) 80px, (max-width: 768px) 96px, 120px'
-                className='rounded object-cover'
+                className='rounded-3xl border border-black object-cover'
               />
             </Link>
           </div>
-          <div className='truncate'>
-            <span className='text-base font-medium sm:text-lg'>
-              {product.name}
+          <div className='flex flex-col'>
+            <span className='text-2xl font-medium tracking-[-0.04em]'>
+              {product.type.slice(0, -1).toLowerCase()}
+            </span>
+            <span className='text-2xl font-extralight tracking-[-0.04em]'>
+              {product.color}
             </span>
           </div>
         </div>
-
-        {/* Quantity controls */}
         <div className='col-span-2 mt-2 flex items-center justify-between sm:col-span-1 sm:mt-0 sm:justify-center'>
-          <span className='text-sm sm:mr-2 sm:text-base'>Quantity:</span>
-          <div className='flex items-center rounded border'>
+          <div className='flex items-center rounded'>
             <button
               onClick={handleDecrementQuantity}
-              className='px-2 py-1 text-lg transition-colors hover:bg-gray-100'
+              className='px-2 py-1 text-xl transition-colors hover:bg-gray-100'
               aria-label='Decrease quantity'
             >
               -
             </button>
-            <span className='min-w-[24px] px-2 py-1 text-center'>
+            <span className='min-w-[24px] px-2 py-1 text-center text-xl'>
               {quantity}
             </span>
             <button
               onClick={handleAddToCart}
-              className='px-2 py-1 text-lg transition-colors hover:bg-gray-100'
+              className='px-2 py-1 text-xl transition-colors hover:bg-gray-100'
               aria-label='Increase quantity'
             >
               +
@@ -73,21 +72,20 @@ export default function CartItemCard({ product, quantity }: CartItem) {
           </div>
         </div>
 
-        {/* Price and remove */}
         <div className='col-span-3 mt-2 flex items-center justify-between sm:col-span-1 sm:mt-0 sm:justify-end'>
-          <span className='text-base font-medium sm:text-lg'>
-            ${(product.price * quantity) / 100}
+          <span className='text-xl font-light'>
+            ${(product.price * quantity) / 100}.00
           </span>
           <button
             onClick={handleRemove}
             className='ml-4 p-2 text-gray-500 transition-colors hover:text-red-500'
             aria-label='Remove item'
           >
-            <span className='text-xl'>×</span>
+            <span className='text-2xl'>X</span>
           </button>
         </div>
       </div>
-      <hr className='my-4 border-dfNew sm:my-6' />
+      <hr className='my-4 border-gray-200 sm:my-6' />
     </>
   );
 }

@@ -1,51 +1,63 @@
 import Link from 'next/link';
-import SocialMediaLinksComponent from '@/components/socialmedia';
+import Image from 'next/image';
+import SocialMediaLinks from '@/components/socialmedia';
+import SubscribeCard from '@/components/subscribe-card';
 
-export default function Footer() {
+const footerLinks = [
+  { href: '/', label: 'home' },
+  { href: '/shop', label: 'shop' },
+  { href: '/shop?page=0&filter=seconds', label: 'seconds' },
+  { href: '/about', label: 'about' },
+  { href: '/gallery', label: 'gallery' },
+  { href: '/contact', label: 'contact' },
+  { href: '/consulting', label: 'consulting' },
+];
+
+export function Footer() {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className='bg-df-bg py-8 text-df-text'>
-      <div className='container mx-auto px-4'>
-        <div className='grid grid-cols-1 gap-8 md:grid-cols-4'>
-          {/* Brand and Copyright */}
-          <div className='md:col-span-2'>
-            <Link href='/' className='mb-4 flex items-center'>
-              <span className='text-2xl'>dragonfly ceramics</span>
-            </Link>
-            <p className='text-sm'>
+    <footer className='bg-dfNew2 p-2 text-black'>
+      <div className='container mx-auto mb-4 px-4'>
+        <div className='grid grid-cols-2 grid-rows-2 md:grid-cols-4'>
+          <div className='col-span-2'>
+            <Image
+              src='/df-red-text.png'
+              alt='Dragonfly Ceramics'
+              height={200}
+              width={400}
+              unoptimized
+              className='md:-mx-6'
+            />
+          </div>
+          <div className='flex flex-col justify-end md:row-start-2'>
+            <ul className='items-end -space-y-2 text-xl md:text-2xl'>
+              {footerLinks.map((link, index) => (
+                <li key={index}>
+                  <Link
+                    href={link.href}
+                    className='tracking-[-0.04em] transition-colors hover:underline'
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className='col-span-2 row-start-2 md:col-start-4 md:row-start-1 md:pt-10'>
+            <SubscribeCard
+              headingText=''
+              subText='sign up for mailing list'
+              subTextAlignment='text-center'
+              subTextSize='text-2xl'
+            />
+          </div>
+          <div className='flex flex-col items-end justify-end md:col-start-4'>
+            <SocialMediaLinks />
+            <p className='pt-6 text-xs md:text-sm'>
               &copy; {currentYear} dragonfly ceramics. all rights reserved.
             </p>
           </div>
-
-          {/* Quick Links */}
-          <div>
-            <ul className='space-y-2'>
-              <li>
-                <Link href='/shop' className='transition-colors'>
-                  shop
-                </Link>
-              </li>
-              <li>
-                <Link href='/about' className='transition-colors'>
-                  about
-                </Link>
-              </li>
-              <li>
-                <Link href='/contact' className='transition-colors'>
-                  contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Social Media */}
-          <div className=''>
-            <SocialMediaLinksComponent />
-          </div>
         </div>
-
-        {/* Bottom Bar add github? */}
-        <div className='mt-8 border-t border-gray-200 pt-8 text-center text-sm'></div>
       </div>
     </footer>
   );

@@ -30,7 +30,7 @@ export default function ActiveSelector() {
     <div data-pending={isPending ? '' : undefined} className='mb-4'>
       <label className='hidden'>sort by:</label>
       <select
-        className='rounded bg-df-bg px-4 py-2 text-lg text-df-text'
+        className='w-full truncate rounded px-4 text-lg tracking-[-0.04em] text-gray-400'
         value={currentActiveFilter}
         onChange={(e) => handleSortChange(e.target.value)}
       >

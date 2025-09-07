@@ -3,12 +3,14 @@
 import type React from 'react';
 
 import { useState, useRef } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import { validateEmail, validateZip } from '@/lib/utils';
 import { useCart } from '@/contexts/CartContext';
 
 const inputTextClass =
-  'w-full border-b border-dfNew bg-df-bg px-4 py-2 text-df-text focus:border-transparent focus:outline-none focus:ring-1 focus:ring-dfNew';
-const labelClass = 'mb-1 block text-lg font-medium text-gray-700';
+  'w-full border rounded-lg border-black  px-4 py-2 text-black focus:border-transparent focus:outline-none focus:ring-1 focus:ring-dfNew';
+const labelClass = 'mb-1 block text-lg text-black tracking-[-0.04em]';
 
 export function Form() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -81,15 +83,30 @@ export function Form() {
     }
   };
   return (
-    <div className='text-df-text'>
-      <h1 className='text-center text-3xl'>
-        please enter your shipping address
-      </h1>
-      <h3 className='text-center text-lg'>
-        the asterisk* indicates a required field
-      </h3>
+    <div className='text-black'>
+      <div className='flex justify-center'>
+        <Image
+          src='/df-red-text.png'
+          alt='Dragonfly Ceramics'
+          width={600}
+          height={400}
+        />
+      </div>
+
       <div className='container mx-auto'>
-        <form onSubmit={handleSubmit} className='mx-auto w-full max-w-4xl'>
+        <form onSubmit={handleSubmit} className='mx-auto w-full max-w-4xl px-4'>
+          <h1 className='mb-2 text-3xl font-medium tracking-[-0.04em] md:text-6xl'>
+            shipping address
+          </h1>
+          <h3 className='text-lg tracking-[-0.04em]'>
+            * indicates a required field
+          </h3>
+          <Link
+            href='/shop/cart/shipping/international'
+            className='mb-2 text-sm hover:underline'
+          >
+            international order? click here!
+          </Link>
           <div className='grid grid-cols-1 gap-2'>
             <div className='space-y-4'>
               <div>
@@ -305,14 +322,26 @@ export function Form() {
           </div>
 
           {error && <p className='mt-4 text-red-600'>{error}</p>}
+          <div className='flex items-center gap-4 p-10'>
+            <Link
+              href={isLoading ? '#' : '/shop/cart'}
+              className={`rounded-3xl border border-black bg-df-yellow px-4 py-2 text-center text-xl tracking-[-0.04em] transition-colors duration-200 hover:bg-dfNew2 ${
+                isLoading
+                  ? 'pointer-events-none cursor-not-allowed opacity-50'
+                  : ''
+              }`}
+            >
+              back
+            </Link>
 
-          <button
-            type='submit'
-            className='mt-6 w-full rounded-md bg-dfNew2 px-4 py-2 text-xl text-df-text transition-colors duration-200 hover:bg-dfNew hover:text-white'
-            disabled={isLoading}
-          >
-            {isLoading ? 'processing...' : 'proceed to checkout'}
-          </button>
+            <button
+              type='submit'
+              className='flex-1 rounded-3xl border border-black bg-df-yellow px-4 py-2 text-xl tracking-[-0.04em] transition-colors duration-200 hover:bg-dfNew2 disabled:cursor-not-allowed disabled:opacity-50'
+              disabled={isLoading}
+            >
+              {isLoading ? 'processing...' : 'continue to payment'}
+            </button>
+          </div>
         </form>
       </div>
     </div>

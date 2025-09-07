@@ -1,60 +1,119 @@
 import Image from 'next/image';
-import ShopLink from '@/components/shop/shop-link';
-import { ImageGridItem } from '@/components/image-grid';
-import { SocialMediaLinksCard } from '@/components/socialmedia';
+import Link from 'next/link';
+import { Button } from '@/components/shop/shop-button';
+import { SocialMediaCard } from '@/components/socialmedia';
 
 export default function About() {
   return (
-    <>
-      <section className='md:py20 mx-auto bg-df-bg px-4 py-28'>
-        <div className='grid items-center gap-12 md:grid-cols-2'>
-          <div className='relative aspect-square bg-df-bg'>
-            <Image
-              src='/about-kelly-cropped.jpg'
-              alt='Kelly Slater, Owner, Dragonfly Ceramics'
-              fill
-              className='bg-df-bg object-contain'
-            />
+    <section className='mx-auto min-h-screen bg-df-yellow py-20 tracking-[-0.04em] text-black'>
+      <div className='absolute left-0 top-0 w-full overflow-hidden leading-[0]'>
+        <svg
+          data-name='Layer 1'
+          xmlns='http://www.w3.org/2000/svg'
+          viewBox='0 0 1200 120'
+          preserveAspectRatio='none'
+          className='relative block h-[500px] w-[calc(170%+1.3px)] lg:h-[800px]'
+        >
+          <path
+            d='M0,0V7.23C0,65.52,268.63,112.77,600,112.77S1200,65.52,1200,7.23V0Z'
+            className='fill-white'
+          ></path>
+        </svg>
+      </div>
+      <div className='relative z-10 grid grid-cols-4 gap-2 lg:grid-cols-5 xl:grid-cols-8'>
+        <div className='flex justify-end'>
+          <div className='flex flex-col -space-y-8 md:mx-2 md:-space-y-16'>
+            <p className='-rotate-90 text-6xl md:text-9xl'>t</p>
+            <p className='-rotate-90 text-6xl md:text-9xl'>u</p>
+            <p className='-rotate-90 text-6xl md:text-9xl'>o</p>
+            <p className='-rotate-90 text-6xl md:text-9xl'>b</p>
+            <p className='-rotate-90 text-6xl md:text-9xl'>a</p>
           </div>
-          <div className='space-y-8'>
-            <div className='space-y-6'>
-              <h2 className='text-center text-5xl text-df-text md:text-left'>
-                meet the artist
-              </h2>
-              <p className='text-center text-2xl leading-relaxed text-df-text md:text-left'>
-                kelly slater (she/her)
+        </div>
+        <div className=''>
+          <Image
+            src='/about-kelly-redesign.png'
+            alt='Kelly Slater, Owner, Dragonfly Ceramics'
+            width={200}
+            height={800}
+            unoptimized
+          />
+        </div>
+        <div className='col-span-2 mr-4 flex flex-col justify-items-start lg:col-span-3'>
+          <div className='flex h-full max-w-md flex-col justify-start'>
+            <Image
+              src='/kelly-name.png'
+              width={150}
+              height={150}
+              alt='Kelly Slater'
+              unoptimized
+              className='-mx-5'
+            />
+            <p className='-mt-2 text-sm md:text-xl'>she/her</p>
+            <p className='-mt-2 text-sm md:text-xl'>ceramicist</p>
+            <p className='-mt-2 text-sm md:text-xl'>nyc</p>
+            <div className='flex h-full flex-col justify-end gap-4'>
+              <p className='text-xs font-light leading-none tracking-[-0.04em] md:text-2xl'>
+                dragonfly ceramics started in 2025 and we focus on handmade
+                functional ceramics for the home with an emphasis on unique
+                colors.
               </p>
-              <p className='text-center text-lg italic leading-relaxed text-df-text md:text-left'>
-                ceramicist
+              <p className='text-xs font-light leading-none tracking-[-0.04em] md:text-2xl'>
+                after getting a degree in filmmaking and ceramics, kelly
+                combined her knowledge in the two mediums creating frequent
+                social content and consistently releasing new ceramic work.
               </p>
-              <p className='text-center text-lg italic leading-relaxed text-df-text md:text-left'>
-                based in nyc
+              <p className='text-xs font-light leading-none tracking-[-0.04em] md:text-2xl'>
+                check out @dragonflyceramics on
+                <Link
+                  href='https://www.instagram.com/dragonflyceramics_/'
+                  className='hover:underline'
+                  rel='noopener noreferrer'
+                  target='_blank'
+                >
+                  {' '}
+                  instagram
+                </Link>
+                ,
+                <Link
+                  href='https://www.tiktok.com/@dragonflyceramics'
+                  className='hover:underline'
+                  rel='noopener noreferrer'
+                  target='_blank'
+                >
+                  {' '}
+                  tiktok
+                </Link>
+                , and
+                <Link
+                  href='https://www.youtube.com/@dragonflyceramics'
+                  className='hover:underline'
+                  rel='noopener noreferrer'
+                  target='_blank'
+                >
+                  {' '}
+                  youtube!
+                </Link>
               </p>
-              <p className='leading-relaxed text-df-text'>
-                i first started working with clay in highschool and then pottery
-                quickly became an obsession in college. i fell in love with the
-                medium when i started to create both functional and
-                nonfunctional things for myself. soon enough, i had so much
-                pottery in my home, that i needed to share it with others.
+              <p className='text-xs font-light leading-none tracking-[-0.04em] md:text-2xl'>
+                for press and inquires
+                <Link href='/contact' className='font-bold hover:underline'>
+                  {' '}
+                  contact the studio.
+                </Link>
               </p>
-              <p className='leading-relaxed text-df-text'>
-                i currently produce small batches of my work and list them here
-                on my website when they are finished. i also offer the option to
-                commission me for custom work and large batch items at a
-                wholesale rate. be sure to sign up for my newsletter so you know
-                when I restock and if anything else exciting happens!
-              </p>
-              <ShopLink label={'shop now'} />
             </div>
           </div>
         </div>
-      </section>
-      <div className='container mx-auto max-w-6xl'>
-        <div className='grid grid-cols-1 gap-4 p-4 md:grid-cols-2'>
-          <SocialMediaLinksCard />
-          <ImageGridItem src='/pottery-hand.jpeg' alt='Grid image 2' />
+        <div className='col-start-2 flex justify-center pt-2'>
+          <Button href='/shop' variant='outline' className='hover:shadow-lg'>
+            shop
+          </Button>
         </div>
       </div>
-    </>
+      <div className='relative z-10'>
+        <SocialMediaCard />
+      </div>
+    </section>
   );
 }
