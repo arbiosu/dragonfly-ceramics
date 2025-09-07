@@ -89,7 +89,7 @@ export default function ConsultingForm() {
   }
 
   return (
-    <div className='mx-auto overflow-x-hidden text-black'>
+    <div className='overflow-x-hidden text-black'>
       <div className='relative z-10 flex min-h-screen flex-col items-center justify-between lg:flex-row'>
         <div className='flex-1 p-10'>
           <h1 className='mb-2 text-7xl tracking-[-0.04em] md:text-8xl'>
@@ -108,7 +108,10 @@ export default function ConsultingForm() {
           </div>
           <div className='flex flex-col gap-24 md:flex-row'>
             <div className='flex-1'>
-              <form onSubmit={handleSubmit} className='space-y-6'>
+              <form
+                onSubmit={handleSubmit}
+                className='w-full max-w-4xl space-y-6'
+              >
                 <div>
                   <label
                     htmlFor='name'
@@ -247,21 +250,16 @@ export default function ConsultingForm() {
             </div>
           </div>
         </div>
-
-        <div className='relative left-12 right-0 mt-12 max-w-2xl flex-1 overflow-x-hidden lg:mt-0'>
-          <div className='group relative z-10'>
-            <div className='relative overflow-hidden'>
-              <Image
-                src='/consulting-page.jpeg'
-                width={800}
-                height={800}
-                className='contrast-105 h-auto w-full rotate-[40deg] overflow-hidden object-cover brightness-105 filter'
-                alt='Dragonfly Ceramics Oil Dispenser - Handcrafed Pottery'
-                unoptimized
-                priority
-              />
-            </div>
-          </div>
+        <div className='mt-12 flex flex-1 items-end justify-end overflow-hidden lg:mt-0'>
+          <Image
+            src='/consulting-page.jpeg'
+            width={800}
+            height={800}
+            alt='Dragonfly Ceramics Oil Dispenser - Handcrafted Pottery'
+            priority
+            unoptimized
+            className='contrast-105 h-auto w-full rotate-[40deg] object-cover brightness-105'
+          />
         </div>
       </div>
     </div>

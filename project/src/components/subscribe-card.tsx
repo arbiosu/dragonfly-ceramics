@@ -66,7 +66,7 @@ export default function SubscribeCard({
 
   return (
     <div>
-      <h2 className='text-center text-6xl tracking-[-0.04em] md:text-8xl'>
+      <h2 className='text-center text-5xl tracking-[-0.04em] md:text-8xl'>
         {headingText}
       </h2>
       <p className={`${subTextAlignment} ${subTextSize} tracking-[-0.04em]`}>

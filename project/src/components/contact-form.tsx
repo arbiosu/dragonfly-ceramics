@@ -140,7 +140,7 @@ export default function ContactForm() {
   }
 
   return (
-    <div className='mx-auto min-h-screen text-black'>
+    <div className='min-h-screen text-black'>
       <div className='relative z-10 flex flex-col items-center justify-between lg:flex-row'>
         <div className='flex-1 p-10'>
           <h1 className='mb-2 text-8xl tracking-[-0.04em]'>contact</h1>
@@ -154,7 +154,10 @@ export default function ContactForm() {
           <div className='flex flex-col gap-24 md:flex-row'>
             {/* Form Section */}
             <div className='flex-1'>
-              <form onSubmit={handleSubmit} className='space-y-6'>
+              <form
+                onSubmit={handleSubmit}
+                className='w-full max-w-4xl space-y-6'
+              >
                 <div>
                   <label
                     htmlFor='topic'
@@ -305,19 +308,16 @@ export default function ContactForm() {
           </div>
         </div>
 
-        <div className='relative left-28 right-0 mt-12 max-w-2xl flex-1 lg:left-0 lg:mt-0'>
-          <div className='group relative'>
-            <div className='relative overflow-hidden'>
-              <Image
-                src='/contact-mug.webp'
-                width={800}
-                height={800}
-                className='contrast-105 h-auto w-full object-cover brightness-105 filter'
-                alt='Dragonfly Ceramics Mug - Handcrafed Pottery'
-                priority
-              />
-            </div>
-          </div>
+        <div className='mt-12 flex flex-1 items-end justify-end overflow-hidden lg:mt-0'>
+          <Image
+            src='/contact-mug.webp'
+            width={800}
+            height={800}
+            alt='Dragonfly Ceramics Oil Dispenser - Handcrafted Pottery'
+            priority
+            unoptimized
+            className='contrast-105 h-auto w-full object-cover brightness-105'
+          />
         </div>
       </div>
     </div>
