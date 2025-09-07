@@ -248,14 +248,14 @@ export default function ConsultingForm() {
           </div>
         </div>
 
-        <div className='relative right-0 mt-12 max-w-2xl flex-1 lg:mt-0'>
-          <div className='group relative z-10 overflow-x-hidden'>
+        <div className='relative left-12 right-0 mt-12 max-w-2xl flex-1 overflow-x-hidden lg:mt-0'>
+          <div className='group relative z-10'>
             <div className='relative overflow-hidden'>
               <Image
                 src='/consulting-page.jpeg'
                 width={800}
                 height={800}
-                className='contrast-105 h-auto w-full rotate-[40deg] object-cover brightness-105 filter'
+                className='contrast-105 h-auto w-full rotate-[40deg] overflow-hidden object-cover brightness-105 filter'
                 alt='Dragonfly Ceramics Oil Dispenser - Handcrafed Pottery'
                 unoptimized
                 priority

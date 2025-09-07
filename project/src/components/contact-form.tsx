@@ -305,7 +305,7 @@ export default function ContactForm() {
           </div>
         </div>
 
-        <div className='relative right-0 mt-12 max-w-2xl flex-1 lg:mt-0'>
+        <div className='relative left-28 right-0 mt-12 max-w-2xl flex-1 lg:left-0 lg:mt-0'>
           <div className='group relative'>
             <div className='relative overflow-hidden'>
               <Image
