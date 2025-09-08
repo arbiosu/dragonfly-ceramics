@@ -45,18 +45,15 @@ export default function ProductDetails({
             <p className='text-6xl font-extralight tracking-[-0.04em]'>
               {product.color}
             </p>
-            {/* Price */}
-            <div>
-              {product.active ? (
-                <p className='mx-1 mt-2 text-4xl font-medium tracking-[-0.04em]'>
-                  ${product.price / 100}.00
-                </p>
-              ) : (
-                <p className='mx-1 mt-2 text-4xl font-medium tracking-[-0.04em]'>
-                  <s>${product.price / 100}</s>
-                  <br></br>sold out!
+            <div className='flex flex-row'>
+              {product.discount && (
+                <p className='mx-1 mt-2 text-4xl font-extralight tracking-[-0.04em] line-through'>
+                  {product.discount}.00
                 </p>
               )}
+              <p className='mx-1 mt-2 text-4xl font-medium tracking-[-0.04em]'>
+                ${product.price / 100}.00
+              </p>
             </div>
           </div>
 
@@ -77,7 +74,6 @@ export default function ProductDetails({
             <QuantityControls product={product} />
           </div>
 
-          {/* Additional Information */}
           <div className='mt-6 border-t border-gray-300 pt-6 text-df-text'>
             <div className='flex gap-2'>
               <div>
@@ -89,7 +85,7 @@ export default function ProductDetails({
                 <p className='text-xl tracking-[-0.04em]'>
                   {product.active
                     ? ` ${product.inventory} in stock`
-                    : ' Out of Stock'}
+                    : ' out of Stock'}
                 </p>
               </div>
             </div>
