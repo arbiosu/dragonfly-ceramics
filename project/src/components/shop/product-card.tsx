@@ -8,8 +8,8 @@ export default function ProductCard({
   product: Tables<'products'>;
 }) {
   return (
-    <div className='w-full overflow-hidden transition-transform duration-300 hover:scale-[1.03]'>
-      <div className='relative aspect-square w-full overflow-hidden rounded-[3em] border border-black p-4 md:rounded-[5em]'>
+    <div className='w-full'>
+      <div className='relative aspect-square w-full overflow-hidden rounded-[3em] border border-black p-4 transition-transform duration-300 md:rounded-[5em] xl:hover:-translate-y-2'>
         <Link
           href={`/shop/${product.stripe_id}`}
           prefetch={false}
@@ -38,53 +38,26 @@ export default function ProductCard({
           </div>
         ) : null}
       </div>
-
-      <div className='flex-flex-col p-4 text-black'>
-        <div className='flex items-start'>
-          <div
-            className={`grid w-full transition-all duration-300 ease-in-out`}
-          >
-            <div className='flex w-full flex-col'>
-              <div>
-                <div className='flex w-full flex-row justify-between'>
-                  <p className='-mt-2 text-base font-medium md:text-xl'>
-                    {product.type.slice(0, -1).toLowerCase()}
-                  </p>
-                  <div className='mx-2 flex flex-col justify-end'>
-                    {product.active ? (
-                      <>
-                        <s>{product.discount}</s>
-                        <p className='-mt-2 text-base font-extralight md:text-xl'>
-                          ${product.price / 100}
-                        </p>
-                      </>
-                    ) : (
-                      <p className='-mt-2 text-base font-extralight md:text-xl'>
-                        <s>${product.price / 100}</s>
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div>
-                <p className='-mt-2 text-base font-extralight md:text-xl'>
-                  {product.color}
-                </p>
-              </div>
-              <div>
-                <p className='-mt-2 text-base font-extralight md:text-xl'>
-                  {product.capacity}
-                </p>
-              </div>
-              <div>
-                {product.set && (
-                  <p className='-mt-2 text-base font-extralight md:text-xl'>
-                    set of {product.set}
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
+      <div className='flex items-start justify-between space-y-0.5 p-4'>
+        <div className='flex min-w-0 flex-1 flex-col'>
+          <p className='overflow-x-hidden text-ellipsis whitespace-nowrap font-medium md:text-xl'>
+            {product.type.slice(0, -1).toLowerCase()}
+          </p>
+          <p className='overflow-x-hidden text-ellipsis whitespace-nowrap font-extralight md:text-xl'>
+            {product.color}
+          </p>
+          <p className='font-extralight md:text-xl'>{product.capacity}</p>
+          <p className='font-extralight md:text-xl'>
+            {product.set ? `set of ${product.set}` : null}
+          </p>
+        </div>
+        <div className='flex flex-col justify-start'>
+          {product.discount && (
+            <p className='font-extralight line-through md:text-xl'>
+              {product.discount}
+            </p>
+          )}
+          <p className='font-extralight md:text-xl'>${product.price / 100}</p>
         </div>
       </div>
     </div>
