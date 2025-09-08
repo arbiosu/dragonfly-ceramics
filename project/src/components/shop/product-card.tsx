@@ -9,7 +9,7 @@ export default function ProductCard({
 }) {
   return (
     <div className='w-full'>
-      <div className='relative aspect-square w-full overflow-hidden rounded-[3em] border border-black p-4 transition-transform duration-300 hover:-translate-y-2 md:rounded-[5em]'>
+      <div className='relative aspect-square w-full overflow-hidden rounded-[3em] border border-black p-4 transition-transform duration-300 md:rounded-[5em] xl:hover:-translate-y-2'>
         <Link
           href={`/shop/${product.stripe_id}`}
           prefetch={false}
