@@ -4,39 +4,46 @@ import { FAQHorizontalScroll } from './faqs';
 const faqs = [
   {
     id: 1,
-    question: 'What if my purchase is damaged or delayed?',
+    question: 'Where do you ship?',
     answer:
-      'All products are packaged with love and care and I ship them out ASAP with a tracking number. However, if your piece comes damaged, please email me photos within 3 days of arrival. I will try my best to replace the item with something similar or a full or partial refund can be given.',
+      "I currently ship worldwide to all locations! Once you've picked out your items, click on “checkout” and there will be an option to fill out an international shipping form!",
   },
   {
     id: 2,
-    question: 'Where do you ship?',
-    answer:
-      'I currently ship worldwide to all locations! Once you picked out your items, click on “checkout” and there will be an option to fill out an international shipping form!',
-  },
-  {
-    id: 3,
     question: 'How do I take care of my Pottery?',
     answer:
       'All of my pieces are dishwasher and microwave safe! However, I always recommend handwashing. Pieces that are not dishwasher and microwave safe will be labeled in the description of the piece.',
   },
   {
-    id: 4,
-    question: 'Do you accept returns?',
+    id: 3,
+    question: 'what are seconds?',
     answer:
-      'Please make your purchases carefully as all sales are final. I only accept returns if the wrong item was shipped to you.',
+      'a second is a product that has minor imperfections or flaws but still perfectly usable and safe to eat or drink out of.',
   },
+
   {
-    id: 5,
+    id: 4,
     question: 'When do you restock?',
     answer:
       'I have no particular schedule for restocks. As long as you are following my socials and/or signed up for my newsletter, you will be alerted when a drop happens!',
   },
   {
-    id: 6,
+    id: 5,
     question: 'How do I purchase a custom or wholesale order?',
     answer:
       "please fill out the form under the contact page and i'll get back to you as soon as i can!",
+  },
+  {
+    id: 6,
+    question: 'Do you accept returns?',
+    answer:
+      'Please make your purchases carefully as all sales are final. I only accept returns if the wrong item was shipped to you.',
+  },
+  {
+    id: 7,
+    question: 'What if my purchase is damaged or delayed?',
+    answer:
+      'All products are packaged with love and care and I ship them out ASAP with a tracking number. However, if your piece comes damaged, please email me photos within 3 days of arrival. I will try my best to replace the item with something similar or a full or partial refund can be given.',
   },
 ];
 
