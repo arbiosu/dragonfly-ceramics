@@ -17,19 +17,19 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
   return (
     <footer className='bg-dfNew2 p-2 text-black'>
-      <div className='container mx-auto mb-4 px-4'>
-        <div className='grid grid-cols-2 grid-rows-2 md:grid-cols-4'>
-          <div className='col-span-2'>
+      <div className='mx-auto mb-4 w-full px-4'>
+        <div className='grid grid-cols-2 grid-rows-2 lg:grid-cols-4'>
+          <div className='col-span-2 flex justify-center lg:justify-start'>
             <Image
               src='/df-red-text.png'
               alt='Dragonfly Ceramics'
               height={200}
               width={400}
               unoptimized
-              className='md:-mx-6'
+              className='lg:-mx-6'
             />
           </div>
-          <div className='flex flex-col justify-end md:row-start-2'>
+          <div className='flex flex-col justify-end lg:row-start-2'>
             <ul className='items-end -space-y-2 text-xl md:text-2xl'>
               {footerLinks.map((link, index) => (
                 <li key={index}>
@@ -43,7 +43,7 @@ export function Footer() {
               ))}
             </ul>
           </div>
-          <div className='col-span-2 row-start-2 md:col-start-4 md:row-start-1 md:pt-10'>
+          <div className='col-span-2 row-start-2 lg:col-start-4 lg:row-start-1 lg:pt-10'>
             <SubscribeCard
               headingText=''
               subText='sign up for mailing list'
@@ -51,7 +51,7 @@ export function Footer() {
               subTextSize='text-2xl'
             />
           </div>
-          <div className='flex flex-col items-end justify-end md:col-start-4'>
+          <div className='flex flex-col items-end justify-end lg:col-start-4'>
             <SocialMediaLinks />
             <p className='pt-6 text-xs md:text-sm'>
               &copy; {currentYear} dragonfly ceramics. all rights reserved.

@@ -93,7 +93,7 @@ export default function SubscribeCard({
                   setEmail(() => e.target.value);
                 }}
                 placeholder='name@example.com'
-                className='w-full py-6'
+                className='w-full py-6 text-xs'
                 disabled={isLoading}
               />
               <button
