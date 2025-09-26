@@ -15,7 +15,7 @@ import {
 } from '@/lib/stripe/utils';
 import {
   determineParcelSize,
-  isUSPSPriorityMail,
+  isUSPSGroundAdvantage,
   convertShippoRateToStripeShippingOption,
 } from '@/lib/stripe-shippo-integrations';
 import { Rate } from 'shippo';
@@ -61,7 +61,7 @@ export async function POST(req: Request) {
     let selectedRate: Rate | null = null;
     const shippingOptions: ShippingRateObject[] = [];
     for (const rate of shipment.rates) {
-      if (isUSPSPriorityMail(rate)) {
+      if (isUSPSGroundAdvantage(rate)) {
         const option = convertShippoRateToStripeShippingOption(rate);
         shippingOptions.push(option);
         selectedRate = rate;

@@ -26,6 +26,10 @@ export function isUSPSPriorityMail(rate: Rate): boolean {
   return rate.servicelevel.token === 'usps_priority';
 }
 
+export function isUSPSGroundAdvantage(rate: Rate): boolean {
+  return rate.servicelevel.token === 'usps_ground_advantage';
+}
+
 export function convertShippoRateToStripeShippingOption(
   rate: Rate
 ): ShippingRateObject {
