@@ -67,7 +67,7 @@ export default function ShoppingCart() {
           subtotal:
         </p>
         <p className='mb-8 text-right text-xl font-medium tracking-[-0.04em] md:text-2xl'>
-          {cartTotal}.00
+          ${cartTotal}.00
         </p>
       </div>
       <div className='flex justify-end'>
