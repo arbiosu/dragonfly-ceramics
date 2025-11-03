@@ -15,7 +15,7 @@ import {
 } from '@/lib/stripe/utils';
 import {
   determineParcelSize,
-  isUSPSGroundAdvantage,
+  isUPSGround,
   convertShippoRateToStripeShippingOption,
 } from '@/lib/stripe-shippo-integrations';
 import { Rate } from 'shippo';
@@ -49,7 +49,6 @@ export async function POST(req: Request) {
       addressFrom: 'b86852b1c9de48a49f272563318ca4dd',
       addressTo: lookup.objectId!,
       parcels: [result.objectId],
-      carrierAccounts: ['5584b761c37843d881dbbf8ab6225bd4'],
       extra: {
         insurance: {
           amount: '100',
@@ -61,7 +60,7 @@ export async function POST(req: Request) {
     let selectedRate: Rate | null = null;
     const shippingOptions: ShippingRateObject[] = [];
     for (const rate of shipment.rates) {
-      if (isUSPSGroundAdvantage(rate)) {
+      if (isUPSGround(rate)) {
         const option = convertShippoRateToStripeShippingOption(rate);
         shippingOptions.push(option);
         selectedRate = rate;
@@ -74,19 +73,6 @@ export async function POST(req: Request) {
     const customFieldProps: Partial<Stripe.Checkout.SessionCreateParams> = {
       custom_fields: [],
     };
-
-    // ceramic magnet
-    customFieldProps.custom_fields?.push({
-      key: 'magnet',
-      label: { type: 'custom', custom: 'Include free ceramic magnet?' },
-      type: 'dropdown',
-      dropdown: {
-        options: [
-          { label: 'Yes', value: 'yes' },
-          { label: 'No', value: 'no' },
-        ],
-      },
-    });
 
     const hasOilDispensers = cartItems.filter(
       (item) => item.product.type === 'oil dispensers'
