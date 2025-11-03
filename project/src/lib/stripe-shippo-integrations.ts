@@ -30,6 +30,10 @@ export function isUSPSGroundAdvantage(rate: Rate): boolean {
   return rate.servicelevel.token === 'usps_ground_advantage';
 }
 
+export function isUPSGround(rate: Rate): boolean {
+  return rate.servicelevel.token === 'ups_ground';
+}
+
 export function convertShippoRateToStripeShippingOption(
   rate: Rate
 ): ShippingRateObject {

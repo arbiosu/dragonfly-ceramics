@@ -14,7 +14,7 @@ export function CopyEmailsButton({
     const emailList = subscribers.data?.data
       .map((contact) => contact.email)
       .filter(Boolean)
-      .join(', ');
+      .join('\n');
 
     if (emailList == null) return;
 
