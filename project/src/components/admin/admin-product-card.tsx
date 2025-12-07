@@ -1,11 +1,13 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useRef } from 'react';
 import { Tables } from '@/lib/supabase/database';
 import { uploadImage } from '@/lib/supabase/model';
 import { updateProductImagesById } from '@/lib/stripe/utils';
 import { deleteProductById } from '@/lib/supabase/model';
+import { deleteImageByUrl } from '@/lib/supabase/storage';
 
 export default function AdminProductCard(props: {
   product: Tables<'products'>;
@@ -15,6 +17,13 @@ export default function AdminProductCard(props: {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [deleting, setDeleting] = useState<boolean>(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<boolean>(false);
+
+  const handleImageDelete = async (
+    product: Tables<'products'>,
+    url: string
+  ) => {
+    await deleteImageByUrl(product, url);
+  };
 
   const handleDelete = async () => {
     setDeleting(true);
@@ -68,6 +77,16 @@ export default function AdminProductCard(props: {
     <div className='relative w-full max-w-sm overflow-hidden bg-df-bg'>
       <div className='p-2'>
         <h3 className='text-lg font-semibold text-df-text'>{product.name}</h3>
+        <div>
+          <Image
+            src={product.images[0]}
+            alt={product.description}
+            height={80}
+            width={80}
+            unoptimized
+          />
+        </div>
+
         <p className='mb-4 flex-grow text-sm text-df-text'>
           Created at: {new Date(product.created_at).toLocaleDateString()}
         </p>
@@ -119,12 +138,20 @@ export default function AdminProductCard(props: {
             {product.images.length > 0 ? (
               product.images.map((url, index) => (
                 <div key={index} className='mb-1 truncate text-sm'>
+                  {index > 0 && (
+                    <button
+                      onClick={() => handleImageDelete(product, url)}
+                      className='p-2 text-lg text-red-400'
+                    >
+                      X
+                    </button>
+                  )}
                   <Link
                     href={url}
                     prefetch={false}
                     className='text-df-text hover:underline'
                   >
-                    Image #{index + 1}: {url}
+                    {url}
                   </Link>
                 </div>
               ))
