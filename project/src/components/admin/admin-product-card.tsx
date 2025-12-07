@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useRef } from 'react';
 import { Tables } from '@/lib/supabase/database';
 import { uploadImage } from '@/lib/supabase/model';
@@ -68,6 +69,16 @@ export default function AdminProductCard(props: {
     <div className='relative w-full max-w-sm overflow-hidden bg-df-bg'>
       <div className='p-2'>
         <h3 className='text-lg font-semibold text-df-text'>{product.name}</h3>
+        <div>
+          <Image
+            src={product.images[0]}
+            alt={product.description}
+            height={80}
+            width={80}
+            unoptimized
+          />
+        </div>
+
         <p className='mb-4 flex-grow text-sm text-df-text'>
           Created at: {new Date(product.created_at).toLocaleDateString()}
         </p>
