@@ -7,6 +7,7 @@ import { Tables } from '@/lib/supabase/database';
 import { uploadImage } from '@/lib/supabase/model';
 import { updateProductImagesById } from '@/lib/stripe/utils';
 import { deleteProductById } from '@/lib/supabase/model';
+import { deleteImageByUrl } from '@/lib/supabase/storage';
 
 export default function AdminProductCard(props: {
   product: Tables<'products'>;
@@ -16,6 +17,13 @@ export default function AdminProductCard(props: {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [deleting, setDeleting] = useState<boolean>(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<boolean>(false);
+
+  const handleImageDelete = async (
+    product: Tables<'products'>,
+    url: string
+  ) => {
+    await deleteImageByUrl(product, url);
+  };
 
   const handleDelete = async () => {
     setDeleting(true);
@@ -130,12 +138,20 @@ export default function AdminProductCard(props: {
             {product.images.length > 0 ? (
               product.images.map((url, index) => (
                 <div key={index} className='mb-1 truncate text-sm'>
+                  {index > 0 && (
+                    <button
+                      onClick={() => handleImageDelete(product, url)}
+                      className='p-2 text-lg text-red-400'
+                    >
+                      X
+                    </button>
+                  )}
                   <Link
                     href={url}
                     prefetch={false}
                     className='text-df-text hover:underline'
                   >
-                    Image #{index + 1}: {url}
+                    {url}
                   </Link>
                 </div>
               ))
