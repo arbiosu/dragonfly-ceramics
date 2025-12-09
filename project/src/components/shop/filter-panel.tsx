@@ -3,7 +3,6 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useOptimistic, useTransition } from 'react';
 
-// Map display labels to backend values
 const filterConfig: Record<string, string> = {
   all: 'all',
   'mugs & cups': 'mugs',
@@ -14,7 +13,6 @@ const filterConfig: Record<string, string> = {
   seconds: 'seconds',
 };
 
-// Get display labels for iteration
 const filterLabels = Object.keys(filterConfig);
 
 export default function FilterPanel({ filters }: { filters: string[] }) {
