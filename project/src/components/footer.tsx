@@ -43,7 +43,10 @@ export function Footer() {
               ))}
             </ul>
           </div>
-          <div className='col-span-2 row-start-2 md:col-start-4 md:row-start-1 md:pt-10'>
+          <div
+            id='subscribe'
+            className='col-span-2 row-start-2 md:col-start-4 md:row-start-1 md:pt-10'
+          >
             <SubscribeCard
               headingText=''
               subText='sign up for mailing list'
