@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { manrope } from '@/../public/fonts/fonts';
+import Banner from '@/components/top-banner';
 import Navbar from '@/components/nav';
 import { Footer } from '@/components/footer';
 import { CartProvider } from '@/contexts/CartContext';
@@ -22,6 +23,7 @@ export default function RootLayout({
         className={`${manrope.className} ${manrope.className} bg-white antialiased`}
       >
         <CartProvider>
+          <Banner />
           <Navbar />
           {children}
           <Analytics />
