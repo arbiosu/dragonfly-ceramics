@@ -3,16 +3,19 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useOptimistic, useTransition } from 'react';
 
-const filterOptions = [
-  'all',
-  'mugs',
-  'oil dispensers',
-  'vases',
-  'berry bowls',
-  'comfy cups',
-  'soap dispensers',
-  'seconds',
-];
+// Map display labels to backend values
+const filterConfig: Record<string, string> = {
+  all: 'all',
+  'mugs & cups': 'mugs',
+  vases: 'vases',
+  'oil & soap dispensers': 'dispensers',
+  bowls: 'bowls',
+  other: 'other',
+  seconds: 'seconds',
+};
+
+// Get display labels for iteration
+const filterLabels = Object.keys(filterConfig);
 
 export default function FilterPanel({ filters }: { filters: string[] }) {
   const router = useRouter();
@@ -20,16 +23,16 @@ export default function FilterPanel({ filters }: { filters: string[] }) {
   const [optimisticFilters, setOptimisticFilters] = useOptimistic(filters);
   const [isPending, startTransition] = useTransition();
 
-  const updateFilters = (filters: string[]) => {
+  const updateFilters = (backendValue: string) => {
     const newParams = new URLSearchParams(searchParams);
     newParams.set('page', '0');
-    newParams.set('filter', filters[0]);
-    if (filters[0] == null || filters[0] === 'all') {
+    newParams.set('filter', backendValue);
+    if (backendValue == null || backendValue === 'all') {
       newParams.delete('filter');
     }
 
     startTransition(() => {
-      setOptimisticFilters(filters);
+      setOptimisticFilters([backendValue]);
       router.push(`?${newParams}`);
     });
   };
@@ -37,28 +40,32 @@ export default function FilterPanel({ filters }: { filters: string[] }) {
   return (
     <div data-pending={isPending ? '' : undefined} className='text-black'>
       <div className='mb-6 flex flex-col -space-y-1 text-base md:text-xl'>
-        {filterOptions.map((filter) => (
-          <div key={filter} className='relative'>
-            <input
-              id={`filter-${filter}`}
-              name={filter}
-              type='checkbox'
-              className='peer hidden'
-              checked={optimisticFilters.includes(filter)}
-              onChange={(e) => {
-                const { name, checked } = e.target;
-                const newFilters = checked ? [name] : [];
-                updateFilters(newFilters);
-              }}
-            />
-            <label
-              htmlFor={`filter-${filter}`}
-              className={`relative inline-block cursor-pointer ${optimisticFilters.includes(filter) ? 'font-bold' : ''}`}
-            >
-              {filter}
-            </label>
-          </div>
-        ))}
+        {filterLabels.map((label) => {
+          const backendValue = filterConfig[label];
+          return (
+            <div key={backendValue} className='relative'>
+              <input
+                id={`filter-${backendValue}`}
+                name={backendValue}
+                type='checkbox'
+                className='peer hidden'
+                checked={optimisticFilters.includes(backendValue)}
+                onChange={(e) => {
+                  const { checked } = e.target;
+                  if (checked) {
+                    updateFilters(backendValue);
+                  }
+                }}
+              />
+              <label
+                htmlFor={`filter-${backendValue}`}
+                className={`relative inline-block cursor-pointer ${optimisticFilters.includes(backendValue) ? 'font-bold' : ''}`}
+              >
+                {label}
+              </label>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

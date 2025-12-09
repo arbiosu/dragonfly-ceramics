@@ -43,7 +43,7 @@ export default function ProductCard({
       <div className='flex items-start justify-between space-y-0.5 p-4'>
         <div className='flex min-w-0 flex-1 flex-col'>
           <p className='overflow-x-hidden text-ellipsis whitespace-nowrap font-medium md:text-xl'>
-            {product.type.slice(0, -1).toLowerCase()}
+            {product.name}
           </p>
           <p className='overflow-x-hidden text-ellipsis whitespace-nowrap font-extralight md:text-xl'>
             {product.color}
