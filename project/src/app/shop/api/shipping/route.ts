@@ -48,6 +48,7 @@ export async function POST(req: Request) {
     const shipment = await createShippoShipment({
       addressFrom: 'b86852b1c9de48a49f272563318ca4dd',
       addressTo: lookup.objectId!,
+      addressReturn: '226d60e74de143debb528930d136765d',
       parcels: [result.objectId],
       extra: {
         insurance: {

@@ -32,6 +32,7 @@ export type ShippoParcel = {
 export type ShippoShipment = {
   addressFrom: string;
   addressTo: string;
+  addressReturn: string;
   parcels: string[];
   extra: {
     insurance: {
