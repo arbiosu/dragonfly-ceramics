@@ -71,20 +71,26 @@ export async function fetchProducts(
   pageSize: number,
   active: boolean | null,
   type: string | null,
-  sortOrder: string
+  sortOrder: string,
+  preview: boolean | null
 ) {
   const supabase = await createServiceClient();
   let query = supabase.from('products').select('*', { count: 'exact' });
 
+  if (preview) {
+    query.eq('active', false).gt('inventory', 0);
+  }
+
   if (active !== null) {
     if (active === true) {
       // Show only active products
-      query = query.eq('active', true);
+      query = query.eq('active', true).gt('inventory', 0);
     } else {
       // Show only sold out products
       query = query.eq('active', false).eq('inventory', 0);
     }
-  } else {
+  }
+  if (active === null && !preview) {
     // Show all except drops (inactive with inventory > 0)
     query = query.or('active.eq.true,and(active.eq.false,inventory.eq.0)');
   }
