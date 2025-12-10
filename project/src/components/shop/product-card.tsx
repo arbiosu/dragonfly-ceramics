@@ -4,8 +4,10 @@ import { Tables } from '@/lib/supabase/database';
 
 export default function ProductCard({
   product,
+  isPreview,
 }: {
   product: Tables<'products'>;
+  isPreview: boolean;
 }) {
   return (
     <div className='w-full'>
@@ -23,8 +25,8 @@ export default function ProductCard({
             unoptimized
           />
         </Link>
-        {(!product.single && product.inventory > 0) ||
-        product.inventory === 0 ? (
+        {isPreview ? null : (!product.single && product.inventory > 0) ||
+          product.inventory === 0 ? (
           <div
             className={`absolute right-6 top-3 w-1/3 rotate-12 rounded-[50%] px-1 py-1 text-center text-sm shadow md:w-1/4 md:px-2 md:py-2 md:text-lg ${
               product.active && product.inventory > 0
@@ -41,7 +43,7 @@ export default function ProductCard({
       <div className='flex items-start justify-between space-y-0.5 p-4'>
         <div className='flex min-w-0 flex-1 flex-col'>
           <p className='overflow-x-hidden text-ellipsis whitespace-nowrap font-medium md:text-xl'>
-            {product.type.slice(0, -1).toLowerCase()}
+            {product.name}
           </p>
           <p className='overflow-x-hidden text-ellipsis whitespace-nowrap font-extralight md:text-xl'>
             {product.color}

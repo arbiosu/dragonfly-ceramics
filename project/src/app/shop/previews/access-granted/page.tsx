@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import { fetchProducts } from '@/lib/supabase/model';
 import FilterPanel from '@/components/shop/filter-panel';
 import SortSelector from '@/components/shop/sort-panel';
@@ -9,9 +11,16 @@ import SubscribeCard from '@/components/subscribe-card';
 
 const PAGE_SIZE = 12;
 
-export default async function Shop(props: {
+export default async function Previews(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  const cookieStore = await cookies();
+  const email = cookieStore.get('userEmail')?.value;
+
+  if (!email) {
+    redirect('/shop/previews/enter-email');
+  }
+
   const searchParams = await props.searchParams;
   const filters = Array.isArray(searchParams.filter)
     ? searchParams.filter
@@ -30,21 +39,13 @@ export default async function Shop(props: {
       ? [searchParams.page]
       : ['0'];
 
-  const active = Array.isArray(searchParams.active)
-    ? searchParams.active
-    : searchParams.active
-      ? [searchParams.active]
-      : [null];
-  const isActive =
-    active[0] === 'true' ? true : active[0] === 'false' ? false : null;
-
   const { data, error, count } = await fetchProducts(
     parseInt(page[0]),
     PAGE_SIZE,
-    isActive,
+    null,
     filters[0],
     sort[0],
-    null
+    true
   );
 
   if (error || count === null) {
@@ -102,7 +103,7 @@ export default async function Shop(props: {
         <div className='mt-10 grid grid-cols-2 gap-8 lg:grid-cols-3'>
           {data.map((product) => (
             <div key={product.id}>
-              <ProductCard product={product} isPreview={false} />
+              <ProductCard product={product} isPreview={true} />
             </div>
           ))}
         </div>
