@@ -3,6 +3,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function Banner() {
@@ -43,20 +44,27 @@ export default function Banner() {
       </div>
       <div className='mx-auto flex items-center'>
         <p className='flex items-center gap-8 text-sm tracking-[-0.04em] text-black'>
-          <span className='text-sm md:text-xl'>
-            {isAlt ? "don't miss the drop!" : "don't miss a thing!"}
-          </span>
-          <span className='text-sm font-semibold tracking-[-0.04em] md:text-xl'>
-            {isAlt ? 'next restock: 12/11' : ''}
-          </span>
-          <Link
-            href='#subscribe'
-            className={`text-sm tracking-[-0.04em] md:text-xl ${isAlt ? 'underline' : ''}`}
-            prefetch={false}
+          <span
+            className={`text-sm tracking-[-0.04em] md:text-xl ${isAlt ? 'font-semibold' : ''}`}
           >
-            {isAlt ? 'get on the email list' : 'sign up for the mailing list'}{' '}
-            <span className='underline'>{isAlt ? '' : 'here'}</span>
-          </Link>
+            {isAlt ? 'next restock: 12/11' : "don't miss a thing!"}
+          </span>
+          <Image
+            src='/logo-cropped-black.png'
+            width={28}
+            height={28}
+            unoptimized
+            alt='dragonfly-ceramics-logo'
+          />
+          {!isAlt && (
+            <Link
+              href='#subscribe'
+              className={`text-sm tracking-[-0.04em] underline md:text-xl`}
+              prefetch={false}
+            >
+              get email updates
+            </Link>
+          )}
         </p>
       </div>
       <div className='flex items-center'>

@@ -33,10 +33,13 @@ export default function EnterEmail() {
   }
 
   return (
-    <div className='mx-auto flex max-w-sm flex-col items-center gap-4 py-28'>
+    <div className='mx-auto flex min-h-screen max-w-sm flex-col items-center justify-center gap-4 py-28'>
       <h1 className='text-center text-4xl text-black'>
-        Get Access to the Drop by verifying your email below
+        email subscribers get the first look.
       </h1>
+      <p className='text-center text-4xl text-black'>
+        verify your email below to get access
+      </p>
       <Input
         type='email'
         placeholder='hello@example.com'

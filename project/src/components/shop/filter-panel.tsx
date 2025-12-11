@@ -2,7 +2,6 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useOptimistic, useTransition } from 'react';
-import Link from 'next/link';
 
 const filterConfig: Record<string, string> = {
   all: 'all',
@@ -66,12 +65,6 @@ export default function FilterPanel({ filters }: { filters: string[] }) {
           );
         })}
       </div>
-      <Link
-        href={'/shop/previews'}
-        className='w-full rounded-3xl border border-black bg-df-yellow px-4 py-2 text-xl text-black transition-colors duration-200 hover:bg-dfNew2'
-      >
-        previews
-      </Link>
     </div>
   );
 }
