@@ -18,8 +18,8 @@ export async function createShippoShipment(shipment: ShippoShipment) {
 }
 
 export async function getCarrierAccounts() {
-  const usps = shippo.carrierAccounts.list({ carrier: CarriersEnum.Usps });
-  return usps;
+  const ups = shippo.carrierAccounts.list({ carrier: CarriersEnum.Ups });
+  return ups;
 }
 
 export async function createShippingLabel(rateId: string) {

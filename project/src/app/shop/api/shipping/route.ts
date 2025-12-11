@@ -67,6 +67,7 @@ export async function POST(req: Request) {
         selectedRate = rate;
       }
     }
+    console.log('shipping rates', shipment.rates);
     if (selectedRate == null) {
       throw new Error('Failed to select a rate');
     }
@@ -76,7 +77,7 @@ export async function POST(req: Request) {
     };
 
     const hasOilDispensers = cartItems.filter(
-      (item) => item.product.type === 'oil dispensers'
+      (item) => item.product.type === 'dispensers'
     );
 
     let colorFieldIndex = 0;
