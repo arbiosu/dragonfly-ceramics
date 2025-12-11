@@ -11,10 +11,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false });
   }
 
-  const emailList =
-    subscribers.data?.data?.map((c) => c.email).filter(Boolean) || [];
+  const normalizedEmail = email.toLowerCase();
 
-  if (!emailList.includes(email)) {
+  const emailList =
+    subscribers.data?.data?.map((c) => c.email.toLowerCase()).filter(Boolean) ||
+    [];
+
+  if (!emailList.includes(normalizedEmail)) {
     return NextResponse.json({ ok: false });
   }
 
