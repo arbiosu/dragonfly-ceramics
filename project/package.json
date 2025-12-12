@@ -12,14 +12,14 @@
     "fmt:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
-    "@react-email/components": "^0.0.34",
+    "@react-email/components": "^1.0.1",
     "@stripe/stripe-js": "^5.7.0",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.49.1",
     "@vercel/analytics": "^1.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "next": "15.1.11",
+    "next": "^15.5.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "resend": "^4.1.2",
