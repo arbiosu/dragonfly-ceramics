@@ -1,6 +1,5 @@
 'use client';
 
-import { revalidatePath } from 'next/cache';
 import { upsertProduct } from '@/lib/supabase/model';
 import { Tables } from '@/lib/supabase/database';
 
@@ -16,7 +15,6 @@ export default function MakeAllProductsLiveButton({
         active: true,
       };
       await upsertProduct(update);
-      revalidatePath('/', 'layout');
     }
   };
 
