@@ -1,6 +1,7 @@
 'use client';
 
 import { upsertProduct } from '@/lib/supabase/model';
+import { updateDropProducts } from '@/lib/stripe/utils';
 import { Tables } from '@/lib/supabase/database';
 
 export default function MakeAllProductsLiveButton({
@@ -15,6 +16,7 @@ export default function MakeAllProductsLiveButton({
         active: true,
       };
       await upsertProduct(update);
+      await updateDropProducts(product.stripe_id);
     }
   };
 

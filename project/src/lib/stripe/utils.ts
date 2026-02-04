@@ -71,6 +71,19 @@ export async function updateProductImagesById(
   }
 }
 
+export async function updateDropProducts(id: string): Promise<Stripe.Product> {
+  try {
+    const product = await stripe.products.update(id, {
+      active: true,
+    });
+    return product;
+  } catch (error) {
+    throw new Error(
+      `Failed to add image to product with ID ${id} with error ${error}`
+    );
+  }
+}
+
 export async function validateCart(
   cart: CartItem[]
 ): Promise<Stripe.Checkout.SessionCreateParams.LineItem[]> {
