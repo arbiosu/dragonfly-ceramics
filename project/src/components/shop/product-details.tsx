@@ -40,7 +40,7 @@ export default function ProductDetails({
         <div className='-mt-4 flex flex-col space-y-4'>
           <div>
             <h1 className='text-6xl font-medium tracking-[-0.04em]'>
-              {product.type.slice(0, -1).toLowerCase()}
+              {product.name}
             </h1>
             <p className='text-6xl font-extralight tracking-[-0.04em]'>
               {product.color}
