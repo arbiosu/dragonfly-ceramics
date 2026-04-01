@@ -9,6 +9,7 @@ const filterConfig: Record<string, string> = {
   vases: 'vases',
   'oil & soap dispensers': 'dispensers',
   bowls: 'bowls',
+  'spoon rests': 'spoonrests',
   other: 'other',
   seconds: 'seconds',
 };
