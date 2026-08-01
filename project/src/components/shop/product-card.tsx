@@ -40,7 +40,7 @@ export default function ProductCard({
           </div>
         ) : null}
       </div>
-      <div className='flex items-start justify-between space-y-0.5 p-4'>
+      <div className='flex items-start justify-between space-y-0.5 p-4 text-[0_2px_4px_rgba(0,0,0,0.8)]'>
         <div className='flex min-w-0 flex-1 flex-col'>
           <p className='overflow-x-hidden text-ellipsis whitespace-nowrap font-medium md:text-xl'>
             {product.name}

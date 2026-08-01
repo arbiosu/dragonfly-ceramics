@@ -7,7 +7,7 @@ import ActiveSelector from '@/components/shop/active-selector';
 import ProductCard from '@/components/shop/product-card';
 import SubscribeCard from '@/components/subscribe-card';
 
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 6;
 
 export default async function Shop(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -57,13 +57,14 @@ export default async function Shop(props: {
   return (
     <main className='flex min-h-screen flex-col items-center px-2 py-28 tracking-[-0.04em] text-black'>
       <section className='w-full max-w-full lg:px-8'>
-        <div className='grid grid-cols-3 items-center gap-2'>
+        <div className='grid grid-cols-[minmax(0,1fr)_2fr_minmax(0,1fr)] items-center gap-2 md:grid-cols-3'>
+          {' '}
           <div>
             <FilterPanel filters={filters} />
           </div>
           <div className='flex justify-center'>
             <Image
-              src={'/shop-header.png'}
+              src={'/shakedown.png'}
               alt='Gallery'
               height={200}
               width={400}
