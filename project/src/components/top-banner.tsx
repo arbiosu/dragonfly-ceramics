@@ -47,7 +47,9 @@ export default function Banner() {
           <span
             className={`text-sm tracking-[-0.04em] md:text-xl ${isAlt ? 'font-semibold' : ''}`}
           >
-            {isAlt ? 'next restock: 6/18' : "don't miss a thing!"}
+            {isAlt
+              ? 'orders placed between 8/18 - 9/2 will not be shipped until 9/3'
+              : "don't miss a thing!"}
           </span>
           <Image
             src='/logo-cropped-black.png'

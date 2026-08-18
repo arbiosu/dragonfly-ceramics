@@ -7,7 +7,7 @@ import ActiveSelector from '@/components/shop/active-selector';
 import ProductCard from '@/components/shop/product-card';
 import SubscribeCard from '@/components/subscribe-card';
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 12;
 
 export default async function Shop(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -64,8 +64,8 @@ export default async function Shop(props: {
           </div>
           <div className='flex justify-center'>
             <Image
-              src={'/shakedown.png'}
-              alt='Gallery'
+              src={'/shop-header.png'}
+              alt='The word shop in cursive by Jayne Breakfast'
               height={200}
               width={400}
               unoptimized
