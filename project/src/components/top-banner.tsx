@@ -48,7 +48,7 @@ export default function Banner() {
             className={`text-sm tracking-[-0.04em] md:text-xl ${isAlt ? 'font-semibold' : ''}`}
           >
             {isAlt
-              ? 'orders placed between 8/18 - 9/2 will not be shipped until 9/3'
+              ? 'use code LABORDAY20 for 20% off your entire order!'
               : "don't miss a thing!"}
           </span>
           <Image
