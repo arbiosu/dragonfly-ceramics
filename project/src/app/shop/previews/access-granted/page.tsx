@@ -9,6 +9,11 @@ import ActiveSelector from '@/components/shop/active-selector';
 import ProductCard from '@/components/shop/product-card';
 import SubscribeCard from '@/components/subscribe-card';
 
+// @next-codemod-ignore Cache Components adoption: this segment temporarily allows blocking.
+// Remove this opt-out after verifying the segment passes validation without it.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+export const instant = false;
+
 const PAGE_SIZE = 12;
 
 export default async function Previews(props: {

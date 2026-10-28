@@ -3,7 +3,7 @@
 import Stripe from 'stripe';
 import { stripe } from './stripe';
 import { ShippoAddress } from '../shippo/types';
-import { Tables } from '@/lib/supabase/database';
+import { Tables } from '@/lib/supabase/database/types';
 
 export interface CartItem {
   product: Tables<'products'>;
@@ -19,6 +19,21 @@ export interface ShippingRateObject {
     };
     display_name: string;
   };
+}
+
+export async function createStripeProduct(product: Tables<'products'>) {
+  try {
+    const stripeProduct = await stripe.products.create({
+      name: product.name,
+      default_price_data: {
+        currency: 'USD',
+        unit_amount: product.price,
+      },
+    });
+    return stripeProduct;
+  } catch (error) {
+    throw new Error(`Failed to create a Stripe product with error ${error}`);
+  }
 }
 
 export async function fetchStripeProducts(): Promise<Stripe.Product[]> {
@@ -91,7 +106,7 @@ export async function validateCart(
     cart.map(async (item) => {
       try {
         const validatedProduct = await stripe.products.retrieve(
-          item.product.stripe_id
+          item.product.stripe_id ?? ''
         );
         if (
           validatedProduct.default_price == null ||

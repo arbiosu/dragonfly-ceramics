@@ -5,6 +5,11 @@ import SortPanel from '@/components/gallery/sort-panel';
 import PaginationControls from '@/components/shop/pagination-controls';
 import GalleryCard from '@/components/gallery/gallery-card';
 
+// @next-codemod-ignore Cache Components adoption: this segment temporarily allows blocking.
+// Remove this opt-out after verifying the segment passes validation without it.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+export const instant = false;
+
 const PAGE_SIZE = 4;
 
 export default async function Gallery(props: {

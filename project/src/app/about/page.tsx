@@ -3,6 +3,11 @@ import Link from 'next/link';
 import { Button } from '@/components/shop/shop-button';
 import { SocialMediaCard } from '@/components/socialmedia';
 
+// @next-codemod-ignore Cache Components adoption: this segment temporarily allows blocking.
+// Remove this opt-out after verifying the segment passes validation without it.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+export const instant = false;
+
 export default function About() {
   return (
     <section className='mx-auto min-h-screen bg-df-yellow py-20 tracking-[-0.04em] text-black'>

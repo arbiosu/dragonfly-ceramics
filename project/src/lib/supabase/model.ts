@@ -1,13 +1,13 @@
 'use server';
 
-import { createServiceClient } from './service';
+import { createClient } from './clients/server';
 import { type ShippoAddress } from '../shippo/types';
-import { TablesInsert } from './database';
+import { TablesInsert } from './database/types';
 import { revalidatePath } from 'next/cache';
 
 export async function uploadImage(file: File, productId: string) {
   const fileName = `product_images/${productId}/${Date.now()}`;
-  const supabase = await createServiceClient();
+  const supabase = await createClient();
   const { data, error } = await supabase.storage
     .from('content')
     .upload(fileName, file);
@@ -23,7 +23,7 @@ export async function saveOrder(
   checkoutSessionId: string,
   address: ShippoAddress
 ) {
-  const supabase = await createServiceClient();
+  const supabase = await createClient();
   return await supabase.from('orders').insert({
     checkout_session_id: checkoutSessionId,
     full_name: address.name,
@@ -39,7 +39,7 @@ export async function saveOrder(
 }
 
 export async function retrieveOrder(checkoutSessionId: string) {
-  const supabase = await createServiceClient();
+  const supabase = await createClient();
   return await supabase
     .from('orders')
     .select()
@@ -47,17 +47,17 @@ export async function retrieveOrder(checkoutSessionId: string) {
 }
 
 export async function createProduct(product: TablesInsert<'products'>) {
-  const supabase = await createServiceClient();
+  const supabase = await createClient();
   return await supabase.from('products').insert({ ...product });
 }
 
 export async function upsertProduct(product: TablesInsert<'products'>) {
-  const supabase = await createServiceClient();
+  const supabase = await createClient();
   return await supabase.from('products').upsert({ ...product });
 }
 
 export async function retrieveProductByStripeId(productId: string) {
-  const supabase = await createServiceClient();
+  const supabase = await createClient();
   return await supabase
     .from('products')
     .select()
@@ -74,7 +74,7 @@ export async function fetchProducts(
   sortOrder: string,
   preview: boolean | null
 ) {
-  const supabase = await createServiceClient();
+  const supabase = await createClient();
   let query = supabase.from('products').select('*', { count: 'exact' });
 
   if (preview) {
@@ -125,7 +125,7 @@ export async function fetchProducts(
 
 export async function deleteProductById(id: string) {
   try {
-    const supabase = await createServiceClient();
+    const supabase = await createClient();
     const { data: deleteData, error: deleteError } = await supabase
       .from('products')
       .delete()
@@ -141,105 +141,6 @@ export async function deleteProductById(id: string) {
     }
     // -- Success --
     revalidatePath('/shop');
-    revalidatePath('/admin');
-    return {
-      data: deleteData,
-      error: null,
-    };
-  } catch (error) {
-    console.log(error);
-    if (error instanceof Error) {
-      return {
-        data: null,
-        error: `Failed to delete product: ${error.message}`,
-      };
-    }
-  }
-}
-
-export async function getGalleryImageById(id: number) {
-  const supabase = await createServiceClient();
-  return await supabase
-    .from('gallery_images')
-    .select()
-    .eq('id', id)
-    .limit(1)
-    .single();
-}
-
-export async function createGalleryImage(
-  image: TablesInsert<'gallery_images'>
-) {
-  const supabase = await createServiceClient();
-  return await supabase.from('gallery_images').insert({ ...image });
-}
-
-export async function fetchGalleryImages(
-  pageIndex: number,
-  pageSize: number,
-  type: string | null,
-  sortOrder: string
-) {
-  const supabase = await createServiceClient();
-
-  let query = supabase.from('gallery_images').select('*', { count: 'exact' });
-
-  if (type) {
-    query = query.eq('type', type);
-  }
-
-  switch (sortOrder) {
-    case 'date_asc':
-      query = query.order('created_at', { ascending: true });
-      break;
-    case 'date_desc':
-      query = query.order('created_at', { ascending: false });
-      break;
-    default:
-      query = query.order('created_at', { ascending: false });
-      break;
-  }
-
-  const from = pageIndex * pageSize;
-  const to = from + pageSize - 1;
-
-  query = query.range(from, to);
-
-  return await query;
-}
-
-export async function deleteGalleryImageById(id: number) {
-  try {
-    const supabase = await createServiceClient();
-    const { data: deleteData, error: deleteError } = await supabase
-      .from('gallery_images')
-      .delete()
-      .eq('id', id)
-      .select()
-      .single();
-
-    if (deleteError || !deleteData) {
-      console.error(`Failed to delete gallery image with id: ${id}`);
-      return {
-        data: null,
-        error: `Failed to delete gallery image. Code: ${deleteError?.code || 'UNKNOWN'}`,
-      };
-    }
-    const { data: storageDeleteData, error: storageDeleteError } =
-      await supabase.storage.from('gallery').remove([deleteData.path.slice(8)]);
-
-    if (storageDeleteError || !storageDeleteData) {
-      console.error(
-        `Failed to delete gallery image from storage with id: ${id}`
-      );
-      return {
-        data: null,
-        error: `Failed to delete gallery image from storage. Code: ${storageDeleteError || 'UNKNOWN'}`,
-      };
-    }
-
-    // -- Success --
-    revalidatePath('/gallery');
     revalidatePath('/admin');
     return {
       data: deleteData,

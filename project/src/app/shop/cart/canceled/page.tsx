@@ -1,5 +1,10 @@
 import ShopLink from '@/components/shop/shop-link';
 
+// @next-codemod-ignore Cache Components adoption: this segment temporarily allows blocking.
+// Remove this opt-out after verifying the segment passes validation without it.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+export const instant = false;
+
 export default function Canceled() {
   return (
     <section id='canceled' className='container mx-auto py-40'>

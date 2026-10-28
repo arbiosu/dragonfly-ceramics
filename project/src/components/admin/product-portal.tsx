@@ -13,6 +13,8 @@ export default async function ProductPortal() {
   );
 
   if (error || count == null) {
+    console.log(error);
+    console.log(count);
     return (
       <h1 className='text-3xl text-df-text'>
         There has been an error with the admin portal.
